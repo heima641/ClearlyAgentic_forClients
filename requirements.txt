@@ -71,3 +71,4 @@ urllib3==2.3.0
 websockets==14.2
 yarl==1.19.0
 youtube-transcript-api==1.0.3
+flask
