@@ -12,6 +12,8 @@ click==8.1.8
 defusedxml==0.7.1
 deprecation==2.1.0
 distro==1.9.0
+flask==2.3.3
+flask-cors==4.0.0
 frozenlist==1.5.0
 google-api-core==2.24.2
 google-api-python-client==2.166.0
