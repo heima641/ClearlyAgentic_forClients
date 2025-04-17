@@ -1,7 +1,13 @@
-from flask import Flask
-import subprocess
+import subprocess  # Standard library
 
+from flask import Flask, request  # Third-party libraries
+from flask_cors import CORS
+
+# Initialize Flask app
 app = Flask(__name__)
+
+# Enable CORS for all routes (helpful for Replit/n8n/frontend triggering)
+CORS(app)
 
 @app.route('/')
 def index():
