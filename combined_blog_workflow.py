@@ -280,9 +280,7 @@ def run_module_1_blog_scraping(variables, blog_json_path):
         print("Script execution will be halted as required variables are missing.")
         return None
 
-    # Set the output file name based on company name, number of blogs, and date
-    blog_json_path = os.path.join(AGENTIC_OUTPUT_DIR, f"{company_name.lower().replace(' ', '_')}_{num_blogs}_{blog_sitemap_keyword}_{datetime.now().strftime('%Y%m%d')}.json")
-    print(f"Output will be saved to: {blog_json_path}")
+    # The output file path is provided by the caller (main workflow) via the blog_json_path argument.
 
     print(f"Using configuration: COMPANY_NAME={company_name}, NUM_BLOGS={num_blogs}, BLOG_SITEMAP_KEYWORD={blog_sitemap_keyword}")
     print(f"BLOG_CATEG_OPTIONS_SITEMAP_URL: {blog_categ_options_sitemap_url}")
@@ -954,8 +952,8 @@ def main():
         # Create output directory if it doesn't exist
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         
-        # Generate output file paths with date only (no timestamp)
-        date_only = datetime.now().strftime("%Y%m%d")
+        # Generate output file paths with date and time (YYYYMMDD_HHMMSS)
+        date_time = datetime.now().strftime("%Y%m%d_%H%M%S")
         # Use lowercase for company_name to maintain consistency with existing files
         company_name_lower = company_name.lower()
         
@@ -963,9 +961,9 @@ def main():
         blog_config = variables["scripts"]["blogs"]
         actual_num_blogs = int(blog_config.get("NUM_BLOGS", num_blogs))
         
-        blog_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_blogs}_blogs_{date_only}.json")
-        chunk_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_blogs}_blogs_chunked_{date_only}.json")
-        embeddings_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_blogs}_blogs_embeddings_{date_only}.json")
+        blog_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_blogs}_blogs_{date_time}.json")
+        chunk_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_blogs}_blogs_chunked_{date_time}.json")
+        embeddings_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_blogs}_blogs_embeddings_{date_time}.json")
         
         print(f"Output file paths:")
         print(f"  Blog JSON: {blog_json_path}")
