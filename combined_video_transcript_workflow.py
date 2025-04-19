@@ -342,9 +342,6 @@ def run_module_1_youtube_transcript_scraping(variables, youtube_json_path):
         print("Script execution will be halted as required variables are missing.")
         return None
 
-    # Set the output file name based on company name, number of videos, and date
-    youtube_json_path = os.path.join(AGENTIC_OUTPUT_DIR, f"{company_name.lower().replace(' ', '_')}_{num_videos}_youtube_transcripts_{datetime.now().strftime('%Y%m%d')}.json")
-    print(f"Output will be saved to: {youtube_json_path}")
 
     print(f"Using configuration: COMPANY_NAME={company_name}, NUM_VIDEOS={num_videos}, COMPANY_NAME_OR_HANDLE={company_name_or_handle}")
     print(f"YOUTUBE_CATEG_OPTIONS_SITEMAP_URL: {youtube_categ_options_sitemap_url}")
@@ -1017,8 +1014,8 @@ def main():
         # Create output directory if it doesn't exist
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         
-        # Generate output file paths with date only (no timestamp)
-        date_only = datetime.now().strftime("%Y%m%d")
+        # Generate output file paths with date and time (YYYYMMDD_HHMMSS)
+        date_time = datetime.now().strftime("%Y%m%d_%H%M%S")
         # Use lowercase for company_name to maintain consistency with existing files
         company_name_lower = company_name.lower()
         
@@ -1026,9 +1023,9 @@ def main():
         transcript_config = variables["scripts"]["transcripts"]
         actual_num_videos = int(transcript_config.get("NUM_VIDEOS", num_videos))
         
-        youtube_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_videos}_youtube_transcripts_{date_only}.json")
-        chunk_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_videos}_youtube_transcripts_chunked_{date_only}.json")
-        embeddings_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_videos}_youtube_transcripts_embeddings_{date_only}.json")
+        youtube_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_videos}_youtube_transcripts_{date_time}.json")
+        chunk_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_videos}_youtube_transcripts_chunked_{date_time}.json")
+        embeddings_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_videos}_youtube_transcripts_embeddings_{date_time}.json")
         
         print(f"Output file paths:")
         print(f"  YouTube Transcript JSON: {youtube_json_path}")
