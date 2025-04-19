@@ -92,7 +92,7 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(),
-        logging.FileHandler(f"blog_embedding_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
+        logging.FileHandler(f"case_study_embedding_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
     ]
 )
 logger = logging.getLogger(__name__)
@@ -235,14 +235,14 @@ def run_module_1_case_study_scraping(variables, case_json_path):
         
         case_config = variables["scripts"]["cases"]
         
-        # Get COMPANY_NAME from global section (since it's not in blogs section)
+        # Get COMPANY_NAME from global section (since it's not in case studies section)
         if "global" in variables and "COMPANY_NAME" in variables["global"]:
             company_name = variables["global"]["COMPANY_NAME"]
             print(f"Successfully fetched COMPANY_NAME from Supabase global section: {company_name}")
         else:
             raise Exception("COMPANY_NAME not found in Supabase config")
 
-        # Get SITEMAP_URL from global section (since it's not in blogs section)
+        # Get SITEMAP_URL from global section (since it's not in case studies section)
         if "global" in variables and "SITEMAP_URL" in variables["global"]:
             sitemap_url = variables["global"]["SITEMAP_URL"]
             print(f"Successfully fetched SITEMAP_URL from Supabase global section: {sitemap_url}")
@@ -280,9 +280,7 @@ def run_module_1_case_study_scraping(variables, case_json_path):
         print("Script execution will be halted as required variables are missing.")
         return None
 
-    # Set the output file name based on company name, number of case studies, and date
-    case_json_path = os.path.join(AGENTIC_OUTPUT_DIR, f"{company_name.lower().replace(' ', '_')}_{num_cases}_case_studies_{datetime.now().strftime('%Y%m%d')}.json")
-    print(f"Output will be saved to: {case_json_path}")
+    # Output file name will be set later in the main workflow, not here.
 
     print(f"Using configuration: COMPANY_NAME={company_name}, NUM_CASE={num_cases}, CASE_SITEMAP_KEYWORD={case_sitemap_keyword}")
     print(f"CASE_CATEG_OPTIONS_SITEMAP_URL: {case_categ_options_sitemap_url}")
@@ -954,18 +952,18 @@ def main():
         # Create output directory if it doesn't exist
         os.makedirs(AGENTIC_OUTPUT_DIR, exist_ok=True)
         
-        # Generate output file paths with date only (no timestamp)
-        date_only = datetime.now().strftime("%Y%m%d")
+        # Generate output file paths with date and time (YYYYMMDD_HHMMSS)
+        date_time = datetime.now().strftime("%Y%m%d_%H%M%S")
         # Use lowercase for company_name to maintain consistency with existing files
         company_name_lower = company_name.lower()
         
-        # Get the actual number of blogs from the case_config
+        # Get the actual number of case studies from the case_config
         case_config = variables["scripts"]["cases"]
         actual_num_cases = int(case_config.get("NUM_CASE", num_cases))
         
-        case_json_path = os.path.join(AGENTIC_OUTPUT_DIR, f"{company_name_lower}_{actual_num_cases}_case_studies_{date_only}.json")
-        chunk_json_path = os.path.join(AGENTIC_OUTPUT_DIR, f"{company_name_lower}_{actual_num_cases}_case_studies_chunked_{date_only}.json")
-        embeddings_json_path = os.path.join(AGENTIC_OUTPUT_DIR, f"{company_name_lower}_{actual_num_cases}_case_studies_embeddings_{date_only}.json")
+        case_json_path = os.path.join(AGENTIC_OUTPUT_DIR, f"{company_name_lower}_{actual_num_cases}_case_studies_{date_time}.json")
+        chunk_json_path = os.path.join(AGENTIC_OUTPUT_DIR, f"{company_name_lower}_{actual_num_cases}_case_studies_chunked_{date_time}.json")
+        embeddings_json_path = os.path.join(AGENTIC_OUTPUT_DIR, f"{company_name_lower}_{actual_num_cases}_case_studies_embeddings_{date_time}.json")
         
         print(f"Output file paths:")
         print(f"  Case study JSON: {case_json_path}")
