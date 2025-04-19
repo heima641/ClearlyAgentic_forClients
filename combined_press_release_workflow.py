@@ -205,12 +205,13 @@ def scrape_page_content(url):
     return {"title": title, "url": url, "content": content}
 
 def run_module_1_press_release_scraping(variables, press_release_json_path):
-    """Module 1: Blog Scraping
-    Retrieves a specified number of articles from a chosen content category,
+    """Module 1: Press Release Scraping
+    Retrieves a specified number of press releases from a chosen content category,
     fetches their titles and text, and saves the results in a JSON file.
     
     Args:
         variables: Configuration variables from Supabase
+        press_release_json_path: Path where the press release content will be saved
         press_release_json_path: Path where the press_release content will be saved
     
     Returns:
@@ -280,9 +281,7 @@ def run_module_1_press_release_scraping(variables, press_release_json_path):
         print("Script execution will be halted as required variables are missing.")
         return None
 
-    # Set the output file name based on company name, number of press_releases, and date
-    press_release_json_path = os.path.join(AGENTIC_OUTPUT_DIR, f"{company_name.lower().replace(' ', '_')}_{num_press_releases}_{press_sitemap_keyword}_{datetime.now().strftime('%Y%m%d')}.json")
-    print(f"Output will be saved to: {press_release_json_path}")
+    # Output file name will be set later in the main workflow, not here.
 
     print(f"Using configuration: COMPANY_NAME={company_name}, NUM_PRESS={num_press_releases}, PRESS_SITEMAP_KEYWORD={press_sitemap_keyword}")
     print(f"PRESS_CATEG_OPTIONS_SITEMAP_URL: {press_categ_options_sitemap_url}")
@@ -423,7 +422,7 @@ def enrich_metadata(chunk_text):
         "quote": contains_quote(chunk_text)
     }
 
-# --- Chunking Function for Blog Posts ---
+# --- Chunking Function for Press Release Posts ---
 def chunk_press_release_post_by_chars(text, min_chars=900, max_chars=1300):
     try:
         sentences = sent_tokenize(text)
@@ -520,7 +519,7 @@ def run_module_2_content_chunking(input_json_path, output_chunk_path):
         analyzer = Analyzer()
 
         for idx, post in enumerate(posts):
-            title = post.get('title', f"BlogPost_{idx+1}")
+            title = post.get('title', f"PressReleasePost_{idx+1}")
             url = post.get('url', '')
             content = post.get('content', '')
 
@@ -530,7 +529,7 @@ def run_module_2_content_chunking(input_json_path, output_chunk_path):
 
             # Split content into chunks based on character length and sentiment shifts
             chunks = chunk_press_release_post_by_chars(content, min_chars=900, max_chars=1300)
-            print(f"Blog post #{idx+1} ({title}) - Split into {len(chunks)} chunks")
+            print(f"Press release post #{idx+1} ({title}) - Split into {len(chunks)} chunks")
 
             total_chunks = len(chunks)
             for i, chunk in enumerate(chunks):
@@ -710,7 +709,7 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
 
         print(f"JSON loaded successfully. Found {chunk_count} chunks to process.")
 
-        # Process Blog Chunks
+        # Process Press Release Chunks
         print("Processing press_release chunks and generating embeddings...")
         records = []
         total_chunks = chunk_count
@@ -954,8 +953,8 @@ def main():
         # Create output directory if it doesn't exist
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         
-        # Generate output file paths with date only (no timestamp)
-        date_only = datetime.now().strftime("%Y%m%d")
+        # Generate output file paths with date and time (YYYYMMDD_HHMMSS)
+        date_time = datetime.now().strftime("%Y%m%d_%H%M%S")
         # Use lowercase for company_name to maintain consistency with existing files
         company_name_lower = company_name.lower()
         
@@ -963,12 +962,12 @@ def main():
         press_config = variables["scripts"]["press"]
         actual_num_press = int(press_config.get("NUM_PRESS", num_press_releases))
         
-        press_release_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_press}_press_releases_{date_only}.json")
-        chunk_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_press}_press_releases_chunked_{date_only}.json")
-        embeddings_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_press}_press_releases_embeddings_{date_only}.json")
+        press_release_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_press}_press_releases_{date_time}.json")
+        chunk_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_press}_press_releases_chunked_{date_time}.json")
+        embeddings_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_press}_press_releases_embeddings_{date_time}.json")
         
         print(f"Output file paths:")
-        print(f"  Blog JSON: {press_release_json_path}")
+        print(f"  Press Release JSON: {press_release_json_path}")
         print(f"  Chunk JSON: {chunk_json_path}")
         print(f"  Embeddings JSON: {embeddings_json_path}")
         
@@ -976,7 +975,7 @@ def main():
         print(f"Will process up to {num_press_releases} press_release posts with keyword '{press_sitemap_keyword}'")
         print(f"Output files will be saved to {OUTPUT_DIR}")
         
-        # Execute Module 1: Blog Scraping
+        # Execute Module 1: Press Release Scraping
         press_release_json_path = run_module_1_press_release_scraping(variables, press_release_json_path)
         if not press_release_json_path or not os.path.exists(press_release_json_path):
             print("ERROR: Module 1 failed. Stopping workflow.")
@@ -1006,11 +1005,11 @@ def main():
         print("WORKFLOW EXECUTION SUMMARY")
         print("=" * 80)
         print(f"Company: {company_name}")
-        print(f"Blog posts processed: {actual_num_press}")
+        print(f"Press release posts processed: {actual_num_press}")
         print(f"Keyword: {press_sitemap_keyword}")
         print(f"Total execution time: {int(minutes)} minutes and {seconds:.2f} seconds")
         print(f"Output files:")
-        print(f"  - Blog content: {os.path.basename(press_release_json_path)}")
+        print(f"  - Press release content: {os.path.basename(press_release_json_path)}")
         print(f"  - Chunked content: {os.path.basename(chunk_json_path)}")
         print(f"  - Embeddings: {os.path.basename(embeddings_json_path)}")
         print("=" * 80)
