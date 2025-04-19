@@ -720,12 +720,12 @@ def main():
         global_config = variables["global"]
         company_name = global_config.get("COMPANY_NAME", "company")
         
-        # Generate output file paths with date only (no timestamp)
-        date_only = datetime.now().strftime("%Y%m%d")
+        # Generate output file paths with date and time (YYYYMMDD_HHMMSS)
+        date_time = datetime.now().strftime("%Y%m%d_%H%M%S")
         
         reviews_json_path = os.path.join(SCRIPT_DIR, f"churnzero_reviews_20250401.json")
-        chunk_json_path = os.path.join(OUTPUT_DIR, f"{company_name.lower()}_reviews_chunked_{date_only}.json")
-        embeddings_json_path = os.path.join(OUTPUT_DIR, f"{company_name.lower()}_reviews_embeddings_{date_only}.json")
+        chunk_json_path = os.path.join(OUTPUT_DIR, f"{company_name.lower()}_reviews_chunked_{date_time}.json")
+        embeddings_json_path = os.path.join(OUTPUT_DIR, f"{company_name.lower()}_reviews_embeddings_{date_time}.json")
         
         print(f"Output file paths:")
         print(f"  Reviews JSON: {reviews_json_path}")
