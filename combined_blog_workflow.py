@@ -66,8 +66,8 @@ load_dotenv(dotenv_path=ENV_FILE_PATH)
 
 # # SUPABASE BUCKET: initialize Supabase client
 supabase_url = os.getenv("VITE_SUPABASE_URL")
-supabase_key = os.getenv("VITE_SUPABASE_ANON_KEY")
-supabase     = create_client(supabase_url, supabase_key)
+supabase_service_key = os.getenv("VITE_SUPABASE_SERVICE_ROLE_KEY")
+supabase     = create_client(supabase_url, supabase_service_key)
 openai_api_key = os.getenv("OPENAI_API_KEY")
 pinecone_api_key = os.getenv("PINECONE_API_KEY")
 
@@ -948,7 +948,7 @@ def main():
     
     if not supabase_url or not supabase_key:
         print("ERROR: Supabase credentials not found in environment variables")
-        print(f"Please ensure {ENV_FILE_PATH} contains VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY")
+        print(f"Please ensure {ENV_FILE_PATH} contains VITE_SUPABASE_URL and VITE_SUPABASE_SERVICE_ROLE_KEY")
         return
     
     # Fetch configuration from Supabase
