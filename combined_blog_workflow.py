@@ -124,13 +124,13 @@ os.makedirs(AGENTIC_OUTPUT_DIR, exist_ok=True)
 # COMMON FUNCTIONS
 # =====================================================================
 
-def fetch_configuration_from_supabase(supabase_url, supabase_key, config_name=None, config_id=None):
+def fetch_configuration_from_supabase(supabase_url, supabase_service_key, config_name=None, config_id=None):
     """
     Fetch configuration variables from Supabase workflow_configs table
 
     Args:
         supabase_url (str): Supabase project URL
-        supabase_key (str): Supabase anon/public key
+        supabase_service_key (str): Supabase service role key
         config_name (str, optional): Name of the configuration to fetch
         config_id (int, optional): ID of the configuration to fetch
 
@@ -139,7 +139,7 @@ def fetch_configuration_from_supabase(supabase_url, supabase_key, config_name=No
     """
     try:
         # Initialize Supabase client
-        supabase: Client = create_client(supabase_url, supabase_key)
+        supabase: Client = create_client(supabase_url, supabase_service_key)
 
         # Query based on either name or ID
         if config_id:
@@ -667,14 +667,14 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
         return False
 
     # Fetch INDEX_NAME from Supabase (this is the only place it will be found)
-    if not supabase_url or not supabase_key:
+    if not supabase_url or not supabase_service_key:
         print("ERROR: Supabase credentials not available in environment file")
         return False
 
     print("Attempting to fetch INDEX_NAME from Supabase...")
     try:
         # Fetch the most recent configuration
-        variables = fetch_configuration_from_supabase(supabase_url, supabase_key)
+        variables = fetch_configuration_from_supabase(supabase_url, supabase_service_key)
         
         # Extract INDEX_NAME from the global section
         if "global" in variables and "INDEX_NAME" in variables["global"]:
@@ -946,7 +946,7 @@ def main():
     # Start timing the entire workflow
     workflow_start_time = datetime.now()
     
-    if not supabase_url or not supabase_key:
+    if not supabase_url or not supabase_service_key:
         print("ERROR: Supabase credentials not found in environment variables")
         print(f"Please ensure {ENV_FILE_PATH} contains VITE_SUPABASE_URL and VITE_SUPABASE_SERVICE_ROLE_KEY")
         return
@@ -954,7 +954,7 @@ def main():
     # Fetch configuration from Supabase
     try:
         print("Fetching configuration from Supabase...")
-        variables = fetch_configuration_from_supabase(supabase_url, supabase_key)
+        variables = fetch_configuration_from_supabase(supabase_url, supabase_service_key)
         
         # Extract required configuration variables
         if "global" not in variables:
