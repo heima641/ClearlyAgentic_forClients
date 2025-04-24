@@ -219,6 +219,7 @@ def scrape_video_transcript(video_id, YOUTUBE_API_KEY):
         transcript_entries = YouTubeTranscriptApi.get_transcript(video_id)
         transcript_text = "\n".join([entry["text"] for entry in transcript_entries])
     except:
+        print(f"[ERROR] transcript scrape failed for {video_id}: {str(e)}")
         return None
     youtube_client = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
     video_response = youtube_client.videos().list(
@@ -345,13 +346,10 @@ def run_module_1_youtube_transcript_scraping(variables, youtube_json_path):
             youtube_categ_options_sitemap_url = ""
             print("YOUTUBE_CATEG_OPTIONS_SITEMAP_URL not found in Supabase, using empty string")
 
-
-
     except Exception as e:
         print(f"ERROR: Failed to fetch required configuration from Supabase: {str(e)}")
         print("Script execution will be halted as required variables are missing.")
         return None
-
 
     print(f"Using configuration: COMPANY_NAME={company_name}, NUM_VIDEOS={num_videos}, COMPANY_NAME_OR_HANDLE={company_name_or_handle}")
     print(f"YOUTUBE_CATEG_OPTIONS_SITEMAP_URL: {youtube_categ_options_sitemap_url}")
@@ -361,6 +359,10 @@ def run_module_1_youtube_transcript_scraping(variables, youtube_json_path):
         # Environment variables already loaded in global section
         variables["YOUTUBE_API_KEY"] = os.environ.get("YOUTUBE_API_KEY")
     YOUTUBE_API_KEY = variables["YOUTUBE_API_KEY"]
+
+    # ✅ Insert this line right here:
+    print(f"Using YOUTUBE_API_KEY = {YOUTUBE_API_KEY[:4]}...")  # Partial print to confirm presence
+    
     channel_id = get_channel_id(company_name_or_handle, YOUTUBE_API_KEY)
     recent_videos = extract_video_ids(channel_id, YOUTUBE_API_KEY, num_videos)
 
