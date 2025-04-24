@@ -24,7 +24,7 @@ This script combines four sequential processes into a single workflow focused on
    - Upserts the embeddings and metadata to Pinecone vector database
    - Saves a complete record of all processed data
 
-All output files are saved to the AGENTIC_OUTPUT folder.
+All output files are saved to a Supabase Bucket instead of the AGENTIC_OUTPUT folder.
 """
 
 # =====================================================================
@@ -41,14 +41,17 @@ import logging
 import nltk
 from datetime import datetime
 from bs4 import BeautifulSoup
-from dotenv import load_dotenv
-from supabase import create_client, Client
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 # Import OpenAI and Pinecone for Module 4
 import openai
 from pinecone import Pinecone
+
+# SUP BUCKET OUTPUT SUP BUCKET OUTPUT
+from dotenv import load_dotenv
+from supabase import create_client   # # SUPABASE BUCKET: import Supabase client
+from supabase import Client
 
 # =====================================================================
 # CONSTANTS AND CONFIGURATION
@@ -57,8 +60,16 @@ from pinecone import Pinecone
 # Path to environment variables file
 ENV_FILE_PATH = "STATIC_VARS_MAR2025.env"
 
-# Output directory for all generated files
-OUTPUT_DIR = "AGENTIC_OUTPUT"
+# SUP BUCKET OUTPUT SUP BUCKET OUTPUT
+# Load environment variables (for any additional env vars needed)
+load_dotenv(dotenv_path=ENV_FILE_PATH)
+
+# # SUPABASE BUCKET: initialize Supabase client
+supabase_url = os.getenv("VITE_SUPABASE_URL")
+supabase_service_key = os.getenv("VITE_SUPABASE_SERVICE_ROLE_KEY")
+supabase = create_client(supabase_url, supabase_service_key)
+openai_api_key = os.getenv("OPENAI_API_KEY")
+pinecone_api_key = os.getenv("PINECONE_API_KEY")
 
 # Default retry settings
 DEFAULT_MAX_RETRIES = 3
@@ -78,12 +89,20 @@ except LookupError:
 # Flag to track if we've already shown the punkt_tab error message
 _shown_punkt_tab_error = False
 
-# Helper function to avoid repetitive error messages
+# Helper function to avoid repetitive error messages -- See 94-109 and 94-117 regarding Punkt
 
-def log_punkt_tab_error(error_type):
+def log_punkt_tab_error(function_name):
+    """Log NLTK punkt tokenizer errors and provide guidance.
+    
+    Tracks a global flag to ensure the message is only shown once per execution.
+    
+    Args:
+        function_name (str): Name of the function where the error occurred
+    """
     global _shown_punkt_tab_error
     if not _shown_punkt_tab_error:
-        print(f"Note: Using fallback methods for text processing due to NLTK configuration.")
+        print(f"Note: Using fallback methods for text processing in {function_name} due to NLTK configuration.")
+        print("This is normal and won't affect results, but processing may be slightly slower.")
         _shown_punkt_tab_error = True
 
 # Configure logging for Module 4
@@ -104,22 +123,18 @@ logging.getLogger("openai").setLevel(logging.WARNING)
 # Setup directory structure
 script_dir = os.path.dirname(os.path.abspath(__file__))
 ENV_FILE_PATH = os.path.join(script_dir, "STATIC_VARS_MAR2025.env")
-AGENTIC_OUTPUT_DIR = os.path.join(script_dir, "AGENTIC_OUTPUT")
-
-# Ensure output directory exists
-os.makedirs(AGENTIC_OUTPUT_DIR, exist_ok=True)
 
 # =====================================================================
 # COMMON FUNCTIONS
 # =====================================================================
 
-def fetch_configuration_from_supabase(supabase_url, supabase_key, config_name=None, config_id=None):
+def fetch_configuration_from_supabase(supabase_url, supabase_service_key, config_name=None, config_id=None):
     """
     Fetch configuration variables from Supabase workflow_configs table
 
     Args:
         supabase_url (str): Supabase project URL
-        supabase_key (str): Supabase anon/public key
+        supabase_service_key (str): Supabase service role key
         config_name (str, optional): Name of the configuration to fetch
         config_id (int, optional): ID of the configuration to fetch
 
@@ -128,7 +143,7 @@ def fetch_configuration_from_supabase(supabase_url, supabase_key, config_name=No
     """
     try:
         # Initialize Supabase client
-        supabase: Client = create_client(supabase_url, supabase_key)
+        supabase: Client = create_client(supabase_url, supabase_service_key)
 
         # Query based on either name or ID
         if config_id:
@@ -318,9 +333,20 @@ def run_module_1_press_release_scraping(variables, press_release_json_path):
     print("\nPausing for 7 seconds before saving data to JSON file...")
     time.sleep(7)
 
-    # --- Part 3: Save the scraped data to a JSON file ---
+    # --- Part 3: Save the scraped data to a JSON file (to Supabase bucket) ---
+    # First write to a temporary local file
     with open(press_release_json_path, "w") as f:
         json.dump(scraped_data, f, indent=4)
+        
+    # Then upload to Supabase bucket
+    with open(press_release_json_path, "rb") as f:
+        file_content = f.read()
+        supabase.storage.from_("agentic-output").upload(
+            os.path.basename(press_release_json_path),
+            file_content,
+            {"content-type": "application/json"}
+        )
+    print(f"File uploaded to Supabase bucket: {os.path.basename(press_release_json_path)}")
 
     print(f"Content data saved to {press_release_json_path}")
     print(f"Module 1 execution completed in {datetime.now() - module_start_time}")
@@ -552,10 +578,20 @@ def run_module_2_content_chunking(input_json_path, output_chunk_path):
                 enriched_chunk.update(metadata)
                 enriched_posts.append(enriched_chunk)
 
-        # Write the enriched press_release posts to the output JSON file
-        # Make sure we're using the exact path that was passed to the function
+        # Write the enriched press_release posts to the output JSON file and upload to Supabase
+        # First write to a temporary local file
         with open(output_chunk_path, 'w', encoding='utf8') as f:
             json.dump(enriched_posts, f, indent=2)
+            
+        # Then upload to Supabase bucket
+        with open(output_chunk_path, "rb") as f:
+            file_content = f.read()
+            supabase.storage.from_("agentic-output").upload(
+                os.path.basename(output_chunk_path),
+                file_content,
+                {"content-type": "application/json"}
+            )
+        print(f"Chunked file uploaded to Supabase bucket: {os.path.basename(output_chunk_path)}")
 
         print("Processing complete! All press_release posts have been processed and enriched.")
         print(f"Chunked output saved to {output_chunk_path}")
@@ -659,7 +695,7 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
     print("Attempting to fetch INDEX_NAME from Supabase...")
     try:
         # Fetch the most recent configuration
-        variables = fetch_configuration_from_supabase(supabase_url, supabase_key)
+        variables = fetch_configuration_from_supabase(supabase_url, supabase_service_key)
         
         # Extract INDEX_NAME from the global section
         if "global" in variables and "INDEX_NAME" in variables["global"]:
@@ -773,12 +809,22 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
 
         print(f"Successfully processed {len(records)}/{total_chunks} chunks")
 
-        # Save Processed Records to a JSON File
+        # Save Processed Records to a JSON File and upload to Supabase bucket
         print(f"Saving processed records to {output_embeddings_path}...")
+        # First write to a temporary local file
         with open(output_embeddings_path, "w", encoding="utf-8") as f:
             json.dump(records, f, indent=4)
+            
+        # Then upload to Supabase bucket
+        with open(output_embeddings_path, "rb") as f:
+            file_content = f.read()
+            supabase.storage.from_("agentic-output").upload(
+                os.path.basename(output_embeddings_path),
+                file_content,
+                {"content-type": "application/json"}
+            )
 
-        print(f"✅ Saved embeddings to {output_embeddings_path}")
+        print(f"✅ Saved embeddings to {output_embeddings_path} and uploaded to Supabase bucket")
 
         # Insert Embeddings into Pinecone
         print("Inserting embeddings into Pinecone...")
@@ -904,17 +950,7 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
 # MAIN FUNCTION
 # =====================================================================
 
-def log_punkt_tab_error(function_name):
-    """Log NLTK punkt tokenizer errors and provide guidance."""
-    print(f"NLTK Error in {function_name}: punkt tokenizer not found.")
-    print("Attempting to download punkt tokenizer...")
-    try:
-        nltk.download('punkt', quiet=True)
-        print("Successfully downloaded punkt tokenizer.")
-    except Exception as e:
-        print(f"Failed to download punkt tokenizer: {e}")
-        print("Please manually download the punkt tokenizer using:")
-        print("import nltk; nltk.download('punkt')")
+# The log_punkt_tab_error function is already defined at the beginning of the file
 
 def main():
     """Main function to orchestrate the entire workflow."""
@@ -925,20 +961,16 @@ def main():
     # Start timing the entire workflow
     workflow_start_time = datetime.now()
     
-    # Load environment variables
-    load_dotenv(ENV_FILE_PATH)
-    supabase_url = os.getenv("VITE_SUPABASE_URL")
-    supabase_key = os.getenv("VITE_SUPABASE_ANON_KEY")
-    
-    if not supabase_url or not supabase_key:
+    # Supabase credentials are already loaded in the global section
+    if not supabase_url or not supabase_service_key:
         print("ERROR: Supabase credentials not found in environment variables")
-        print(f"Please ensure {ENV_FILE_PATH} contains VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY")
+        print(f"Please ensure {ENV_FILE_PATH} contains VITE_SUPABASE_URL and VITE_SUPABASE_SERVICE_ROLE_KEY")
         return
     
     # Fetch configuration from Supabase
     try:
         print("Fetching configuration from Supabase...")
-        variables = fetch_configuration_from_supabase(supabase_url, supabase_key)
+        variables = fetch_configuration_from_supabase(supabase_url, supabase_service_key)
         
         # Extract required configuration variables
         if "global" not in variables:
@@ -950,8 +982,7 @@ def main():
         press_sitemap_keyword = global_config.get("PRESS_SITEMAP_KEYWORD", "press_release")
         num_press_releases = int(global_config.get("NUM_PRESS", 10))
         
-        # Create output directory if it doesn't exist
-        os.makedirs(OUTPUT_DIR, exist_ok=True)
+        # No longer need to create local output directory as files will be saved to Supabase bucket
         
         # Generate output file paths with date and time (YYYYMMDD_HHMMSS)
         date_time = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -962,9 +993,10 @@ def main():
         press_config = variables["scripts"]["press"]
         actual_num_press = int(press_config.get("NUM_PRESS", num_press_releases))
         
-        press_release_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_press}_press_releases_{date_time}.json")
-        chunk_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_press}_press_releases_chunked_{date_time}.json")
-        embeddings_json_path = os.path.join(OUTPUT_DIR, f"{company_name_lower}_{actual_num_press}_press_releases_embeddings_{date_time}.json")
+        # Define file paths without OUTPUT_DIR as they'll be uploaded to Supabase bucket
+        press_release_json_path = f"{company_name_lower}_{actual_num_press}_press_releases_{date_time}.json"
+        chunk_json_path = f"{company_name_lower}_{actual_num_press}_press_releases_chunked_{date_time}.json"
+        embeddings_json_path = f"{company_name_lower}_{actual_num_press}_press_releases_embeddings_{date_time}.json"
         
         print(f"Output file paths:")
         print(f"  Press Release JSON: {press_release_json_path}")
@@ -973,7 +1005,7 @@ def main():
         
         print(f"Configuration loaded successfully for {company_name}")
         print(f"Will process up to {num_press_releases} press_release posts with keyword '{press_sitemap_keyword}'")
-        print(f"Output files will be saved to {OUTPUT_DIR}")
+        print(f"Output files will be saved to Supabase bucket: agentic-output")
         
         # Execute Module 1: Press Release Scraping
         press_release_json_path = run_module_1_press_release_scraping(variables, press_release_json_path)

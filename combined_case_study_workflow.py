@@ -24,7 +24,7 @@ This script combines four sequential processes into a single workflow:
    - Upserts the embeddings and metadata to Pinecone vector database
    - Saves a complete record of all processed case study data
 
-All output files are saved to the AGENTIC_OUTPUT folder.
+All output files are saved to a Supabase Bucket instead of the AGENTIC_OUTPUT folder.
 """
 
 # =====================================================================
@@ -41,14 +41,17 @@ import logging
 import nltk
 from datetime import datetime
 from bs4 import BeautifulSoup
-from dotenv import load_dotenv
-from supabase import create_client, Client
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 # Import OpenAI and Pinecone for Module 4
 import openai
 from pinecone import Pinecone
+
+# SUP BUCKET OUTPUT SUP BUCKET OUTPUT
+from dotenv import load_dotenv
+from supabase import create_client   # # SUPABASE BUCKET: import Supabase client
+from supabase import Client
 
 # =====================================================================
 # CONSTANTS AND CONFIGURATION
@@ -57,8 +60,16 @@ from pinecone import Pinecone
 # Path to environment variables file
 ENV_FILE_PATH = "STATIC_VARS_MAR2025.env"
 
-# Output directory for all generated files
-OUTPUT_DIR = "AGENTIC_OUTPUT"
+# SUP BUCKET OUTPUT SUP BUCKET OUTPUT
+# Load environment variables (for any additional env vars needed)
+load_dotenv(dotenv_path=ENV_FILE_PATH)
+
+# # SUPABASE BUCKET: initialize Supabase client
+supabase_url = os.getenv("VITE_SUPABASE_URL")
+supabase_service_key = os.getenv("VITE_SUPABASE_SERVICE_ROLE_KEY")
+supabase = create_client(supabase_url, supabase_service_key)
+openai_api_key = os.getenv("OPENAI_API_KEY")
+pinecone_api_key = os.getenv("PINECONE_API_KEY")
 
 # Default retry settings
 DEFAULT_MAX_RETRIES = 3
@@ -80,10 +91,18 @@ _shown_punkt_tab_error = False
 
 # Helper function to avoid repetitive error messages
 
-def log_punkt_tab_error(error_type):
+def log_punkt_tab_error(function_name):
+    """Log NLTK punkt tokenizer errors and provide guidance.
+    
+    Tracks a global flag to ensure the message is only shown once per execution.
+    
+    Args:
+        function_name (str): Name of the function where the error occurred
+    """
     global _shown_punkt_tab_error
     if not _shown_punkt_tab_error:
-        print(f"Note: Using fallback methods for text processing due to NLTK configuration.")
+        print(f"Note: Using fallback methods for text processing in {function_name} due to NLTK configuration.")
+        print("This is normal and won't affect results, but processing may be slightly slower.")
         _shown_punkt_tab_error = True
 
 # Configure logging for Module 4
@@ -104,22 +123,18 @@ logging.getLogger("openai").setLevel(logging.WARNING)
 # Setup directory structure
 script_dir = os.path.dirname(os.path.abspath(__file__))
 ENV_FILE_PATH = os.path.join(script_dir, "STATIC_VARS_MAR2025.env")
-AGENTIC_OUTPUT_DIR = os.path.join(script_dir, "AGENTIC_OUTPUT")
-
-# Ensure output directory exists
-os.makedirs(AGENTIC_OUTPUT_DIR, exist_ok=True)
 
 # =====================================================================
 # COMMON FUNCTIONS
 # =====================================================================
 
-def fetch_configuration_from_supabase(supabase_url, supabase_key, config_name=None, config_id=None):
+def fetch_configuration_from_supabase(supabase_url, supabase_service_key, config_name=None, config_id=None):
     """
     Fetch configuration variables from Supabase workflow_configs table
 
     Args:
         supabase_url (str): Supabase project URL
-        supabase_key (str): Supabase anon/public key
+        supabase_service_key (str): Supabase service role key
         config_name (str, optional): Name of the configuration to fetch
         config_id (int, optional): ID of the configuration to fetch
 
@@ -128,7 +143,7 @@ def fetch_configuration_from_supabase(supabase_url, supabase_key, config_name=No
     """
     try:
         # Initialize Supabase client
-        supabase: Client = create_client(supabase_url, supabase_key)
+        supabase: Client = create_client(supabase_url, supabase_service_key)
 
         # Query based on either name or ID
         if config_id:
@@ -222,8 +237,6 @@ def run_module_1_case_study_scraping(variables, case_json_path):
     
     module_start_time = datetime.now()
     
-    # Load environment variables (for any additional env vars needed)
-    load_dotenv(dotenv_path=ENV_FILE_PATH)
     print(f"Using configuration variables passed from main function")
     
     # Use the variables passed from the main function
@@ -280,7 +293,7 @@ def run_module_1_case_study_scraping(variables, case_json_path):
         print("Script execution will be halted as required variables are missing.")
         return None
 
-    # Output file name will be set later in the main workflow, not here.
+    # The output file path is provided by the caller (main workflow) via the case_json_path argument.
 
     print(f"Using configuration: COMPANY_NAME={company_name}, NUM_CASE={num_cases}, CASE_SITEMAP_KEYWORD={case_sitemap_keyword}")
     print(f"CASE_CATEG_OPTIONS_SITEMAP_URL: {case_categ_options_sitemap_url}")
@@ -321,6 +334,13 @@ def run_module_1_case_study_scraping(variables, case_json_path):
     with open(case_json_path, "w") as f:
         json.dump(scraped_data, f, indent=4)
     
+    # # SUPABASE BUCKET: upload raw case study JSON to Supabase bucket
+    # SUP BUCKET OUTPUT SUP BUCKET OUTPUT
+    with open(case_json_path, "rb") as _f:
+        _data = _f.read()
+    res = supabase.storage.from_("agentic-output").upload(os.path.basename(case_json_path), _data)
+    print(f"Uploaded {os.path.basename(case_json_path)} to Supabase:", res)
+
     print(f"Case study data saved to {case_json_path}")
     print(f"Module 1 execution completed in {datetime.now() - module_start_time}")
     
@@ -487,7 +507,8 @@ def run_module_2_content_chunking(input_json_path, output_chunk_path):
     """Module 2: Content Chunking for Embeddings
     Processes the retrieved content by chunking it into smaller pieces suitable for embeddings,
     enriches the chunks with metadata, and saves the results in a second JSON file.
-    
+    # SUP BUCKET OUTPUT SUP BUCKET OUTPUT
+        
     Args:
         input_json_path: Path to the JSON file generated by Module 1
         output_chunk_path: Path where the chunked output will be saved
@@ -553,15 +574,21 @@ def run_module_2_content_chunking(input_json_path, output_chunk_path):
 
         # Write the enriched case studies to the output JSON file
         # Make sure we're using the exact path that was passed to the function
+        # SUP BUCKET OUTPUT SUP BUCKET OUTPUT
         with open(output_chunk_path, 'w', encoding='utf8') as f:
             json.dump(enriched_posts, f, indent=2)
+
+        # # SUPABASE BUCKET: upload chunked case study JSON to Supabase bucket
+        with open(output_chunk_path, "rb") as _f:
+            _data = _f.read()
+        res = supabase.storage.from_("agentic-output").upload(os.path.basename(output_chunk_path), _data)
+        print(f"Uploaded {os.path.basename(output_chunk_path)} to Supabase:", res)
 
         print("Processing complete! All case studies have been processed and enriched.")
         print(f"Chunked output saved to {output_chunk_path}")
         print(f"Module 2 execution completed in {datetime.now() - module_start_time}")
         
         return True
-
     except Exception as error:
         print("Error processing the JSON file:", error)
         print(f"Module 2 failed after {datetime.now() - module_start_time}")
@@ -621,6 +648,7 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
     """Module 4: Embedding Generation and Pinecone Upsert
     Generates embeddings for each chunk, upserts the embeddings and metadata to Pinecone vector database,
     and saves a complete record of all processed data.
+    # SUP BUCKET OUTPUT SUP BUCKET OUTPUT
     
     Args:
         input_processed_path: Path to the processed JSON file generated by Module 3
@@ -634,13 +662,6 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
     print("=" * 80)
     
     module_start_time = datetime.now()
-    
-    # Load environment variables
-    load_dotenv(ENV_FILE_PATH)
-    openai_api_key = os.getenv("OPENAI_API_KEY")
-    pinecone_api_key = os.getenv("PINECONE_API_KEY")
-    supabase_url = os.getenv("VITE_SUPABASE_URL")
-    supabase_key = os.getenv("VITE_SUPABASE_ANON_KEY")
 
     # LOGGING POINT 2: Log API key status (masked for security)
     print(f"LOG-POINT-2: OpenAI API key loaded: {bool(openai_api_key)} (length: {len(openai_api_key) if openai_api_key else 0})")
@@ -651,14 +672,14 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
         return False
 
     # Fetch INDEX_NAME from Supabase (this is the only place it will be found)
-    if not supabase_url or not supabase_key:
+    if not supabase_url or not supabase_service_key:
         print("ERROR: Supabase credentials not available in environment file")
         return False
 
     print("Attempting to fetch INDEX_NAME from Supabase...")
     try:
         # Fetch the most recent configuration
-        variables = fetch_configuration_from_supabase(supabase_url, supabase_key)
+        variables = fetch_configuration_from_supabase(supabase_url, supabase_service_key)
         
         # Extract INDEX_NAME from the global section
         if "global" in variables and "INDEX_NAME" in variables["global"]:
@@ -773,10 +794,16 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
         print(f"Successfully processed {len(records)}/{total_chunks} case study chunks")
 
         # Save Processed Records to a JSON File
+        # SUP BUCKET OUTPUT SUP BUCKET OUTPUT
         print(f"Saving processed case study records to {output_embeddings_path}...")
         with open(output_embeddings_path, "w", encoding="utf-8") as f:
             json.dump(records, f, indent=4)
 
+        # SUPABASE BUCKET: upload processed JSON to Supabase bucket
+        with open(output_embeddings_path, "rb") as _f:
+            _data = _f.read()
+        res = supabase.storage.from_("agentic-output").upload(os.path.basename(output_embeddings_path), _data)
+        print(f"Uploaded {os.path.basename(output_embeddings_path)} to Supabase:", res)
         print(f" Saved case study embeddings to {output_embeddings_path}")
 
         # Insert Embeddings into Pinecone
@@ -903,17 +930,7 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
 # MAIN FUNCTION
 # =====================================================================
 
-def log_punkt_tab_error(function_name):
-    """Log NLTK punkt tokenizer errors and provide guidance."""
-    print(f"NLTK Error in {function_name}: punkt tokenizer not found.")
-    print("Attempting to download punkt tokenizer...")
-    try:
-        nltk.download('punkt', quiet=True)
-        print("Successfully downloaded punkt tokenizer.")
-    except Exception as e:
-        print(f"Failed to download punkt tokenizer: {e}")
-        print("Please manually download the punkt tokenizer using:")
-        print("import nltk; nltk.download('punkt')")
+# The log_punkt_tab_error function is already defined at the beginning of the file
 
 def main():
     """Main function to orchestrate the entire workflow."""
@@ -924,20 +941,15 @@ def main():
     # Start timing the entire workflow
     workflow_start_time = datetime.now()
     
-    # Load environment variables
-    load_dotenv(ENV_FILE_PATH)
-    supabase_url = os.getenv("VITE_SUPABASE_URL")
-    supabase_key = os.getenv("VITE_SUPABASE_ANON_KEY")
-    
-    if not supabase_url or not supabase_key:
+    if not supabase_url or not supabase_service_key:
         print("ERROR: Supabase credentials not found in environment variables")
-        print(f"Please ensure {ENV_FILE_PATH} contains VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY")
+        print(f"Please ensure {ENV_FILE_PATH} contains VITE_SUPABASE_URL and VITE_SUPABASE_SERVICE_ROLE_KEY")
         return
     
     # Fetch configuration from Supabase
     try:
         print("Fetching configuration from Supabase...")
-        variables = fetch_configuration_from_supabase(supabase_url, supabase_key)
+        variables = fetch_configuration_from_supabase(supabase_url, supabase_service_key)
         
         # Extract required configuration variables
         if "global" not in variables:
@@ -949,9 +961,6 @@ def main():
         case_sitemap_keyword = global_config.get("CASE_SITEMAP_KEYWORD", "case")
         num_cases = int(global_config.get("NUM_CASE", 10))
         
-        # Create output directory if it doesn't exist
-        os.makedirs(AGENTIC_OUTPUT_DIR, exist_ok=True)
-        
         # Generate output file paths with date and time (YYYYMMDD_HHMMSS)
         date_time = datetime.now().strftime("%Y%m%d_%H%M%S")
         # Use lowercase for company_name to maintain consistency with existing files
@@ -960,10 +969,11 @@ def main():
         # Get the actual number of case studies from the case_config
         case_config = variables["scripts"]["cases"]
         actual_num_cases = int(case_config.get("NUM_CASE", num_cases))
-        
-        case_json_path = os.path.join(AGENTIC_OUTPUT_DIR, f"{company_name_lower}_{actual_num_cases}_case_studies_{date_time}.json")
-        chunk_json_path = os.path.join(AGENTIC_OUTPUT_DIR, f"{company_name_lower}_{actual_num_cases}_case_studies_chunked_{date_time}.json")
-        embeddings_json_path = os.path.join(AGENTIC_OUTPUT_DIR, f"{company_name_lower}_{actual_num_cases}_case_studies_embeddings_{date_time}.json")
+
+        # OUTPUT_DIR was removed from the script in favor of Supabase bucket - - SUP BUCKET OUTPUT
+        case_json_path = f"{company_name_lower}_{actual_num_cases}_case_studies_{date_time}.json"
+        chunk_json_path = f"{company_name_lower}_{actual_num_cases}_case_studies_chunked_{date_time}.json"
+        embeddings_json_path = f"{company_name_lower}_{actual_num_cases}_case_studies_embeddings_{date_time}.json"
         
         print(f"Output file paths:")
         print(f"  Case study JSON: {case_json_path}")
@@ -972,7 +982,7 @@ def main():
         
         print(f"Configuration loaded successfully for {company_name}")
         print(f"Will process up to {num_cases} case studies with keyword '{case_sitemap_keyword}'")
-        print(f"Output files will be saved to {AGENTIC_OUTPUT_DIR}")
+        print(f"Output files will be saved to Supabase bucket: agentic-output")
         
         # Execute Module 1: Case Study Scraping
         case_json_path = run_module_1_case_study_scraping(variables, case_json_path)

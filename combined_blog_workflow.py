@@ -91,10 +91,18 @@ _shown_punkt_tab_error = False
 
 # Helper function to avoid repetitive error messages
 
-def log_punkt_tab_error(error_type):
+def log_punkt_tab_error(function_name):
+    """Log NLTK punkt tokenizer errors and provide guidance.
+    
+    Tracks a global flag to ensure the message is only shown once per execution.
+    
+    Args:
+        function_name (str): Name of the function where the error occurred
+    """
     global _shown_punkt_tab_error
     if not _shown_punkt_tab_error:
-        print(f"Note: Using fallback methods for text processing due to NLTK configuration.")
+        print(f"Note: Using fallback methods for text processing in {function_name} due to NLTK configuration.")
+        print("This is normal and won't affect results, but processing may be slightly slower.")
         _shown_punkt_tab_error = True
 
 # Configure logging for Module 4
@@ -330,15 +338,13 @@ def run_module_1_blog_scraping(variables, blog_json_path):
     # SUP BUCKET OUTPUT SUP BUCKET OUTPUT
     with open(blog_json_path, "rb") as _f:
         _data = _f.read()
-    res = supabase.storage.from_("agentic-output") \
-                .upload(os.path.basename(blog_json_path), _data)
+    res = supabase.storage.from_("agentic-output").upload(os.path.basename(blog_json_path), _data)
     print(f"Uploaded {os.path.basename(blog_json_path)} to Supabase:", res)
 
     print(f"Content data saved to {blog_json_path}")
     print(f"Module 1 execution completed in {datetime.now() - module_start_time}")
     
     return blog_json_path
-
 
 # =====================================================================
 # MODULE 2: CONTENT CHUNKING IMPLEMENTATION
@@ -575,8 +581,7 @@ def run_module_2_content_chunking(input_json_path, output_chunk_path):
         # # SUPABASE BUCKET: upload chunked blog JSON to Supabase bucket
         with open(output_chunk_path, "rb") as _f:
             _data = _f.read()
-        res = supabase.storage.from_("agentic-output") \
-                    .upload(os.path.basename(output_chunk_path), _data)
+        res = supabase.storage.from_("agentic-output").upload(os.path.basename(output_chunk_path), _data)
         print(f"Uploaded {os.path.basename(output_chunk_path)} to Supabase:", res)
 
         print("Processing complete! All blog posts have been processed and enriched.")
@@ -786,24 +791,23 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
                 print(f"Error processing chunk {i}: {e}")
                 # Continue with next chunk rather than failing entire process
 
-        print(f"Successfully processed {len(records)}/{total_chunks} chunks")
+        print(f"Successfully processed {len(records)}/{total_chunks} blog chunks")
 
         # Save Processed Records to a JSON File
         # SUP BUCKET OUTPUT SUP BUCKET OUTPUT
-        print(f"Saving processed records to {output_embeddings_path}...")
+        print(f"Saving processed blog records to {output_embeddings_path}...")
         with open(output_embeddings_path, "w", encoding="utf-8") as f:
             json.dump(records, f, indent=4)
 
-        # # SUPABASE BUCKET: upload embeddings JSON to Supabase bucket
+        # SUPABASE BUCKET: upload processed JSON to Supabase bucket
         with open(output_embeddings_path, "rb") as _f:
             _data = _f.read()
-        res = supabase.storage.from_("agentic-output") \
-                .upload(os.path.basename(output_embeddings_path), _data)
+        res = supabase.storage.from_("agentic-output").upload(os.path.basename(output_embeddings_path), _data)
         print(f"Uploaded {os.path.basename(output_embeddings_path)} to Supabase:", res)
-        print(f"✅ Saved embeddings to {output_embeddings_path}")
+        print(f"✅ Saved blog embeddings to {output_embeddings_path}")
 
         # Insert Embeddings into Pinecone
-        print("Inserting embeddings into Pinecone...")
+        print("Inserting blog embeddings into Pinecone...")
         batch_size = 100
         total_batches = (len(records) + batch_size - 1) // batch_size
         successful_inserts = 0
@@ -926,17 +930,7 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
 # MAIN FUNCTION
 # =====================================================================
 
-def log_punkt_tab_error(function_name):
-    """Log NLTK punkt tokenizer errors and provide guidance."""
-    print(f"NLTK Error in {function_name}: punkt tokenizer not found.")
-    print("Attempting to download punkt tokenizer...")
-    try:
-        nltk.download('punkt', quiet=True)
-        print("Successfully downloaded punkt tokenizer.")
-    except Exception as e:
-        print(f"Failed to download punkt tokenizer: {e}")
-        print("Please manually download the punkt tokenizer using:")
-        print("import nltk; nltk.download('punkt')")
+# The log_punkt_tab_error function is already defined at the beginning of the file
 
 def main():
     """Main function to orchestrate the entire workflow."""
