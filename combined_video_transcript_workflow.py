@@ -71,6 +71,10 @@ supabase_service_key = os.getenv("VITE_SUPABASE_SERVICE_ROLE_KEY")
 supabase = create_client(supabase_url, supabase_service_key)
 openai_api_key = os.getenv("OPENAI_API_KEY")
 pinecone_api_key = os.getenv("PINECONE_API_KEY")
+proxy_user = os.getenv("SMARTPROXY_USER")
+proxy_pass = os.getenv("SMARTPROXY_PASS")
+proxy_host = os.getenv("SMARTPROXY_HOST")
+proxy_port = os.getenv("SMARTPROXY_PORT")
 
 # Default retry settings
 DEFAULT_MAX_RETRIES = 3
@@ -216,20 +220,36 @@ def extract_video_ids(channel_id, YOUTUBE_API_KEY, num_videos):
 
 def scrape_video_transcript(video_id, YOUTUBE_API_KEY):
     try:
-        transcript_entries = YouTubeTranscriptApi.get_transcript(video_id)
+        # Load proxy credentials from environment
+        proxy_user = os.getenv("SMARTPROXY_USER")
+        proxy_pass = os.getenv("SMARTPROXY_PASS")
+        proxy_host = os.getenv("SMARTPROXY_HOST")
+        proxy_port = os.getenv("SMARTPROXY_PORT")
+
+        # Format proxy URL with credentials
+        proxy_url = f"http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}"
+        proxies = {
+            "http": proxy_url,
+            "https": proxy_url
+        }
+
+        # Fetch transcript via Smartproxy
+        transcript_entries = YouTubeTranscriptApi.get_transcript(video_id, proxies=proxies)
         transcript_text = "\n".join([entry["text"] for entry in transcript_entries])
-    except:
+
+    except Exception as e:
         print(f"[ERROR] transcript scrape failed for {video_id}: {str(e)}")
         return None
+
+    # Fetch video title from YouTube API
     youtube_client = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
-    video_response = youtube_client.videos().list(
-        part="snippet",
-        id=video_id
-    ).execute()
+    video_response = youtube_client.videos().list(part="snippet", id=video_id).execute()
+
     if video_response["items"]:
         title = video_response["items"][0]["snippet"]["title"]
     else:
         title = "No Title"
+
     return {
         "title": title,
         "url": f"https://www.youtube.com/watch?v={video_id}",
