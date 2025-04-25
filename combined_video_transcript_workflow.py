@@ -76,6 +76,8 @@ proxy_pass = os.getenv("SMARTPROXY_PASS")
 proxy_host = os.getenv("SMARTPROXY_HOST")
 proxy_port = os.getenv("SMARTPROXY_PORT")
 
+print("ENV TEST:", os.getenv("SMARTPROXY_USER"))
+
 # Default retry settings
 DEFAULT_MAX_RETRIES = 3
 DEFAULT_RETRY_DELAY = 2  # seconds
@@ -225,6 +227,12 @@ def scrape_video_transcript(video_id, YOUTUBE_API_KEY):
         proxy_pass = os.getenv("SMARTPROXY_PASS")
         proxy_host = os.getenv("SMARTPROXY_HOST")
         proxy_port = os.getenv("SMARTPROXY_PORT")
+
+        print("DEBUG SMARTPROXY ENV LOADING")
+        print("USER:", proxy_user)
+        print("PASS:", proxy_pass[:4] + "..." if proxy_pass else None)
+        print("HOST:", proxy_host)
+        print("PORT:", proxy_port)
 
         # Format proxy URL with credentials
         proxy_url = f"http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}"
