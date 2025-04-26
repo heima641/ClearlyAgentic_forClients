@@ -426,11 +426,14 @@ def run_module_1_youtube_transcript_scraping(variables, youtube_json_path):
     
     # Upload to Supabase bucket
     with open(youtube_json_path, "rb") as f:
-        data = f.read()
-    res = supabase.storage.from_("agentic-output").upload(os.path.basename(youtube_json_path), data)
-    if not res:
+        file_content = f.read()
+    response = supabase.storage.from_("agentic-output").upload(os.path.basename(youtube_json_path), 
+        file_content,
+        {"content-type": "application/json"}
+    )
+    if not response:
         raise Exception(f"Failed to upload {youtube_json_path} to Supabase bucket")
-    print(f"Uploaded {os.path.basename(youtube_json_path)} to Supabase bucket")
+    print(f"Uploaded to Supabase bucket: {os.path.basename(youtube_json_path)}, Response: {response}")
     
     print(f"Transcript data saved to {youtube_json_path}")
     print(f"Module 1 execution completed in {datetime.now() - module_start_time}")
@@ -668,11 +671,14 @@ def run_module_2_content_chunking(input_json_path, output_chunk_path):
         
         # Upload to Supabase bucket
         with open(output_chunk_path, "rb") as f:
-            data = f.read()
-        res = supabase.storage.from_("agentic-output").upload(os.path.basename(output_chunk_path), data)
-        if not res:
+            file_content = f.read()
+        response = supabase.storage.from_("agentic-output").upload(os.path.basename(output_chunk_path), 
+            file_content,
+            {"content-type": "application/json"}
+        )
+        if not response:
             raise Exception(f"Failed to upload {output_chunk_path} to Supabase bucket")
-        print(f"Uploaded {os.path.basename(output_chunk_path)} to Supabase bucket")
+        print(f"Uploaded to Supabase bucket: {os.path.basename(output_chunk_path)}, Response: {response}")
 
         print("Processing complete! All YouTube transcripts have been processed and enriched.")
         print(f"Chunked output saved to {output_chunk_path}")
@@ -899,11 +905,14 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
         
         # Upload to Supabase bucket
         with open(output_embeddings_path, "rb") as f:
-            data = f.read()
-        res = supabase.storage.from_("agentic-output").upload(os.path.basename(output_embeddings_path), data)
-        if not res:
+            file_content = f.read()
+        response = supabase.storage.from_("agentic-output").upload(os.path.basename(output_embeddings_path), 
+            file_content,
+            {"content-type": "application/json"}
+        )
+        if not response:
             raise Exception(f"Failed to upload {output_embeddings_path} to Supabase bucket")
-        print(f"✅ Uploaded {os.path.basename(output_embeddings_path)} to Supabase bucket")
+        print(f"✅ Uploaded to Supabase bucket: {os.path.basename(output_embeddings_path)}, Response: {response}")
 
         # Insert Embeddings into Pinecone
         print("Inserting embeddings into Pinecone...")

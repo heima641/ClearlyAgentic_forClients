@@ -334,12 +334,16 @@ def run_module_1_blog_scraping(variables, blog_json_path):
     with open(blog_json_path, "w") as f:
         json.dump(scraped_data, f, indent=4)
 
-    # # SUPABASE BUCKET: upload raw blog JSON to Supabase bucket
     # SUP BUCKET OUTPUT SUP BUCKET OUTPUT
+    # # SUPABASE BUCKET: upload raw blog JSON to Supabase bucket
     with open(blog_json_path, "rb") as _f:
-        _data = _f.read()
-    res = supabase.storage.from_("agentic-output").upload(os.path.basename(blog_json_path), _data)
-    print(f"Uploaded {os.path.basename(blog_json_path)} to Supabase:", res)
+        file_content = _f.read()
+    response = supabase.storage.from_("agentic-output").upload(
+        os.path.basename(blog_json_path), 
+        file_content, 
+        {"content-type": "application/json"}
+    )
+    print(f"Uploaded to Supabase: {os.path.basename(blog_json_path)}, Response: {response}")
 
     print(f"Content data saved to {blog_json_path}")
     print(f"Module 1 execution completed in {datetime.now() - module_start_time}")
@@ -580,9 +584,13 @@ def run_module_2_content_chunking(input_json_path, output_chunk_path):
 
         # # SUPABASE BUCKET: upload chunked blog JSON to Supabase bucket
         with open(output_chunk_path, "rb") as _f:
-            _data = _f.read()
-        res = supabase.storage.from_("agentic-output").upload(os.path.basename(output_chunk_path), _data)
-        print(f"Uploaded {os.path.basename(output_chunk_path)} to Supabase:", res)
+            file_content = _f.read()
+        response = supabase.storage.from_("agentic-output").upload(
+            os.path.basename(output_chunk_path), 
+            file_content, 
+            {"content-type": "application/json"}
+        )
+        print(f"Uploaded to Supabase: {os.path.basename(output_chunk_path)}, Response: {response}")
 
         print("Processing complete! All blog posts have been processed and enriched.")
         print(f"Chunked output saved to {output_chunk_path}")
@@ -801,9 +809,13 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
 
         # SUPABASE BUCKET: upload processed JSON to Supabase bucket
         with open(output_embeddings_path, "rb") as _f:
-            _data = _f.read()
-        res = supabase.storage.from_("agentic-output").upload(os.path.basename(output_embeddings_path), _data)
-        print(f"Uploaded {os.path.basename(output_embeddings_path)} to Supabase:", res)
+            file_content = _f.read()
+        response = supabase.storage.from_("agentic-output").upload(
+            os.path.basename(output_embeddings_path), 
+            file_content, 
+            {"content-type": "application/json"}
+        )
+        print(f"Uploaded to Supabase: {os.path.basename(output_embeddings_path)}, Response: {response}")
         print(f"✅ Saved blog embeddings to {output_embeddings_path}")
 
         # Insert Embeddings into Pinecone
