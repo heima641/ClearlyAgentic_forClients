@@ -266,7 +266,7 @@ def enrich_metadata(chunk_text):
 # Removed obsolete chunk_reviews_post_by_chars function as chunking now operates on 'like' and 'dislike' fields directly.
 def run_module_2_content_chunking(input_json_path, output_chunk_path):
     """
-    Processes each review's 'like' and 'dislike' fields as separate chunks, enriches with metadata, and saves the results.
+    Processes each review's 'like', 'dislike', and 'problems solved' fields as separate chunks, enriches with metadata, and saves the results.
     Args:
         input_json_path: Path to the reviews JSON file
         output_chunk_path: Path where the chunked output will be saved
@@ -325,6 +325,28 @@ def run_module_2_content_chunking(input_json_path, output_chunk_path):
                     "sentence_count": count_sentences(dislike_text),
                     "word_count": count_words(dislike_text),
                     "token_count": count_words(dislike_text),
+                    "sentiment": sentiment,
+                    "processing_date": datetime.now().strftime("%Y-%m-%d"),
+                    "script_version": "REVIEWS-1.0"
+                }
+                enriched_chunk.update(metadata)
+                enriched_reviews.append(enriched_chunk)
+            
+            # Process 'problems solved' section
+            problems_solved_text = review.get("problems solved", "").strip()
+            if problems_solved_text:
+                sentiment = analyzer.polarity_scores(problems_solved_text)['compound']
+                metadata = enrich_metadata(problems_solved_text)
+                enriched_chunk = {
+                    "id": f"review_{review_index+1}_problems_solved",
+                    "review_date": review_date,
+                    "reviewer_role": reviewer_role,
+                    "company_size": company_size,
+                    "review_type": "problems solved",
+                    "content": problems_solved_text,
+                    "sentence_count": count_sentences(problems_solved_text),
+                    "word_count": count_words(problems_solved_text),
+                    "token_count": count_words(problems_solved_text),
                     "sentiment": sentiment,
                     "processing_date": datetime.now().strftime("%Y-%m-%d"),
                     "script_version": "REVIEWS-1.0"
