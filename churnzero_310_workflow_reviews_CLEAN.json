@@ -1,0 +1,2172 @@
+[
+  {
+    "Review Date": "01/23/2019",
+    "Reviewer Role": "Senior Customer Success Manager",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "The ability to pull in important data from disparate sources into one single dashboard. This is the crux of a CSMs job and having the ability to see these key data points really can help manage churn more effectively.",
+    "dislike": "Having the ability to complete a task without having to fill in all the detail would be good. Mostly though, I understand why it is important to put the details."
+  },
+  {
+    "Review Date": "02/07/2019",
+    "Reviewer Role": "Audio Engineer | Eagles Television Network",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "A) They got/get us! --- we demo'd and investigated several other tools in this space, and the sales rep at CZ was way more able to quickly connect the dots for us... We described our team, and needs --- they gave us real-world examples of \"how this would look\", and showed us exactly how our world would look through the lens of this tool.\n\nB) Our onboarding manager has really been able to quickly help us adapt our systems & processes to make great use of the new system. They are also REALLY able to quickly adapt the Churnzero interface for us, by adding fields / connecting data-points to other systems, and have kept us on-track with the adoption through routine touch-base calls. We are being actively coached through this, and that's vital to our success.",
+    "dislike": "Very little --- there's a couple bits of frustrations about how some of the views are / aren't organized, but 95% of the interface makes perfect sense and is easy to use."
+  },
+  {
+    "Review Date": "03/25/2019",
+    "Reviewer Role": "Verified User in Telecommunications",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "Chase has a been a huge asset in configuring our ChurnZero service and ultimately is why we have continued to use the solution. Our use of the software is pretty unique with the way that we identify parent accounts, the whole CZ has done a great job in helping us configure the software to meet our needs. Being able to set up notifications of \"at-risk\" behavior or inactivity by customers is invaluable. Being able to call out Onboarding with the appropriate milestones using Journeys and automating messages with Plays are also great features that we use heavily as well.",
+    "dislike": "I don't like not being able to easily see the average Churnscore of my accounts from the Dashboard or when viewing a segment. The Plays area needs some polishing but I understand that interface will be overhauled soon. I would like to have the ability to permanently delete or hide inactive Plays, to see better email formatting options built into the play steps and to have the ability to have conditions for each step of a Play (similar to Intercom.) I'm not convinced we've nailed the criteria for a Churnscore and wish there was more ability to have thresholds/points vary by vertical within the same score. I lastly wish that my administrator had access to view my segments and plays as a user, it's kind of crazy that she couldn't see them. We had to upgrade my seat to a admin just so that we could collaborate on segments and plays."
+  },
+  {
+    "Review Date": "04/05/2019",
+    "Reviewer Role": "VP of Customer Care",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The UI is easy and once you understand the concept of \"segments\" it's easy to tailor. I've used other platforms that were great for the individual CSM, but as a leader, it was extremely difficult to get aggregated reporting to look at overall trends. ChurnZero works for both. It also seems to integrate well and easily with Salesforce. Their Customer Success team is also responsive and helpful.",
+    "dislike": "The Churn Score, or maybe how we're using it, could use a little refinement. Not sure that's a Churn Zero issue, it may be how we've implemented it."
+  },
+  {
+    "Review Date": "04/17/2019",
+    "Reviewer Role": "Director of IT",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "Automated email and Segmentation allow us to streamline our processes. Churn scores are a great way to quickly see if our customers are at risk. I really like the Live Export feature that has been introduced. Exporting the segmented data to Google Sheets and using Google Data Studio allows another level of reporting and dashboard creation.",
+    "dislike": "Some limitations with what can be done in Salesforce and what can be done in Churnzero. Still need to maintain both subscriptions. Reporting within the application is quite limited. The data and dashboards they have are nice however it would be nice to have a reporting tool within the application similar to salesforce where you can create your own reports."
+  },
+  {
+    "Review Date": "05/02/2019",
+    "Reviewer Role": "Customer Operations Manager",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "What I like most is that I am able to use one platform for all of my teams needs. We use to have 3 different tools for campaigns, gathering data and logging activities. Moving to ChurnZero has help us have all of this in one place which has made our lives much easier.",
+    "dislike": "There really isn't anything that comes to mind. Whenever my team or I would have a suggestion they have actually worked on putting things in place. They are very good at taking feedback and actually acting on the feedback."
+  },
+  {
+    "Review Date": "05/28/2019",
+    "Reviewer Role": "Onboarding Account Manager",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "I love seeing accounts change colors as their churn score moves. It makes it so easy to prioritize what accounts to contact first.",
+    "dislike": "It took a couple weeks to get used to the system. I still think there is a lot I'm not utilizing in the system. I wish there was a support number to call but they do respond pretty quickly when I've opened a ticket."
+  },
+  {
+    "Review Date": "05/31/2019",
+    "Reviewer Role": "Client Success Manager",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "I LOVE the colored pie graphs! This helps me track my accounts and their progress",
+    "dislike": "The only thing I don't like is that the pie graphs telling me what accounts are in red, green or yellow are on a separate page than my churn zero tasks. Minimal dislike, but they made me put something."
+  },
+  {
+    "Review Date": "06/03/2019",
+    "Reviewer Role": "Client Success Director",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "I like how the application can stitch together application data along with our salesforce.com data. This helps us with a holistic picture of the client's engagement and activity with our application. We are also able to create a live export of our data into different areas of our business, this allows other departments to leverage the data",
+    "dislike": "The system can be a bit labor intensive at times but the tools allow you to conduct a lot of engagement and monitoring activities."
+  },
+  {
+    "Review Date": "06/20/2019",
+    "Reviewer Role": "Business Intelligence Manager",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "The ability to tie in our CRM data with real-time application data. The problem we were facing was to truly be able to understand our clients from a quantitative level. We knew on a surface level that they told us they were using the app, but often times the data tells a different story. With ChurnZero we have been able to set up triggers automatically alerting our team when important usage data is dropping. It is allowing us to become proactive with our client management, opposed to reactionary.",
+    "dislike": "I don't have any issues with the software, it does everything I need and then some. The only hiccup at all in the whole process was my company's error, in maintaining data inefficiently, so I had to clean that up on my end."
+  },
+  {
+    "Review Date": "06/28/2019",
+    "Reviewer Role": "Manager, Customer Support",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "We love having a system that can finally show us user metrics in a way that fits our Customer Success team. As we scale our company, we've found that looking at data in multiple places is a really good way to lose things, and we haven't been able to put any renewals process into place prior to using CZ.",
+    "dislike": "Some account linking things can be tough to navigate; if your data isn't 100% clean you'll run into some frustrations getting things set up."
+  },
+  {
+    "Review Date": "07/01/2019",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "I have really enjoyed the service at ChurnZero. Our implementation and customer success reps have both been so diligent and very consistent in their outreach. They have also been very thoughtful in their responses to all of our questions and always make sure to get the best solution for our company.",
+    "dislike": "There is not a whole lot that I dislike! I do wish that business hours applied to plays as a whole and not just the part of the play you are in. But I do like that you can review emails before they are sent."
+  },
+  {
+    "Review Date": "07/01/2019",
+    "Reviewer Role": "Sr. Enterprise CSM",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "ChurnZero makes internal reporting easy; I'm able to create reports on segments, features enabled, churnscore, etc. The churnscore is customizable per segment, allowing you to weight different metrics for different tiers of customers. To sum it up, at a quick glance, I'm able to identify my churn-risk clients as well as those without features enabled, allowing my team to focus on upsells.",
+    "dislike": "It does require a fair amount of work to set up ChurnZero so data imports correctly from your software."
+  },
+  {
+    "Review Date": "07/15/2019",
+    "Reviewer Role": "Director, Client Services",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "I really like that ChurnZero allows me to quickly see alerts associated with my accounts, see an overall dashboard for all accounts, and also look up any account to get a ton of information about overall health, users/usage, as well as a ton of other details.",
+    "dislike": "Sometimes I feel like churn scores are less than accurate, but I do believe that's a result of the way my company has specifically designed the scores to populate (so it's not really the fault of CZ)."
+  },
+  {
+    "Review Date": "07/17/2019",
+    "Reviewer Role": "Account Manager",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "The ability to monitor all my clients activity from 1 platform. Being in a SaaS company it is vitally important to know how and when my customers are using our platform in order to take advantage of a pattern in which I see an upsell opportunity or to save a customer from churning by seeing a decline in usage before the renewal date.",
+    "dislike": "The auto email set up can be difficult to set up. The integration to the correct SalesForce accounts can also be tricky, need to make sure the SF accounts are clean"
+  },
+  {
+    "Review Date": "07/19/2019",
+    "Reviewer Role": "Senior Client Success Manager",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "I'm a big fan of their automation capabilities and alerts on clients. The interface is easily navigable, and the turn around time from starting out as a new user to be come a power user is fairly short.",
+    "dislike": "There's not much to dislike without being nitpicking. Having said that, when given product feature requests they are welcome to it, and are quick to correct."
+  },
+  {
+    "Review Date": "07/19/2019",
+    "Reviewer Role": "Chief Operating Officer",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "It's nice to work with a Customer Success platform that is also invested in using it's own platform to guarantee a great customer success experience to us!",
+    "dislike": "Still working out some of the UI kinks I think. Things are improving, but there are parts of the platform that still have some odd navigation."
+  },
+  {
+    "Review Date": "08/09/2019",
+    "Reviewer Role": "VP",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Churn Zero has changed the way we manage the custom experience. This tool has taken so many manual processes and automated them. We can now do more with our existing team.",
+    "dislike": "There isn't anything that i don't like. The setup and implementation was very straight forward"
+  },
+  {
+    "Review Date": "08/22/2019",
+    "Reviewer Role": "Customer Success Specialist",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero brings our company closer to the business that we work with. With the tools that CZ provides, we get a deeper understanding of each account and how to approach them.",
+    "dislike": "I don't dislike anything about ChurnZero"
+  },
+  {
+    "Review Date": "08/28/2019",
+    "Reviewer Role": "Implementation Manager",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "Easy to review survey results and able to automate certain functions using \"plays\".",
+    "dislike": "The Salesforce integration has taken a lot of internal work on our part."
+  },
+  {
+    "Review Date": "08/29/2019",
+    "Reviewer Role": "Mid-Market(51-1000 emp.)",
+    "Company Size": "From day 1, the interaction with the ChurnZero team was positive. They are quick to help and find creative solutions to every request or ask we threw their way. The platform itself is highly customisable, easy to use and answer all of our needs. Where there are gaps between what the platform had to offer and what we needed, the team was able to find a solution ad even create one for us.",
+    "like": "Some of the customisations and set ups can only be done with the help of someone from ChurnZero which caused some delays in our implementations, though the team was helpful in that. Communication in emails and calls only made it hard to handle the issues quickly.",
+    "dislike": ""
+  },
+  {
+    "Review Date": "09/05/2019",
+    "Reviewer Role": "Mid-Market(51-1000 emp.)",
+    "Company Size": "It is easy on the eyes, has a helpful and interactive team that go above and beyond and takes little effort to get used to it in fact it is an indispensable part of my day as a customer success manager at chargebee. love their marketing emails and gif's - just mindblowing and love my customer success point of contact - Bora Lee",
+    "like": "well I believe that the user interface can be a little more friendly and in-app videos for 2-5 mins can be inculcated.",
+    "dislike": ""
+  },
+  {
+    "Review Date": "09/09/2019",
+    "Reviewer Role": "Cloud/MSP Technician",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I absolutely love how easy it was to get started with ChurnZero. My organization has used it for a while, however, i am a recent new hire. Learning the system, how it works and how it can be personalized to your workflow took less than an hour!",
+    "dislike": "No dislikes on this side! The software is very easy to use and get going."
+  },
+  {
+    "Review Date": "10/03/2019",
+    "Reviewer Role": "Customer Success Operations Manager",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "- Journeys help deliver a consistent customer experience and will help onboard new CSMs faster\n\n- Plays are useful to automate previously manual processes\n\n- Great support from our ChurnZero CSM",
+    "dislike": "- The customizability is a double-edged sword. It's quite a bit of effort to get the right configuration up front before CSMs start seeing the value in their day-to-day\n\n- CSMs did not find the user interface particularly intuitive"
+  },
+  {
+    "Review Date": "10/21/2019",
+    "Reviewer Role": "Vice President of Strategy",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "Our account manager is super helpful in helping us use the tool and clean up our data.",
+    "dislike": "Reporting is a bit counter intuitive but once it is explained it makes sense."
+  },
+  {
+    "Review Date": "11/04/2019",
+    "Reviewer Role": "Verified User in Non-Profit Organization Management",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "Using Churnzero to automate tasks has been extremely time-saving!",
+    "dislike": "I haven't had as much time as I'd like to continue to learn more about and utilize ChurnZero."
+  },
+  {
+    "Review Date": "03/09/2020",
+    "Reviewer Role": "User Experience Specialist",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "It is a very powerful tool with an awesome team of support.",
+    "dislike": "Some features are still needed, but they are minor."
+  },
+  {
+    "Review Date": "07/29/2020",
+    "Reviewer Role": "Small-Business(50 or fewer emp.)",
+    "Company Size": "Small-Business",
+    "like": "ChurnZero helped to consolidate the information I previously pulled from multiple different platforms and made it more efficient for me to reach out to my customers. Being in customer service I really appreciate their level of support especially when assisting with issues. My own CSM has been a valuable resource in helping to implement and understand the intricacies the platform.",
+    "dislike": "I dislike that I am unable to discontinue using the other platforms and only have to look at ChrunZero throughout the day but that is in part due to our internal process. I wish we had implemented ChurnZero sooner as it would have made beneficial impact on my outreach and my customer's success earlier on."
+  },
+  {
+    "Review Date": "08/27/2020",
+    "Reviewer Role": "Mid-Market(51-1000 emp.)",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "They are a really attentive company. My experience with them as really amazing, always doing their best to solve our problems.\n\nAlso, their product really has some awesome features that really helps us organize our lives in Customer Success and to propagate a CS mindset in the company.",
+    "dislike": "We are a brazilian company and not all of us speak english, so that was hard sometimes in meetings and calls when we have to translate part of the conversation back and forth until we are all on the same page. But still, they were really thoughtful and tryed their best not to talk to quickly so that some of us would loose track.\n\nSometimes, when we noticed a few bugs on the system, we talked to them and they got to working asap to try to solve it."
+  },
+  {
+    "Review Date": "08/27/2020",
+    "Reviewer Role": "Mid-Market(51-1000 emp.)",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "This tool reminds me of everything to do on a daily bases, extremely increasing my proficiency. I use this tool everyday.\n\nMany benefits come along with this tool:\n\n1. User friendly.\n\n2. Maintain all your data.\n\n3. Save your time.\n\n4. Organize the customer's details.\n\n5. Remind you through mails and pop notifications.\n\n6. Increase your revenue.\n\n7. Increase and build good customer relationships.\n\n8. Maintain churn report.\n\n9. Maintain reactivation clients report.\n\n10. Maintains Freeze account detail.\n\n11. Increase creativity.\n\n12. Increase social connect.\n\n13. Worry less and work more.\n\n14. Increase quality work.\n\n15. Increase productivity.\n\nThese points are less to describe how this tool makes my life easy and productive at the same time. Kudos to the founder who has developed this tool.",
+    "dislike": "Trust me I did not found anything wrong about this tool till now. It makes my work much easier, it's very easy to use and easily accessible. So No dislikes from my side.\n\nDislike:\n\n1. Nothing till now."
+  },
+  {
+    "Review Date": "09/02/2020",
+    "Reviewer Role": "Mid-Market(51-1000 emp.)",
+    "Company Size": "Mid-Market",
+    "like": "I like the fact that I can easily bring information from our CRM and platform to generate insights. The segments are great and covering every aspect and level of segmentation I would like to look at. I especially like \"My Command Center Dashboard\" that allows me to quickly follow up on the different segments.",
+    "dislike": "I wish there was more flexibility in the graphs and building visualization to gain the insights I'm looking for."
+  },
+  {
+    "Review Date": "09/04/2020",
+    "Reviewer Role": "Small-Business(50 or fewer emp.)",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "I really like so much about the actual platform. ChurnZero is powerful machinery and there is a learning curve because the system can do so much and is so flexible. But, that's why it's ChurnZero's customer service that I'm here to rave about.\n\nFrom implementation (Morgan, Implementation Specialist) to roll-out (Bri, CSM) to ongoing, daily support (Vanessa, CSM and Matt / Scott, Tech Support): every step of the way there has been an incredible human there to offer support.",
+    "dislike": "As I mentioned, it's complex (because it's powerful and flexible), so it does take time to learn. When you are steering the customer support ship for lean org this can feel daunting, but don't worry. The people at ChurnZero make you feel like a genius."
+  },
+  {
+    "Review Date": "09/09/2020",
+    "Reviewer Role": "VP Customer Success",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "- Implementation was great - very knowledgable implementation consultant and clearly outlined project plan\n\n- The administration is simple. Our Salesforce.com is a living, breathing system and we are changing things daily; ChurnZero makes it very easy to change the current setup, add additional custom fields and custom tables, and to rearrange the views so the CSMs are comfortable and it models what they were used to seeing in Salesforce.\n\n- The Dashboard is awesome! A one-stop shop for the important stuff, and it flexes based on role. As a manager, I can see an overview of my team's work, and the individual users only see what's relevant to them.\n\n- Built in NPS functionality is easy to deploy and automate responses and action based on results.\n\n- VERY VERY intuitive - training the team is simple.",
+    "dislike": "- Having to build a segment before building journeys and playbooks can sometimes cause issues. I will forget to create the segment first, and realize that I need a new segment in order to complete a journey."
+  },
+  {
+    "Review Date": "09/16/2020",
+    "Reviewer Role": "Small-Business (50 or fewer emp.)",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The best CS tool in the biz",
+    "dislike": "It's a lot to learn, but, I suppose all of the really powerful tools are."
+  },
+  {
+    "Review Date": "09/29/2020",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "First Year CZ Going Better than Anticipated",
+    "dislike": "I would've liked to have more training when we began but it was not essential. I would also love more ideas on how others use it."
+  },
+  {
+    "Review Date": "10/19/2020",
+    "Reviewer Role": "Head of Technology Partnerships",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Automation and plays\n\nEasy to view churn scores\n\nEasy to export all data into Google Sheets",
+    "dislike": "Hard to find key metrics and distributions at times (potentially poor configuration and setup on my side)\n\nTime to implement everything (this will always be painful)\n\nCompleting tasks is quite a manual setup\n\nWe have to rely on integration with Segment to push a lot of events from our platform into CZ (but you can't please everyone!)"
+  },
+  {
+    "Review Date": "10/19/2020",
+    "Reviewer Role": "Verified User in Internet",
+    "Company Size": "Mid-Market",
+    "like": "ChurnZero has been an excellent tool for managing my large client book, I particular love the alerts option, which allows me to be proactive with my customers and build trust with them when I can let them know of something that has occurred. I also love that it provides options for automation to reach out to my customers in one email versus sending multiple manually. It gives me a great place to keep all of my notes as well.",
+    "dislike": "The only thing that I don't quite utilize too much that I should is the Playbook or the Journey section, but I think with some additional effort on my end to use, it could be super helpful. I also would like to be able to follow up on NPS surveys to encourage customers to take them."
+  },
+  {
+    "Review Date": "10/20/2020",
+    "Reviewer Role": "Customer Training Specialist",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "I like all the different tabs and categories available for customer information. It makes all the information organized and easily accessible.",
+    "dislike": "The sidebar is a bit confusing, sometimes it's hard to find things. For example, if I am looking for a segment, it's hard to find. Also, if I want to delete a contact from a Company, I can't find a way to do this. I wish some of the smaller/simple tasks like this were a bit more intuitive within the system."
+  },
+  {
+    "Review Date": "10/21/2020",
+    "Reviewer Role": "Small-Business(50 or fewer emp.)",
+    "Company Size": "Small-Business",
+    "like": "Love the visibility/engagement reports it gives me for my customer portfolio",
+    "dislike": "Only downside is the navigation takes a little while to get used to but when you get it, it's powerful."
+  },
+  {
+    "Review Date": "10/22/2020",
+    "Reviewer Role": "Customer Success Operations Ma",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "We came into ChurnZero as a rapidly scaling SaaS company that needed to find a way to measure our customers health and a way to help us, help them maximize their success with our platform.",
+    "dislike": "We did run into limitations within the platform, especially in regards to branding and customization."
+  },
+  {
+    "Review Date": "10/26/2020",
+    "Reviewer Role": "Director",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The primary benefit of ChurnZero is the fact that the software is very clearly built with the life of the CSM in mind.",
+    "dislike": "In some areas the platform can be inflexible, and their integrations don't do well if your SaaS product is typically deployed across multiple URLs, such as under customer-specific domains, or even just multiple apps."
+  },
+  {
+    "Review Date": "10/28/2020",
+    "Reviewer Role": "Small-Business(50 or fewer emp.)",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "I love the user friendly interface and the countless tools to sort and manipulate the data I need. Amazing customer support as well!",
+    "dislike": "I wish there was less of a lag time when Approving emails to send in my plays. Sometimes it will take a few seconds to load. It will also do this when trying to load the Messages tab on a contact page."
+  },
+  {
+    "Review Date": "11/12/2020",
+    "Reviewer Role": "Mid-Market(51-1000 emp.)",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "With ChurnZero there is flexibility with thoughtfulness and customization within reason.",
+    "dislike": "While segments are the brain of how all things work better (alerts, plays, journeys, etc.), segments would benefit greatly with some conditioning logic and filtering advancements, without having to create a multitude of columns sets."
+  },
+  {
+    "Review Date": "11/13/2020",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Game-changing tool; needs thoughtful rollout and structuring",
+    "dislike": "Upfront set up that was more that was anticipated. Fitting our business needs into the CZ mold has presented some challenges."
+  },
+  {
+    "Review Date": "11/20/2020",
+    "Reviewer Role": "Small-Business(50 or fewer emp.)",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "The structure of Churn Zero leaves no data off the table. If there is an account or contact with a data point, you can use that data to measure, automate, and execute.",
+    "dislike": "Not much to say here. I suppose it would be helpful if upon implementation we had a little more strategy guidance since the webinars provide the how-to's."
+  },
+  {
+    "Review Date": "12/03/2020",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero was implemented and working nearly immediately after purchasing. We were able to easily get our CRM data flowing into ChurnZero and begin setting up alerts, automation, and segments. The ChurnZero environment was easy to set-up and the ChurnZero team was with us every step of the way. This tool is excellent for small and growing teams who need a solution that doesn't take a specialist to manage.",
+    "dislike": "I have no concrete dislikes. The ChurnZero team is always quick to help and provide solutions for any issues that we have."
+  },
+  {
+    "Review Date": "12/10/2020",
+    "Reviewer Role": "Director, Client Success & Brand Marketing",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "ChurnZero has been an integral tool in helping us manage accounts & prevent churn",
+    "dislike": "Segments are not always 100% accurate - but that's moreso to do with how our Platform sends event data."
+  },
+  {
+    "Review Date": "12/10/2020",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Great and powerful tool!",
+    "dislike": "Their architecture took a bit of time at first to understand but other than that we are very happy with the product and service."
+  },
+  {
+    "Review Date": "01/04/2021",
+    "Reviewer Role": "Insurance",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "ChurnZero continues to be a great Customer Success tool to my team and our company! The integrations available between ChurnZero and our other systems is incredibly helpful in consolidating and serving up reporting to our leadership team and the broader company.",
+    "dislike": "We discovered that ChurnZero is not HIPPA compliant which may prove to be an issue for our company down the road in terms of the information stored/integrated with CZ."
+  },
+  {
+    "Review Date": "01/04/2021",
+    "Reviewer Role": "Real Estate",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The thing that really put us over the edge with ChurnZero was the Customer Support team. They have such a comprehensive plan for getting your account and team set up quickly and with best practices in mind.",
+    "dislike": "The interface and UX is dated and could use some improvements."
+  },
+  {
+    "Review Date": "01/06/2021",
+    "Reviewer Role": "Mid-Market(51-1000 emp.)",
+    "Company Size": "Mid-Market",
+    "like": "I love how easy of use it is! You don't need to be a genius, there is a ton of learning articles to read to expand on your ChurnZero knowledge too!",
+    "dislike": "There isn't a chatbot in Chrunzero, I think this would be useful."
+  },
+  {
+    "Review Date": "01/11/2021",
+    "Reviewer Role": "Computer Software",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero provides you with in-depth insight about the overall health of an account in seconds of logging in.",
+    "dislike": "I am currently still learning all the tips and tricks of the software but I do which that the search fill was a little more advanced."
+  },
+  {
+    "Review Date": "01/11/2021",
+    "Reviewer Role": "Verified User in Information Technology and Services",
+    "Company Size": "Mid-Market",
+    "like": "The daily digest is a great way to start my day, it gives me the ability to check on my clients and action items at a high level all in one email!",
+    "dislike": "I would like to see a data import digest that outlines who did what or changes to my platform, or the ability to revert to a previous date might be helpful."
+  },
+  {
+    "Review Date": "01/12/2021",
+    "Reviewer Role": "Electrical/Electronic Manufacturing",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "ChurnZero allows you to add tasks and set reminders so your clients don't slip through the cracks. Not only do these show up in ChurnZero, but thanks to their integration with Slack, you can receive the notices there, as well as an email.",
+    "dislike": "Much like with advanced tools, the customization due to all the integrations can make the tool seem a bit overwhelming. Especially for teams or team members who may not be the most tech-savvy."
+  },
+  {
+    "Review Date": "01/13/2021",
+    "Reviewer Role": "Mid-Market(51-1000 emp.)",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "I love the support that CZ has. Tickets are answered quickly, and they are always helpful with following up.",
+    "dislike": "It is hard to learn all of the attributes and account engagements to build segments. I never know which one to select. It takes a long time to build but once it's completed you are good to go!"
+  },
+  {
+    "Review Date": "01/19/2021",
+    "Reviewer Role": "Head of Customer Outreach & Strategic Initiatives",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "Relatively intuitive to learn, once you are able to wrap your mind around everything working out of segments everything falls into place.",
+    "dislike": "The UI/UX feels a bit too sensitive when switching between tabs on the left-hand side of the dashboard. I wish the menu bar on the left could stay expanded out."
+  },
+  {
+    "Review Date": "01/21/2021",
+    "Reviewer Role": "Customer Success Analyst",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "The centralization of SaaS usage data and CRM account and contact data alone is incredibly valuable, but being able to also include email and ticket data, and then act on insights gleaned from all of that data is the best part of CZ.",
+    "dislike": "Our implementation went smoothly, and the staff and training resources at CZ are top-notch. That said, it is a considerable time commitment to put everything in place."
+  },
+  {
+    "Review Date": "01/26/2021",
+    "Reviewer Role": "VP Customer Success",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "Connection to product, support & CRM is a must have!",
+    "dislike": "sometimes can take a while to get info because there is so much data."
+  },
+  {
+    "Review Date": "02/01/2021",
+    "Reviewer Role": "Mid-Market(51-1000 emp.)",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "Vanessa has been extremely knowledgeable and helpful in getting myself and the CS team up to speed on using CZ to increase visibility into our client's on-boarding journey and engagement, as well as automate many tasks.",
+    "dislike": "As expected with any advanced CS platform, there is the time to get up to speed, but once you invest the time, the end result is fully worth the work!"
+  },
+  {
+    "Review Date": "02/02/2021",
+    "Reviewer Role": "Client Success Manager",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "Event based triggers and our CSM. Lucas Farely made all the difference for us. He's been an awesome shepherd guiding us through the platform and overall strategy to optimizing our CS team.",
+    "dislike": "Not especially intuitive. It takes some work to set up, leverage and push team adoption - but the output is worth it."
+  },
+  {
+    "Review Date": "02/04/2021",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The most helpful piece about Churnzero is all of the assistance that you receive from the team. We were onboarded by a wonderful, helpful woman named Bri and have had a great experience since that moment! All of the items that you are able to customize and fit to your liking is awesome compared to other companies in the space.",
+    "dislike": "Because there are SO many metrics and options, then sometimes training other people to use the software can get overwhelming to them. All of the data is fantastic information and not everyone has to utilize every piece of it, which is just another plus to the software."
+  },
+  {
+    "Review Date": "02/15/2021",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "- the flexibility with which journeys could be built to automate most of the work we've been using excel sheets for has been the best feature so far.",
+    "dislike": "It would be nice to send users outside Churnzero ( For ex: Finnace teams) updates on existing invoices we work with, without them having to create an account on CZ."
+  },
+  {
+    "Review Date": "02/18/2021",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Easy to understand tools. I can build an automation with clearly defined steps and triggers, with reporting and results tracking baked in. It's an intuitive process that lets me work with our account data the way that I want to.",
+    "dislike": "It's sometimes difficult to extract some of the reporting I'm looking for. While the built in dashboards are great for account managers, they don't always show what I'm looking for. For example, if there's a specific health score component I want to track I need to create a segment and export, then review the results in a spreadsheet."
+  },
+  {
+    "Review Date": "02/26/2021",
+    "Reviewer Role": "Client Success Manager",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "The ability to customize the churn criteria to what makes sense for our clients.",
+    "dislike": "There are some canned reports that aren't as helpful to me and I would like to be able to customize the dashboard a bit more."
+  },
+  {
+    "Review Date": "02/26/2021",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I really like the Command Center and executing plays in Churn Zero. The Command Center keeps me organized for my daily tasks, and running plays allows me to reach large groups of people while still being very professional and personal.",
+    "dislike": "I would say executing plays is not hard, but I feel like building plays is still a bit cumbersome. I think as I learn more about the system it will get easier."
+  },
+  {
+    "Review Date": "02/28/2021",
+    "Reviewer Role": "Director of Customer Success",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "From the sales process, through the implementation, and on to the Customer Success team, I have been very impressed with the thoroughness of the process.",
+    "dislike": "Some pre-built content would be helpful to further drive adoption within teams."
+  },
+  {
+    "Review Date": "03/01/2021",
+    "Reviewer Role": "Director of Customer Success",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "Playbooks that allow a CSM to leave repetitive tasks to automation freeing them up to do meaningful account management work.",
+    "dislike": "The team still has to use Salesforce to edit things like Opportunities and we'd prefer to have one tool to work in."
+  },
+  {
+    "Review Date": "03/08/2021",
+    "Reviewer Role": "Client Success Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "One way or another (segments, journeys, plays, tasks) you can see + act on nearly anything you need to do. It's a very comprehensive system.",
+    "dislike": "Because of the granularity, building out a these processes can be intimidating. I would like a more fully-featured email generator as well."
+  },
+  {
+    "Review Date": "04/21/2021",
+    "Reviewer Role": "VP of Customer Success",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The ChurnZero team from Sales to Implementation to Customer Success has been amazing to work with. We are seeing the benefits from the product within the first 30-days, what more could we ask for!",
+    "dislike": "Would like to be able to customize a few of the default views."
+  },
+  {
+    "Review Date": "07/15/2021",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Easy to sign in through my Salesforce credential and to trigger emails based on customer behaviour",
+    "dislike": "User interface could use a refresh and update."
+  },
+  {
+    "Review Date": "08/30/2021",
+    "Reviewer Role": "Operations Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The tool so far seems like it will add a ton of value for us (even tho we haven't really used it yet). The implementation team was very helpful and proactive, which I loved!",
+    "dislike": "Nothing so far! Hoping that stays the same as we continue our onboarding"
+  },
+  {
+    "Review Date": "09/03/2021",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I like how easy it is to find customers and all the great ways to create customer segments.",
+    "dislike": "It's difficult to make good looking emails and in-app announcements. I would love to use these features more, but it's impossible to make it look okay."
+  },
+  {
+    "Review Date": "10/07/2021",
+    "Reviewer Role": "Manager of Product Support",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "That it is automated based on data that we often don't have time to analyze.",
+    "dislike": "It can be challenging to create plays and segments"
+  },
+  {
+    "Review Date": "10/07/2021",
+    "Reviewer Role": "Computer Software",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I like the calendar integration as well as the integration with Salesforce. It helps minimize duplication efforts.",
+    "dislike": "I wish there were a quick view to see recent, tracked correspondence with clients."
+  },
+  {
+    "Review Date": "10/07/2021",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Organizes my clients and adds line of site to parameters",
+    "dislike": "Not as user-friendly as I'd hoped with creating lists. The Remediation plans/Journeys are confusing"
+  },
+  {
+    "Review Date": "10/07/2021",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The NPS surveys and journey orchestration",
+    "dislike": "Would like to have the Journey work products included in the product (eg spreadsheets the customer needs to fill out)"
+  },
+  {
+    "Review Date": "10/07/2021",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The ability to create such an easy onboarding process while measuring the overall health and longevity of the accounts.",
+    "dislike": "Its hard to find any dislikes about the company. Truly a flawless experience with an endless amount of resources needed to ramp up your knowledge on the platform."
+  },
+  {
+    "Review Date": "11/16/2021",
+    "Reviewer Role": "Information Technology and Services",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Resolutive and supportive. They are always ready to help and resolve our questions very fast",
+    "dislike": "nothing to complain! a great example to follow"
+  },
+  {
+    "Review Date": "12/20/2021",
+    "Reviewer Role": "Mid-Market",
+    "Company Size": "Mid-Market",
+    "like": "Being able to automate emails at key touchpoints and create segments of clients based on certain characteristics have been incredibly impactful for our team. A direct quote from a senior strategist on our team today: \"OMG I just used CZ to create a play to send out an email to my partners and I have to say that was RIDICULOUSLY efficient. Wow. ChurnZero is amazing.\"",
+    "dislike": "There is a bit of a learning curve and setup time required for ChurnZero --- definitely worth it, but for a busy team, it means that after a year we are still unlocking potential. A positive in a lot of ways that there is constantly more we can do with it, but it does require time investment to get the most out of it."
+  },
+  {
+    "Review Date": "12/23/2021",
+    "Reviewer Role": "Implementation Specialist",
+    "Company Size": "Mid-Market",
+    "like": "I like that ChurnZero shows me which customers are falling behind on their journeys. I enjoy the notifications and alerts because that helps me stay focused on ensuring my customer accounts are updated. It does help me have a better view of what I need to accomplish or focus on for the week.",
+    "dislike": "The tasks features. The dashboard. It's not customizable without an upgrade. Sometimes my settings aren't saved and it feels like I'm wasting my time on trying to find the data I'm looking for. It can be frustrating to attempt to delete a task and it doesn't register that it's deleted. It's also a waste of time that journeys that are completed or failed don't automatically have tasks delete or removed from the queue."
+  },
+  {
+    "Review Date": "12/27/2021",
+    "Reviewer Role": "Director of Customer Success",
+    "Company Size": "Mid-Market",
+    "like": "I've implemented CZ at two companies now, and I can't speak highly enough of both the software and the team. A lot of other options are out there these days, but the visibility management gets into details on a by-CSM basis are game-changing for both leadership and their reports. Additionally, the support and assistance provided by the personable and knowledgeable CSMs at CZ allow us to really maximize the benefits of the tool. Everyone over there is a true joy to work with, and more than willing to provide as much hand-holding as we needed.",
+    "dislike": "There are some aspects of the UI that can be challenging during the implementation and setup phase - if only because the tool is capable of so much - but my CSM + Implementation manager at CZ were always able to provide guidance and assistance in a hurry."
+  },
+  {
+    "Review Date": "01/04/2022",
+    "Reviewer Role": "Head of Customer Success",
+    "Company Size": "Mid-Market",
+    "like": "* Product Flexibility\n\n* Salesforce and G-Suite integration\n\n* Support responsiveness\n\n* ChurnZero deployment and success team\n\n* Key product features",
+    "dislike": "* Analytics and reporting still need some work to get to the next level"
+  },
+  {
+    "Review Date": "01/24/2022",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The insights and reporting we can get from the data collected within ChurnZero helps my team to be proactive with our client base and minimize churn. By creating plays and having ChurnZero monitor my clients usage, my team doesn't have to think about reaching out to clients themselves, we can create canned emails for them to push send and help create additional touchpoints with our end users. I also love managing my NPS campaigns directly from the platform and being able to track those trends campaign over campaign.",
+    "dislike": "Not necessarily a dislike, but I would love the option to add dashboard reporting as an ala carte feature add on."
+  },
+  {
+    "Review Date": "01/31/2022",
+    "Reviewer Role": "User",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "I'll first start by saying the key to true service is having amazing people representing your product. We've received the most amazing service from our AM, Erica! From training, to product knowledge, to her responsiveness and willingness to assist and answer questions, Erica has been the absolute BEST! ChurnZero in itself is helping us get to our ultimate goal of a 99% retention rate. We've definitely got a long way to go but are confident that the software will lead the way to our success! Any leaders of Customer Success should adopt this product ASAP. It's really a game changer. We're able to monitor customer feedback through surveys in addition to creating plays and journeys for targeted outreach. This tool is top tier and unmatched. Thank you ChurnZero!",
+    "dislike": "None, we have no current complaints related to this product."
+  },
+  {
+    "Review Date": "03/04/2022",
+    "Reviewer Role": "VP of Customer Sucess",
+    "Company Size": "Mid-Market",
+    "like": "The product is focused on the Customer Success organizations journeys and mission. Unlike SalesForce or other CRMs this product is designed with CS in mind. Tracking customers through customized journeys, milestones and tasks all while a great algorithm tracks churn risks and alerts me to early red flags",
+    "dislike": "I could use more of a meeting notes section (like a customer journal almost). You can create sections for this, but it would be helpful if this feature was productised. CS often relies on great meeting notes. It's the one thing missing."
+  },
+  {
+    "Review Date": "04/21/2022",
+    "Reviewer Role": "Implementation Manager",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The command center, where I can track my tasks, key segments, calendar, and keep all of my work in front of me and not feel overwhelmed.",
+    "dislike": "There have been a few times when the platform has been a little slow, but that has been rare."
+  },
+  {
+    "Review Date": "04/21/2022",
+    "Reviewer Role": "Senior Manager, Customer Success",
+    "Company Size": "Mid-Market",
+    "like": "I appreciate the ability to automate some of the day-to-day tasks that can often fall through the cracks. Having the ability to \"trigger\" a play based on pre-defined characteristics allows my team to be proactive without having to THINK about it too much or source the data on their own.",
+    "dislike": "So far, the biggest limitation is our data. The onboarding, training and post-go-live teams have all been incredibly helpful. It may be something we don't have (or I haven't found) but having some pre-defined plays would be helpful."
+  },
+  {
+    "Review Date": "04/21/2022",
+    "Reviewer Role": "Sr Customer Success Manager",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The Churnscore has been great, it helps me make informed decisions",
+    "dislike": "The only downside is that its a bit heavy to set up, you have to make a lot of segments to get the data right"
+  },
+  {
+    "Review Date": "04/21/2022",
+    "Reviewer Role": "Educator Training Manager",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "You know at a glance who is happy and who is not. Being able to create segments of customers to target with customized emails is also awesome. And I'm a big fan of the email/slack notifications.",
+    "dislike": "There is a pretty steep learning curve to CZ. I've been using the platform for about a year and I still find new things and things I didn't know I could do. They did train us, but I'm still learning."
+  },
+  {
+    "Review Date": "04/21/2022",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The ability to build dashboards and then analyze metrics by segments, seeing trends and spotting fires at a glance while also being able to drill down.",
+    "dislike": "This may be more specific to our implementation, but we have a lot of filters, tags, and possible measurables from our sales system of record and our product, and it causes a lot of 'noise' when building new reports / dashboard features / segments. If there were a list of frequently used fields, that would be a helpful feature."
+  },
+  {
+    "Review Date": "04/29/2022",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I love the fact that it allows me to watch my client's progress and will trigger an alert for me when important account actions are taken.",
+    "dislike": "I wish there was some kind of free licensing for viewer types. It would extremely helpful if sales counter parts were able to view the information stored at the account level even if they won't be doing anything in the tool."
+  },
+  {
+    "Review Date": "05/04/2022",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I like that our customer success manager really goes the extra mile. She is always helping us and pushing us so we can finish what is missing.",
+    "dislike": "In the beginning, the integration was a bit difficult. A spreadsheet might not be the most appropriate way to implement a platform."
+  },
+  {
+    "Review Date": "05/18/2022",
+    "Reviewer Role": "Product Manager",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "My favorite part of ChurnZero is how customizable it is. There are endless possibilities when it comes to custom fields, custom plays, custom journeys, etc. In addition, ChurnZero is the first platform I have used that was not overly complicated. Even with all of the customization, they still managed to make a user-friendly platform. Another reason I would highly, highly recommend ChurnZero is because of just how truly amazing their CSM team is. In the beginning, especially, we had a lot of questions in terms of how to set up plays, journeys, walkthroughs, success panels, etc, but our personal CSMs Bree and then Kerry were there for us every step of the way. They even came to weekly meetings prepared with suggestions for various plays, including plays that their OWN Customer Success team uses! These interactions with our CSM did help and help us feel more confident about our own adoption of the platform. It's easy to understand how this is a Customer Success platform after seeing how amazing their own CSMs are. I seriously cannot give enough props to ChurnZero's staff. You can really tell that they take the time in hiring only the best of the best.",
+    "dislike": "I would say the only thing I \"dislike\" about the platform is how long it takes to get set up and running. It does take a lot of time and effort, but it truly is worth it if you put the time in. We were able to accomplish the full set-up of ChurnZero with only 2 users setting it up. It took a few months to get everything just the way we wanted, but the ChurnZero Customer Success team was there every step of the way. In the beginning, we had weekly meetings with our personal CSM to answer any questions, as well as offer personalized suggestions on how to make our CZ experience and adoption even better. There is definitely a steep learning curve when it comes to the full adoption of ChurnZero. At first, our team met with our personal CSM once a week, which then evolved to a 2-week cadence, and then monthly."
+  },
+  {
+    "Review Date": "06/06/2022",
+    "Reviewer Role": "Implementation Project Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero is a pretty intuitive platform. As a past Salesforce user, this platform feels like it has the same kind of flexibility to track specific goals and metrics for your company in ways that matter for your business. The staff is extremely helpful in getting you off to the races and making sure you understand how to use everything the system has to offer.",
+    "dislike": "It's hard to say much that's negative about this system. I would have to say it is probably difficult to set the program up entirely on your own. But again, their staff is so helpful in this respect that you really aren't on your own here."
+  },
+  {
+    "Review Date": "06/21/2022",
+    "Reviewer Role": "Client Success Representative",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "Churn Zero gives me the knowledge of knowing which customers are using our service vs. those who are not. It also keeps me on track with my tasks. I haven't heard of a service that is comparable.",
+    "dislike": "I wouldn't really say they are many downsides to using Churn Zero. It's a powerful tool that I think is essential to our customer service department. I think any issues we have are internal to our organization, and how our current CRM integrates."
+  },
+  {
+    "Review Date": "06/22/2022",
+    "Reviewer Role": "Director of Accounts",
+    "Company Size": "Mid-Market",
+    "like": "As a director, the Command Center Team View allows me to see meetings, tasks and messages for my CSMs and ensure they're staying on track. My company also recently began using Custom Dashboards, and this feature has been invaluable. It saves me a ton of time from having to run the data through another tool, such as Salesforce, and also includes our unique segmentation.",
+    "dislike": "One unique issue for us is that the same contact (email address) may be included multiple times (if they are a user at each child account as well as the parent). This makes it challenging to send emails through CZ without the contacts being sent duplicate emails. We have found workarounds for this challenge, but it would be great if CZ could automatically remove those duplicates."
+  },
+  {
+    "Review Date": "06/23/2022",
+    "Reviewer Role": "Customer Success Operations Coordinator",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "ChurnZero is a must-have tool for any growing Customer Success team. The platform allows you to proactively support your clients, have a 50k foot view to make decisions and create a cohesive team unit.",
+    "dislike": "The only downside is that if you do not come prepared, it will take longer to implement the use of ChurnZero. However, I have been blown away at the amazing CS team within ChurnZero who meet you where you are and continually support you along the way."
+  },
+  {
+    "Review Date": "06/24/2022",
+    "Reviewer Role": "Sales Enablement Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero is SO rich with data and ways to visualize it. It's very user-friendly for customer-facing people. The built-in \"actions\" - such as alerts or plays - allow the team to automate some tasks and maintain a more proactive stance with their customers.",
+    "dislike": "There is an upfront investment of time needed to get it configured from the get-go. Our technical folks needed to devote time to getting data fed in. Frontline adoption really depended on managers and leaders creating dashboards, alerts and plays people could use and having them copy - rather than leaving it up to individual team members to take it and run with it. This is to be expected from a system with a high degree of customization but it took a little longer than expected."
+  },
+  {
+    "Review Date": "06/30/2022",
+    "Reviewer Role": "Sr. CSM",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Being able to keep track of the risk is key! I also really like the ability to set up plays and reminders.",
+    "dislike": "The disconnect between other apps. (Salesforce and slack)"
+  },
+  {
+    "Review Date": "06/30/2022",
+    "Reviewer Role": "Manager, Customer Success Team",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "You'd assume a CSM platform will put a high standard on their own Customer Success and Support -> ChurnZero knocks it out of the park. Our CSMs have always been incredibly insightful, helpful, quick to respond and jump on calls, true knowledge experts, and so on. Anytime I've opened a ticket for support with an issue, the resolution has been profoundly quick and makes sense, so we don't repeat the same mistakes. Outside of the service level which is my favorite part, ChurnZero's platform makes our lives easier here. We are fully integrated into numerous customer journey Plays, NPS surveys, segmentation, and so much more that is critical to our own success as a CS team.",
+    "dislike": "There are some UI/UX gaps that I've raised. It's rather nitpicky - but small things tend to build up and can cause frustration, say when you are in a crunch and building out email comms to your customer base, and the UI is making it difficult to format items correctly, pull in the accurate dynamic fields, utilize the right segment, etc. Again - it's minor, but it's the main drawback that I can think of when thinking of the platform as a whole."
+  },
+  {
+    "Review Date": "07/15/2022",
+    "Reviewer Role": "VP of Operations",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Ease of use for CS end users, comprehensive and flexible configuration options, breadth of functionality, consolidation of information from multiple systems into one via integration. CS and AM teams now have one place to go to see everything needed to evaluate customer activity, health, communications, etc.",
+    "dislike": "Double-edged sword of feature breadth and configuration flexibility is Admin learning curve. Some of the journey and play configurations weren't immediately intuitive. Leveraged CZ onboarding resources and online tutorials to get up to speed."
+  },
+  {
+    "Review Date": "07/19/2022",
+    "Reviewer Role": "Mid-Market(51-1000 emp.)",
+    "Company Size": "I love that ChurnZero keeps me updated on which client needs more attention in my goals of keeping client accounts active and engaged. It is user friendly and I use it daily now. As a CSM, my job is to let clients know what's new at IDC as well as help them see value in their contract with us. ChurnXero helps me with my role.",
+    "like": "There are so many functionalities that extensive training is required when using ChurnZero. It's appreciated but it does get a bit tedious when first learning how to use it.",
+    "dislike": "4.5 out of 5"
+  },
+  {
+    "Review Date": "07/22/2022",
+    "Reviewer Role": "Senior Account Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero is great for being able to keep quick tabs on accounts and their usage at a glance. They also have an awesome system to setup automatic/automated emails both internally to help you keep tabs as well as external to make sure clients don't go too long without a 'touch'.",
+    "dislike": "I wish there was a bit more flexibility with the ChurnScore. Our platform has different uses based on different client needs and occasionally the ChurnScore doesn't align 100%."
+  },
+  {
+    "Review Date": "07/26/2022",
+    "Reviewer Role": "Customer Success Manager, Digital Enablement Specialist",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The customer service is amazing. As someone who works in Customer Success, their CSM team and Support team are incredibly helpful and accommodating.",
+    "dislike": "There can be some strange inefficiencies.. For example, having to create an account segment AND contact segment to send an email to all contacts from the same organization the same email thread."
+  },
+  {
+    "Review Date": "07/29/2022",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "My favorite thing is the metrics available and how it integrates with our other platforms and products. A close second would be the ability to create Plays and Surveys.",
+    "dislike": "If I could change anything, it would be nice to see our mobile app usage integrated within ChurnZero. I would also love more customization/format options within the Play creation area."
+  },
+  {
+    "Review Date": "08/08/2022",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Churnzero allows me to see an overview of my book of business. It is easy to create plays and has automated outreach capabilities. I can log into ChurnZero and know how to plan my week and my outreach based on usage and the ChurZero score.",
+    "dislike": "ChurnZero is not UI friendly. It takes a while to get used to navigating the platform and drilling down into all the functions. There is training material available, which is helpful, but an easier navigating experience would be helpful."
+  },
+  {
+    "Review Date": "08/09/2022",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "All the tools I need to manage my customer's churn risk and their engagement are easy to access and leverage. There is not much of a learning curve and you can quickly get to the heart of your customer's engagement with your product",
+    "dislike": "There are great customization options when looking at customers but wish it was quicker to see just my customers and not the customers of the whole team. It may be good to have a glance at my assigned customers without needing to create a segment."
+  },
+  {
+    "Review Date": "08/16/2022",
+    "Reviewer Role": "Director of Customer Support",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "Health Score Tracking. ChurnZero took our app's usage metrics and helped us keep track of possible churn. We always knew the key indicators of what could lead to churn with our app, but ChurnZero helped us spot trends more easily.",
+    "dislike": "Like any software implementation, ChurnZero requires a lot of time commitment to get right. Its capabilities are very deep and when you get started it can feel a bit overwhelming."
+  },
+  {
+    "Review Date": "08/17/2022",
+    "Reviewer Role": "Head of Customer Success",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "There's so much you can do with all the data, before we had no accurate Health Scoring system, no easy access to usage data, and no scalability for engaging with our customers en mass. ChurnZero gives you all the tools you need to operate a modern CS function within a growing SaaS business. Plays have revolutionised the way we work, allowing us to generate automated responses and alerts for our entire customer base, using intricate variables of data - which without ChurnZero - we could never have considered.",
+    "dislike": "There are very few things to dislike, one of the additions I'd find useful however is the ability to see upcoming meetings on a Customer Profile, so that you could easily identify when the next scheduled meeting is due to happen per customer. The calendar integration is great, but to be able to highlight where customers do not have anything scheduled in your Outlook calendar would be really useful."
+  },
+  {
+    "Review Date": "08/22/2022",
+    "Reviewer Role": "Head of Marketing",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "As we have recently finished our implementation and are nearly complete with onboarding I must say the support from multiple people has been top notch. They give you even more information and context to help you solve the problem and next steps for what you will soon be working on. The analytics are both high level and can be broken down at a micro level.",
+    "dislike": "Sometimes there are certain actions that can't be cloned or things that should auto-save but you have to remember to save."
+  },
+  {
+    "Review Date": "08/24/2022",
+    "Reviewer Role": "Sr Account Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The ease with which I can find information. The segments are incredibly useful when tracking down all sorts of data. Churnzero has made my workload so much more manageable.",
+    "dislike": "The onboarding process was long because there are so many features available. It took a little while to learn the ins and outs but it's a good problem to have!"
+  },
+  {
+    "Review Date": "08/25/2022",
+    "Reviewer Role": "Verified User in Computer Software",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "ChurnZero has a great onboarding process and great CSMs. I can't underestimate how easy it now is to stay on top of all QBRs, renewals, customer health, and have the visibility to see how CSMs are doing with their portfolios. As we use ChurnZero more and more, it's clear we'll continue to discover ways to drive more value for our business and our customers.",
+    "dislike": "Salesforce opportunities need to be at CZ account level"
+  },
+  {
+    "Review Date": "08/31/2022",
+    "Reviewer Role": "Customer Success Executive",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Churnzero is really great for outlining which of your customers need the most immediate attention. Not only that, but is great to use as a day to day diary for each customer.",
+    "dislike": "I wouldn't say i have a dislike as such. Just little things such as being able to pull detailed spreadsheets for listing upcoming renewals could be a little easier. Apart from that, i'm not certain i could make any suggestions to improve it."
+  },
+  {
+    "Review Date": "09/13/2022",
+    "Reviewer Role": "VP, Customer Success and Implementation Services",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "As we build our integration of Churnzero we quickly realize the power the tool gives to create actionable plays, journeys, tasks and drive better customer outcomes.",
+    "dislike": "I don't have any dislikes yet in our first quarter of using the tool. So far, our use case is linked to our SFDC dataset and is working well, but I am eager to get our product team engaged in linking Churnzero into our applications to gain access to real-time application telemetry."
+  },
+  {
+    "Review Date": "09/13/2022",
+    "Reviewer Role": "Customer Success Manager-Mid Market",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero is a must for all Customer Success teams! Some aspects we love are that it integrates with Salesforce, runs reports, creates plays, Customer Journeys and Churn Scores... to name a few. This platform has been vital to the automation of our Success team.",
+    "dislike": "Currently, there are no aspects of the platform that we do not like or wish was better. The platform is evolving, and we are excited to see what comes of all the growth."
+  },
+  {
+    "Review Date": "09/14/2022",
+    "Reviewer Role": "Verified User in Public Relations and Communications",
+    "Company Size": "Mid-Market",
+    "like": "The speed and ability to easily monitor and measure success / Churn for Customers",
+    "dislike": "Lack of Mobile App, pulling in data sometimes is a real process"
+  },
+  {
+    "Review Date": "09/19/2022",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The Churnscores are helpful in tracking performance.",
+    "dislike": "It can be difficult to set up some plays if you don't have experience."
+  },
+  {
+    "Review Date": "10/04/2022",
+    "Reviewer Role": "Verified User in Computer & Network Security",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I love the customer insights and versatility of the tool. I like the ability to work on a customer account, share their insights with the team, and planning, but most of all to make it simple and appealing.",
+    "dislike": "The reporting features are good, but a bit cumbersome. Is hard to find the objects you need (i.e not all journey objects show up in the list), and then the options to make graphic visualization of data are very bad. We have been exporting the data to excel to graphic it all. It will be lovely it we could stay within the app."
+  },
+  {
+    "Review Date": "10/05/2022",
+    "Reviewer Role": "Adult Learning Facilitator",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero is an incredible tool that I use daily as a CSM. The platform integrates with every tool I use (Salesforce, Outlook, etc.) and provides insightful data.",
+    "dislike": "The only improvement I would like to see on CZ would be the ease of creating playbooks and having more accessible resources to more efficiently set up and run a play."
+  },
+  {
+    "Review Date": "10/06/2022",
+    "Reviewer Role": "Chief Financial Officer",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "From sales to onboarding to using the product, each representative was helpful and made the entire process effortless - even for team members who had never implemented a software product. The sales team did a great job answering questions that the CSM, finance, tech, and system teams had. They also found a way to work through our unique business model so that the cost-benefit would be appropriately achieved. The implementation specialists were very organized and provided a clear roadmap for achievements by week. Once we were onboarded, we received continuous support as we continued to improve our workflows.",
+    "dislike": "During the sales process, there were a few hiccups where the HubSpot/ChurnZero integration features weren't adequately explained to overcome our initial hesitation. But we stumbled across those features during a discussion and knew this was our team's product."
+  },
+  {
+    "Review Date": "10/07/2022",
+    "Reviewer Role": "Client Marketing Lead",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero provides a comprehensive platform for consistent client communication. The ability to build workflows with emails, in-app popups, and surveys is a great tool to support our clients with all inside knowledge needed to help keep them happy and, in turn, reduce churn.",
+    "dislike": "There are certain limitations to how narrow you can go with segmentation as far as the implementation with Salesforce goes. This seems to be an issue on both sides, not just CZ."
+  },
+  {
+    "Review Date": "10/12/2022",
+    "Reviewer Role": "Customer Success Specialist",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "My favorite part of ChurnZero is being able to save time when contacting my book of business. I can place contacts in a play and make sure they are contacted thoroughly without having to compose an email for contact. I also enjoy the fact that I can build custom segments to organize my customers and contacts. I target a super specific customer and customize my contact with them in a fast and easy system.",
+    "dislike": "There isn't much I don't like about ChurnZero. One thing I wish that was different about ChurnZero is the email platform. I wish that I could CC another contact on an email or send an email to just one contact. One more thing I would like to see different about ChurnZero is being able to set a time on a task. I think being able to set a time on a task in ChurnZero would be helpful and could keep my calendar less crowded."
+  },
+  {
+    "Review Date": "10/12/2022",
+    "Reviewer Role": "Director, Education Experience and Training",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero Enterprise edition allows users to have access to enhanced features like custom AI powered Insights, Customer Surveys and Dashboards, and better means to engage your customers in app.",
+    "dislike": "Churnzero has gone through a lot of changes recently as they reorganized their own internal CS functions. I have had 5 CSMs in less than a year. It seems like everytime one gets to know my business, I get reassigned."
+  },
+  {
+    "Review Date": "10/12/2022",
+    "Reviewer Role": "Partner Success Manager",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The OB Process and KB. It is really good.",
+    "dislike": "The UI is the biggest issue. Not intuitive."
+  },
+  {
+    "Review Date": "10/12/2022",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I absolutely love that ChurnZero gives our CSM's a dashboard to start their day! The plays have helped so much with less manual email reach out, but in a personal way. In addition, it pulls in usage data which we are using to pull into our health score! We are still relatively new customers but looking forward to learning more and more!",
+    "dislike": "I think having the CSM involved in the implementation would be helpful so they understand what we are trying to accomplish from the start. In addition, there were some things we learned after the fact (ex: CZ doesn't play well with small text fields) that would have been great to know from the start! Some UI changes would be great too! Collapsible Connected fields/objects would help so much!"
+  },
+  {
+    "Review Date": "10/13/2022",
+    "Reviewer Role": "Director, Customer Success",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "The Implementation team was awesome and helped us quickly and clearly integrate our Salesforce data. Now we have visibility into accounts we never previously had and can easily automate tasks and plays to help our team help our clients.",
+    "dislike": "The reality of new software is that you will need to devote time to the implementation and training of the team. It is definitely a commitment. However, ChurnZero provided us with great recommendations to help with this process. It forced us to do some data work that we had needed to do and we are better off because of it!"
+  },
+  {
+    "Review Date": "10/13/2022",
+    "Reviewer Role": "Director of Customer Success & Implementation",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The automation possibilities and the ease of building that out.",
+    "dislike": "The Salesforce integration could be a bit easier to use."
+  },
+  {
+    "Review Date": "10/13/2022",
+    "Reviewer Role": "Enterprise Client Success Manager - Team Lead",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The data is very actionable and I don't spend my time watching dashboards or digging through account details. The system knows what is important for my workflow and surfaces the items that I need to be aware of. The integrations with other systems cut down on duplicate data entry and the product has evolved quickly, in line with our feedback!",
+    "dislike": "It can be fairly cumbersome at times to make the right combination of segments to be able to run a play."
+  },
+  {
+    "Review Date": "10/13/2022",
+    "Reviewer Role": "Sales Development Representative",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "How it integrates with our customer education goals",
+    "dislike": "There are not many things to dislike about the platform at all!"
+  },
+  {
+    "Review Date": "10/13/2022",
+    "Reviewer Role": "Director, Customer Experience",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "It is a powerful yet simplistic tool that helps elevate CS team.",
+    "dislike": "Nothing that I have found to date. it has been a great tool."
+  },
+  {
+    "Review Date": "10/13/2022",
+    "Reviewer Role": "Customer Operations Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I love all of the in-app capabilities. Our customer base tends to be a bit software-resistant, so the more we can keep in-app and in one place, the more likely they are to engage and benefit from the info we are trying to get to them. I also really love that we can keep track of different customer journeys. This has been a game-changer for our implementation team!",
+    "dislike": "It does SO MUCH! Don't get me wrong, I really love that it can do so much, but it can sometimes be overwhelming, especially when learning it for the first time. That being said, our CSM is AMAZING, and the support is world-class."
+  },
+  {
+    "Review Date": "10/13/2022",
+    "Reviewer Role": "Verified User in Hospitality",
+    "Company Size": "Mid-Market",
+    "like": "CZ is an amazing software for organizations. It provides all of the data we need to be a successful CS team. My favorite feature is the Journeys. It allows us to seamlessly assist our customers without overwhelming them.",
+    "dislike": "I wish there was a a way to snooze tickets."
+  },
+  {
+    "Review Date": "10/13/2022",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero's software helps our CS team (implementation and customer success managers) manage their accounts during all of the post-sale motions that happen with the implementation and customer success managers. We're able to better track the health of accounts which enables our team to be proactive with their clients. The software is easy to use, we're able to easily monitor our customers, easy to customize reports, segments, dashboards, plays, journeys, and CZ has a lot of great training resources that we have utilized. It was also great we could integrate with our Salesforce.",
+    "dislike": "I haven't found anything so far that I have disliked"
+  },
+  {
+    "Review Date": "10/17/2022",
+    "Reviewer Role": "Senior Manager for Corporate Programs / Operations",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I am comfortable with the ease of use, and I like the visual representations of the data, it is all available in one place with a couple of clicks.",
+    "dislike": "At first, like with any tool I was trying to get to my comfort zone and trying to make sense of it all. With frequent use it all starts to piece together quite fast."
+  },
+  {
+    "Review Date": "10/18/2022",
+    "Reviewer Role": "Mid-Market",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I like the up-to-date churn scores and account health metrics as well as the ability to run plays for outreach.",
+    "dislike": "I dislike how the review-required emails that are triggered by plays take minutes and longer to be generated. This interrupts the flow of work and often causes me to lose my place or even forget a step when working with a multitude of clients."
+  },
+  {
+    "Review Date": "10/19/2022",
+    "Reviewer Role": "Director of Clinical Success",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "I like that it keeps all of my notes organized via which customer and by customer names. I can always find the information I am looking for in under 30 seconds. I also appreciate the segments to let me know which customers I have not yet had contact with in certain time frames.",
+    "dislike": "I dislike that there is a discrepancy between our metabase data of usage on the platfrom versus churn zero data of usage on the platform, we do know why there is a discrepancy."
+  },
+  {
+    "Review Date": "10/19/2022",
+    "Reviewer Role": "Clinical Success Director",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "Being able to create segments for easy navigation.",
+    "dislike": "So many aspects that I get overwhelmed. It will just take time to understand."
+  },
+  {
+    "Review Date": "10/20/2022",
+    "Reviewer Role": "Mid-Market(51-1000 emp.)",
+    "Company Size": "Useful tool with all the features needed for CS managers to do their jobs within only one platform. Before we introduced CZ they had to go to 3 different tools to get information and now everything gets handled together.",
+    "like": "I don't like the looks of the charts used on their dashboards. Making new dashboards is slightly unintuitive but not a deal breaker since you set them up once or a few times at most.",
+    "dislike": "4.5 out of 5"
+  },
+  {
+    "Review Date": "10/24/2022",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero is a CSM must-have for daily routing and portfolio management. Top benefits are customization, playbooks and segments, fully connected to my Google environment.",
+    "dislike": "Nothing I can think of. Everything's great regarding my needs."
+  },
+  {
+    "Review Date": "10/26/2022",
+    "Reviewer Role": "CS Strategy & Operations Analyst",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "The service is the best. Our CSM, Kevin< is fantastic! Anytime I have a question he is ready to help!",
+    "dislike": "I have yet to find something that is not helpful. every time I think I'm stuck, there is a solution for it."
+  },
+  {
+    "Review Date": "10/26/2022",
+    "Reviewer Role": "Manager, Customer Success EMEA",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "What I like most on Churnzero is the flexibility that the platform provides; you can tailor a lot according to your business requirements and organizational needs. They also have great content and learning resources.",
+    "dislike": "The user interface needs some enhancements to be more modern and appealing to users."
+  },
+  {
+    "Review Date": "11/03/2022",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The implementation & CSM team has been rockstars throughout the entire process. The Salesforce and product integrations are exactly what our organization was looking for from ChurnZero. The in-app/product guidance that we can implement will be key in leveling up our customer experience.",
+    "dislike": "The platform so far is great! The implementation process is lengthy, but the ChurnZero team makes it as easy as possible."
+  },
+  {
+    "Review Date": "11/11/2022",
+    "Reviewer Role": "Director of Customer Success",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "I've been a ChurnZero customer twice. I selected it for my current 8-person CS team because I knew it would help us monitor client health, track key activities in the customer lifecycle, and automate repeated processes as we continue growing. As a department head, I feel that I can fine-tune and manage changes to our account without needing a full-time administrator or significant help from support.",
+    "dislike": "The user interface isn't terribly appealing, but I understand that improvements are coming shortly. I also wasn't wowed by the sales process itself---don't let that dissuade you from taking a good look at the software and what it can offer."
+  },
+  {
+    "Review Date": "11/11/2022",
+    "Reviewer Role": "Manager, Enterprise Customer Success",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "It allows us to provide a consistent cadence for our customer lifecycle and make improvements and additions on the fly when needed.",
+    "dislike": "We have had some technical issues with integrations and data flow, but they have been very responsive in resolving them."
+  },
+  {
+    "Review Date": "11/11/2022",
+    "Reviewer Role": "Transportation/Trucking/Railroad",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The visibility into customer usage! And the Journeys!",
+    "dislike": "The journey status not being configurable."
+  },
+  {
+    "Review Date": "11/16/2022",
+    "Reviewer Role": "EVP Customer Success & RevOps",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "Overall, I love the story that it can help me and my team tell to leadership, team members and last but least - our customers. I have so many \"what I like bests\", but If I were to have to select only ONE, right now my favorite feature is the ability to capture feedback easily without having to invest in another tool.",
+    "dislike": "I have to reach deep to find something I don' t like. I can only think about what I don't like in terms of suggested improvements (which ChurnZero loves to deliver) and that one improvement I'd like to see right now is a native Zoom webinar and meeting integration."
+  },
+  {
+    "Review Date": "12/01/2022",
+    "Reviewer Role": "Verified User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I appreciate the daily digest that brings the essential items to my attention at the start of each day. The History section lets me see prior communications from former CSMs and brings me up to speed when a colleague is out of the office. I also love Plays where messages are queued up for me to review. It helps to standardize the emails, and the option to review lets me personalize the message to each customer. The API connections with our other internal programs are invaluable as it centralizes information and truly makes ChurnZero a one-stop-shop. The CS AI has helped generate wording for an email when I need help getting started.",
+    "dislike": "I have not run into anything I dislike about this program. In my previous job, I did not have a program tailored toward CSMs, so using ChurnZero has been an eye-opening experience."
+  },
+  {
+    "Review Date": "12/09/2022",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "I just started using ChurnZero, so I have only scratched the surface. The client dashboards are easy to use, and the number of metrics available on an individual client level and for all clients in your book is comprehensive.",
+    "dislike": "I haven't identified any functions I don't like."
+  },
+  {
+    "Review Date": "12/21/2022",
+    "Reviewer Role": "Success Manager",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "Im able to segment my customers by a variety of different metrics and fields to help pinpoint my outreach and identify customers that are struggling as well as those that are excelling",
+    "dislike": "Its not a plug-and-play solution so setup took a while and is still continuous as we refine the data that we're looking for from our internal system, but all systems are going to require some time to make things work for each specific company"
+  },
+  {
+    "Review Date": "12/28/2022",
+    "Reviewer Role": "EVP of Global Sales & Revenue Operations",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "User-friendly interface and integration with other systems, ability to build users' journeys",
+    "dislike": "We still need to resolve the problem with the ChurnZero support team of why automated emails sent to our customers are going to the spam folders. It's why we just stopped to do that. Still trying to figure out the platform, so hard to say what I dislike now."
+  },
+  {
+    "Review Date": "01/03/2023",
+    "Reviewer Role": "Director of Customer Success",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The solutions and CS support is fantastic. The tool is incredibly customizable for my specific CS strategy. The ability to import our user data is awesome and has already provided fruitful insights.",
+    "dislike": "Because the tool is so customizable, it's complicated. I joined my company when CZ was perhaps 75% implemented, and it's been difficult to get it to the finish line."
+  },
+  {
+    "Review Date": "01/03/2023",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "There is constant check-in from your Customer Success Manager. They are with you every step of the way to make sure you understand the product and feel comfortable reaching out if you have any questions.",
+    "dislike": "Nothing against ChurnZero, but I wish I had more time in my day to review the videos they sent by emnail and attend training offered by the company to gain a better understanding of the product."
+  },
+  {
+    "Review Date": "01/05/2023",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I love that you can find everything account related in one place. The platform allows for collaboration across teams and other media for day-to-day business ease.",
+    "dislike": "Learning the platform took a little time, and I'm not familiar with certain advanced features yet. That being said, there are training modules available from the company on these topics."
+  },
+  {
+    "Review Date": "01/11/2023",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "The platform is very easy to get used to. Features are designed with Customer Success in mind, and the number of integrations ChurnZero offers will make your life as a CSM much easier.",
+    "dislike": "Feature requests are slow to be implemented."
+  },
+  {
+    "Review Date": "01/12/2023",
+    "Reviewer Role": "Elite Customer Success Manager",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The customization ability for my email templates.",
+    "dislike": "The new update seems to be a step back from before."
+  },
+  {
+    "Review Date": "01/16/2023",
+    "Reviewer Role": "Gerente de Customer Success",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "CZ supports me daily, in structuring the journeys, monitoring and evolution of CS team playbooks, creating and monitoring satisfaction surveys. Being a very intuitive tool.",
+    "dislike": "The absence of tutorials in local languages."
+  },
+  {
+    "Review Date": "01/16/2023",
+    "Reviewer Role": "Manager, Customer Success",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Once you get how everything is tied together, ChurnZero allows you to slice and dice any and all customer information to provide you with actionable critical insights",
+    "dislike": "It is easy to make a mistake and miss a factor that cuts down your segments to not show you the needed information."
+  },
+  {
+    "Review Date": "01/17/2023",
+    "Reviewer Role": "Customer Success Specialist",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "I love their new AI solution. I think it is a great feature.",
+    "dislike": "I would love to have a place where I can write general notes."
+  },
+  {
+    "Review Date": "01/17/2023",
+    "Reviewer Role": "",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "Churn Zero is very flexible and easy to learn.\n\nWe have followed the online courses, and our rep is accommodating to help us customize our customer's Journeys, custom fields, with 3rd party app integration, and more.\n\nWe appreciate that even with the online trainings, we are still supported to build the customization according to our needs.",
+    "dislike": "There is nothing we dislike so far. I am still learning the platform."
+  },
+  {
+    "Review Date": "01/17/2023",
+    "Reviewer Role": "Verified User in Computer Software",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I like how intuitive CZ is and how it simplifies my daily activities. I also like the fact that our CSM is always available to solve any issues we have.",
+    "dislike": "I feel like the plays are somewhat limited. I'm used to Outreach so that's probably why."
+  },
+  {
+    "Review Date": "01/23/2023",
+    "Reviewer Role": "CSM",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The overview that Churn 0 gives me over my customers and the different dashboards you can create for your needs. Once the alerts are established they are a great ressource to act on time and fast if needed.",
+    "dislike": "It would be great to have a preset of templates for dashboards and alerts already"
+  },
+  {
+    "Review Date": "01/25/2023",
+    "Reviewer Role": "Sales Representative",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I like the format of each tab. It's easy for me to find what I need, and there's a lot of depth of information/insights I can gain about a client.",
+    "dislike": "There is nothing I don't like about using ChurnZero!"
+  },
+  {
+    "Review Date": "01/30/2023",
+    "Reviewer Role": "Director of Customer Success",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The Plays and Journeys work well together.",
+    "dislike": "Quick actions and edit button on the far right -hand side of the page. The Success Centre has too much content in it (it takes too long to load)."
+  },
+  {
+    "Review Date": "01/30/2023",
+    "Reviewer Role": "Senior CSM",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The customer journey mapping but also the ability to put segments and playbooks into situ.",
+    "dislike": "Sometimes too much detail on one page .. possibly clear graphics and colour"
+  },
+  {
+    "Review Date": "02/03/2023",
+    "Reviewer Role": "",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "I find the ability to create segments and look at specific information for my accounts is most helpful. I also appreciate the flexibility to create custom dashboards within ChurnZero.",
+    "dislike": "Not much. As a newer user of ChurnZero, I am still learning a lot about how to use it. Sometimes there are glitches when plays do not run correctly, and diagnosing and fixing issues can be a little tricky."
+  },
+  {
+    "Review Date": "02/06/2023",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The ability to streamline work for my team with automated tasks, messages and insights to their books of business and achievements.",
+    "dislike": "I would love the ability for a journey to be manipulated more."
+  },
+  {
+    "Review Date": "02/06/2023",
+    "Reviewer Role": "Small-Business",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "Churn Zero is a tool that can solve almost every task you have on your to-do list. It has many ways of showing you information and helping you communicate with your customers.",
+    "dislike": "It is complex, with so many different tools, and the initial configuration can be a little overwhelming."
+  },
+  {
+    "Review Date": "02/08/2023",
+    "Reviewer Role": "Small-Business (50 or fewer emp.)",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "How much it has helped us to have all the information in one place and to be able to be proactive with our clients and automate some processes",
+    "dislike": "Sometimes when I'm doing a playbook I get confused about the rules so that it arrives as my expectations want"
+  },
+  {
+    "Review Date": "02/09/2023",
+    "Reviewer Role": "",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "Most helpful would include my CSM--he's great and has awesome solutions to issues. I love having email plays that I can run automatically--has cut down at least 1/2 my steps. The fact that we can connect ChurnZero to our product lets me pull reports that I used to have to be logged in to see the data, then evaluate next steps. I can now effectively manage over 150 accounts with appropriate conversations.",
+    "dislike": "Least helpful: Updated: Zooming out no longer works with the usage graphs. Also, the onboarding journey has false titles unless we manually kick a journey out of \"Stuck\"."
+  },
+  {
+    "Review Date": "02/13/2023",
+    "Reviewer Role": "",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "I find most helpful with Churn Zero that all of my tasks are easy to find, my calendar is available at a single glance and I am able to save my favorite segments.",
+    "dislike": "I am not a fan of some of the new features that find it hard to find certain details about my accounts. Such as when accounts are towards the bottom of the page it is hard for me to click."
+  },
+  {
+    "Review Date": "02/13/2023",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Plays and Journey are very good to work with.",
+    "dislike": "Email campaign do not provide proper stats."
+  },
+  {
+    "Review Date": "02/14/2023",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The note tracking, the integration options, the constant fluctuations of feedback and scores per client, the dashboard, and the journey options.",
+    "dislike": "Not CZ's fault, but I wish there could be a Google Mail/Calendar plug in, to mark tasks complete and include notes directly."
+  },
+  {
+    "Review Date": "02/14/2023",
+    "Reviewer Role": "Manager of Implementation",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "I love how easy it is to plan and prioritize my day with ChurnZero!",
+    "dislike": "The system can kick you out in the middle of a entering information on the customer record."
+  },
+  {
+    "Review Date": "02/14/2023",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Its a tool designed for Customer Success Teams. It allows you to be proactive without spending hours and hours digging through things yourself. It allows you to map out a strong fluid cs process. As a CSM I use it to keep track of my KPI's and what I know my manager needs to report out on.",
+    "dislike": "How difficult adoption can be for the team\n\nHow it's not super easy to clean up, segments, plays, and fields can all be tied together and you need to unravel it all to clean it up."
+  },
+  {
+    "Review Date": "02/15/2023",
+    "Reviewer Role": "Enterprise (> 1000 emp.)",
+    "Company Size": "It's just very easy to use and intuitive. Manages account to-dos with ease.",
+    "like": "Nothing that I can think of. I've used for roughly 6 months and have not found anything I dislike.",
+    "dislike": ""
+  },
+  {
+    "Review Date": "02/16/2023",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "What I love most about Churnzero is that it does half the work for you and is very user friendly!",
+    "dislike": "What I dislike about Churnzero is all of the tabs and sections to choose from I feel like there is an easier way to display it all. Some could view it as overwhelming."
+  },
+  {
+    "Review Date": "02/16/2023",
+    "Reviewer Role": "User",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "I use ChurnZero to monitor my customer's utilization, suggest in-product expansion opportunities, and engage with my clients in different ways based on their exact needs.",
+    "dislike": "ChurnZero can be clunky at times. Setting up certain types of segments and plays is not always intuitive for the user. I also wish there were a way to easily document customer check-ins."
+  },
+  {
+    "Review Date": "02/21/2023",
+    "Reviewer Role": "",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "Simple\n\nEasy to Use\n\nIntegration is seamless\n\nImplementation process was smooth\n\nInfact Great hand holding process during evaluations\n\nTurn Around time is awesome by the CSM with valuable suggestions",
+    "dislike": "Its so simple that anyone use it :)\n\nNeed to have RAG indicators on various other parameters too to help the use thru visual aids, not a big thing but help wonders"
+  },
+  {
+    "Review Date": "02/22/2023",
+    "Reviewer Role": "Manager, Business Intelligence & Global Tenders",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "There are no current CSM solutions for the transportation business, but CZ was able to take their product and have it adapt to our unique needs.",
+    "dislike": "We can't fully manipulate its layout to our unique business but its adaptable enough. If we were in a different industry, it would be perfect."
+  },
+  {
+    "Review Date": "02/22/2023",
+    "Reviewer Role": "User",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The ability to report and track milestones and achievements using ChurnZero Journeys has been really beneficial. Also, being able to automate outreach along with tasks etc. using Plays.",
+    "dislike": "Sometimes the logic that goes into creating segments is a bit counterintuitive. It can take a bit longer and an extra set of eyes and ears to really think through."
+  },
+  {
+    "Review Date": "02/23/2023",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The easy way to create dashboards to monitor usage.",
+    "dislike": "Sometimes it is al information can be used or synced between different accounts."
+  },
+  {
+    "Review Date": "02/26/2023",
+    "Reviewer Role": "CSM",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "ChurnZero helps our team see the whole customer picture, at a high level we have Churn Scores to quickly see which customers need our attention. We are then able to look deeper into the detail through the customer card with centralised communication, task, contract information, ticket data and more. This allows for seamless customer engagement cadences.",
+    "dislike": "The UI is a little outdated, although it is still intuitive to use."
+  },
+  {
+    "Review Date": "02/28/2023",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I love the plays. I can run my day off all the plays I set up to make contact with a customer. Having todo's pop up. It streamlines my day.",
+    "dislike": "The only thing is I wish I could mark account cancelled. So they do not show in reporting or churnsores."
+  },
+  {
+    "Review Date": "03/02/2023",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero helps organize accounts in various ways and gives a deeper insight into accounts' health. It is easy to navigate and build out new segments and reports.",
+    "dislike": "The command center could use some improvements; for example, it would be great to be able to click into Today's summary and see the tasks completed or messages sent."
+  },
+  {
+    "Review Date": "03/02/2023",
+    "Reviewer Role": "Mid-Market",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "What i like best about Churnzero is all of the reporting and account data you can pull in once place, it makes it easy to use everything in once place. Super user friendly!",
+    "dislike": "What I dislike about churnzero is all of the tabs, would be nice for a simpilar categories."
+  },
+  {
+    "Review Date": "03/02/2023",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I like the health scores, the integration with SFDC, and the ability to create tasks, alerts, and playbooks.",
+    "dislike": "It was difficult to adopt; it took my team about two years to start using the platform. The biggest hurdle was getting the internal resources to make the integrations a reality. Once this step was completed, the team was able to start using the platform."
+  },
+  {
+    "Review Date": "03/02/2023",
+    "Reviewer Role": "",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "I love the insights ChurnZero provides into my book of business, and allows me to identify gaps I may have missed.",
+    "dislike": "The UI has been a bit confusing at times but with practice easily navigable."
+  },
+  {
+    "Review Date": "03/02/2023",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I love the segments! It really helps me drill down and prioritize my accounts",
+    "dislike": "Some of the flows are not user friendly. It could be a bit smoother"
+  },
+  {
+    "Review Date": "03/05/2023",
+    "Reviewer Role": "Manager, Customer Success",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "The company drinks their own champagne. The tool is constantly evolving and improving because they not only listen to their customers but also use the tool themselves.",
+    "dislike": "Nothing. I love the way that they anticipate our needs and provide a platform that's easy to use. We've had a great experience so far!"
+  },
+  {
+    "Review Date": "03/06/2023",
+    "Reviewer Role": "",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "Automates so many aspects of my job, including sending emails, checking usage, and prioritizing which clients I need to focus my attention to on any given day.",
+    "dislike": "I wish that there was a way to automatically exit a contact from a play if they book a meeting with me (right now it can automatically exit AFTER the meeting happens only)."
+  },
+  {
+    "Review Date": "03/06/2023",
+    "Reviewer Role": "",
+    "Company Size": "Enterprise(> 1000 emp.)",
+    "like": "I like how ChurnZero is a one-stop shop to check in on my client accounts. It makes the work day easier to have everything in one spot instead of fishing around multiple platforms.",
+    "dislike": "There is so much to learn. ChurnZero Academy is great, but I do not have that much time in my workday to complete them all. I just wish it was a bit more user friendly."
+  },
+  {
+    "Review Date": "03/06/2023",
+    "Reviewer Role": "Verified User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The ability to see things visually on the dashboards and communicate with our clients.",
+    "dislike": "Some things are hard to find in certain areas. There's a lot of information and it's hard to think of how/where to put things. Staying organized as a team is a challenge as well with so much information."
+  },
+  {
+    "Review Date": "03/09/2023",
+    "Reviewer Role": "Verified User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I like being able to set up plays (emails) that go out automatically to clients. It helps so you don't forget to send them.",
+    "dislike": "Everything is helpful but learning how to use all it has to offer was challenging."
+  },
+  {
+    "Review Date": "03/13/2023",
+    "Reviewer Role": "",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "The Dashboard and all the information that is provided there. The tasks as reminders The colors that define adoption and Churn along with ARR. Easy to see which customers have logged in Live daily. The daily email with tasks.",
+    "dislike": "It took a while to understand there is a lot to learn. I suggest more video tutorials Sometimes the Churn scores are not reflected correctly. I suggest correcting an easy place to identify the criteria (a link or an information bubble) that moved the score from red to yellow or vice versa. This availability would help me as a user instead of asking my administrator."
+  },
+  {
+    "Review Date": "03/16/2023",
+    "Reviewer Role": "Sales Consultant",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Ability to find data faster on current customers and clients",
+    "dislike": "It is not able to integrate with all platforms"
+  },
+  {
+    "Review Date": "03/22/2023",
+    "Reviewer Role": "Small-Business (50 or fewer emp.)",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "Churn Zero is a great tool for managing customer journeys, from implementation, onboarding and throughout their lifecycle. Plays make it really easy to automate processes, saving heaps of time writing out emails and creating tasks manually.",
+    "dislike": "It's not always easy to see a full timeline of a specific customer which includes meetings, both past and future, notes and activities all in one place."
+  },
+  {
+    "Review Date": "03/22/2023",
+    "Reviewer Role": "",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "The ability to segment your customer base in a very dynamic way makes the tool really flexible.",
+    "dislike": "No visible historical data to track who created things or made last edits. Since we work as a team of admins on CZ, it would be useful to see this."
+  },
+  {
+    "Review Date": "03/27/2023",
+    "Reviewer Role": "",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "This is a software product worthy of serious consideration should you possess relational database or SalesForce report writer acumen. A dizzying number of data segments, filters, selection criteria and playbooks await the forward-thinking CSM.",
+    "dislike": "The 'downside' to this freedom to create is that considerable time and resources are required to build a strong platform baseline. It's an acceptable give-and-take with power designing versus 'pre-loaded' options some platforms offer."
+  },
+  {
+    "Review Date": "04/03/2023",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I can see usage easily, filter through accounts, and look up direct reports' accounts easily",
+    "dislike": "It feels outdated and difficult to navigate at times"
+  },
+  {
+    "Review Date": "04/17/2023",
+    "Reviewer Role": "Sales",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "So far, the onboarding process has been outstanding!",
+    "dislike": "Honestly, I have yet to find many, We have only been using it a few months but so far its working great for us."
+  },
+  {
+    "Review Date": "04/17/2023",
+    "Reviewer Role": "Verified User in Accounting",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The alerts and automation capabilities are nice features in CZ",
+    "dislike": "It would be nice to have more plug and play componets to build playbooks"
+  },
+  {
+    "Review Date": "04/24/2023",
+    "Reviewer Role": "Verified User in Information Technology and Services",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Friendly UI/UX and easily integrate with our core app. I also like the dev console. Easy to spot errors.",
+    "dislike": "Lack of examples for integrations. Cannot config authentication endpoint Urls for different environments (product, staging, qa, dev, local)"
+  },
+  {
+    "Review Date": "04/30/2023",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I loved using Churnzero's email alert customization - I would automatically get alerted whenever a customer account had a new user created in our corresponding software. This saved me a lot of time + energy, and allowed me to be truly proactive in my service approach.",
+    "dislike": "The interface is not super user-friendly, customization takes a lot of fiddling with, and overall, it felt a bit clunky to use in action. Although there are improvements I would recommend, it does the trick."
+  },
+  {
+    "Review Date": "05/01/2023",
+    "Reviewer Role": "Support Trainer",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "the way I can manage my task, It lets me organize better",
+    "dislike": "I like everything, I can't say one thing I don't like"
+  },
+  {
+    "Review Date": "05/10/2023",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "Clean layout which isn't busy with extra unnecessary drill downs.",
+    "dislike": "There currently an 'or' feature when running plays."
+  },
+  {
+    "Review Date": "05/15/2023",
+    "Reviewer Role": "Small-Business (50 or fewer emp.)",
+    "Company Size": "I can create journeys and send massive emails",
+    "like": "Can track a lot of stuff from my customers",
+    "dislike": ""
+  },
+  {
+    "Review Date": "05/21/2023",
+    "Reviewer Role": "Verified User in Computer Software",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "It makes my daily account management more streamline.",
+    "dislike": "N/A - Nothing at this point. The Platform works well for my role."
+  },
+  {
+    "Review Date": "05/23/2023",
+    "Reviewer Role": "",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "Simple and easy-to-use UI, valuable task and email automation, very configurable, and an excellent tool for a holistic view of your customer health.",
+    "dislike": "Some of the naming conventions they use are not entirely intuitive (i.e.; journey vs. play)"
+  },
+  {
+    "Review Date": "05/24/2023",
+    "Reviewer Role": "Verified User",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "I love the ease of the tool, very easy to navigate and very easy to learn how to use.",
+    "dislike": "I honestly cannot think of anything bad. Their team is very open to feedback for product updates which is great."
+  },
+  {
+    "Review Date": "06/06/2023",
+    "Reviewer Role": "",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "easy to use with limitless functionality",
+    "dislike": "There are no downsides to using ChurnZero"
+  },
+  {
+    "Review Date": "06/07/2023",
+    "Reviewer Role": "Human Resources",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "The ability to use segments and plays to automate emails, tasks and account/contact updates. The custom Dashboards are also easy to use and provide excellent insight into your clients",
+    "dislike": "ChurnZero is not consistent in how they notify you of software updates. Sometimes it's an email, other times it's a popup on the site or on the specific page that has been updated / created."
+  },
+  {
+    "Review Date": "06/20/2023",
+    "Reviewer Role": "Mid-Market(51-1000 emp.)",
+    "Company Size": "Communication with clients is easy as well as customizable.",
+    "like": "Filtering accounts can be a little confusing at first compared to some softwares but not a big deal!",
+    "dislike": "4.5 out of 5"
+  },
+  {
+    "Review Date": "07/07/2023",
+    "Reviewer Role": "",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "Intuitive, ease of use, UI and UX, excellent filtering/reporting capabilities. Great font and typeface. Conservative enough, but retaining a funky edge",
+    "dislike": "It can sometimes feel as though there are too many options and choices - not sure how I would improve it, particularly as so much data is available"
+  },
+  {
+    "Review Date": "07/14/2023",
+    "Reviewer Role": "Verified User in Public Safety",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "User friendly, good tool for organizing",
+    "dislike": "There is nothing that I dislike, thus far"
+  },
+  {
+    "Review Date": "07/18/2023",
+    "Reviewer Role": "",
+    "Company Size": "Enterprise(> 1000 emp.)",
+    "like": "Everything you need to manage accounts is at your fingertips and connectivity to other apps in the workspace is helpful as well.",
+    "dislike": "I really haven't found a downside or dislike"
+  },
+  {
+    "Review Date": "07/25/2023",
+    "Reviewer Role": "Information Technology and Services",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Being able to see changes in churnscores so that I know how to best help clients/who needs additional support.",
+    "dislike": "It is not as intuitive or easy to use at first."
+  },
+  {
+    "Review Date": "08/01/2023",
+    "Reviewer Role": "Mid-Market",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Its very organized and easy to do what I need to do in one setting",
+    "dislike": "The new AI is a little wonky but Im sure it will get better"
+  },
+  {
+    "Review Date": "08/07/2023",
+    "Reviewer Role": "Enterprise(> 1000 emp.)",
+    "Company Size": "My favorite feature of ChurnZero would probably be the tasks, segments, and plays. I love that I can use tasks to create follow-up reminders for myself and log meeting notes. The segments help me so much with visibility into the health of my accounts and strategizing my account reviews. The plays make mass communication a dream while also creating a personal touch for my customers.",
+    "like": "I haven't come across anything that I dislike yet!",
+    "dislike": "5.0 out of 5"
+  },
+  {
+    "Review Date": "08/08/2023",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero has everything I need to manage accounts as a Customer Success Manager. I especially appreciate the calendar integration as an easy way to track my meeting notes and follow up tasks, while providing transparency accross a CS team.",
+    "dislike": "I would love if there was an easier way to see if I've missed notes on past meetings"
+  },
+  {
+    "Review Date": "08/18/2023",
+    "Reviewer Role": "",
+    "Company Size": "Enterprise(> 1000 emp.)",
+    "like": "ease of use, and love how it sync's with CRM. CZ provides a valuble insight on our customer's data and their usage. Very helpful for our reports.",
+    "dislike": "can't think of anything..I love how their CSMs are able to help out and stay in touch with you via timely emails."
+  },
+  {
+    "Review Date": "08/21/2023",
+    "Reviewer Role": "Small-Business (50 or fewer emp.)",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "Onboarding was really straight forward. Given the multiple sources of data we were trying to connect the team did a great job of helping me understand the concepts so I could apply them to our business case. You can do SO much with the data once it is aggregated. ChurnZero has already made us much more efficient, and I can't wait to see the value add it brings as we continue to scale.",
+    "dislike": "I honestly don't have any complaints. It has really been such a great solution for our growing team."
+  },
+  {
+    "Review Date": "09/08/2023",
+    "Reviewer Role": "",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "The customer service made me feel supported and heard",
+    "dislike": "I loved it all. They have reduced my churn quickly and efficiently."
+  },
+  {
+    "Review Date": "09/09/2023",
+    "Reviewer Role": "",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "I like the ease of use and the ability to track my accounts with one or two clicks. The reporting is also great. I use ChurnZero every day to capture my updates.",
+    "dislike": "Nothing I think ChurnZero is perfect for my needs."
+  },
+  {
+    "Review Date": "10/04/2023",
+    "Reviewer Role": "User",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "It is great for gathering usage data, for creating plays and automating CS",
+    "dislike": "Some parts are not 100% user friendly - i.e. it can get a bit confusing when trying to build a segment or to create a play, the instructions and the criteria are not always clear"
+  },
+  {
+    "Review Date": "12/11/2023",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Our CSM is very responsive and hands on.",
+    "dislike": "Some aspects are clunky and not as user friendly."
+  },
+  {
+    "Review Date": "12/21/2023",
+    "Reviewer Role": "Senior Customer Success Manager (Strategic Accounts)",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "The platform is very easy and intuitive to use. There are so many different fields which can be created and different levels of filtering for adhoc reporting, its essentially endless.",
+    "dislike": "Sometimes, because the product is so complex, it can take a while to set up things to your liking and get the correct view which you are looking for."
+  },
+  {
+    "Review Date": "01/11/2024",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I'm in ChurnZero every single day. I love the Command Center. It has all of my important tasks and to dos, my agenda for the day, and a breakout of custom segments that help me keep an eye on support ticket lead times, reviewing my upcoming client renewals, etc. I also love the new and improved Notes feature. A game changer that allowed me to finally move most of my client related tasks, notes and responsibilities into CZ. Plus, our CSM Hoawrd is the absolute best. :)",
+    "dislike": "The UI can be a little clunky, but they are also always improving it. I find a cool new feature regularly."
+  },
+  {
+    "Review Date": "01/29/2024",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I use churn Zero every day and I love the ability to create your own segments and track your accounts easily. With being a CSM I manage many accounts and need to remember the needs of each one. By using Churn zero it makes it super easy to look for specifics in each account as well as reminding yourself of things to do down the line.",
+    "dislike": "Nothing I dislike, but think it would be very cool to have churn zero AI be able to create renewal reports for accounts within a segment. This would be to include all usage within their features. Very similar to the AI brief, but more geared towrads renewal with client facing details so we can share it with visuals."
+  },
+  {
+    "Review Date": "02/05/2024",
+    "Reviewer Role": "Professor",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "1. Very attentive and responsive CSMs and support team\n2. User freindly and highly configurable for our needs\n3. Has many features that usually require you to purchase additional tools for i.e. NPS\n4. API and intigration with CRM and other key platforms as well as the built-in reporting functionality.\n5. CS AI is really great for generating email templates and customer briefs.\n6. Great automation features via playbooks and journeys.",
+    "dislike": "The downside is because ChurnZero does a lot it came be overwhelming for new users, specifically admins, but this can be mitigated by visiting their acedmey page. It does not have the UI features you see in competitors but these are primarily aesthetic and personal preference."
+  },
+  {
+    "Review Date": "02/09/2024",
+    "Reviewer Role": "Small-Business (50 or fewer emp.)",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "What I like most about ChurnZero is its ability to provide a deep and detailed understanding of customer behavior. This tool has been fundamental in allowing us to accurately track how our customers interact with our solutions, which is invaluable for any business focused on customer retention and satisfaction. The ease of use of ChurnZero is remarkable; from the beginning, it seemed intuitive and accessible to me, which facilitates the efficient and effective implementation of tracking and engagement initiatives. The platform makes it possible to develop and execute retention strategies without complications, allowing our team to focus on what really matters: building strong and lasting relationships with our customers.",
+    "dislike": "Despite its numerous strengths, ChurnZero has areas that could be improved. One of the aspects I find limiting is the email creation functionality, which offers little in terms of customization and design. For brands looking to differentiate themselves and communicate uniquely with their customers, this limitation can be an obstacle. Additionally, the user interface, although rich in features, can sometimes be cluttered, making it difficult to quickly find specific tools and functions. This aspect can be overwhelming for new users or for those who prefer a cleaner and more minimalist user experience."
+  },
+  {
+    "Review Date": "02/26/2024",
+    "Reviewer Role": "Mid-Market",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I use ChurnZero to stay on top of how my customers use my product and if their usage numbers start to decrease. Being able to see exactly what a customer looks at most to tailor my calls with them is super insightful and ultimately leads to customer retention. I can't really speak to the implementation of ChurnZero, but since I've started using it, it has easily become one of my most used tools to interact with customers. Elise, our account manager, is fantastic, proactive, and extremely helpful, and friendly.",
+    "dislike": "There really isn't a lot - minor UI things that all websites deal with that ultimately come down to preference. The tool is very robust."
+  },
+  {
+    "Review Date": "02/27/2024",
+    "Reviewer Role": "",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "ChurnZero integrates ALL of our SAAS company's platforms/data points to see our users' data in one consolidated place.",
+    "dislike": "It is a heavy lift to onboard, train, and implement ChurnZero in order to use it to its full capabilities."
+  },
+  {
+    "Review Date": "02/27/2024",
+    "Reviewer Role": "User",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "I love using Churn Zero to gather Account information at glance, like usage stats, and which admin uses the tool the most. This helps me know who to reach out to with important account-related questions or upsell opportunities.",
+    "dislike": "It's not necessarily a dislike, but I wish the account plays were easier to run. If there was an option to run an account play and then decide who I want to send it to, this would be easier than having to remember to find the contact and then run an account play. For some reason, my brain does not want to do this and each time I have to sit and think before I remember how to run an account play if I haven't done it in a while."
+  },
+  {
+    "Review Date": "03/01/2024",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I like the overall simplicity and ease of use. It's a great way to connect with clients and keep a high-level view and pulse on a business that's easily accessible and reportable.",
+    "dislike": "I was a big fan of Playbooks in Gainsight, so when I had a CTA created, it would have a \"checklist\" of all my tasks so I know what I've done and what I still need to do. The Upcoming Tasks in CZ can get cluttered and bulky in the view. Otherwise, it keeps me on task and what I need to accomplish next."
+  },
+  {
+    "Review Date": "03/04/2024",
+    "Reviewer Role": "User",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "ChurnZero has helped me redesign and restructure how I manage clients day-to-day in the best of ways. Activities and Notes are my two favorite features, as you can prep for upcoming meetings in the same place you will take in-meeting notes, create follow-up tasks and send out follow-up emails. Using plays, I've reduced the amount of time needed to create manual tasks for new accounts and have better visibility into the step-progress of each task. Each time I have a feature suggestion or need assistance, our company product-owner has been able to reach our ChurnZero CSM quickly and provides great assistance.",
+    "dislike": "As a user of ChurnZero, I do not have many critical critiques of the platform. There have been minor quirks that have presented, such as the inability to use \"tab\" when scrolling in a form or risk selecting information you did not mean to, but nothing that would take away from the efficiency gains seen."
+  },
+  {
+    "Review Date": "03/08/2024",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero is always enhancing its product offering and investing in partnerships that support client success initiatives. We've been a client for a year and it seems like they've released several material enhancements (such as, Renewal Hub, Play Templates, the list goes on). The platform has a ton of features and customization to develop and iterate on client journeys and plays. The customization was very important to support our complex business model. Lastly, we've been able to make our team more efficient and increase client load because of ChurnZero. Prior to implementing CZ we were working out of multiple systems making us incredible slow to react to what our data was telling us.",
+    "dislike": "There isn't much. I do wish their reporting capabilities and dashboard building were more robust in platform. Other than that this is an excellent platform and one organizations should STRONGLY consider."
+  },
+  {
+    "Review Date": "03/18/2024",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero helps me organize my day to day efficiently and keep track of all my client info. I never forget anything now! There are so many different features and all of which are easy to use and just a click away.",
+    "dislike": "I don't dislike a whole bunch, I think ChurnZero is a diverse platform and there is a lot to know and a lot of capabilities, I think that could be challenging for some to fully understand and utilize it to its full potential, but I am enjoying learning all the ins and outs."
+  },
+  {
+    "Review Date": "03/19/2024",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero serves as a home base of sorts for understanding where your customers are in their lifecycle with your organization. Integreates well with apps such as Salesforce. Very easy to use once you have a decent command of segementation. I use this tool daily to track changes in sentiments and plan my work accordingly",
+    "dislike": "Some things that could work better with CZ are building out reporting easier, and keeping a similar dashboard type view for those coming over from a dedicated CDM"
+  },
+  {
+    "Review Date": "03/26/2024",
+    "Reviewer Role": "Senior Account Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I love being able to see my day at a glance. Integrations into our other systems has also made things easier over time.",
+    "dislike": "Sometimes little notifications pop up over my tasks while I am trying to click on them. Additionally, it seems like the system is extremely customizable, so you can find yourself doing things the hard way without knowing it. Ask the team for help!"
+  },
+  {
+    "Review Date": "04/02/2024",
+    "Reviewer Role": "Information Technology and Services",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "As a Customer Success Manager, I cannot emphasize enough how much I love using ChurnZero. The platform is robust, intuitive, and incredibly user-friendly. With ChurnZero, I'm able to effectively manage my customer portfolio and make data-driven decisions that help improve customer retention.",
+    "dislike": "There is nothing that I dislike about the platform :)"
+  },
+  {
+    "Review Date": "04/09/2024",
+    "Reviewer Role": "User",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "Having experienced most of the Customer Success platforms, I would choose ChurnZero again. The platform is intuitive without being overly complex. Data flows are clear and can be used to monitor and action signals. The ChurnZero support and success teams are attentive, responsive and consultative. What I like the most is how easy it is to administer the system. Many of the competitor platforms require a trained administrator. ChurnZero can be stood up and managed by a Customer Success Leader making it possible to run lean and scale with a business.",
+    "dislike": "Using the full feature set of ChurnZero including the ability to manage renewals and Success Center to interface with customers directly will require the support of product, support and sales."
+  },
+  {
+    "Review Date": "04/10/2024",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "CZ takes data from so many sources and puts them together so that I can find the insights I need to take positive action quickly to keep my accounts healthy.",
+    "dislike": "The mental conversion of \"higher number is worse\" is a minor hiccup, but once you have reframed the number in your head, it's OK."
+  },
+  {
+    "Review Date": "04/11/2024",
+    "Reviewer Role": "Verified User in Marketing and Advertising",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "A very straightforward and flexible tool capable of scaling alongside your business.",
+    "dislike": "To obtain the product's total value, you need corresponding expertise on your internal teams."
+  },
+  {
+    "Review Date": "04/16/2024",
+    "Reviewer Role": "Product Consultant",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "ChurnZero has been very easy to learn and is also very robust in terms of giving customers the ability to customize their instance to fit their specific needs. My experiences with customer support have been top-notch as well.",
+    "dislike": "While I'm a big fan of the fact that ChurnZero can be customized to fit the sepcific needs of each individual customer, that also means it can be easy for a customer to go overboard with the customization, making things messy/cluttered. This is likely a customer-specific problem that can be addressed during the onboarding/implementation phase moreso than a platform-specific problem."
+  },
+  {
+    "Review Date": "04/18/2024",
+    "Reviewer Role": "User",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "I love being able to create plays for myself/my team and also create tasts. It really keeps me on track with my to do items, I never miss a thing.",
+    "dislike": "It was a little difficult to learn, and there is so much to do, I often feel like I'm not utilizing everything."
+  },
+  {
+    "Review Date": "05/03/2024",
+    "Reviewer Role": "User",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "I use ChurnZero everyday as a Customer Success Manager! I am happy to say that this makes my job much more consistent. I love knowing I can depend on CZ to keep me on track. I have been a user for about 2 years now, and the platform has improved so much over this time that I am eager to see what is next.",
+    "dislike": "I think there are still parts of the platform that are not super user-intuitive right off the bat. However, they do offer a ton of trainings and a large informational library which can assist with this."
+  },
+  {
+    "Review Date": "05/12/2024",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "In 2021, when I turned in my first CZ NPS score, I reviewed CZ as an 8. At the time, the tool was at the \"Okay\" stage it was good, but it needed to get better. Fast forward to today, and I now feel the tool is at the \"Great\" stage & my NPS rating is a 10. So, why did my mind change? Constant Innovation: It keeps getting better! They listen to their audience when we provide product feedback & push out new features & functionality that help solve the issue. Top-Notch Support: My ChurnZero Managers have been nothing but Rock Stars since I started using the tool. In addition, the Support Team is fantastic & quickly helps me address my issues. They have pulled through for me a few times when I was in a bind. Improved Usability: The tool has become more robust with much-needed new functionality. For example, the ability to purge your records was game-changing & very needed. In addition, sending CZ-only fields back to your CRM was a huge missing link to CZ & now that is available. Lastly, the new ChurnZero certification has helped lift this tool to new heights, allowing users to show their learning & development in the application.",
+    "dislike": "There are still a few system issues that come up at times, and I need to find workarounds for them, but that's with any application."
+  },
+  {
+    "Review Date": "05/21/2024",
+    "Reviewer Role": "Senior Customer Success Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "What I like best about churn zero is it's configurability which is essential for any tool to be a single source of truth for a variety of organisations with very different processes. You can configure this with a fair amount of freedom which is very helpful.",
+    "dislike": "I am not very happy about the user interface which has a learning curve and seamlessness in the processes which could have some click optimisations."
+  },
+  {
+    "Review Date": "06/03/2024",
+    "Reviewer Role": "Information Technology and Services",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "There's a lot of information about our clients to collect and analyze . ChurnZero makes it easy to do that. We use multiple software solutions for various purposes, and ChurnZero is my favourite.",
+    "dislike": "There's not much do dislike. If i had to nitpick, i would say that the setup is complex and the workflow that you can create needs to be progressively refined. But that's just the nature of seeting up a solution of this nature"
+  },
+  {
+    "Review Date": "06/05/2024",
+    "Reviewer Role": "Director - Customer Success",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Integration with other systems is very easy with ChurnZero. Usually, they help our teams in Integrations too. We are very happy with the overall services and recommend this system.",
+    "dislike": "It's a slightly less mature system. We found some excellent enhancements and passed them on to their teams. However, we saw that the team was very receptive and flexible to adopt."
+  },
+  {
+    "Review Date": "06/13/2024",
+    "Reviewer Role": "Director, Sales",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero is the perfect business assistant. All accounts, activities, dashboards, playbooks all in one easily-accessible place",
+    "dislike": "The is some time investment needed to learn to navigate throughout the site"
+  },
+  {
+    "Review Date": "06/25/2024",
+    "Reviewer Role": "Director of Customer Success",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The platform has game changing features like the Healthscoe dashboard, automated task creation, multi channel communication (email and in-app), forecasting, etc.",
+    "dislike": "I dont have anything of note yet. So far it looks like a robust platform and to get the most value out of it, you have to do the work to set it up properly along with their implmentation / CS team."
+  },
+  {
+    "Review Date": "06/27/2024",
+    "Reviewer Role": "Customer Success Associate",
+    "Company Size": "Enterprise(> 1000 emp.)",
+    "like": "Segments are really similar to SQL but simplified, which maked them easier to learn and use. Dashbords and reporting are also very practical and time saving when it comes to see data. I have also noticed it's very easy to link to other applications.",
+    "dislike": "The adding notes future is ok, but maybe you need a space where you can create a document and be able to write and edit any information regarding the customer's journey, internal meetings notes, etc. Notes are very simple and small and sometimes it's very difficult to either keep one note where you need to put everything (because this cannot be pinned) or try to find something when you have several notes."
+  },
+  {
+    "Review Date": "06/28/2024",
+    "Reviewer Role": "Verified User in Marketing and Advertising",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The ChurnZero platform helps me to have an in-depth understanding of my customers. The Command Centre helps me have an over-view of my entire month to organise my day-to-day activities. The UI is really cool to use & helps me navigate cross different sections and features.",
+    "dislike": "I believe that there can always be innovations in any product. However, the current setup has been super helpful for me & satisfies my requirements to help me achieve success for myself & my customers"
+  },
+  {
+    "Review Date": "07/09/2024",
+    "Reviewer Role": "Data Migration Specialist",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero helps the business to run smoothly on a daily basis. The tasks are laid out for each department, deadlines/goals are set, easy to follow, and it's all encompassing. Tasks and deadlines are easily added and edited if needed. Custom support is quick and is able to answer questions. ChurnZero has been easily implemented and integrated into the company for every day use.",
+    "dislike": "At this time I have not seen any downsides."
+  },
+  {
+    "Review Date": "07/10/2024",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I love that it helps keep me organized! I enjoy the flexibility to view data that is relevant to role.",
+    "dislike": "There is honestly no downside for me. I have enjoyed using the program."
+  },
+  {
+    "Review Date": "07/13/2024",
+    "Reviewer Role": "Product Specialist",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The automated emails created after you type up notes on a meeting/call are fantastic! All the automations you can create make work so much easier. Support is great as well.",
+    "dislike": "It is a bit confusing at first and took a while to learn and understand their language, but now that I understand how it all works it is quite easy!"
+  },
+  {
+    "Review Date": "07/15/2024",
+    "Reviewer Role": "Project Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "A platform where you get access to consolidated data from multiple projects. Also the reports/dashboard help you to get insights very quickly and showcases clear picture of the activities/tasks. The UI and font is really good, user friendly, intuitive and fast. I love to access the tool and get/update the required information very quickly.",
+    "dislike": "Nothing at the moment everything is great"
+  },
+  {
+    "Review Date": "07/22/2024",
+    "Reviewer Role": "Director Of Client Services",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "ChurnZero has helped us in many ways. Believe it or not, we didn't sign up because we had a ChurnProblem. We signed up to get a pulse on how our awesome customers were really doing. With the health scores and many ways to segment and track, I'd recommend ChurnZero to anyone.",
+    "dislike": "Sometimes, you have to use Segments to accomplish even the simplest tasks, which seems to add a step or two to an otherwise easy process. It's a minor nitpick though. Nowhere close to a deal breaker."
+  },
+  {
+    "Review Date": "07/23/2024",
+    "Reviewer Role": "SVP Customer Success",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "Automated Playbooks and Journeys, AI insight. Love the product roadmap and speed of innovation.",
+    "dislike": "There are a lot of deep features, and we consistently need PS/CS help to unlock. Make sure to align that help from the vendor, though it is much less than we have had to demand from other CS vendors."
+  },
+  {
+    "Review Date": "07/24/2024",
+    "Reviewer Role": "Customer Experience Program Manager",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "In my opinion, ChurnZero is easy to navigate and has been a great help to me in managing my book of business. My Customer Success Manager is responsive and always provides great support and guidance. I am a frequent user of the platform and one of the highest adopters in my organization. I like how easy it is to build segments and basic playbooks.",
+    "dislike": "There are opportunities for ChurnZero to be more user-friendly, especially when it comes to composing emails outside of playbooks. For example, it would be helpful to have the ability to navigate to the contacts tab and bulk compose an email with those that I filter by contact role."
+  },
+  {
+    "Review Date": "07/25/2024",
+    "Reviewer Role": "Information Technology and Services",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "It enables us to be more efficient and deliver our customers enhanced value due to the functionality available. I particularly value the journey, playbook, reporting, alerting and general customer management functionality. The deployment was easy and quick, and the CS team, implementation team and customer support are second to none. I enjoy using the product, and frequently give myself little \"ChurnZero projects\" to complete due to the satisfaction I get from using the tool.",
+    "dislike": "Nothing, ChurnZero as a product and a company are great to partner with! If I had to pick something, the success plan functionality could be stronger, and I am excited for the upcoming imminent releases in this area which will improve this part of the platform."
+  },
+  {
+    "Review Date": "07/26/2024",
+    "Reviewer Role": "Implementation Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Many tabs to tell much of the customer story/journey.",
+    "dislike": "Some information could be better served if it was on one tab rather than spread out over many."
+  },
+  {
+    "Review Date": "07/29/2024",
+    "Reviewer Role": "Senior Customer Success Manager",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "*The data it provides on how our clients are progressing\n*Automation of emails\n*The ablity to quickly and easily view client details and notes from meetings\n*All clients are seperated and you can see them at the company level but also at the individual level",
+    "dislike": "Takes some using to understand and start setting up plays and journeys"
+  },
+  {
+    "Review Date": "07/29/2024",
+    "Reviewer Role": "Customer Success Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The CSM team is amazing. Jeff is very responsive.",
+    "dislike": "Learning how to set up Plays and work with segments is not intuitive. CZ does take a team that is tech savy and really ready to dig in."
+  },
+  {
+    "Review Date": "08/06/2024",
+    "Reviewer Role": "Technical Account Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Different fields pertaining to a specific account where everything will be available to understand the current status.",
+    "dislike": "The log activity does not show the title which it has been selected. Obviously there is too much information which we need to add."
+  },
+  {
+    "Review Date": "08/30/2024",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "They constantly try to improve their offering and listen to feedback offered by customers, and they are overall quick to fix issues, especially when they stem from releases.",
+    "dislike": "We've changed quite a few CSMs in our years of using the platform. Some changes made in the UI/UX last year changed the way an account appears and unfortunately for our organisation's level, it was more efficient before they made change."
+  },
+  {
+    "Review Date": "09/02/2024",
+    "Reviewer Role": "Renewal Account Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "CZ has been helping a lot with all the information that I need from the accounts I'm handling -- specifically regarding the usage report.",
+    "dislike": "Nothing really much after the recent update."
+  },
+  {
+    "Review Date": "09/03/2024",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero is a great tool to be able to manage not only all my customers, but all of the work I have to do.",
+    "dislike": "I really like the churn score that it produces but I wish it could show more information regarding use of the product."
+  },
+  {
+    "Review Date": "09/09/2024",
+    "Reviewer Role": "Director of Customer Success - MEA",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "Easier to track engagement, prevent churn, and deliver proactive customer service. The automated workflows and in-depth analytics have been game-changers for our team, helping us focus on the right customers at the right time. The user interface is intuitive, and the support from the ChurnZero team has been outstanding.",
+    "dislike": "Unable to pull in external sources in Dashboards for reporting"
+  },
+  {
+    "Review Date": "09/16/2024",
+    "Reviewer Role": "Vice President, Customer Experience",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "Churnzero allows all of our teams to be more effective at understanding our client's needs and usage.",
+    "dislike": "We have different instances of salesforce that feeds into CZ and we would love to be able to collect everything in one place."
+  },
+  {
+    "Review Date": "09/18/2024",
+    "Reviewer Role": "Information Technology and Services",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "The day-to-day time saving it has for me. The automation and thinking for me.",
+    "dislike": "The ability to not respond to an email that is already started in outlook. The clunkiness of messaging and formats."
+  },
+  {
+    "Review Date": "09/30/2024",
+    "Reviewer Role": "Orr Fellow",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "What I find most helpful about Churnzero is the visibility I see into my customer portfolio's health. My to dos calendare helps me navigate my day a lot better.",
+    "dislike": "It takes some learning for some to understand the logical thought process behind creating segmemts. I really have enjoyed learning the logic behind it and it does help me think."
+  },
+  {
+    "Review Date": "10/04/2024",
+    "Reviewer Role": "Independent E-commerce Consultant",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The power that Churnzero has, how widely you can implement it. It is very customizable. With the Slack integration anyone in your organisation can query information about your customers.",
+    "dislike": "With great power, comes great responsibility, and also great effort in setting it up. Make sure you get your dataset right before jumping into setting up ChurnZero or otherwise it will delay your go live."
+  },
+  {
+    "Review Date": "10/11/2024",
+    "Reviewer Role": "Director of Sales",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "Having insights we never had are amazing. And while the platform is really powerful, we are learning how to manage it ourselves which helps feel self-reliant as a team.",
+    "dislike": "If you have never used a platform like this before, it can feel like a lot. However, the CSMs and support are great."
+  },
+  {
+    "Review Date": "10/11/2024",
+    "Reviewer Role": "VP, Customer Success and Support",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "I really like the amount of detail I can get from CZ from a leadership prespective. I'm able to do capacity modeling, some budget planning for additioanl headcount and quickly review my teams work and where they are with customers on their customers journey. Our CZ CSM, Jeff Newman has been outstanding in every aspect. Always so attentive and responsive!",
+    "dislike": "My main use for CZ is reporting, I would like to see an easier way to put reports together for my leadership. I would like see more of a monthly reporting feature."
+  },
+  {
+    "Review Date": "10/15/2024",
+    "Reviewer Role": "Sr. Strategic Account Manager",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "Love the overview and insight I gain on my book of business--identifying where both risks and opportunities lay.",
+    "dislike": "Changes need to go through a CZ admin at our company, not everyone can access and build out reports/widgets as needed."
+  },
+  {
+    "Review Date": "10/16/2024",
+    "Reviewer Role": "CS",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The team is very nice. I like that we can customize our own buildout too. There are a lot of functions that most users don't even use.",
+    "dislike": "It's not very intuitive. The new updates to their learning should help."
+  },
+  {
+    "Review Date": "10/16/2024",
+    "Reviewer Role": "Customer Success Team Lead",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "ChurnZero has been a game-changer for our customer retention strategy. The platform is easy to use, the automation features are top-notch, and the customer success team is outstanding.",
+    "dislike": "I dislike that I have to rely on the highly responsive Support team to create customized calculated/formula fields to aggregate data."
+  },
+  {
+    "Review Date": "10/16/2024",
+    "Reviewer Role": "Customer Success Manager | Partnering for Growth",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "it helps organise all the work at one portal which really save a lot of time",
+    "dislike": "maybe it needs more enhancement in reports"
+  },
+  {
+    "Review Date": "10/16/2024",
+    "Reviewer Role": "Customer Success Associate",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The accessibility and easy integration with my daily functions",
+    "dislike": "The only thing I'd say is sometimes the academy is a little hard to follow at times"
+  },
+  {
+    "Review Date": "10/16/2024",
+    "Reviewer Role": "Sr Director of Customer Success",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Ease of use and Customer Success have been the bigest benefit to myself and my teams. I have used CZ at mutiple companies and have never had a bad experience with the product or support.",
+    "dislike": "Ability to customize the platform to cater to our needs"
+  },
+  {
+    "Review Date": "10/16/2024",
+    "Reviewer Role": "Partner Success Team Lead",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "How easy it is to source customer information, pull data, and customize alerts to stay on top of ever-changing journeys.",
+    "dislike": "There have been a lot of changes to the home page that catch my team off guard. A lot of my CSM are tenured so it can feel like there's a new system as soon as we get used to the last one."
+  },
+  {
+    "Review Date": "10/16/2024",
+    "Reviewer Role": "Director, Sales Operations & Enablement",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Excellent customer service and engagement team.",
+    "dislike": "a little bit clunky on the back-end and lacking some OOTB integrations!"
+  },
+  {
+    "Review Date": "10/17/2024",
+    "Reviewer Role": "Manager of Customer Success",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Plays and the analytics from sending emails via plays. Gone are the days of not knowing if and how your email campaigns land",
+    "dislike": "Ability to roll up and down account attributes between parent and child accounts"
+  },
+  {
+    "Review Date": "10/17/2024",
+    "Reviewer Role": "CSM",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "1. I really like their updated dashboard view. 2. Journeys are simple to create and manage. 3. Good support/CSM team.",
+    "dislike": "1. Lack of customisation, especially for some view/profile options. 2. It is a little bit hard to work on the design templates. 3. Some segment logic is missing."
+  },
+  {
+    "Review Date": "10/23/2024",
+    "Reviewer Role": "Head of Customer Success",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The ability to create comprehensive customer scores built on many different factors. This has been so important to make sure the team are focused in the right areas.",
+    "dislike": "The user interface could be improved, it's intuitive and easy to navigate, but doesn't look the best."
+  },
+  {
+    "Review Date": "10/24/2024",
+    "Reviewer Role": "Verified User in Computer Software",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "I love how easy it is to update the customer 360 fields, and keep tabs on your task, meetings, book of business, and plan campaigns to benefit the client.",
+    "dislike": "Nothing as of now, maybe they can enhance surveys and playbooks a bit."
+  },
+  {
+    "Review Date": "10/25/2024",
+    "Reviewer Role": "Customer success manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I like the fact that you can have a holistic view of all your customers and understand anything about them.",
+    "dislike": "I don't love the UI, and I think that the user experience can be improved."
+  },
+  {
+    "Review Date": "11/11/2024",
+    "Reviewer Role": "User",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "Range of features, Easy of use and visibility, Good service and support, Relatively easy integration, Value for money",
+    "dislike": "UI can be improved, Better dashboards or custom dashboard capabilities, Better measurement of results in more high-level way and not per-play"
+  },
+  {
+    "Review Date": "11/25/2024",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I feel that CZ is packed with all the features and functionalities required to keep a track of customers' entire life cycle with our product.",
+    "dislike": "There's not much to dislike about CZ. They have terrific CSMs, support system and an awesome product."
+  },
+  {
+    "Review Date": "11/25/2024",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "I like how we can adapt it to feat our business needs. It was adapted to our kind of business and it is quite easy to navigate and get the information we need to run our Book of Business.",
+    "dislike": "The UI needs a tune up. It could be better."
+  },
+  {
+    "Review Date": "12/10/2024",
+    "Reviewer Role": "Customer Success Rep",
+    "Company Size": "Small-Business(50 or fewer emp.)",
+    "like": "On the customer tracking side it was awesome. Very robust, and good at tracking customer lifecycle, and building out automation for it.",
+    "dislike": "It had the start of additional features, like in app guides, checklists, and other items. But they never worked well, and they were limited to the single page. Not as robust as other in app tools. Then the cost was extreme for what you got."
+  },
+  {
+    "Review Date": "12/16/2024",
+    "Reviewer Role": "Verified User in Airlines/Aviation",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "ChurnZero provides a 360 degree view of all the customers and helps the AM and CS teams to proactively monitor all the accounts. The tool is loaded with tons of useful features and integration capabilities.",
+    "dislike": "I personally do not feel there is anything to be highlighted as a negative point about the tool."
+  },
+  {
+    "Review Date": "12/20/2024",
+    "Reviewer Role": "Senior Customer Success Manager",
+    "Company Size": "Mid-Market(51-1000 emp.)",
+    "like": "The navigation and UI are simple and easy to use",
+    "dislike": "There is nothing to dislike that I have seen so far."
+  },
+  {
+    "Review Date": "01/02/2025",
+    "Reviewer Role": "Frontline Support Manager",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "As a support person, I can quickly see a customer's Churn Score and the reasons for that score.",
+    "dislike": "The API isn't as robust as I'd like. This limits our ability to get the amazing data from ChurnZero into ServiceNow, where our support team spends most of our time."
+  },
+  {
+    "Review Date": "01/06/2025",
+    "Reviewer Role": "Verified User in Computer Software",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The Plabooks, automation, integration and churnscore visibility",
+    "dislike": "searching for items in not always intuitive, a lot of clicking is required"
+  },
+  {
+    "Review Date": "01/13/2025",
+    "Reviewer Role": "Human Resources",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "How easy it is to show customer usage. And that it all ties back to Salesforce.",
+    "dislike": "Custom fields that tie to salesforce can be a little bit particular."
+  },
+  {
+    "Review Date": "01/21/2025",
+    "Reviewer Role": "User",
+    "Company Size": "Enterprise (> 1000 emp.)",
+    "like": "at a glance view of customer usage, contacts and dashboards",
+    "dislike": "a bit too cumbersome to configure and not as flexible"
+  },
+  {
+    "Review Date": "01/31/2025",
+    "Reviewer Role": "Director of Customer Success",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "It's highly customizable. Their support and customer success teams are responsible, insightful and overall very helpful.",
+    "dislike": "I'd like to be able to pull audit logs myself and not depend on the ChurnZero team."
+  },
+  {
+    "Review Date": "02/07/2025",
+    "Reviewer Role": "Customer Success Representative",
+    "Company Size": "Small-Business (50 or fewer emp.)",
+    "like": "The journey function and how I can manage my customers through what they need.",
+    "dislike": "I find the UI/UX a little clunky and hard to navigate at times."
+  },
+  {
+    "Review Date": "02/10/2025",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Insights, CRM for CSMs , Dashboards, Reports & Integrations to tools",
+    "like": "",
+    "dislike": "4.5 out of 5"
+  },
+  {
+    "Review Date": "02/10/2025",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Helps me be a better CSM by tracking everything I need and bringing it together in one platform",
+    "dislike": "Insights, CRM for CSMs , Dashboards, Reports & Integrations to tools"
+  },
+  {
+    "Review Date": "02/18/2025",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Having all my clients in one place, and using journeys to queue up and measure where they are in onboarding makes client management so much easier.",
+    "like": "",
+    "dislike": "5.0 out of 5"
+  },
+  {
+    "Review Date": "02/28/2025",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Great tool to improve the efficiency of your CS team!",
+    "dislike": "Currently, there are none to dislike about ChurnZero."
+  },
+  {
+    "Review Date": "02/28/2025",
+    "Reviewer Role": "User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "Insights, CRM for CSMs , Dashboards, Reports & Integrations to tools",
+    "dislike": "UI/UX could be bit more friendly, If you are new to the system it takes a while to get used to"
+  },
+  {
+    "Review Date": "02/28/2025",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Health Score Tracking. ChurnZero took our app's usage metrics and helped us keep track of possible churn. We always knew the key indicators of what could lead to churn with our app, but ChurnZero helped us spot trends more easily.",
+    "like": "Like any software implementation, ChurnZero requires a lot of time commitment to get right. Its capabilities are very deep and when you get started it can feel a bit overwhelming.",
+    "dislike": "4.5 out of 5"
+  },
+  {
+    "Review Date": "02/28/2025",
+    "Reviewer Role": "Verified User",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "The ability to monitor customer performance based on the criteria you deem to be most valuable. You can also build playbooks which allow you to automate the majority of your touchpoints with customers.",
+    "dislike": "Due to the range of features CZ offers, it is a complex software and can be quite confusing to begin with."
+  },
+  {
+    "Review Date": "02/28/2025",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market",
+    "like": "The implementation process was very professional, and I felt that the customer success manager knew our use case very well, was very proactive, and had a high team availability.",
+    "dislike": "They need to be a little more mentally flexible about customer needs at the beginning of the implementation and not work by the book."
+  },
+  {
+    "Review Date": "02/28/2025",
+    "Reviewer Role": "Mid-Market (51-1000 emp.)",
+    "Company Size": "Mid-Market (51-1000 emp.)",
+    "like": "We transitioned from managing our customers solely in our CRM to using ChurnZero because we needed something that could scale with us and our custo...",
+    "dislike": ""
+  }
+]

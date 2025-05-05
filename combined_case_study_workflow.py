@@ -650,7 +650,8 @@ def get_embedding(text, api_key, model="text-embedding-3-small", max_retries=3, 
                 print(f"Failed to get embedding after {max_retries} attempts: {e}")
                 raise
 
-def run_module_4_embedding_generation(input_processed_path, output_embeddings_path):
+# Accept company_name as a parameter in the function signature
+def run_module_4_embedding_generation(input_processed_path, output_embeddings_path, company_name):
     """Module 4: Embedding Generation and Pinecone Upsert
     Generates embeddings for each chunk, upserts the embeddings and metadata to Pinecone vector database,
     and saves a complete record of all processed data.
@@ -841,9 +842,9 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
                     print(f"LOG-POINT-5: Upserting batch {batch_num}, vectors: {len(vectors)}, first vector ID: {vectors[0]['id'] if vectors else 'none'}")
                     print(f"LOG-POINT-5: First vector dimension: {len(vectors[0]['values']) if vectors and 'values' in vectors[0] else 'unknown'}")
                     
-                    # CRITICAL FIX: Explicitly specify namespace as an empty string
-                    # This ensures vectors go to the default namespace that's visible in stats
-                    response = index.upsert(vectors=vectors, namespace="")
+                    # CRITICAL FIX: Explicitly specify namespace as company_name
+                    # This ensures vectors go to the namespace that's visible in stats
+                    response = index.upsert(vectors=vectors, namespace=company_name.lower())
                     print(f"LOG-POINT-5: Upsert response: {response}")
                     successful_inserts += len(vectors)
                     
@@ -889,7 +890,7 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
             # CRITICAL FIX: Force a query to ensure stats are updated
             try:
                 # Query a random vector to force stats refresh
-                index.query(vector=[0.1]*1536, top_k=1, namespace="")
+                index.query(vector=[0.1]*1536, top_k=1, namespace=company_name.lower())
             except Exception as query_error:
                 print(f"Query to refresh stats failed, but continuing: {query_error}")
                 
@@ -1008,8 +1009,8 @@ def main():
         # Note: Module 3 is integrated into Module 2 in this implementation
         # So we proceed directly to Module 4
             
-        # Execute Module 4: Embedding Generation and Pinecone Upsert
-        success = run_module_4_embedding_generation(chunk_json_path, embeddings_json_path)
+        # Execute Module 4: Embedding Generation and Pinecone Upsert - Pass company_name as parameter
+        success = run_module_4_embedding_generation(chunk_json_path, embeddings_json_path, company_name)
         if not success:
             print("ERROR: Module 4 failed.")
             return
