@@ -534,6 +534,13 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
                 if i % 20 == 0:
                     print(f"Embedding generated for chunk {i}, length: {len(embedding)}, sanitized ID: {sanitized_id}")
                 
+                # Check if this is a problems_solved chunk
+                is_problem_solved = "problems_solved" in chunk or "_problems_solved" in sanitized_id
+                review_type = chunk.get("review_type", "")
+                
+                # Get problems_solved content if available
+                problems_solved_text = chunk.get("problems_solved", "")
+                
                 record = {
                     "id": sanitized_id,
                     "text": text,
@@ -557,7 +564,14 @@ def run_module_4_embedding_generation(input_processed_path, output_embeddings_pa
                         "features_used": chunk.get("features_used", []),
                         "personas": chunk.get("personas", []),
                         "metrics": chunk.get("metrics", []),
-                        "quote": chunk.get("quote", False)
+                        "quote": chunk.get("quote", False),
+                        
+                        # Add explicit fields for problems detection
+                        "problems_solved": problems_solved_text,
+                        "problems_solved:": problems_solved_text if is_problem_solved else "",
+                        "has_problems_solved": is_problem_solved,
+                        "content_type": "problem_solution" if is_problem_solved else review_type,
+                        "review_type": review_type
                     }
                 }
 
