@@ -342,8 +342,9 @@ def run_module_2_content_chunking(input_json_path, output_chunk_path):
                     "review_date": review_date,
                     "reviewer_role": reviewer_role,
                     "company_size": company_size,
-                    "review_type": "problems solved",
+                    "review_type": "problems_solved",
                     "content": problems_solved_text,
+                    "problems_solved": problems_solved_text,  # Explicitly include this field
                     "sentence_count": count_sentences(problems_solved_text),
                     "word_count": count_words(problems_solved_text),
                     "token_count": count_words(problems_solved_text),
