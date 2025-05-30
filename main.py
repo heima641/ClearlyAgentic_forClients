@@ -38,5 +38,10 @@ def run_video_transcript():
     subprocess.Popen(["python", "combined_video_transcript_workflow.py"])
     return "Video transcript workflow started", 200
 
+@app.route('/run_standard_analysis', methods=['POST'])
+def run_standard_analysis():
+    subprocess.Popen(['python', 'standard_question_analyzer_v2.py'])
+    return "Standard analysis workflow started", 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
