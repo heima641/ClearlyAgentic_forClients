@@ -350,23 +350,18 @@ For technical details, see the corresponding JSON file.
             txt_filename = f"{namespace}_standard_analysis_{timestamp}.txt"
             txt_content = self.create_text_summary(response, namespace)
             
-            # Step 6: Save files locally (bypassing RLS issue for now)
-            self.logger.info("Saving files locally due to RLS restrictions")
+            # Step 6: Upload files to Supabase storage
+            # Upload JSON file to Supabase storage
+            json_url = self.upload_to_supabase_storage(json_content, json_filename, 'application/json')
             
-            # Save JSON file locally
-            with open(json_filename, 'w', encoding='utf-8') as f:
-                f.write(json_content)
+            # Upload TXT file to Supabase storage
+            txt_url = self.upload_to_supabase_storage(txt_content, txt_filename, 'text/plain')
             
-            # Save TXT file locally  
-            with open(txt_filename, 'w', encoding='utf-8') as f:
-                f.write(txt_content)
-                
-            json_url = f"Local file: {json_filename}"
-            txt_url = f"Local file: {txt_filename}"
-            
-            self.logger.success("Files saved locally successfully", {
+            self.logger.success("Files uploaded to Supabase storage successfully", {
                 "json_file": json_filename,
-                "txt_file": txt_filename
+                "txt_file": txt_filename,
+                "json_url": json_url,
+                "txt_url": txt_url
             })
             
             result = {
