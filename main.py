@@ -40,7 +40,7 @@ def run_video_transcript():
 
 @app.route('/run_standard_analysis', methods=['POST'])
 def run_standard_analysis():
-    subprocess.Popen(['python', 'standard_question_analyzer_to_cards.py'])
+    subprocess.Popen(['python', 'standard_question_analyzer_to_cards02.py'])
     return "Standard analysis workflow started", 200
 
 if __name__ == '__main__':
