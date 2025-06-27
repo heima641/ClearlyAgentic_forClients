@@ -777,7 +777,7 @@ def main():
         reviews_input_filename = reviews_config["REVIEWS_INPUT_FILENAME"]
         
         # Input file path (local)
-        reviews_json_path = os.path.join(SCRIPT_DIR, reviews_input_filename)
+        reviews_json_path = os.path.join(SCRIPT_DIR, "AGENTIC_OUTPUT", reviews_input_filename)
         
         # Output file paths (for Supabase bucket - no directory paths)
         chunk_json_path = f"{company_name.lower()}_reviews_chunked_{date_time}.json"
