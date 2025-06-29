@@ -71,16 +71,21 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 pinecone_api_key = os.getenv("PINECONE_API_KEY")
 
 def download_input_file_from_supabase(bucket_name: str, key: str) -> str:
+    # Create a temp file and keep the path
     with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
         temp_path = tmp.name
 
-    resp = supabase.storage.from_(bucket_name).download(key)
-    if resp.error:
+    try:
+        # Download returns raw bytes in supabase-py 2.x
+        file_bytes: bytes = supabase.storage.from_(bucket_name).download(key)
+    except Exception as e:
+        # Clean up the empty temp file we just created
         os.remove(temp_path)
-        raise RuntimeError(f"Supabase download error: {resp.error.message}")
+        raise RuntimeError(f"Supabase download error: {e}")
 
+    # Write the returned bytes directly
     with open(temp_path, "wb") as f:
-        f.write(resp.data)
+        f.write(file_bytes)
 
     return temp_path
 
