@@ -30,6 +30,7 @@ All output files are saved to a Supabase Bucket instead of the AGENTIC_OUTPUT fo
 import os
 import json
 import re
+import tempfile
 import time
 import traceback
 import logging
@@ -68,6 +69,25 @@ supabase_service_key = os.getenv("VITE_SUPABASE_SERVICE_ROLE_KEY")
 supabase = create_client(supabase_url, supabase_service_key)
 openai_api_key = os.getenv("OPENAI_API_KEY")
 pinecone_api_key = os.getenv("PINECONE_API_KEY")
+
+def download_input_file_from_supabase(bucket_name: str, key: str) -> str:
+    # Create a temp file and keep the path
+    with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
+        temp_path = tmp.name
+
+    try:
+        # Download returns raw bytes in supabase-py 2.x
+        file_bytes: bytes = supabase.storage.from_(bucket_name).download(key)
+    except Exception as e:
+        # Clean up the empty temp file we just created
+        os.remove(temp_path)
+        raise RuntimeError(f"Supabase download error: {e}")
+
+    # Write the returned bytes directly
+    with open(temp_path, "wb") as f:
+        f.write(file_bytes)
+
+    return temp_path
 
 # Record start time for execution tracking
 start_time = datetime.now()
@@ -777,8 +797,13 @@ def main():
         reviews_input_filename = reviews_config["REVIEWS_INPUT_FILENAME"]
         print("▶︎ Runtime reviews_input_filename:", reviews_input_filename)
         
-        # Input file path (local)
-        reviews_json_path = os.path.join(SCRIPT_DIR, "AGENTIC_OUTPUT", reviews_input_filename)
+        # Download input JSON from Supabase bucket
+        try:
+            reviews_json_path = download_input_file_from_supabase("clean-reviews", reviews_input_filename)
+            temp_file_to_cleanup = reviews_json_path
+        except Exception as e:
+            print("ERROR fetching input JSON from Supabase:", e)
+            return
         
         # Output file paths (for Supabase bucket - no directory paths)
         chunk_json_path = f"{company_name.lower()}_reviews_chunked_{date_time}.json"
@@ -814,7 +839,14 @@ def main():
         if not success:
             print("ERROR: Module 4 failed.")
             return
-        
+           
+        # Clean up the temporary input file
+        if 'temp_file_to_cleanup' in locals() and os.path.exists(temp_file_to_cleanup):
+          try:
+            os.remove(temp_file_to_cleanup)
+          except OSError:
+            print("Warning: could not delete temp input file:", temp_file_to_cleanup)
+
         # Calculate total execution time
         workflow_end_time = datetime.now()
         workflow_execution_time = workflow_end_time - workflow_start_time
