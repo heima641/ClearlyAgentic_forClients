@@ -775,6 +775,7 @@ def main():
             return
             
         reviews_input_filename = reviews_config["REVIEWS_INPUT_FILENAME"]
+        print("▶︎ Runtime reviews_input_filename:", reviews_input_filename)
         
         # Input file path (local)
         reviews_json_path = os.path.join(SCRIPT_DIR, "AGENTIC_OUTPUT", reviews_input_filename)
