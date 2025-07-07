@@ -43,5 +43,10 @@ def run_standard_analysis():
     subprocess.Popen(['python', 'standard_question_analyzer_to_cards02.py'])
     return "Standard analysis workflow started", 200
 
+@app.route('/run_video_script', methods=['POST'])
+def run_video_script():
+    subprocess.Popen(["python", "video_script_automation.py"])
+    return "Video script workflow started", 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
