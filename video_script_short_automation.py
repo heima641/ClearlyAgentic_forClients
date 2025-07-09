@@ -55,6 +55,7 @@ ENV_FILE_PATH = "STATIC_VARS_MAR2025.env"
 load_dotenv(ENV_FILE_PATH)
 supabase_url = os.getenv("VITE_SUPABASE_URL")
 supabase_service_key = os.getenv("VITE_SUPABASE_SERVICE_ROLE_KEY")
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 # Handle missing environment variables - NO FALLBACKS
 if not supabase_url:
@@ -73,7 +74,6 @@ if not openai_api_key:
     exit(1)
 
 supabase = create_client(supabase_url, supabase_service_key)
-openai_api_key = os.getenv("OPENAI_API_KEY")
 
 # Record start time for execution tracking (Eastern Time)
 eastern_tz = ZoneInfo("America/New_York")
