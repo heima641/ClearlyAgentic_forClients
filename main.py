@@ -60,5 +60,12 @@ def run_video_script_short():
     subprocess.Popen(["python", "video_script_short_automation.py"])
     return "Short video script workflow started", 200
 
+@app.route('/run_threads_titles', methods=['POST'])
+def run_threads_titles():
+    """Trigger threads & titles workflow (Twitter threads + video titles from cards 01-15)"""
+    subprocess.Popen(["python", "threads_titles_automation.py"])
+    return "Threads and titles workflow started", 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
+    
