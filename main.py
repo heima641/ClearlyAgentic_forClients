@@ -66,6 +66,12 @@ def run_threads_titles():
     subprocess.Popen(["python", "threads_titles_automation.py"])
     return "Threads and titles workflow started", 200
 
+@app.route('/run_email_sequence', methods=['POST'])
+def run_email_sequence():
+    """Trigger email sequence workflow (9-email sequences from cards 01-15)"""
+    subprocess.Popen(["python", "email_sequence_automation.py"])
+    return "Email sequence workflow started", 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
     
