@@ -468,13 +468,8 @@ def process_poppy_cards(variables, guidance_files):
         input_bucket = video_script_config["supabase_buckets"]["input_cards"]
         output_bucket = video_script_config["supabase_buckets"]["output"]
         
-        # Define the card combinations (P1-P4 permutations)
-        card_combinations = []
-        for p1 in range(1, 5):
-            for p2 in range(1, 5):
-                for p3 in range(1, 5):
-                    for p4 in range(1, 5):
-                        card_combinations.append(f"P{p1}_P{p2}_P{p3}_P{p4}")
+        # Use predefined card combinations from configuration
+        card_combinations = video_script_config["card_combinations"]
         
         # Process each combination (cards 01-10)
         processed_scripts = []
