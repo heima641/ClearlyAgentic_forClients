@@ -309,7 +309,14 @@ STRATEGIC QUOTE DISTRIBUTION REQUIREMENTS:
 - Structure each problem with: Problem Introduction → Customer Quote validating the problem → Solution + Benefits → Success Quote
 - Use role-specific attributions (Director of Sales, VP Sales, CRO, CEO) to broaden buyer persona appeal
 - Distribute quotes every 60-90 seconds throughout the script for continuous social proof
-- Target 12-15 total quotes across the script for optimal conversion psychology
+- Use customer quotes throughout the script for optimal conversion psychology
+
+QUOTE UTILIZATION MANDATE:
+- Each four-problem poppy card contains 32 total quotes (8 customer quotes per problem)
+- YOU MUST utilize 12-15 of these existing quotes in your script
+- DO NOT create new quotes - extract and use the provided quotes
+- Failure to use 12+ quotes means the script does not meet requirements
+- Quote distribution per problem: 3-4 problem-specific customer quotes each (total in the video script: 12-16 quotes)
 
 PSYCHOLOGICAL FRAMEWORK - PEER VALIDATION APPROACH:
 - Frame this as "peer sharing insights" rather than "company selling solution"
