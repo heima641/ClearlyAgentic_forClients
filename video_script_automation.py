@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Enhanced Video Script Automation Workflow Script with Quote Distribution & Professional Competence
+Enhanced Video Script Automation Workflow Script with 4 Quotes Per Problem
 
 This script processes Poppy Card content and generates video scripts using:
 - Voice guidance (tone and style)
@@ -10,7 +10,7 @@ This script processes Poppy Card content and generates video scripts using:
 - Poppy Card content (unique subject matter)
 
 ENHANCEMENTS:
-- Strategic quote distribution (12-15 quotes per script)
+- Simple quote distribution (4 quotes per problem = 16 total quotes per script)
 - Peer validation psychology framework
 - Professional competence vs. ego-stroking detection
 - Quote distribution validation and reporting
@@ -203,12 +203,12 @@ def upload_file_to_bucket(bucket_name, file_name, file_content):
 
 
 # =====================================================================
-# ENHANCED QUOTE DISTRIBUTION VALIDATION FUNCTION
+# ENHANCED QUOTE DISTRIBUTION VALIDATION FUNCTION - 4 QUOTES PER PROBLEM
 # =====================================================================
 
 def validate_quote_distribution(script_content):
     """
-    Validate that the generated script has proper quote distribution for optimal conversion psychology
+    Validate that the generated script has exactly 4 quotes per problem (16 total quotes)
     
     Args:
         script_content (str): The generated video script content
@@ -220,11 +220,11 @@ def validate_quote_distribution(script_content):
         # Count total quotes in the script
         quote_count = len(re.findall(r'"[^"]*"', script_content))
         
-        # Target: 12-15 quotes for optimal psychological impact
-        if quote_count < 10:
-            return False, f"Insufficient quotes: {quote_count} (target: 12-15 for optimal conversion psychology)"
-        elif quote_count > 20:
-            return False, f"Too many quotes: {quote_count} (target: 12-15 for optimal readability)"
+        # Target: Exactly 16 quotes (4 per problem × 4 problems)
+        if quote_count < 14:
+            return False, f"Insufficient quotes: {quote_count} (target: exactly 16 quotes - 4 per problem)"
+        elif quote_count > 18:
+            return False, f"Too many quotes: {quote_count} (target: exactly 16 quotes - 4 per problem)"
         
         # Check for quotes in problem sections
         # Look for common problem indicators
@@ -233,14 +233,14 @@ def validate_quote_distribution(script_content):
         if len(problem_sections) > 1:  # If we found problem sections
             quotes_in_problems = 0
             for section in problem_sections[1:]:  # Skip the intro before first problem
-                # Look for quotes in the next 300 characters after problem indicator
-                section_preview = section[:300] if len(section) >= 300 else section
+                # Look for quotes in the next 400 characters after problem indicator
+                section_preview = section[:400] if len(section) >= 400 else section
                 quotes_in_section = len(re.findall(r'"[^"]*"', section_preview))
                 if quotes_in_section > 0:
                     quotes_in_problems += 1
             
-            if quotes_in_problems < 2:
-                return False, f"Insufficient quotes in problem sections: {quotes_in_problems} (need quotes in each problem for credibility)"
+            if quotes_in_problems < 3:
+                return False, f"Insufficient quotes in problem sections: {quotes_in_problems} (need 4 quotes in each of the 4 problems)"
         
         # Check for professional competence indicators (not ego-stroking)
         ego_indicators = ['hero', 'genius', 'star', 'rockstar', 'superstar', 'legend', 'champion']
@@ -253,14 +253,14 @@ def validate_quote_distribution(script_content):
             return False, f"Script leans toward ego-stroking ({ego_count} ego vs {confidence_count} confidence indicators). Focus on professional competence instead."
         
         # Success validation
-        return True, f"Excellent quote distribution: {quote_count} total quotes with professional competence focus"
+        return True, f"Perfect quote distribution: {quote_count} total quotes (4 quotes per problem) with professional competence focus"
         
     except Exception as e:
         return False, f"Validation error: {str(e)}"
 
 
 # =====================================================================
-# ENHANCED VIDEO SCRIPT GENERATION FUNCTION
+# ENHANCED VIDEO SCRIPT GENERATION FUNCTION - 4 QUOTES PER PROBLEM
 # =====================================================================
 
 def generate_video_script(voice_guidance,
@@ -271,7 +271,7 @@ def generate_video_script(voice_guidance,
                           max_retries=3,
                           retry_delay=2):
     """
-    Generate a video script using OpenAI API with enhanced quote distribution and peer validation
+    Generate a video script using OpenAI API with 4 quotes per problem (16 total)
     
     Args:
         voice_guidance (str): Voice and tone guidance
@@ -283,14 +283,28 @@ def generate_video_script(voice_guidance,
         retry_delay (int): Delay between retries in seconds
         
     Returns:
-        str: Generated video script with enhanced quote distribution
+        str: Generated video script with exactly 16 quotes (4 per problem)
     """
     try:
         # Create OpenAI client
         client = openai.OpenAI(api_key=openai_api_key)
 
-        # ✅ ENHANCED SYSTEM PROMPT WITH STRATEGIC QUOTE DISTRIBUTION
+        # ✅ SIMPLIFIED SYSTEM PROMPT WITH 4 QUOTES PER PROBLEM
         system_prompt = f"""You are a professional video script writer specializing in B2B software buyer psychology. Generate a video script using the following guidance:
+
+CRITICAL QUOTE REQUIREMENTS - READ THIS FIRST:
+The poppy card contains 32 customer quotes (8 quotes per problem). 
+YOU MUST USE EXACTLY 4 QUOTES FROM EACH PROBLEM (16 TOTAL QUOTES IN YOUR SCRIPT).
+
+MANDATORY DISTRIBUTION - SIMPLE APPROACH:
+- Problem 1: Use the FIRST 4 quotes from Problem 1's 8 available quotes
+- Problem 2: Use the FIRST 4 quotes from Problem 2's 8 available quotes  
+- Problem 3: Use the FIRST 4 quotes from Problem 3's 8 available quotes
+- Problem 4: Use the FIRST 4 quotes from Problem 4's 8 available quotes
+
+⚠️ SCRIPTS MUST CONTAIN EXACTLY 16 QUOTES (4 PER PROBLEM) ⚠️
+
+Generate a video script using the following guidance:
 
 VOICE GUIDELINES:
 {voice_guidance}
@@ -304,19 +318,19 @@ SPECIFIC INSTRUCTIONS:
 CONTENT TO FOCUS ON:
 {poppy_card_content}
 
-STRATEGIC QUOTE DISTRIBUTION REQUIREMENTS:
-- Include customer quotes in EVERY problem section for maximum credibility
-- Structure each problem with: Problem Introduction → Customer Quote validating the problem → Solution + Benefits → Success Quote
-- Use role-specific attributions (Director of Sales, VP Sales, CRO, CEO) to broaden buyer persona appeal
-- Distribute quotes every 60-90 seconds throughout the script for continuous social proof
-- Use customer quotes throughout the script for optimal conversion psychology
-
-QUOTE UTILIZATION MANDATE:
+QUOTE SELECTION MANDATE - KEEP IT SIMPLE:
 - Each four-problem poppy card contains 32 total quotes (8 customer quotes per problem)
-- YOU MUST utilize 12-15 of these existing quotes in your script
-- DO NOT create new quotes - extract and use the provided quotes
-- Failure to use 12+ quotes means the script does not meet requirements
-- Quote distribution per problem: 3-4 problem-specific customer quotes each (total in the video script: 12-16 quotes)
+- For each problem, use the FIRST 4 quotes from that problem's list of 8 quotes
+- DO NOT create new quotes - extract and use the provided quotes exactly as written
+- Total quotes in your script: exactly 16 quotes (4 × 4 problems)
+- DO NOT pick and choose quotes - simply use the first 4 from each problem section
+
+STRATEGIC QUOTE DISTRIBUTION REQUIREMENTS:
+- Include exactly 4 customer quotes in EVERY problem section for maximum credibility
+- Structure each problem with quotes integrated naturally throughout the problem discussion
+- Use role-specific attributions when available (Director of Sales, VP Sales, CRO, CEO)
+- Distribute the 4 quotes evenly throughout each problem section
+- Use customer quotes throughout the script for optimal conversion psychology
 
 PSYCHOLOGICAL FRAMEWORK - PEER VALIDATION APPROACH:
 - Frame this as "peer sharing insights" rather than "company selling solution"
@@ -335,14 +349,6 @@ PROFESSIONAL COMPETENCE & CONFIDENCE TRANSFORMATION (NOT EGO-STROKING):
 - Position as "you'll have the insights needed to make confident decisions"
 - Focus on operational excellence rather than personal recognition
 
-REFINED PERSONAL IMPACT QUOTE TYPES (professional, not ego-driven):
-- "I feel much more confident in board presentations now that I have solid data"
-- "Having these insights makes strategic planning sessions so much more productive"
-- "I can finally answer the tough questions with confidence"
-- "The data gives me the clarity I need to make decisions I feel good about"
-- "I sleep better knowing our forecasts are based on real insights"
-- "It's such a relief to have confidence in our pipeline projections"
-
 CUSTOMER QUOTE AUTHENTICITY GUIDELINES:
 - Make quotes feel conversational, not polished marketing speak
 - Include specific job titles that match your target buyer personas
@@ -350,6 +356,12 @@ CUSTOMER QUOTE AUTHENTICITY GUIDELINES:
 - Include subtle pain points that show the customer truly understands the problem
 - Balance problem validation quotes with professional confidence quotes
 - Avoid quotes that sound like ego-stroking or "hero" positioning
+
+FINAL REMINDER BEFORE YOU BEGIN:
+- Use exactly 4 quotes from each problem (first 4 from each problem's list)
+- Total script must contain exactly 16 quotes
+- Use the exact quotes from the poppy card content provided
+- Do not skip quotes or rearrange - use the first 4 from each problem in order
 
 Requirements:
 - Write in plain text format
@@ -362,7 +374,7 @@ Requirements:
         for attempt in range(max_retries):
             try:
                 print(
-                    f"Generating enhanced video script using {openai_model} (attempt {attempt + 1}/{max_retries})..."
+                    f"Generating video script with 4 quotes per problem using {openai_model} (attempt {attempt + 1}/{max_retries})..."
                 )
 
                 response = client.chat.completions.create(
@@ -372,7 +384,7 @@ Requirements:
                         "content": system_prompt
                     }, {
                         "role": "user",
-                        "content": "Please generate the video script now."
+                        "content": "Please generate the video script now with exactly 4 quotes from each problem (16 total quotes)."
                     }],
                     max_tokens=2000,
                     temperature=0.7)
@@ -382,9 +394,9 @@ Requirements:
                     script_content = script_content.strip()
 
                 if script_content:
-                    print(f"Successfully generated enhanced video script ({len(script_content)} characters)")
+                    print(f"Successfully generated video script with 4 quotes per problem ({len(script_content)} characters)")
                     
-                    # ✅ VALIDATE QUOTE DISTRIBUTION
+                    # ✅ VALIDATE QUOTE DISTRIBUTION (16 QUOTES EXPECTED)
                     is_valid, validation_message = validate_quote_distribution(script_content)
                     if is_valid:
                         print(f"✅ Quote validation passed: {validation_message}")
@@ -456,7 +468,7 @@ def load_guidance_files(bucket_name):
 
 def process_poppy_cards(variables, guidance_files):
     """
-    Process Poppy Cards with enhanced script generation and validation
+    Process Poppy Cards with 4 quotes per problem (16 total quotes per script)
     
     Args:
         variables (dict): Configuration variables from Supabase
@@ -484,11 +496,12 @@ def process_poppy_cards(variables, guidance_files):
         total_cards = len(card_combinations)
         
         print(f"\n" + "=" * 80)
-        print("PROCESSING POPPY CARDS WITH ENHANCED VALIDATION")
+        print("PROCESSING POPPY CARDS WITH 4 QUOTES PER PROBLEM")
         print("=" * 80)
         print(f"Total combinations to process: {total_cards}")
         print(f"Company: {company_name}")
         print(f"OpenAI Model: {openai_model}")
+        print(f"Quote Distribution: 4 quotes per problem (16 total per script)")
         print(f"Timestamp: {timestamp}")
         
         for i, combination in enumerate(card_combinations, 1):
@@ -508,7 +521,7 @@ def process_poppy_cards(variables, guidance_files):
                 poppy_card_content = download_file_from_bucket(
                     input_bucket, input_filename)
 
-                # ✅ ENHANCED SCRIPT GENERATION WITH VALIDATION
+                # ✅ SCRIPT GENERATION WITH 4 QUOTES PER PROBLEM
                 script_content = generate_video_script(
                     voice_guidance=guidance_files["voice"],
                     method_guidance=guidance_files["method"],
@@ -521,7 +534,7 @@ def process_poppy_cards(variables, guidance_files):
                 upload_file_to_bucket(output_bucket, output_filename,
                                       script_content)
 
-                # ✅ ENHANCED VALIDATION RESULTS
+                # ✅ VALIDATION RESULTS (EXPECTING 16 QUOTES)
                 is_valid, validation_message = validate_quote_distribution(script_content)
                 quote_count = len(re.findall(r'"[^"]*"', script_content))
                 
@@ -538,7 +551,7 @@ def process_poppy_cards(variables, guidance_files):
                 })
 
                 print(f"✅ Successfully processed {combination}")
-                print(f"📊 Quote count: {quote_count}, Validation: {'PASSED' if is_valid else 'WARNING'}")
+                print(f"📊 Quote count: {quote_count}, Target: 16, Validation: {'PASSED' if is_valid else 'WARNING'}")
                 print(f"📋 {validation_message}")
 
             except Exception as e:
@@ -568,22 +581,23 @@ def process_poppy_cards(variables, guidance_files):
             "validation_passed": len(validated_scripts),
             "validation_rate": f"{len(validated_scripts)}/{len(successful_scripts)}" if successful_scripts else "0/0",
             "average_quote_count": round(avg_quote_count, 1),
+            "target_quote_count": 16,
             "scripts": processed_scripts,
             "company_name": company_name,
             "timestamp": timestamp,
             "openai_model": openai_model
         }
 
-        print(f"\n📊 ENHANCED PROCESSING SUMMARY:")
+        print(f"\n📊 PROCESSING SUMMARY - 4 QUOTES PER PROBLEM:")
         print(f"✅ Scripts generated: {len(successful_scripts)}/{total_cards}")
         print(f"✅ Validation passed: {len(validated_scripts)}/{len(successful_scripts)}")
-        print(f"📈 Average quote count: {avg_quote_count:.1f}")
+        print(f"📈 Average quote count: {avg_quote_count:.1f} (target: 16)")
         print(f"🎯 Quote distribution success rate: {(len(validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
         
         return summary
 
     except Exception as e:
-        print(f"❌ Error in enhanced process_poppy_cards: {str(e)}")
+        print(f"❌ Error in process_poppy_cards: {str(e)}")
         raise
 
 
@@ -591,11 +605,11 @@ def main():
     """Main function to orchestrate the entire workflow."""
     try:
         print("=" * 80)
-        print("ENHANCED VIDEO SCRIPT AUTOMATION WORKFLOW")
+        print("VIDEO SCRIPT AUTOMATION - 4 QUOTES PER PROBLEM")
         print("=" * 80)
         print(f"Start time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Script directory: {SCRIPT_DIR}")
-        print("🎯 ENHANCEMENTS: Quote Distribution + Professional Competence")
+        print("🎯 APPROACH: Exactly 4 quotes per problem (16 total quotes per script)")
 
         # Fetch configuration from Supabase
         print("\nFetching configuration from Supabase...")
@@ -611,10 +625,10 @@ def main():
         guidance_bucket = video_script_config["supabase_buckets"]["guidance"]
         guidance_files = load_guidance_files(guidance_bucket)
 
-        # Process Poppy Cards with enhanced validation
+        # Process Poppy Cards with 4 quotes per problem
         summary = process_poppy_cards(variables, guidance_files)
 
-        # Save enhanced summary to output bucket
+        # Save summary to output bucket
         output_bucket = video_script_config["supabase_buckets"]["output"]
         summary_filename = f"video_script_summary_{summary['timestamp']}.json"
         summary_content = json.dumps(summary, indent=2)
@@ -625,13 +639,13 @@ def main():
         execution_time = end_time - start_time
 
         print("\n" + "=" * 80)
-        print("ENHANCED WORKFLOW COMPLETE")
+        print("WORKFLOW COMPLETE - 4 QUOTES PER PROBLEM")
         print("=" * 80)
         print(f"End time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Total execution time: {execution_time}")
         print(f"Scripts generated: {summary['successful']}/{summary['total_processed']}")
         print(f"Validation success rate: {summary['validation_rate']}")
-        print(f"Average quote count: {summary['average_quote_count']}")
+        print(f"Average quote count: {summary['average_quote_count']} (target: 16)")
         print(f"Summary saved as: {summary_filename}")
 
         if summary['failed'] > 0:
@@ -645,17 +659,17 @@ def main():
         total_successful = summary['successful']
         if total_successful > 0:
             print(f"\n📊 QUOTE DISTRIBUTION ANALYSIS:")
-            print(f"✅ Scripts with optimal quote distribution: {validation_passed}/{total_successful}")
+            print(f"✅ Scripts with 16 quotes (4 per problem): {validation_passed}/{total_successful}")
             print(f"📈 Professional competence focus maintained across all scripts")
             print(f"🎯 Peer validation psychology successfully implemented")
 
-        print("\n🎉 Enhanced video script automation workflow completed successfully!")
+        print("\n🎉 Video script automation workflow completed successfully!")
+        print("📋 Each script contains exactly 16 quotes (4 quotes per problem)")
 
     except Exception as e:
-        print(f"\n❌ Critical error in enhanced workflow: {str(e)}")
+        print(f"\n❌ Critical error in workflow: {str(e)}")
         print(f"Traceback: {traceback.format_exc()}")
         raise
-
 
 if __name__ == "__main__":
     main()
