@@ -461,7 +461,7 @@ def process_poppy_cards(variables, guidance_files):
     try:
         # Extract configuration
         video_script_config = variables["scripts"]["video_script"]
-        company_name = variables["COMPANY_NAME_OR_HANDLE"]
+        company_name = variables["global"]["COMPANY_NAME"]
         openai_model = variables.get("OPENAI_MODEL", "gpt-4o")
         
         # Get bucket configurations
