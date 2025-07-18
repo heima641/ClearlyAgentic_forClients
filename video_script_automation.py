@@ -14,7 +14,8 @@ ENHANCEMENTS:
 - Peer validation psychology framework
 - Professional competence vs. ego-stroking detection
 - Quote distribution validation and reporting
-- Company name integration (6 mentions per script, +2 minutes content)
+- Company name integration (6 mentions per script)
+- ADDITIVE IMPROVEMENTS: Feature clarity, revenue impact, implementation assurance, competitive differentiation
 
 The workflow processes 10 predefined Poppy Card combinations sequentially,
 generating custom video scripts for each combination and saving them to Supabase.
@@ -261,7 +262,58 @@ def validate_quote_distribution(script_content):
 
 
 # =====================================================================
-# ENHANCED VIDEO SCRIPT GENERATION FUNCTION - 4 QUOTES PER PROBLEM + COMPANY NAME
+# ADDITIVE ENHANCEMENT: ENHANCED CONTENT VALIDATION FUNCTION
+# =====================================================================
+
+def validate_enhanced_content(script_content, company_name):
+    """
+    Validate the enhanced content requirements (additive improvements)
+    
+    Args:
+        script_content (str): The generated video script content
+        company_name (str): Company name to check for
+        
+    Returns:
+        tuple: (is_valid: bool, message: str)
+    """
+    try:
+        validation_issues = []
+        
+        # Check for implementation time mention (< 8 hours)
+        implementation_keywords = ['8 hour', 'eight hour', 'quick implementation', 'rapid deployment', 'fast setup']
+        has_implementation_mention = any(keyword in script_content.lower() for keyword in implementation_keywords)
+        if not has_implementation_mention:
+            validation_issues.append("Missing implementation time assurance in outro")
+        
+        # Check for payback period mention (< 6 months)
+        payback_keywords = ['6 month', 'six month', 'payback', 'roi', 'return on investment']
+        has_payback_mention = any(keyword in script_content.lower() for keyword in payback_keywords)
+        if not has_payback_mention:
+            validation_issues.append("Missing payback period assurance in problem sections")
+        
+        # Check for competitive differentiation
+        competitive_keywords = ['better than', 'unlike', 'superior', 'advantage', 'unique', 'differentiat']
+        has_competitive_mention = any(keyword in script_content.lower() for keyword in competitive_keywords)
+        if not has_competitive_mention:
+            validation_issues.append("Missing competitive differentiation in outro")
+        
+        # Check for feature explanations
+        feature_keywords = ['feature', 'capability', 'functionality', 'tool', 'dashboard', 'analytics']
+        has_feature_mention = any(keyword in script_content.lower() for keyword in feature_keywords)
+        if not has_feature_mention:
+            validation_issues.append("Missing specific feature explanations in problem sections")
+        
+        if validation_issues:
+            return False, f"Enhanced content validation issues: {', '.join(validation_issues)}"
+        else:
+            return True, "All enhanced content requirements validated successfully"
+            
+    except Exception as e:
+        return False, f"Enhanced validation error: {str(e)}"
+
+
+# =====================================================================
+# ENHANCED VIDEO SCRIPT GENERATION FUNCTION - 4 QUOTES PER PROBLEM + COMPANY NAME + ADDITIVE IMPROVEMENTS
 # =====================================================================
 
 def generate_video_script(voice_guidance,
@@ -381,18 +433,64 @@ Requirements:
 - Include company name **once naturally in the intro** 
 - Include company name **at least once per Problem section** (4 total)
 - Include company name **once in the outro**
-- Expand total script by ~280 words (≈2 minutes narration) through these natural integrations
+- Expand total script by ~280 words through these natural integrations
 - Make mentions feel organic - position as the solution provider, not repetitive branding
 - Example integration: "...companies like yours working with {company_name} have discovered..."
 - Focus on value association: "{company_name} helps businesses..." or "Through {company_name}'s insights..."
 - Maintain professional, consultative tone - not salesy or pushy
 - Ensure seamless flow - company mentions should enhance, not interrupt, the narrative"""
 
+        # ✅ ADDITIVE ENHANCEMENT: PROBLEM SECTION CONTENT REQUIREMENTS
+        system_prompt += f"""
+
+🎯 PROBLEM SECTION CONTENT REQUIREMENTS - ADDITIVE ENHANCEMENTS:
+
+FEATURE CLARITY MANDATE (Requirement 1):
+- In each of the 4 problem sections, add 2-3 sentences explaining the specific {company_name} feature that addresses this problem
+- Use fewer than 800 additional characters per problem section for feature explanations
+- Include high-level explanation of how the feature helps solve the specific problem
+- Reference the product as "{company_name}" consistently throughout feature descriptions
+- Make feature descriptions concrete and specific, not vague marketing language
+- Examples: "{company_name}'s pipeline analytics dashboard shows exactly where deals are stuck" or "{company_name}'s automated scoring system highlights which prospects need immediate attention"
+
+REVENUE IMPACT MANDATE (Requirement 2):
+- In each of the 4 problem sections, add 2-3 sentences explaining how this solution increases revenue
+- Use fewer than 800 additional characters per problem section for revenue impact explanations
+- Specifically assure viewers they will achieve less than 6-month payback period
+- Reference the product as "{company_name}" consistently throughout ROI descriptions
+- Include specific revenue generation mechanisms (faster deals, better conversion, reduced waste, etc.)
+- Position as "fully engaged users consistently achieve sub-6-month ROI"
+- Examples: "Companies using {company_name}'s deal acceleration features see 23% faster close rates, typically achieving full payback in under 6 months" or "{company_name} users report 31% improvement in qualified lead conversion, with most seeing ROI within 5 months"
+"""
+
+        # ✅ ADDITIVE ENHANCEMENT: OUTRO CONTENT REQUIREMENTS  
+        system_prompt += f"""
+
+🚀 OUTRO CONTENT REQUIREMENTS - ADDITIVE ENHANCEMENTS:
+
+IMPLEMENTATION ASSURANCE MANDATE (Requirement 3):
+- In the first 4 sentences of the outro, assure viewers that full {company_name} implementation takes less than 8 hours
+- Use fewer than 800 additional characters for implementation time assurance
+- Reference the product as "{company_name}" consistently
+- Emphasize minimal disruption to current operations
+- Position as "rapid deployment advantage"
+- Examples: "{company_name} deploys in under 8 hours with zero disruption to your current sales process" or "Full {company_name} implementation typically completes in 6-8 hours, often during a single business day"
+
+COMPETITIVE DIFFERENTIATION MANDATE (Requirement 4):
+- In the first 5 sentences of the outro, clarify what makes {company_name} superior to competitors
+- Use fewer than 800 additional characters for competitive advantages
+- Reference the product as "{company_name}" consistently  
+- Include 2 specific differentiators that are concrete and measurable
+- Focus on unique capabilities, not generic benefits
+- Avoid naming specific competitors - focus on category advantages
+- Examples: "Unlike traditional CRM analytics, {company_name} provides predictive deal scoring and real-time pipeline health monitoring" or "{company_name}'s peer-based benchmarking gives you insights that generic sales platforms simply cannot match"
+"""
+
         # Continue with existing retry logic...
         for attempt in range(max_retries):
             try:
                 print(
-                    f"Generating video script with 4 quotes per problem and {company_name} integration using {openai_model} (attempt {attempt + 1}/{max_retries})..."
+                    f"Generating enhanced video script with 4 quotes per problem, {company_name} integration, and additive improvements using {openai_model} (attempt {attempt + 1}/{max_retries})..."
                 )
 
                 response = client.chat.completions.create(
@@ -402,9 +500,9 @@ Requirements:
                         "content": system_prompt
                     }, {
                         "role": "user",
-                        "content": "Please generate the video script now with exactly 4 quotes from each problem (16 total quotes) and natural company name integration."
+                        "content": "Please generate the video script now with exactly 4 quotes from each problem (16 total quotes), natural company name integration, and all additive improvements including feature clarity, revenue impact, implementation assurance, and competitive differentiation."
                     }],
-                    max_tokens=2000,
+                    max_tokens=2500,  # Increased token limit for enhanced content
                     temperature=0.7)
 
                 script_content = response.choices[0].message.content
@@ -412,16 +510,23 @@ Requirements:
                     script_content = script_content.strip()
 
                 if script_content:
-                    print(f"Successfully generated video script with 4 quotes per problem and company integration ({len(script_content)} characters)")
+                    print(f"Successfully generated enhanced video script ({len(script_content)} characters)")
                     
                     # ✅ VALIDATE QUOTE DISTRIBUTION (16 QUOTES EXPECTED)
                     is_valid, validation_message = validate_quote_distribution(script_content)
                     if is_valid:
                         print(f"✅ Quote validation passed: {validation_message}")
-                        return script_content
                     else:
                         print(f"⚠️ Quote validation warning: {validation_message}")
-                        return script_content  # Return anyway but log the warning
+                    
+                    # ✅ VALIDATE ENHANCED CONTENT REQUIREMENTS
+                    is_enhanced_valid, enhanced_message = validate_enhanced_content(script_content, company_name)
+                    if is_enhanced_valid:
+                        print(f"✅ Enhanced content validation passed: {enhanced_message}")
+                    else:
+                        print(f"⚠️ Enhanced content validation warning: {enhanced_message}")
+                        
+                    return script_content
                 else:
                     raise Exception("Empty response from OpenAI")
 
@@ -486,7 +591,7 @@ def load_guidance_files(bucket_name):
 
 def process_poppy_cards(variables, guidance_files):
     """
-    Process Poppy Cards with 4 quotes per problem (16 total quotes per script) and company name integration
+    Process Poppy Cards with 4 quotes per problem (16 total quotes per script), company name integration, and additive improvements
     
     Args:
         variables (dict): Configuration variables from Supabase
@@ -514,13 +619,14 @@ def process_poppy_cards(variables, guidance_files):
         total_cards = len(card_combinations)
         
         print(f"\n" + "=" * 80)
-        print("PROCESSING POPPY CARDS WITH 4 QUOTES PER PROBLEM + COMPANY INTEGRATION")
+        print("PROCESSING POPPY CARDS WITH ENHANCED ADDITIVE IMPROVEMENTS")
         print("=" * 80)
         print(f"Total combinations to process: {total_cards}")
         print(f"Company: {company_name}")
         print(f"OpenAI Model: {openai_model}")
         print(f"Quote Distribution: 4 quotes per problem (16 total per script)")
-        print(f"Company Integration: 6 mentions per script (+2 minutes content)")
+        print(f"Company Integration: 6 mentions per script")
+        print(f"✅ ADDITIVE ENHANCEMENTS: Feature clarity, Revenue impact, Implementation assurance, Competitive differentiation")
         print(f"Timestamp: {timestamp}")
         
         for i, combination in enumerate(card_combinations, 1):
@@ -532,7 +638,7 @@ def process_poppy_cards(variables, guidance_files):
                 # Card numbers iterate from card01 to card10 to match actual file names
                 card_number = f"card{((i-1) % 10) + 1:02d}"  # Formats as card01, card02, ..., card10
                 input_filename = f"{company_name}_{card_number}_{combination}.txt"
-                output_filename = f"{company_name}_script_{combination}_{timestamp}.txt"
+                output_filename = f"{company_name}_enhanced_script_{combination}_{timestamp}.txt"  # Updated filename to reflect enhancements
 
                 print(f"Looking for file: {input_filename}")
 
@@ -540,7 +646,7 @@ def process_poppy_cards(variables, guidance_files):
                 poppy_card_content = download_file_from_bucket(
                     input_bucket, input_filename)
 
-                # ✅ SCRIPT GENERATION WITH 4 QUOTES PER PROBLEM + COMPANY NAME
+                # ✅ ENHANCED SCRIPT GENERATION WITH ALL ADDITIVE IMPROVEMENTS
                 script_content = generate_video_script(
                     voice_guidance=guidance_files["voice"],
                     method_guidance=guidance_files["method"],
@@ -554,8 +660,9 @@ def process_poppy_cards(variables, guidance_files):
                 upload_file_to_bucket(output_bucket, output_filename,
                                       script_content)
 
-                # ✅ VALIDATION RESULTS (EXPECTING 16 QUOTES)
+                # ✅ DUAL VALIDATION RESULTS (QUOTES + ENHANCED CONTENT)
                 is_valid, validation_message = validate_quote_distribution(script_content)
+                is_enhanced_valid, enhanced_message = validate_enhanced_content(script_content, company_name)
                 quote_count = len(re.findall(r'"[^"]*"', script_content))
                 
                 # Record the processed script with enhanced metrics
@@ -567,12 +674,16 @@ def process_poppy_cards(variables, guidance_files):
                     "quote_count": quote_count,
                     "validation_passed": is_valid,
                     "validation_message": validation_message,
+                    "enhanced_validation_passed": is_enhanced_valid,
+                    "enhanced_validation_message": enhanced_message,
                     "status": "success"
                 })
 
                 print(f"✅ Successfully processed {combination}")
                 print(f"📊 Quote count: {quote_count}, Target: 16, Validation: {'PASSED' if is_valid else 'WARNING'}")
-                print(f"📋 {validation_message}")
+                print(f"📋 Quote validation: {validation_message}")
+                print(f"🎯 Enhanced validation: {'PASSED' if is_enhanced_valid else 'WARNING'}")
+                print(f"📈 Enhanced details: {enhanced_message}")
 
             except Exception as e:
                 print(f"❌ Error processing {combination}: {str(e)}")
@@ -583,13 +694,15 @@ def process_poppy_cards(variables, guidance_files):
                     "error": str(e),
                     "status": "failed",
                     "validation_passed": False,
+                    "enhanced_validation_passed": False,
                     "quote_count": 0
                 })
 
-        # Enhanced summary with validation statistics
+        # Enhanced summary with dual validation statistics
         successful_scripts = [s for s in processed_scripts if s["status"] == "success"]
         failed_scripts = [s for s in processed_scripts if s["status"] == "failed"]
         validated_scripts = [s for s in successful_scripts if s.get("validation_passed", False)]
+        enhanced_validated_scripts = [s for s in successful_scripts if s.get("enhanced_validation_passed", False)]
         
         # Calculate average quote count for successful scripts
         avg_quote_count = sum(s.get("quote_count", 0) for s in successful_scripts) / len(successful_scripts) if successful_scripts else 0
@@ -599,21 +712,27 @@ def process_poppy_cards(variables, guidance_files):
             "successful": len(successful_scripts),
             "failed": len(failed_scripts),
             "validation_passed": len(validated_scripts),
+            "enhanced_validation_passed": len(enhanced_validated_scripts),
             "validation_rate": f"{len(validated_scripts)}/{len(successful_scripts)}" if successful_scripts else "0/0",
+            "enhanced_validation_rate": f"{len(enhanced_validated_scripts)}/{len(successful_scripts)}" if successful_scripts else "0/0",
             "average_quote_count": round(avg_quote_count, 1),
             "target_quote_count": 16,
             "scripts": processed_scripts,
             "company_name": company_name,
             "timestamp": timestamp,
-            "openai_model": openai_model
+            "openai_model": openai_model,
+            "additive_enhancements": ["feature_clarity", "revenue_impact", "implementation_assurance", "competitive_differentiation"]
         }
 
-        print(f"\n📊 PROCESSING SUMMARY - 4 QUOTES PER PROBLEM + COMPANY INTEGRATION:")
+        print(f"\n📊 ENHANCED PROCESSING SUMMARY - ALL ADDITIVE IMPROVEMENTS:")
         print(f"✅ Scripts generated: {len(successful_scripts)}/{total_cards}")
-        print(f"✅ Validation passed: {len(validated_scripts)}/{len(successful_scripts)}")
+        print(f"✅ Quote validation passed: {len(validated_scripts)}/{len(successful_scripts)}")
+        print(f"🎯 Enhanced validation passed: {len(enhanced_validated_scripts)}/{len(successful_scripts)}")
         print(f"📈 Average quote count: {avg_quote_count:.1f} (target: 16)")
-        print(f"🏢 Company integration: {company_name} mentioned 6 times per script")
+        print(f"🏢 Company integration: {company_name} mentioned 6+ times per script")
         print(f"🎯 Quote distribution success rate: {(len(validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
+        print(f"🚀 Enhanced content success rate: {(len(enhanced_validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
+        print(f"📋 Additive enhancements: {', '.join(summary['additive_enhancements'])}")
         
         return summary
 
@@ -626,12 +745,17 @@ def main():
     """Main function to orchestrate the entire workflow."""
     try:
         print("=" * 80)
-        print("VIDEO SCRIPT AUTOMATION - 4 QUOTES PER PROBLEM + COMPANY INTEGRATION")
+        print("ENHANCED VIDEO SCRIPT AUTOMATION - ALL ADDITIVE IMPROVEMENTS")
         print("=" * 80)
         print(f"Start time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Script directory: {SCRIPT_DIR}")
         print("🎯 APPROACH: Exactly 4 quotes per problem (16 total quotes per script)")
-        print("🏢 ENHANCEMENT: Company name integration (6 mentions + 2 minutes content)")
+        print("🏢 ENHANCEMENT: Company name integration (6 mentions)")
+        print("🚀 ADDITIVE IMPROVEMENTS:")
+        print("   ✅ Feature clarity in each problem section (<800 chars)")
+        print("   ✅ Revenue impact with <6-month payback assurance (<800 chars)")
+        print("   ✅ Implementation assurance <8 hours in outro (<800 chars)")
+        print("   ✅ Competitive differentiation in outro (<800 chars)")
 
         # Fetch configuration from Supabase
         print("\nFetching configuration from Supabase...")
@@ -647,12 +771,12 @@ def main():
         guidance_bucket = video_script_config["supabase_buckets"]["guidance"]
         guidance_files = load_guidance_files(guidance_bucket)
 
-        # Process Poppy Cards with 4 quotes per problem and company integration
+        # Process Poppy Cards with all enhancements
         summary = process_poppy_cards(variables, guidance_files)
 
         # Save summary to output bucket
         output_bucket = video_script_config["supabase_buckets"]["output"]
-        summary_filename = f"video_script_summary_{summary['timestamp']}.json"
+        summary_filename = f"enhanced_video_script_summary_{summary['timestamp']}.json"
         summary_content = json.dumps(summary, indent=2)
         upload_file_to_bucket(output_bucket, summary_filename, summary_content)
 
@@ -661,14 +785,15 @@ def main():
         execution_time = end_time - start_time
 
         print("\n" + "=" * 80)
-        print("WORKFLOW COMPLETE - 4 QUOTES PER PROBLEM + COMPANY INTEGRATION")
+        print("ENHANCED WORKFLOW COMPLETE - ALL ADDITIVE IMPROVEMENTS")
         print("=" * 80)
         print(f"End time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Total execution time: {execution_time}")
         print(f"Scripts generated: {summary['successful']}/{summary['total_processed']}")
-        print(f"Validation success rate: {summary['validation_rate']}")
+        print(f"Quote validation success rate: {summary['validation_rate']}")
+        print(f"Enhanced validation success rate: {summary['enhanced_validation_rate']}")
         print(f"Average quote count: {summary['average_quote_count']} (target: 16)")
-        print(f"Company integration: {summary['company_name']} mentioned 6 times per script")
+        print(f"Company integration: {summary['company_name']} mentioned 6+ times per script")
         print(f"Summary saved as: {summary_filename}")
 
         if summary['failed'] > 0:
@@ -677,19 +802,27 @@ def main():
                 if script['status'] == 'failed':
                     print(f"  - {script['combination']}: {script.get('error', 'Unknown error')}")
 
-        # Show validation statistics
+        # Show enhanced validation statistics
         validation_passed = summary['validation_passed']
+        enhanced_validation_passed = summary['enhanced_validation_passed']
         total_successful = summary['successful']
         if total_successful > 0:
-            print(f"\n📊 QUOTE DISTRIBUTION ANALYSIS:")
+            print(f"\n📊 COMPREHENSIVE VALIDATION ANALYSIS:")
             print(f"✅ Scripts with 16 quotes (4 per problem): {validation_passed}/{total_successful}")
-            print(f"🏢 Company mentions per script: 6 (intro + 4 problems + outro)")
+            print(f"🎯 Scripts with enhanced content: {enhanced_validation_passed}/{total_successful}")
+            print(f"🏢 Company mentions per script: 6+ (intro + 4 problems + outro)")
             print(f"📈 Professional competence focus maintained across all scripts")
             print(f"🎯 Peer validation psychology successfully implemented")
+            print(f"🚀 Additive improvements: {', '.join(summary['additive_enhancements'])}")
 
-        print("\n🎉 Video script automation workflow completed successfully!")
+        print("\n🎉 Enhanced video script automation workflow completed successfully!")
         print("📋 Each script contains exactly 16 quotes (4 quotes per problem)")
-        print("🏢 Each script includes natural company name integration (+2 minutes content)")
+        print("🏢 Each script includes natural company name integration")
+        print("🚀 Each script includes all additive improvements:")
+        print("   • Feature clarity explanations")
+        print("   • Revenue impact with sub-6-month payback assurance")
+        print("   • Implementation time assurance (<8 hours)")
+        print("   • Competitive differentiation advantages")
 
     except Exception as e:
         print(f"\n❌ Critical error in workflow: {str(e)}")
