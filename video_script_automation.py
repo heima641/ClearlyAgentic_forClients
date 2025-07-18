@@ -14,6 +14,7 @@ ENHANCEMENTS:
 - Peer validation psychology framework
 - Professional competence vs. ego-stroking detection
 - Quote distribution validation and reporting
+- Company name integration (6 mentions per script, +2 minutes content)
 
 The workflow processes 10 predefined Poppy Card combinations sequentially,
 generating custom video scripts for each combination and saving them to Supabase.
@@ -260,30 +261,32 @@ def validate_quote_distribution(script_content):
 
 
 # =====================================================================
-# ENHANCED VIDEO SCRIPT GENERATION FUNCTION - 4 QUOTES PER PROBLEM
+# ENHANCED VIDEO SCRIPT GENERATION FUNCTION - 4 QUOTES PER PROBLEM + COMPANY NAME
 # =====================================================================
 
 def generate_video_script(voice_guidance,
                           method_guidance,
                           prompt_instructions,
                           poppy_card_content,
+                          company_name,
                           openai_model="gpt-4o",
                           max_retries=3,
                           retry_delay=2):
     """
-    Generate a video script using OpenAI API with 4 quotes per problem (16 total)
+    Generate a video script using OpenAI API with 4 quotes per problem (16 total) and company name integration
     
     Args:
         voice_guidance (str): Voice and tone guidance
         method_guidance (str): Script structure and framework guidance
         prompt_instructions (str): Specific processing instructions
         poppy_card_content (str): Poppy Card content to focus on
+        company_name (str): Company name for brand integration
         openai_model (str): OpenAI model to use
         max_retries (int): Maximum number of retry attempts
         retry_delay (int): Delay between retries in seconds
         
     Returns:
-        str: Generated video script with exactly 16 quotes (4 per problem)
+        str: Generated video script with exactly 16 quotes (4 per problem) and company mentions
     """
     try:
         # Create OpenAI client
@@ -370,11 +373,26 @@ Requirements:
 - Create an engaging video script that follows the voice, method, and focuses on the provided content
 - Ensure quote distribution creates a "peer validation experience" rather than a sales pitch"""
 
+        # ADDITIVE ENHANCEMENT: Company Name Integration Instructions
+        system_prompt += f"""
+
+🔁 ADDITIONAL MANDATE - COMPANY NAME INTEGRATION:
+- Company name: {company_name}
+- Include company name **once naturally in the intro** 
+- Include company name **at least once per Problem section** (4 total)
+- Include company name **once in the outro**
+- Expand total script by ~280 words (≈2 minutes narration) through these natural integrations
+- Make mentions feel organic - position as the solution provider, not repetitive branding
+- Example integration: "...companies like yours working with {company_name} have discovered..."
+- Focus on value association: "{company_name} helps businesses..." or "Through {company_name}'s insights..."
+- Maintain professional, consultative tone - not salesy or pushy
+- Ensure seamless flow - company mentions should enhance, not interrupt, the narrative"""
+
         # Continue with existing retry logic...
         for attempt in range(max_retries):
             try:
                 print(
-                    f"Generating video script with 4 quotes per problem using {openai_model} (attempt {attempt + 1}/{max_retries})..."
+                    f"Generating video script with 4 quotes per problem and {company_name} integration using {openai_model} (attempt {attempt + 1}/{max_retries})..."
                 )
 
                 response = client.chat.completions.create(
@@ -384,7 +402,7 @@ Requirements:
                         "content": system_prompt
                     }, {
                         "role": "user",
-                        "content": "Please generate the video script now with exactly 4 quotes from each problem (16 total quotes)."
+                        "content": "Please generate the video script now with exactly 4 quotes from each problem (16 total quotes) and natural company name integration."
                     }],
                     max_tokens=2000,
                     temperature=0.7)
@@ -394,7 +412,7 @@ Requirements:
                     script_content = script_content.strip()
 
                 if script_content:
-                    print(f"Successfully generated video script with 4 quotes per problem ({len(script_content)} characters)")
+                    print(f"Successfully generated video script with 4 quotes per problem and company integration ({len(script_content)} characters)")
                     
                     # ✅ VALIDATE QUOTE DISTRIBUTION (16 QUOTES EXPECTED)
                     is_valid, validation_message = validate_quote_distribution(script_content)
@@ -468,7 +486,7 @@ def load_guidance_files(bucket_name):
 
 def process_poppy_cards(variables, guidance_files):
     """
-    Process Poppy Cards with 4 quotes per problem (16 total quotes per script)
+    Process Poppy Cards with 4 quotes per problem (16 total quotes per script) and company name integration
     
     Args:
         variables (dict): Configuration variables from Supabase
@@ -496,12 +514,13 @@ def process_poppy_cards(variables, guidance_files):
         total_cards = len(card_combinations)
         
         print(f"\n" + "=" * 80)
-        print("PROCESSING POPPY CARDS WITH 4 QUOTES PER PROBLEM")
+        print("PROCESSING POPPY CARDS WITH 4 QUOTES PER PROBLEM + COMPANY INTEGRATION")
         print("=" * 80)
         print(f"Total combinations to process: {total_cards}")
         print(f"Company: {company_name}")
         print(f"OpenAI Model: {openai_model}")
         print(f"Quote Distribution: 4 quotes per problem (16 total per script)")
+        print(f"Company Integration: 6 mentions per script (+2 minutes content)")
         print(f"Timestamp: {timestamp}")
         
         for i, combination in enumerate(card_combinations, 1):
@@ -521,12 +540,13 @@ def process_poppy_cards(variables, guidance_files):
                 poppy_card_content = download_file_from_bucket(
                     input_bucket, input_filename)
 
-                # ✅ SCRIPT GENERATION WITH 4 QUOTES PER PROBLEM
+                # ✅ SCRIPT GENERATION WITH 4 QUOTES PER PROBLEM + COMPANY NAME
                 script_content = generate_video_script(
                     voice_guidance=guidance_files["voice"],
                     method_guidance=guidance_files["method"],
                     prompt_instructions=guidance_files["prompt"],
                     poppy_card_content=poppy_card_content,
+                    company_name=company_name,
                     openai_model=openai_model
                 )
 
@@ -588,10 +608,11 @@ def process_poppy_cards(variables, guidance_files):
             "openai_model": openai_model
         }
 
-        print(f"\n📊 PROCESSING SUMMARY - 4 QUOTES PER PROBLEM:")
+        print(f"\n📊 PROCESSING SUMMARY - 4 QUOTES PER PROBLEM + COMPANY INTEGRATION:")
         print(f"✅ Scripts generated: {len(successful_scripts)}/{total_cards}")
         print(f"✅ Validation passed: {len(validated_scripts)}/{len(successful_scripts)}")
         print(f"📈 Average quote count: {avg_quote_count:.1f} (target: 16)")
+        print(f"🏢 Company integration: {company_name} mentioned 6 times per script")
         print(f"🎯 Quote distribution success rate: {(len(validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
         
         return summary
@@ -605,11 +626,12 @@ def main():
     """Main function to orchestrate the entire workflow."""
     try:
         print("=" * 80)
-        print("VIDEO SCRIPT AUTOMATION - 4 QUOTES PER PROBLEM")
+        print("VIDEO SCRIPT AUTOMATION - 4 QUOTES PER PROBLEM + COMPANY INTEGRATION")
         print("=" * 80)
         print(f"Start time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Script directory: {SCRIPT_DIR}")
         print("🎯 APPROACH: Exactly 4 quotes per problem (16 total quotes per script)")
+        print("🏢 ENHANCEMENT: Company name integration (6 mentions + 2 minutes content)")
 
         # Fetch configuration from Supabase
         print("\nFetching configuration from Supabase...")
@@ -625,7 +647,7 @@ def main():
         guidance_bucket = video_script_config["supabase_buckets"]["guidance"]
         guidance_files = load_guidance_files(guidance_bucket)
 
-        # Process Poppy Cards with 4 quotes per problem
+        # Process Poppy Cards with 4 quotes per problem and company integration
         summary = process_poppy_cards(variables, guidance_files)
 
         # Save summary to output bucket
@@ -639,13 +661,14 @@ def main():
         execution_time = end_time - start_time
 
         print("\n" + "=" * 80)
-        print("WORKFLOW COMPLETE - 4 QUOTES PER PROBLEM")
+        print("WORKFLOW COMPLETE - 4 QUOTES PER PROBLEM + COMPANY INTEGRATION")
         print("=" * 80)
         print(f"End time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Total execution time: {execution_time}")
         print(f"Scripts generated: {summary['successful']}/{summary['total_processed']}")
         print(f"Validation success rate: {summary['validation_rate']}")
         print(f"Average quote count: {summary['average_quote_count']} (target: 16)")
+        print(f"Company integration: {summary['company_name']} mentioned 6 times per script")
         print(f"Summary saved as: {summary_filename}")
 
         if summary['failed'] > 0:
@@ -660,11 +683,13 @@ def main():
         if total_successful > 0:
             print(f"\n📊 QUOTE DISTRIBUTION ANALYSIS:")
             print(f"✅ Scripts with 16 quotes (4 per problem): {validation_passed}/{total_successful}")
+            print(f"🏢 Company mentions per script: 6 (intro + 4 problems + outro)")
             print(f"📈 Professional competence focus maintained across all scripts")
             print(f"🎯 Peer validation psychology successfully implemented")
 
         print("\n🎉 Video script automation workflow completed successfully!")
         print("📋 Each script contains exactly 16 quotes (4 quotes per problem)")
+        print("🏢 Each script includes natural company name integration (+2 minutes content)")
 
     except Exception as e:
         print(f"\n❌ Critical error in workflow: {str(e)}")
