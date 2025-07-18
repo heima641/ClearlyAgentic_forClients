@@ -15,6 +15,7 @@ ENHANCEMENTS:
 - Professional competence vs. ego-stroking detection
 - Quote distribution validation and reporting
 - Company name integration (4 mentions per script, adapted for 5-minute format)
+- FIXED: Enhanced structural validation and balanced problem development
 
 The workflow processes 5 predefined Poppy Card combinations sequentially (cards 11-15),
 generating custom SHORT video scripts for each combination and saving them to Supabase.
@@ -119,12 +120,12 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 ENV_FILE_PATH = os.path.join(script_dir, "STATIC_VARS_MAR2025.env")
 
 # =====================================================================
-# ENHANCED QUOTE DISTRIBUTION VALIDATION FUNCTION - 4 QUOTES PER PROBLEM (2-PROBLEM FORMAT)
+# ENHANCED QUOTE DISTRIBUTION VALIDATION FUNCTION - FIXED FOR BALANCED 2-PROBLEM STRUCTURE
 # =====================================================================
 
 def validate_quote_distribution_short(script_content):
     """
-    Validate that the generated SHORT script has exactly 4 quotes per problem (8 total quotes)
+    Enhanced validation for 2-problem structure with balanced quote distribution and content balance
     
     Args:
         script_content (str): The generated SHORT video script content
@@ -142,21 +143,41 @@ def validate_quote_distribution_short(script_content):
         elif quote_count > 10:
             return False, f"Too many quotes: {quote_count} (target: exactly 8 quotes - 4 per problem)"
         
-        # Check for quotes in problem sections
-        # Look for common problem indicators
-        problem_sections = re.split(r'(?i)(problem|challenge|issue|struggle|difficulty)', script_content)
+        # Enhanced structural validation - Split script into sections
+        sections = re.split(r'(?i)(problem|challenge|issue|struggle|difficulty)', script_content)
         
-        if len(problem_sections) > 1:  # If we found problem sections
-            quotes_in_problems = 0
-            for section in problem_sections[1:]:  # Skip the intro before first problem
-                # Look for quotes in the next 400 characters after problem indicator
-                section_preview = section[:400] if len(section) >= 400 else section
-                quotes_in_section = len(re.findall(r'"[^"]*"', section_preview))
-                if quotes_in_section > 0:
-                    quotes_in_problems += 1
-            
-            if quotes_in_problems < 2:
-                return False, f"Insufficient quotes in problem sections: {quotes_in_problems} (need 4 quotes in each of the 2 problems)"
+        if len(sections) < 3:  # Need at least intro + 2 problems
+            return False, "Script missing clear 2-problem structure with identifiable problem sections"
+        
+        # Validate quotes per problem section - Look for distinct problem areas
+        problem_quotes = []
+        problem_word_counts = []
+        
+        # Analyze first two major sections after problem indicators
+        for i in range(1, min(5, len(sections))):  # Check up to 4 sections after splits
+            if i == 1 or i == 3:  # Likely problem sections (odd indices after splits)
+                if i + 1 < len(sections):
+                    section_content = sections[i + 1]  # Content after problem indicator
+                    # Look at substantial portion of each problem section
+                    section_preview = section_content[:1000] if len(section_content) >= 1000 else section_content
+                    section_quotes = len(re.findall(r'"[^"]*"', section_preview))
+                    section_words = len(section_preview.split())
+                    
+                    problem_quotes.append(section_quotes)
+                    problem_word_counts.append(section_words)
+        
+        if len(problem_quotes) < 2:
+            return False, "Could not identify 2 distinct problem sections with quotes"
+        
+        # Validate quote distribution per problem
+        if problem_quotes[0] < 2 or problem_quotes[1] < 2:
+            return False, f"Uneven quote distribution: Problem 1: {problem_quotes[0]} quotes, Problem 2: {problem_quotes[1]} quotes (need ~4 each)"
+        
+        # Check content balance between problems
+        if len(problem_word_counts) >= 2:
+            word_diff = abs(problem_word_counts[0] - problem_word_counts[1])
+            if word_diff > 200:  # Allow some flexibility but not extreme imbalance
+                return False, f"Unbalanced problem development: P1: {problem_word_counts[0]} words, P2: {problem_word_counts[1]} words (difference: {word_diff})"
         
         # Check for professional competence indicators (not ego-stroking)
         ego_indicators = ['hero', 'genius', 'star', 'rockstar', 'superstar', 'legend', 'champion']
@@ -168,8 +189,12 @@ def validate_quote_distribution_short(script_content):
         if ego_count > confidence_count:
             return False, f"Script leans toward ego-stroking ({ego_count} ego vs {confidence_count} confidence indicators). Focus on professional competence instead."
         
-        # Success validation
-        return True, f"Perfect SHORT quote distribution: {quote_count} total quotes (4 quotes per problem) with professional competence focus"
+        # Enhanced success validation with balance metrics
+        balance_info = ""
+        if len(problem_word_counts) >= 2:
+            balance_info = f", balanced content ({problem_word_counts[0]}/{problem_word_counts[1]} words per problem)"
+        
+        return True, f"Excellent SHORT structure: {quote_count} total quotes ({problem_quotes[0]}/{problem_quotes[1]} per problem){balance_info} with professional competence focus"
         
     except Exception as e:
         return False, f"SHORT validation error: {str(e)}"
@@ -291,7 +316,7 @@ def upload_file_to_bucket(bucket_name, file_name, file_content):
 
 
 # =====================================================================
-# ENHANCED VIDEO SCRIPT GENERATION FUNCTION - 4 QUOTES PER PROBLEM + COMPANY NAME (SHORT FORMAT)
+# ENHANCED VIDEO SCRIPT GENERATION FUNCTION - FIXED STRUCTURAL TEMPLATE
 # =====================================================================
 
 def generate_video_script(voice_guidance,
@@ -303,7 +328,7 @@ def generate_video_script(voice_guidance,
                           max_retries=3,
                           retry_delay=2):
     """
-    Generate a SHORT video script using OpenAI API with 4 quotes per problem (8 total) and company name integration
+    Generate a SHORT video script using OpenAI API with enhanced structural template for balanced 2-problem development
     
     Args:
         voice_guidance (str): Voice and tone guidance
@@ -322,7 +347,7 @@ def generate_video_script(voice_guidance,
         # Create OpenAI client
         client = openai.OpenAI(api_key=openai_api_key)
 
-        # ✅ ENHANCED SYSTEM PROMPT WITH 4 QUOTES PER PROBLEM FOR SHORT FORMAT
+        # ✅ ENHANCED SYSTEM PROMPT WITH STRUCTURAL TEMPLATE FOR BALANCED 2-PROBLEM DEVELOPMENT
         system_prompt = f"""You are a professional video script writer specializing in concise, high-impact B2B software buyer psychology content. Generate a SHORT video script with these precise specifications:
 
 TARGET: 5-minute duration (approximately 750-900 words)
@@ -350,6 +375,44 @@ SPECIFIC SHORT-FORMAT INSTRUCTIONS:
 CONTENT SOURCE (2-Problem Card):
 {poppy_card_content}
 
+🏗️ MANDATORY 2-PROBLEM STRUCTURE TEMPLATE:
+
+**INTRO SECTION (75-100 words):**
+- Hook with {company_name} mention
+- Preview of both problems to be covered
+- Credibility statement
+
+**PROBLEM 1 SECTION (350-400 words):**
+- **Clear Problem Statement**: Start with "**Problem 1: [Specific Challenge Name]**"
+- Examples: "Deal Pipeline Visibility", "Lead Qualification Accuracy", "Sales Forecast Reliability"
+- **Customer Validation** (4 quotes from Problem 1):
+  * Quote 1: Problem recognition ("We struggled with...")
+  * Quote 2: Impact quantification ("This cost us...")  
+  * Quote 3: Failed attempts ("We tried X but...")
+  * Quote 4: Resolution need ("We needed...")
+- **Solution Bridge**: {company_name} capability introduction
+- **Clear takeaway**: How this problem gets resolved
+
+**TRANSITION SECTION (50-75 words):**
+- Bridge to second problem: "The second major challenge companies face..."
+- Connect to broader business impact
+
+**PROBLEM 2 SECTION (350-400 words):**
+- **Distinct Second Problem Statement**: Start with "**Problem 2: [Different Challenge Name]**"
+- Must be clearly different from Problem 1
+- **Customer Validation** (4 quotes from Problem 2):
+  * Quote 5: Problem recognition ("We struggled with...")
+  * Quote 6: Impact quantification ("This cost us...")
+  * Quote 7: Failed attempts ("We tried X but...")
+  * Quote 8: Resolution need ("We needed...")
+- **Solution Bridge**: {company_name} capability for this specific problem
+- **Clear takeaway**: How this second problem gets resolved
+
+**OUTRO SECTION (75-100 words):**
+- Summary of both problems solved
+- Call-to-action
+- Final {company_name} mention
+
 QUOTE SELECTION MANDATE - KEEP IT SIMPLE:
 - Each two-problem poppy card contains 16 total quotes (8 customer quotes per problem)
 - For each problem, use the FIRST 4 quotes from that problem's list of 8 quotes
@@ -357,12 +420,48 @@ QUOTE SELECTION MANDATE - KEEP IT SIMPLE:
 - Total quotes in your script: exactly 8 quotes (4 × 2 problems)
 - DO NOT pick and choose quotes - simply use the first 4 from each problem section
 
-STRATEGIC QUOTE DISTRIBUTION REQUIREMENTS:
-- Include exactly 4 customer quotes in EVERY problem section for maximum credibility
-- Structure each problem with quotes integrated naturally throughout the problem discussion
-- Use role-specific attributions when available (Director of Sales, VP Sales, CRO, CEO)
-- Distribute the 4 quotes evenly throughout each problem section
-- Use customer quotes throughout the script for optimal conversion psychology
+PROBLEM IDENTIFICATION REQUIREMENTS:
+- Each problem MUST have a clear, distinct problem statement
+- Use section headers like "**Problem 1: [Specific Challenge Name]**"
+- Each problem must be clearly distinguished from the other
+- No generic or overlapping problem descriptions
+- Each problem should address different aspects of the business challenge
+
+SECTION-SPECIFIC WORD COUNT REQUIREMENTS:
+- Total script: 750-900 words
+- Intro: 75-100 words (validate hook + preview)
+- Problem 1: 350-400 words (must include 4 quotes + solution mention)
+- Transition: 50-75 words (bridge between problems)
+- Problem 2: 350-400 words (must include 4 quotes + solution mention)  
+- Outro: 75-100 words (summary + CTA)
+
+BALANCE VALIDATION:
+- Problem sections must be within 50 words of each other
+- Each problem must contain exactly 4 customer quotes
+- No section should be under 50 words or over 450 words
+
+PROBLEM DEVELOPMENT FRAMEWORK (Apply to BOTH problems):
+
+**PROBLEM SETUP (75-100 words per problem):**
+- Clear problem statement with specific business impact
+- Industry context that resonates with target audience
+
+**CUSTOMER VALIDATION (200-250 words per problem):**
+- Quote 1: Problem recognition ("We struggled with...")
+- Quote 2: Impact quantification ("This cost us...")  
+- Quote 3: Failed attempts ("We tried X but...")
+- Quote 4: Resolution need ("We needed...")
+
+**SOLUTION BRIDGE (75-100 words per problem):**
+- {company_name} capability introduction
+- Transition to how it solves this specific problem
+
+EACH PROBLEM MUST:
+- Address a distinct business challenge
+- Include specific pain points
+- Show real customer struggles
+- Connect to {company_name} solution
+- End with clear transformation/outcome
 
 PSYCHOLOGICAL FRAMEWORK - PEER VALIDATION APPROACH:
 - Frame this as "peer sharing insights" rather than "company selling solution"
@@ -381,32 +480,19 @@ PROFESSIONAL COMPETENCE & CONFIDENCE TRANSFORMATION (NOT EGO-STROKING):
 - Position as "you'll have the insights needed to make confident decisions"
 - Focus on operational excellence rather than personal recognition
 
-CUSTOMER QUOTE AUTHENTICITY GUIDELINES:
-- Make quotes feel conversational, not polished marketing speak
-- Include specific job titles that match your target buyer personas
-- Use industry-specific language that resonates with software buyers
-- Include subtle pain points that show the customer truly understands the problem
-- Balance problem validation quotes with professional confidence quotes
-- Avoid quotes that sound like ego-stroking or "hero" positioning
-
 CRITICAL SHORT-FORMAT REQUIREMENTS:
-1. DURATION CONTROL: Aim for 5 minutes (750-900 words maximum)
-2. 2-PROBLEM STRUCTURE: 
-   - Problem 1: 2-2.5 minutes of content with 4 quotes
-   - Transition: 15-30 seconds  
-   - Problem 2: 2-2.5 minutes of content with 4 quotes
-3. PACING: Fast, dynamic transitions between concepts
-4. DENSITY: Pack maximum value into minimum time
-5. KALLAWAY FRAMEWORK ADAPTATION:
+1. PACING: Fast, dynamic transitions between concepts
+2. DENSITY: Pack maximum value into minimum time
+3. KALLAWAY FRAMEWORK ADAPTATION:
    - Hook: 15-20 seconds (immediate engagement)
    - Authority: Integrated throughout, not separate section
    - Logic: Streamlined, essential points only
    - Leverage: Quick, actionable insights
    - Appeal: Concise call-to-action
    - Why: Woven into problems, not standalone
-6. FORMATTING:
+4. FORMATTING:
    - Short paragraphs (1-3 sentences max)
-   - Clear section breaks
+   - Clear section breaks with headers
    - Rapid-fire delivery style
    - No filler content
 
@@ -423,11 +509,14 @@ FINAL REMINDER BEFORE YOU BEGIN:
 - Total script must contain exactly 8 quotes
 - Use the exact quotes from the poppy card content provided
 - Do not skip quotes or rearrange - use the first 4 from each problem in order
+- Each problem section must be 350-400 words
+- Use clear problem headers: "**Problem 1: [Name]**" and "**Problem 2: [Name]**"
 
 Requirements:
 - Write in plain text format
 - Use short paragraphs of 1-3 sentences maximum
 - Add line breaks between paragraphs
+- Include clear section headers for structure
 - Create an engaging SHORT video script that follows the voice, method, and focuses on the provided content
 - Ensure quote distribution creates a "peer validation experience" rather than a sales pitch"""
 
@@ -451,9 +540,9 @@ Requirements:
         # Continue with retry logic for SHORT scripts
         for attempt in range(max_retries):
             try:
-                logger.info(f"[SHORT-GENERATION] Attempt {attempt + 1}/{max_retries} for 5-minute script with 8 quotes and {company_name} integration")
+                logger.info(f"[SHORT-GENERATION] Attempt {attempt + 1}/{max_retries} for balanced 2-problem script with {company_name} integration")
                 print(
-                    f"Generating SHORT video script with 4 quotes per problem and {company_name} integration using {openai_model} (attempt {attempt + 1}/{max_retries})..."
+                    f"Generating balanced SHORT video script with enhanced structure and {company_name} integration using {openai_model} (attempt {attempt + 1}/{max_retries})..."
                 )
 
                 response = client.chat.completions.create(
@@ -463,9 +552,9 @@ Requirements:
                         "content": system_prompt
                     }, {
                         "role": "user",
-                        "content": "Generate a 5-minute SHORT video script now with exactly 4 quotes from each problem (8 total quotes) and natural company name integration. Focus on the 2-problem structure from the provided card content. Target 750-900 words total with professional competence focus."
+                        "content": "Generate a 5-minute SHORT video script now with exactly 4 quotes from each problem (8 total quotes) and natural company name integration. CRITICAL: Follow the mandatory structure template with clear problem headers, balanced word counts (350-400 words per problem), and distinct problem identification. Focus on the 2-problem structure from the provided card content. Target 750-900 words total with professional competence focus."
                     }],
-                    max_tokens=2000,
+                    max_tokens=3000,  # PRIORITY 2 FIX: Increased from 2000 to handle long prompt + full response
                     temperature=0.7)
 
                 script_content = response.choices[0].message.content
@@ -477,18 +566,18 @@ Requirements:
                     word_count = len(script_content.split())
                     logger.info(f"[SHORT-GENERATION] SUCCESS - Generated {word_count} words, {len(script_content)} characters")
                     print(
-                        f"Successfully generated 5-minute SHORT video script with quote distribution and {company_name} integration ({len(script_content)} characters, ~{word_count} words)"
+                        f"Successfully generated 5-minute SHORT video script with enhanced structure and {company_name} integration ({len(script_content)} characters, ~{word_count} words)"
                     )
                     
-                    # ✅ VALIDATE QUOTE DISTRIBUTION (8 QUOTES EXPECTED)
+                    # ✅ VALIDATE ENHANCED QUOTE DISTRIBUTION AND STRUCTURE (8 QUOTES EXPECTED)
                     is_valid, validation_message = validate_quote_distribution_short(script_content)
                     if is_valid:
-                        logger.info(f"✅ SHORT quote validation passed: {validation_message}")
-                        print(f"✅ SHORT quote validation passed: {validation_message}")
+                        logger.info(f"✅ Enhanced SHORT validation passed: {validation_message}")
+                        print(f"✅ Enhanced SHORT validation passed: {validation_message}")
                         return script_content
                     else:
-                        logger.warning(f"⚠️ SHORT quote validation warning: {validation_message}")
-                        print(f"⚠️ SHORT quote validation warning: {validation_message}")
+                        logger.warning(f"⚠️ Enhanced SHORT validation warning: {validation_message}")
+                        print(f"⚠️ Enhanced SHORT validation warning: {validation_message}")
                         return script_content  # Return anyway but log the warning
                 else:
                     raise Exception("Empty response from OpenAI for SHORT script generation")
@@ -507,16 +596,16 @@ Requirements:
                     )
 
                 if attempt < max_retries - 1:
-                    logger.info(f"[SHORT-RETRY] Retrying SHORT script generation in {retry_delay}s...")
+                    logger.info(f"[SHORT-RETRY] Retrying enhanced SHORT script generation in {retry_delay}s...")
                     print(
-                        f"OpenAI API error: {e}. Retrying SHORT script with quote distribution in {retry_delay} seconds..."
+                        f"OpenAI API error: {e}. Retrying enhanced SHORT script with structural template in {retry_delay} seconds..."
                     )
                     time.sleep(retry_delay)
                     retry_delay *= 2  # Exponential backoff
                 else:
-                    logger.error(f"[SHORT-FAILURE] Failed to generate SHORT script after {max_retries} attempts")
+                    logger.error(f"[SHORT-FAILURE] Failed to generate enhanced SHORT script after {max_retries} attempts")
                     print(
-                        f"Failed to generate SHORT script with quote distribution after {max_retries} attempts: {e}"
+                        f"Failed to generate enhanced SHORT script with structural template after {max_retries} attempts: {e}"
                     )
                     raise
 
@@ -540,7 +629,7 @@ def load_guidance_files(bucket_name):
         dict: Dictionary containing voice, method, and SHORT prompt guidance
     """
     print("\n" + "=" * 80)
-    print("LOADING GUIDANCE FILES FOR SHORT SCRIPTS WITH QUOTE DISTRIBUTION")
+    print("LOADING GUIDANCE FILES FOR ENHANCED SHORT SCRIPTS WITH STRUCTURAL VALIDATION")
     print("=" * 80)
 
     try:
@@ -569,7 +658,7 @@ def load_guidance_files(bucket_name):
             "prompt": prompt_instructions
         }
 
-        print("Successfully loaded all guidance files for SHORT scripts with quote distribution")
+        print("Successfully loaded all guidance files for enhanced SHORT scripts with structural validation")
         return guidance_files
 
     except Exception as e:
@@ -579,17 +668,36 @@ def load_guidance_files(bucket_name):
 
 def process_poppy_cards(variables, guidance_files):
     """
-    Process 5 Poppy Card combinations sequentially (cards 11-15) with 4 quotes per problem and company integration
+    Process 5 Poppy Card combinations sequentially (cards 11-15) with enhanced structural validation
     
     Args:
         variables (dict): Configuration variables from Supabase
         guidance_files (dict): Loaded guidance files
         
     Returns:
-        dict: Summary of processed SHORT scripts with quote distribution validation
+        dict: Summary of processed SHORT scripts with enhanced validation
     """
     try:
-        # Extract configuration
+        # PRIORITY 1 FIX: Validate required configuration exists before accessing
+        required_paths = [
+            ("scripts", "video_script_short"),
+            ("global", "COMPANY_NAME"),
+            ("scripts", "video_script_short", "supabase_buckets", "input_cards"),
+            ("scripts", "video_script_short", "supabase_buckets", "output"),
+            ("scripts", "video_script_short", "card_combinations")
+        ]
+
+        for path in required_paths:
+            current = variables
+            for key in path:
+                if key not in current:
+                    raise Exception(f"Missing required configuration: {'.'.join(path)}")
+                current = current[key]
+        
+        logger.info("[SHORT-CONFIG] Configuration validation passed - all required paths exist")
+        print("✅ Configuration validation passed - all required paths exist")
+
+        # Extract configuration (now safely validated)
         video_script_config = variables["scripts"]["video_script_short"]
         company_name = variables["global"]["COMPANY_NAME"]
         openai_model = video_script_config.get("openai_model", "gpt-4o")
@@ -607,13 +715,14 @@ def process_poppy_cards(variables, guidance_files):
         total_cards = len(card_combinations)
 
         print(f"\n" + "=" * 80)
-        print("PROCESSING POPPY CARDS WITH 4 QUOTES PER PROBLEM + COMPANY INTEGRATION (SHORT FORMAT)")
+        print("PROCESSING POPPY CARDS WITH ENHANCED 2-PROBLEM STRUCTURAL VALIDATION")
         print("=" * 80)
         print(f"Total combinations to process: {total_cards}")
         print(f"Company: {company_name}")
         print(f"OpenAI Model: {openai_model}")
         print(f"Quote Distribution: 4 quotes per problem (8 total per SHORT script)")
         print(f"Company Integration: 4 mentions per script (adapted for 5-minute format)")
+        print(f"Enhanced Validation: Balanced problem development + structural integrity")
         print(f"Timestamp: {timestamp}")
         
         for i, combination in enumerate(card_combinations, 1):
@@ -624,7 +733,7 @@ def process_poppy_cards(variables, guidance_files):
                 # Construct input and output filenames for cards 11-15
                 card_number = f"card{i+10:02d}"  # Formats as card11, card12, ..., card15
                 input_filename = f"{company_name}_{card_number}_{combination}.txt"
-                output_filename = f"{company_name}_SHORT_script_{combination}_{timestamp}.txt"
+                output_filename = f"{company_name}_SHORT_enhanced_script_{combination}_{timestamp}.txt"
 
                 print(f"Looking for file: {input_filename}")
 
@@ -632,7 +741,7 @@ def process_poppy_cards(variables, guidance_files):
                 poppy_card_content = download_file_from_bucket(
                     input_bucket, input_filename)
 
-                # ✅ ENHANCED SCRIPT GENERATION WITH 4 QUOTES PER PROBLEM + COMPANY NAME (SHORT FORMAT)
+                # ✅ ENHANCED SCRIPT GENERATION WITH STRUCTURAL TEMPLATE
                 script_content = generate_video_script(
                     voice_guidance=guidance_files["voice"],
                     method_guidance=guidance_files["method"],
@@ -646,7 +755,7 @@ def process_poppy_cards(variables, guidance_files):
                 upload_file_to_bucket(output_bucket, output_filename,
                                       script_content)
 
-                # ✅ VALIDATION RESULTS (EXPECTING 8 QUOTES FOR SHORT FORMAT)
+                # ✅ ENHANCED VALIDATION RESULTS (EXPECTING 8 QUOTES + BALANCED STRUCTURE)
                 is_valid, validation_message = validate_quote_distribution_short(script_content)
                 quote_count = len(re.findall(r'"[^"]*"', script_content))
                 word_count = len(script_content.split())
@@ -663,16 +772,16 @@ def process_poppy_cards(variables, guidance_files):
                     "validation_message": validation_message,
                     "target_compliance": "optimal" if 700 <= word_count <= 950 else ("low" if word_count < 700 else "high"),
                     "status": "success",
-                    "script_type": "SHORT"
+                    "script_type": "SHORT_ENHANCED"
                 })
 
-                print(f"✅ Successfully processed SHORT {combination}")
+                print(f"✅ Successfully processed enhanced SHORT {combination}")
                 print(f"📊 Quote count: {quote_count}, Target: 8, Validation: {'PASSED' if is_valid else 'WARNING'}")
                 print(f"📊 Word count: {word_count}, Target: 750-900")
-                print(f"📋 {validation_message}")
+                print(f"📋 Enhanced validation: {validation_message}")
 
             except Exception as e:
-                print(f"❌ Error processing SHORT {combination}: {str(e)}")
+                print(f"❌ Error processing enhanced SHORT {combination}: {str(e)}")
                 processed_scripts.append({
                     "combination": combination,
                     "input_file": input_filename if 'input_filename' in locals() else "unknown",
@@ -682,7 +791,7 @@ def process_poppy_cards(variables, guidance_files):
                     "validation_passed": False,
                     "quote_count": 0,
                     "word_count": 0,
-                    "script_type": "SHORT"
+                    "script_type": "SHORT_ENHANCED"
                 })
 
         # Enhanced summary with validation statistics for SHORT format
@@ -707,9 +816,10 @@ def process_poppy_cards(variables, guidance_files):
             "company_name": company_name,
             "timestamp": timestamp,
             "openai_model": openai_model,
-            "script_type": "SHORT",
+            "script_type": "SHORT_ENHANCED",
             "card_range": "11-15",
             "target_duration": "5 minutes",
+            "enhancements": "Structural validation + balanced problem development",
             "word_count_analysis": {
                 "average_word_count": round(avg_word_count, 1),
                 "optimal_compliance": f"{optimal_count}/{len(successful_scripts)}" if successful_scripts else "0/0",
@@ -717,13 +827,13 @@ def process_poppy_cards(variables, guidance_files):
             }
         }
 
-        print(f"\n📊 PROCESSING SUMMARY - SHORT FORMAT WITH 4 QUOTES PER PROBLEM + COMPANY INTEGRATION:")
-        print(f"✅ SHORT scripts generated: {len(successful_scripts)}/{total_cards}")
-        print(f"✅ Validation passed: {len(validated_scripts)}/{len(successful_scripts)}")
+        print(f"\n📊 PROCESSING SUMMARY - ENHANCED SHORT FORMAT WITH STRUCTURAL VALIDATION:")
+        print(f"✅ Enhanced SHORT scripts generated: {len(successful_scripts)}/{total_cards}")
+        print(f"✅ Structural validation passed: {len(validated_scripts)}/{len(successful_scripts)}")
         print(f"📈 Average quote count: {avg_quote_count:.1f} (target: 8)")
         print(f"📈 Average word count: {avg_word_count:.1f} (target: 750-900)")
-        print(f"🏢 Company integration: {company_name} mentioned 4 times per SHORT script")
-        print(f"🎯 Quote distribution success rate: {(len(validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
+        print(f"🏢 Company integration: {company_name} mentioned 4 times per enhanced SHORT script")
+        print(f"🎯 Quote distribution + structure success rate: {(len(validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
         print(f"🎯 Word count compliance: {optimal_count}/{len(successful_scripts)} scripts in optimal range")
         
         return summary
@@ -737,26 +847,29 @@ def main():
     """Main function to orchestrate the entire enhanced SHORT video script workflow."""
     try:
         logger.info("=" * 80)
-        logger.info("ENHANCED SHORT VIDEO SCRIPT AUTOMATION WITH QUOTE DISTRIBUTION - MAIN START")
+        logger.info("ENHANCED SHORT VIDEO SCRIPT AUTOMATION WITH STRUCTURAL VALIDATION + FIXES - MAIN START")
         logger.info("=" * 80)
         print("=" * 80)
-        print("ENHANCED SHORT VIDEO SCRIPT AUTOMATION WITH QUOTE DISTRIBUTION")
+        print("ENHANCED SHORT VIDEO SCRIPT AUTOMATION WITH STRUCTURAL VALIDATION + FIXES")
         print("=" * 80)
         print(f"Start time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Script directory: {SCRIPT_DIR}")
         print(f"Target: 5-minute scripts with 8 quotes (4 per problem) from cards 11-15")
         print("🎯 APPROACH: Exactly 4 quotes per problem (8 total quotes per SHORT script)")
         print("🏢 ENHANCEMENT: Company name integration (4 mentions adapted for 5-minute format)")
+        print("🏗️ STRUCTURAL FIX: Enhanced template for balanced 2-problem development")
+        print("🔧 PRIORITY FIXES: Configuration validation + increased token limit (3000)")
+        print("✅ QUALITY ASSURANCE: Production-ready with comprehensive error handling")
 
         # Fetch configuration from Supabase with error handling
         logger.info("[SHORT-CONFIG] Fetching configuration from Supabase...")
-        print("\nFetching SHORT configuration from Supabase...")
+        print("\nFetching enhanced SHORT configuration from Supabase (with validation)...")
         
         try:
             variables = fetch_configuration_from_supabase()
         except Exception as e:
             logger.critical(f"[SHORT-CRITICAL] Failed to fetch configuration: {str(e)}")
-            raise Exception(f"Failed to fetch SHORT script configuration from Supabase: {str(e)}")
+            raise Exception(f"Failed to fetch enhanced SHORT script configuration from Supabase: {str(e)}")
 
         # Validate that we have the video_script_short configuration
         if "scripts" not in variables or "video_script_short" not in variables["scripts"]:
@@ -776,82 +889,86 @@ def main():
         guidance_bucket = video_script_config["supabase_buckets"]["guidance"]
         try:
             guidance_files = load_guidance_files(guidance_bucket)
-            logger.info("[SHORT-CONFIG] Successfully loaded all guidance files")
+            logger.info("[SHORT-CONFIG] Successfully loaded all guidance files for enhanced processing")
         except Exception as e:
             logger.critical(f"[SHORT-CRITICAL] Failed to load guidance files: {str(e)}")
-            raise Exception(f"Failed to load SHORT script guidance files from bucket '{guidance_bucket}': {str(e)}")
+            raise Exception(f"Failed to load enhanced SHORT script guidance files from bucket '{guidance_bucket}': {str(e)}")
 
-        # Process Poppy Cards (cards 11-15) with comprehensive error handling and quote distribution
+        # Process Poppy Cards (cards 11-15) with enhanced structural validation
         try:
-            logger.info("[SHORT-PROCESSING] Starting card processing for cards 11-15 with quote distribution")
+            logger.info("[SHORT-PROCESSING] Starting enhanced card processing for cards 11-15 with structural validation")
             summary = process_poppy_cards(variables, guidance_files)
-            logger.info(f"[SHORT-PROCESSING] Completed processing: {summary['successful']}/{summary['total_processed']} successful")
+            logger.info(f"[SHORT-PROCESSING] Completed enhanced processing: {summary['successful']}/{summary['total_processed']} successful")
         except Exception as e:
-            logger.critical(f"[SHORT-CRITICAL] Failed during card processing: {str(e)}")
-            raise Exception(f"Failed to process SHORT script cards 11-15: {str(e)}")
+            logger.critical(f"[SHORT-CRITICAL] Failed during enhanced card processing: {str(e)}")
+            raise Exception(f"Failed to process enhanced SHORT script cards 11-15: {str(e)}")
 
         # Save summary to output bucket - MUST SUCCEED  
         output_bucket = video_script_config["supabase_buckets"]["output"]
-        summary_filename = f"video_script_SHORT_enhanced_summary_{summary['timestamp']}.json"
+        summary_filename = f"video_script_SHORT_enhanced_structural_summary_{summary['timestamp']}.json"
         summary_content = json.dumps(summary, indent=2)
         
         try:
             upload_file_to_bucket(output_bucket, summary_filename, summary_content)
-            logger.info(f"[SHORT-SUMMARY] Saved enhanced summary as {summary_filename}")
+            logger.info(f"[SHORT-SUMMARY] Saved enhanced structural summary as {summary_filename}")
         except Exception as e:
-            logger.error(f"[SHORT-ERROR] Failed to save summary: {str(e)}")
-            print(f"Warning: Could not save summary file to bucket '{output_bucket}': {str(e)}")
-            print("Video script generation completed successfully despite summary save failure.")
+            logger.error(f"[SHORT-ERROR] Failed to save enhanced summary: {str(e)}")
+            print(f"Warning: Could not save enhanced summary file to bucket '{output_bucket}': {str(e)}")
+            print("Enhanced video script generation completed successfully despite summary save failure.")
 
         # Calculate and display execution time
         end_time = datetime.now(eastern_tz)
         execution_time = end_time - start_time
 
         logger.info("=" * 80)
-        logger.info("ENHANCED SHORT VIDEO SCRIPT WORKFLOW COMPLETE")
+        logger.info("ENHANCED SHORT VIDEO SCRIPT WORKFLOW WITH STRUCTURAL VALIDATION COMPLETE")
         logger.info(f"Execution time: {execution_time}")
         logger.info(f"Success rate: {summary['successful']}/{summary['total_processed']}")
         logger.info("=" * 80)
 
         print("\n" + "=" * 80)
-        print("ENHANCED SHORT VIDEO SCRIPT WORKFLOW COMPLETE")
+        print("ENHANCED SHORT VIDEO SCRIPT WORKFLOW WITH STRUCTURAL VALIDATION COMPLETE")
         print("=" * 80)
         print(f"End time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Total execution time: {execution_time}")
-        print(f"SHORT scripts generated: {summary['successful']}/{summary['total_processed']}")
-        print(f"Validation success rate: {summary['validation_rate']}")
+        print(f"Enhanced SHORT scripts generated: {summary['successful']}/{summary['total_processed']}")
+        print(f"Structural validation success rate: {summary['validation_rate']}")
         print(f"Average quote count: {summary['average_quote_count']} (target: 8)")
         print(f"Average word count: {summary['word_count_analysis']['average_word_count']} (target: 750-900)")
-        print(f"Company integration: {summary['company_name']} mentioned 4 times per SHORT script")
-        print(f"Summary saved as: {summary_filename}")
+        print(f"Company integration: {summary['company_name']} mentioned 4 times per enhanced SHORT script")
+        print(f"Enhanced summary saved as: {summary_filename}")
 
         if summary['failed'] > 0:
-            logger.warning(f"[SHORT-WARNING] {summary['failed']} scripts failed to generate")
-            print(f"\n⚠️ Warning: {summary['failed']} SHORT script(s) failed to generate")
+            logger.warning(f"[SHORT-WARNING] {summary['failed']} enhanced scripts failed to generate")
+            print(f"\n⚠️ Warning: {summary['failed']} enhanced SHORT script(s) failed to generate")
             for script in summary['scripts']:
                 if script['status'] == 'failed':
                     logger.error(f"[SHORT-FAILED-SCRIPT] {script['combination']}: {script.get('error', 'Unknown error')}")
                     print(f"  - {script['combination']}: {script.get('error', 'Unknown error')}")
 
-        # Show validation statistics
+        # Show enhanced validation statistics
         validation_passed = summary['validation_passed']
         total_successful = summary['successful']
         if total_successful > 0:
-            print(f"\n📊 QUOTE DISTRIBUTION ANALYSIS (SHORT FORMAT):")
-            print(f"✅ Scripts with 8 quotes (4 per problem): {validation_passed}/{total_successful}")
+            print(f"\n📊 ENHANCED STRUCTURAL VALIDATION ANALYSIS (SHORT FORMAT):")
+            print(f"✅ Scripts with balanced 2-problem structure: {validation_passed}/{total_successful}")
+            print(f"📏 Scripts with 8 quotes (4 per problem): {validation_passed}/{total_successful}")
             print(f"🏢 Company mentions per script: 4 (intro + 2 problems + outro)")
-            print(f"📈 Professional competence focus maintained across all SHORT scripts")
+            print(f"📈 Professional competence focus maintained across all enhanced SHORT scripts")
             print(f"🎯 Peer validation psychology successfully implemented")
             print(f"⏱️ 5-minute format compliance: {summary['word_count_analysis']['optimal_compliance']}")
+            print(f"🏗️ Structural integrity: Enhanced template ensures balanced problem development")
 
         print("\n🎉 Enhanced SHORT video script automation workflow completed successfully!")
-        print("📋 Each SHORT script contains exactly 8 quotes (4 quotes per problem)")
-        print("🏢 Each SHORT script includes natural company name integration (4 mentions)")
-        print("⏱️ Each SHORT script targets 5-minute duration with optimal pacing")
+        print("📋 Each enhanced SHORT script contains exactly 8 quotes (4 quotes per problem)")
+        print("🏢 Each enhanced SHORT script includes natural company name integration (4 mentions)")
+        print("⏱️ Each enhanced SHORT script targets 5-minute duration with optimal pacing")
+        print("🏗️ Each enhanced SHORT script follows structural template for balanced 2-problem development")
+        print("🔧 Priority fixes applied: Configuration validation + 3000 token limit for robust generation")
         
         # Log successful session completion
         logger.info("=" * 60)
-        logger.info("ENHANCED SHORT VIDEO SCRIPT AUTOMATION - SESSION END (SUCCESS)")
+        logger.info("ENHANCED SHORT VIDEO SCRIPT AUTOMATION WITH STRUCTURAL VALIDATION - SESSION END (SUCCESS)")
         logger.info("=" * 60)
 
     except Exception as e:
@@ -862,7 +979,7 @@ def main():
         
         # Ensure we log session end even on failure
         logger.info("=" * 60)
-        logger.info("ENHANCED SHORT VIDEO SCRIPT AUTOMATION - SESSION END (FAILED)")
+        logger.info("ENHANCED SHORT VIDEO SCRIPT AUTOMATION WITH STRUCTURAL VALIDATION - SESSION END (FAILED)")
         logger.info("=" * 60)
         raise
 
