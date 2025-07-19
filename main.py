@@ -72,6 +72,12 @@ def run_email_sequence():
     subprocess.Popen(["python", "email_sequence_automation.py"])
     return "Email sequence workflow started", 200
 
+@app.route('/run_heygen_chunker', methods=['POST'])
+def run_heygen_chunker():
+    """Trigger HeyGen 4-problem script chunker workflow"""
+    subprocess.Popen(["python", "heygen_script_chunker_automation.py"])
+    return "HeyGen 4-problem script chunker workflow started", 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
     
