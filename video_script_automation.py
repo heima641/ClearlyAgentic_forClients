@@ -14,7 +14,7 @@ ENHANCEMENTS:
 - Peer validation psychology framework
 - Professional competence vs. ego-stroking detection
 - Quote distribution validation and reporting
-- Company name integration (6 mentions per script)
+- Company name integration (11 mentions per script)
 - ADDITIVE IMPROVEMENTS: Feature clarity, revenue impact, implementation assurance, competitive differentiation
 
 The workflow processes 10 predefined Poppy Card combinations sequentially,
@@ -303,10 +303,17 @@ def validate_enhanced_content(script_content, company_name):
         if not has_feature_mention:
             validation_issues.append("Missing specific feature explanations in problem sections")
         
+        # Check for company name mentions (expecting exactly 11 for full format)
+        company_mentions = script_content.lower().count(company_name.lower())
+        if company_mentions < 9:
+            validation_issues.append(f"Insufficient company mentions: {company_mentions} (target: exactly 11)")
+        elif company_mentions > 13:
+            validation_issues.append(f"Excessive company mentions: {company_mentions} (target: exactly 11)")
+        
         if validation_issues:
             return False, f"Enhanced content validation issues: {', '.join(validation_issues)}"
         else:
-            return True, "All enhanced content requirements validated successfully"
+            return True, f"All enhanced content requirements validated successfully (company mentions: {company_mentions})"
             
     except Exception as e:
         return False, f"Enhanced validation error: {str(e)}"
@@ -425,20 +432,34 @@ Requirements:
 - Create an engaging video script that follows the voice, method, and focuses on the provided content
 - Ensure quote distribution creates a "peer validation experience" rather than a sales pitch"""
 
-        # ADDITIVE ENHANCEMENT: Company Name Integration Instructions
+        # COMPANY NAME INTEGRATION INSTRUCTIONS (ADAPTED FOR FULL FORMAT)
         system_prompt += f"""
 
-🔁 ADDITIONAL MANDATE - COMPANY NAME INTEGRATION:
+🔁 MANDATORY COMPANY NAME INTEGRATION - EXACT PLACEMENT REQUIRED:
 - Company name: {company_name}
-- Include company name **once naturally in the intro** 
-- Include company name **at least once per Problem section** (4 total)
-- Include company name **once in the outro**
-- Expand total script by ~280 words through these natural integrations
-- Make mentions feel organic - position as the solution provider, not repetitive branding
-- Example integration: "...companies like yours working with {company_name} have discovered..."
-- Focus on value association: "{company_name} helps businesses..." or "Through {company_name}'s insights..."
-- Maintain professional, consultative tone - not salesy or pushy
-- Ensure seamless flow - company mentions should enhance, not interrupt, the narrative"""
+
+STRICT SECTION-BY-SECTION REQUIREMENTS:
+- **INTRO SECTION**: Include company name EXACTLY ONCE at the end of intro paragraph
+- **PROBLEM 1 SECTION**: Include company name EXACTLY TWICE - once when introducing the solution, once in a customer quote context  
+- **PROBLEM 2 SECTION**: Include company name EXACTLY TWICE - once when introducing the solution, once in a customer quote context
+- **PROBLEM 3 SECTION**: Include company name EXACTLY TWICE - once when introducing the solution, once in a customer quote context
+- **PROBLEM 4 SECTION**: Include company name EXACTLY TWICE - once when introducing the solution, once in a customer quote context
+- **OUTRO SECTION**: Include company name EXACTLY TWICE - once in implementation paragraph, once in competitive differentiation paragraph
+
+TOTAL MANDATE: EXACTLY 11 company mentions distributed as: 1+2+2+2+2+2=11
+
+⚠️ CRITICAL RESTRICTIONS:
+- DO NOT mention {company_name} more than the specified times per section
+- DO NOT use {company_name} in consecutive sentences within the same paragraph
+- DO NOT repeat {company_name} when referring back to features - use "the platform", "this solution", "the system" instead
+- AVOID generic references like "companies working with {company_name}" - be specific about the value being delivered
+- Each mention must serve a distinct purpose: solution introduction, feature explanation, or competitive positioning
+
+🚫 COMPANY NAME OVERUSE PREVENTION:
+- After each mention of {company_name}, use alternative references for at least 2 sentences
+- Alternative references: "the platform", "this solution", "the system", "the tool", "this technology"
+- When discussing features, lead with the benefit, then attribute to {company_name} once per feature discussion
+- In customer quotes, {company_name} should only appear if it's a natural part of the customer's language"""
 
         # ✅ ADDITIVE ENHANCEMENT: PROBLEM SECTION CONTENT REQUIREMENTS
         system_prompt += f"""
@@ -500,7 +521,7 @@ COMPETITIVE DIFFERENTIATION MANDATE (Requirement 4):
                         "content": system_prompt
                     }, {
                         "role": "user",
-                        "content": "Please generate the video script now with exactly 4 quotes from each problem (16 total quotes), natural company name integration, and all additive improvements including feature clarity, revenue impact, implementation assurance, and competitive differentiation."
+                        "content": "Please generate the video script now with exactly 4 quotes from each problem (16 total quotes), natural company name integration (11 mentions), and all additive improvements including feature clarity, revenue impact, implementation assurance, and competitive differentiation."
                     }],
                     max_tokens=2500,  # Increased token limit for enhanced content
                     temperature=0.7)
@@ -625,7 +646,7 @@ def process_poppy_cards(variables, guidance_files):
         print(f"Company: {company_name}")
         print(f"OpenAI Model: {openai_model}")
         print(f"Quote Distribution: 4 quotes per problem (16 total per script)")
-        print(f"Company Integration: 6 mentions per script")
+        print(f"Company Integration: 11 mentions per script")
         print(f"✅ ADDITIVE ENHANCEMENTS: Feature clarity, Revenue impact, Implementation assurance, Competitive differentiation")
         print(f"Timestamp: {timestamp}")
         
@@ -664,6 +685,7 @@ def process_poppy_cards(variables, guidance_files):
                 is_valid, validation_message = validate_quote_distribution(script_content)
                 is_enhanced_valid, enhanced_message = validate_enhanced_content(script_content, company_name)
                 quote_count = len(re.findall(r'"[^"]*"', script_content))
+                company_mentions = script_content.lower().count(company_name.lower())
                 
                 # Record the processed script with enhanced metrics
                 processed_scripts.append({
@@ -672,6 +694,7 @@ def process_poppy_cards(variables, guidance_files):
                     "output_file": output_filename,
                     "script_length": len(script_content),
                     "quote_count": quote_count,
+                    "company_mentions": company_mentions,
                     "validation_passed": is_valid,
                     "validation_message": validation_message,
                     "enhanced_validation_passed": is_enhanced_valid,
@@ -681,6 +704,7 @@ def process_poppy_cards(variables, guidance_files):
 
                 print(f"✅ Successfully processed {combination}")
                 print(f"📊 Quote count: {quote_count}, Target: 16, Validation: {'PASSED' if is_valid else 'WARNING'}")
+                print(f"🏢 Company mentions: {company_mentions}, Target: 11")
                 print(f"📋 Quote validation: {validation_message}")
                 print(f"🎯 Enhanced validation: {'PASSED' if is_enhanced_valid else 'WARNING'}")
                 print(f"📈 Enhanced details: {enhanced_message}")
@@ -695,7 +719,8 @@ def process_poppy_cards(variables, guidance_files):
                     "status": "failed",
                     "validation_passed": False,
                     "enhanced_validation_passed": False,
-                    "quote_count": 0
+                    "quote_count": 0,
+                    "company_mentions": 0
                 })
 
         # Enhanced summary with dual validation statistics
@@ -704,8 +729,9 @@ def process_poppy_cards(variables, guidance_files):
         validated_scripts = [s for s in successful_scripts if s.get("validation_passed", False)]
         enhanced_validated_scripts = [s for s in successful_scripts if s.get("enhanced_validation_passed", False)]
         
-        # Calculate average quote count for successful scripts
+        # Calculate averages for successful scripts
         avg_quote_count = sum(s.get("quote_count", 0) for s in successful_scripts) / len(successful_scripts) if successful_scripts else 0
+        avg_company_mentions = sum(s.get("company_mentions", 0) for s in successful_scripts) / len(successful_scripts) if successful_scripts else 0
 
         summary = {
             "total_processed": total_cards,
@@ -721,7 +747,11 @@ def process_poppy_cards(variables, guidance_files):
             "company_name": company_name,
             "timestamp": timestamp,
             "openai_model": openai_model,
-            "additive_enhancements": ["feature_clarity", "revenue_impact", "implementation_assurance", "competitive_differentiation"]
+            "additive_enhancements": ["feature_clarity", "revenue_impact", "implementation_assurance", "competitive_differentiation"],
+            "company_integration": {
+                "average_mentions": round(avg_company_mentions, 1),
+                "target_mentions": 11
+            }
         }
 
         print(f"\n📊 ENHANCED PROCESSING SUMMARY - ALL ADDITIVE IMPROVEMENTS:")
@@ -729,7 +759,7 @@ def process_poppy_cards(variables, guidance_files):
         print(f"✅ Quote validation passed: {len(validated_scripts)}/{len(successful_scripts)}")
         print(f"🎯 Enhanced validation passed: {len(enhanced_validated_scripts)}/{len(successful_scripts)}")
         print(f"📈 Average quote count: {avg_quote_count:.1f} (target: 16)")
-        print(f"🏢 Company integration: {company_name} mentioned 6+ times per script")
+        print(f"🏢 Average company mentions: {avg_company_mentions:.1f} (target: 11)")
         print(f"🎯 Quote distribution success rate: {(len(validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
         print(f"🚀 Enhanced content success rate: {(len(enhanced_validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
         print(f"📋 Additive enhancements: {', '.join(summary['additive_enhancements'])}")
@@ -750,7 +780,7 @@ def main():
         print(f"Start time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Script directory: {SCRIPT_DIR}")
         print("🎯 APPROACH: Exactly 4 quotes per problem (16 total quotes per script)")
-        print("🏢 ENHANCEMENT: Company name integration (6 mentions)")
+        print("🏢 ENHANCEMENT: Company name integration (11 mentions)")
         print("🚀 ADDITIVE IMPROVEMENTS:")
         print("   ✅ Feature clarity in each problem section (<800 chars)")
         print("   ✅ Revenue impact with <6-month payback assurance (<800 chars)")
@@ -793,7 +823,7 @@ def main():
         print(f"Quote validation success rate: {summary['validation_rate']}")
         print(f"Enhanced validation success rate: {summary['enhanced_validation_rate']}")
         print(f"Average quote count: {summary['average_quote_count']} (target: 16)")
-        print(f"Company integration: {summary['company_name']} mentioned 6+ times per script")
+        print(f"Average company mentions: {summary['company_integration']['average_mentions']} (target: 11)")
         print(f"Summary saved as: {summary_filename}")
 
         if summary['failed'] > 0:
@@ -810,14 +840,14 @@ def main():
             print(f"\n📊 COMPREHENSIVE VALIDATION ANALYSIS:")
             print(f"✅ Scripts with 16 quotes (4 per problem): {validation_passed}/{total_successful}")
             print(f"🎯 Scripts with enhanced content: {enhanced_validation_passed}/{total_successful}")
-            print(f"🏢 Company mentions per script: 6+ (intro + 4 problems + outro)")
+            print(f"🏢 Company mentions per script: 11 (intro + 4 problems with 2 each + outro with 2)")
             print(f"📈 Professional competence focus maintained across all scripts")
             print(f"🎯 Peer validation psychology successfully implemented")
             print(f"🚀 Additive improvements: {', '.join(summary['additive_enhancements'])}")
 
         print("\n🎉 Enhanced video script automation workflow completed successfully!")
         print("📋 Each script contains exactly 16 quotes (4 quotes per problem)")
-        print("🏢 Each script includes natural company name integration")
+        print("🏢 Each script includes natural company name integration (11 mentions)")
         print("🚀 Each script includes all additive improvements:")
         print("   • Feature clarity explanations")
         print("   • Revenue impact with sub-6-month payback assurance")
