@@ -14,7 +14,7 @@ ENHANCEMENTS (TRANSPLANTED FROM FULL VERSION):
 - Peer validation psychology framework
 - Professional competence vs. ego-stroking detection
 - Quote distribution validation and reporting
-- Company name integration (5 mentions per script, adapted for 6-8 minute format)
+# Company name integration (8 mentions per script, adapted for 6-8 minute format)
 - ADDITIVE IMPROVEMENTS: Feature clarity, revenue impact, implementation assurance, competitive differentiation
 - Enhanced content validation with full strictness
 - Rich creative guidance matching four-problem version depth
@@ -26,7 +26,7 @@ Card Range: 11-15 (specifically for 2-problem format cards)
 Target Duration: 6-8 minutes (increased from 5 minutes for rich development)
 Target Word Count: 1200-1600 words (proportional depth to full version)
 Quote Distribution: 4 quotes per problem (8 total quotes)
-Company Integration: 5 mentions (intro + 2 problems with 1-2 each + outro)
+# Company Integration: 8 mentions (intro + 2 problems with 2 each + transition + outro with 2)
 Output Bucket: two-problem-script-drafts (preserves existing architecture)
 
 All output files are saved to Supabase Storage buckets.
@@ -246,12 +246,12 @@ def validate_enhanced_content_short(script_content, company_name):
         if not has_feature_mention:
             validation_issues.append("Missing specific feature explanations in problem sections")
         
-        # Check for company name mentions (expecting 5 for SHORT format)
+        # Check for company name mentions (expecting exactly 8 for SHORT format)
         company_mentions = script_content.lower().count(company_name.lower())
-        if company_mentions < 4:
-            validation_issues.append(f"Insufficient company mentions: {company_mentions} (target: 5)")
-        elif company_mentions > 7:
-            validation_issues.append(f"Excessive company mentions: {company_mentions} (target: 5)")
+        if company_mentions < 7:
+            validation_issues.append(f"Insufficient company mentions: {company_mentions} (target: exactly 8)")
+        elif company_mentions > 9:
+            validation_issues.append(f"Excessive company mentions: {company_mentions} (target: exactly 8)")
         
         if validation_issues:
             return False, f"Enhanced content validation issues: {', '.join(validation_issues)}"
@@ -503,18 +503,30 @@ Requirements:
         # COMPANY NAME INTEGRATION INSTRUCTIONS (ADAPTED FOR SHORT FORMAT)
         system_prompt += f"""
 
-🔁 ADDITIONAL MANDATE - COMPANY NAME INTEGRATION:
+🔁 MANDATORY COMPANY NAME INTEGRATION - EXACT PLACEMENT REQUIRED:
 - Company name: {company_name}
-- Include company name **once naturally in the intro** 
-- Include company name **1-2 times per Problem section** (2-4 total across problems)
-- Include company name **once in the outro**
-- Total company mentions: 5 (intro + 2-4 in problems + outro)
-- Expand total script by ~200 words through these natural integrations
-- Make mentions feel organic - position as the solution provider, not repetitive branding
-- Example integration: "...companies like yours working with {company_name} have discovered..."
-- Focus on value association: "{company_name} helps businesses..." or "Through {company_name}'s insights..."
-- Maintain professional, consultative tone - not salesy or pushy
-- Ensure seamless flow - company mentions should enhance, not interrupt, the narrative"""
+
+STRICT SECTION-BY-SECTION REQUIREMENTS:
+- **INTRO SECTION**: Include company name EXACTLY ONCE at the end of intro paragraph
+- **PROBLEM 1 SECTION**: Include company name EXACTLY TWICE - once when introducing the solution, once in a customer quote context  
+- **TRANSITION SECTION**: Include company name EXACTLY ONCE when bridging to the second problem
+- **PROBLEM 2 SECTION**: Include company name EXACTLY TWICE - once when introducing the solution, once in a customer quote context
+- **OUTRO SECTION**: Include company name EXACTLY TWICE - once in implementation paragraph, once in competitive differentiation paragraph
+
+TOTAL MANDATE: EXACTLY 8 company mentions distributed as: 1+2+1+2+2=8
+
+⚠️ CRITICAL RESTRICTIONS:
+- DO NOT mention {company_name} more than the specified times per section
+- DO NOT use {company_name} in consecutive sentences within the same paragraph
+- DO NOT repeat {company_name} when referring back to features - use "the platform", "this solution", "the system" instead
+- AVOID generic references like "companies working with {company_name}" - be specific about the value being delivered
+- Each mention must serve a distinct purpose: solution introduction, feature explanation, or competitive positioning
+
+🚫 COMPANY NAME OVERUSE PREVENTION:
+- After each mention of {company_name}, use alternative references for at least 2 sentences
+- Alternative references: "the platform", "this solution", "the system", "the tool", "this technology"
+- When discussing features, lead with the benefit, then attribute to {company_name} once per feature discussion
+- In customer quotes, {company_name} should only appear if it's a natural part of the customer's language"""
 
         # ✅ TRANSPLANTED ADDITIVE ENHANCEMENT REQUIREMENTS FROM FULL VERSION
         system_prompt += f"""
@@ -573,7 +585,7 @@ COMPETITIVE DIFFERENTIATION MANDATE (Requirement 4):
                         "content": system_prompt
                     }, {
                         "role": "user",
-                        "content": "Generate a 6-8 minute SHORT video script now with exactly 4 quotes from each problem (8 total quotes), natural company name integration (5 mentions), and all additive improvements including feature clarity, revenue impact, implementation assurance, and competitive differentiation. Target 1200-1600 words with rich creative development matching the depth of the four-problem version."
+                        "content": "Generate a 6-8 minute SHORT video script now with exactly 4 quotes from each problem (8 total quotes), natural company name integration (8 mentions), and all additive improvements including feature clarity, revenue impact, implementation assurance, and competitive differentiation. Target 1200-1600 words with rich creative development matching the depth of the four-problem version."
                     }],
                     max_tokens=4000,  # Increased to 4000 as specified
                     temperature=0.7)
@@ -754,7 +766,7 @@ def process_poppy_cards(variables, guidance_files):
         print(f"Input Bucket: {input_bucket}")
         print(f"Output Bucket: {output_bucket}")
         print(f"Quote Distribution: 4 quotes per problem (8 total per SHORT script)")
-        print(f"Company Integration: 5 mentions per script")
+        print(f"Company Integration: 8 mentions per script")
         print(f"Word Target: 1200-1600 words (rich creative development)")
         print(f"Duration Target: 6-8 minutes")
         print(f"✅ FULL ADDITIVE ENHANCEMENTS: Feature clarity, Revenue impact, Implementation assurance, Competitive differentiation")
@@ -818,7 +830,7 @@ def process_poppy_cards(variables, guidance_files):
                 print(f"✅ Successfully processed creative-enhanced SHORT {combination}")
                 print(f"📊 Quote count: {quote_count}, Target: 8, Validation: {'PASSED' if is_valid else 'WARNING'}")
                 print(f"📊 Word count: {word_count}, Target: 1200-1600")
-                print(f"🏢 Company mentions: {company_mentions}, Target: 5")
+                print(f"🏢 Company mentions: {company_mentions}, Target: 8")
                 print(f"📋 Structural validation: {validation_message}")
                 print(f"🎯 Enhanced validation: {'PASSED' if is_enhanced_valid else 'WARNING'}")
                 print(f"📈 Enhanced details: {enhanced_message}")
@@ -877,7 +889,7 @@ def process_poppy_cards(variables, guidance_files):
             },
             "company_integration": {
                 "average_mentions": round(avg_company_mentions, 1),
-                "target_mentions": 5
+                "target_mentions": 8
             }
         }
 
@@ -887,7 +899,7 @@ def process_poppy_cards(variables, guidance_files):
         print(f"🎯 Enhanced content validation passed: {len(enhanced_validated_scripts)}/{len(successful_scripts)}")
         print(f"📈 Average quote count: {avg_quote_count:.1f} (target: 8)")
         print(f"📈 Average word count: {avg_word_count:.1f} (target: 1200-1600)")
-        print(f"🏢 Average company mentions: {avg_company_mentions:.1f} (target: 5)")
+        print(f"🏢 Average company mentions: {avg_company_mentions:.1f} (target: 8)")
         print(f"🎯 Structural success rate: {(len(validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
         print(f"🚀 Enhanced content success rate: {(len(enhanced_validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
         print(f"🎯 Word count compliance: {optimal_count}/{len(successful_scripts)} scripts in optimal range")
@@ -914,7 +926,7 @@ def main():
         print(f"Target: 6-8 minute scripts with 8 quotes (4 per problem) from cards 11-15")
         print(f"Word Target: 1200-1600 words with rich creative development")
         print("🎯 APPROACH: Exactly 4 quotes per problem (8 total quotes per SHORT script)")
-        print("🏢 ENHANCEMENT: Company name integration (5 mentions)")
+        print("🏢 ENHANCEMENT: Company name integration (8 mentions)")
         print("🚀 CREATIVE TRANSPLANT: Full additive improvements from four-problem version")
         print("   ✅ Feature clarity in each problem section (<800 chars)")
         print("   ✅ Revenue impact with <6-month payback assurance (<800 chars)")
@@ -997,7 +1009,7 @@ def main():
         print(f"Enhanced content validation success rate: {summary['enhanced_validation_rate']}")
         print(f"Average quote count: {summary['average_quote_count']} (target: 8)")
         print(f"Average word count: {summary['word_count_analysis']['average_word_count']} (target: 1200-1600)")
-        print(f"Average company mentions: {summary['company_integration']['average_mentions']} (target: 5)")
+        print(f"Average company mentions: {summary['company_integration']['average_mentions']} (target: 8)")
         print(f"Creative summary saved as: {summary_filename}")
 
         if summary['failed'] > 0:
@@ -1017,7 +1029,7 @@ def main():
             print(f"✅ Scripts with balanced 2-problem structure: {validation_passed}/{total_successful}")
             print(f"📏 Scripts with 8 quotes (4 per problem): {validation_passed}/{total_successful}")
             print(f"🎯 Scripts with enhanced content: {enhanced_validation_passed}/{total_successful}")
-            print(f"🏢 Company mentions per script: 5 (intro + problems + outro)")
+            print(f"🏢 Company mentions per script: 8 (intro + problems + transition + outro)")
             print(f"📈 Professional competence focus maintained across all creative SHORT scripts")
             print(f"🎯 Peer validation psychology successfully implemented")
             print(f"⏱️ Duration target compliance: 6-8 minutes with {summary['word_count_analysis']['optimal_compliance']} optimal word count")
@@ -1026,7 +1038,7 @@ def main():
 
         print("\n🎉 Creative-enhanced SHORT video script automation workflow completed successfully!")
         print("📋 Each creative SHORT script contains exactly 8 quotes (4 quotes per problem)")
-        print("🏢 Each creative SHORT script includes natural company name integration (5 mentions)")
+        print("🏢 Each creative SHORT script includes natural company name integration (8 mentions)")
         print("⏱️ Each creative SHORT script targets 6-8 minute duration with rich development")
         print("🚀 Each creative SHORT script includes full additive improvements:")
         print("   • Feature clarity explanations in problem sections")
