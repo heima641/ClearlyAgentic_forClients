@@ -78,8 +78,8 @@ def run_heygen_chunker():
     subprocess.Popen(["python", "heygen_4p_script_chunker_automation.py"])
     return "HeyGen 4-problem script chunker workflow started", 200
 
-@app.route('/run_2p_heygen_chunker', methods=['POST'])
-def run_2p_heygen_chunker():
+@app.route('/run_heygen_2prob_chunker', methods=['POST'])
+def run_heygen_2prob_chunker():
     """Trigger HeyGen 2-problem script chunker workflow"""
     subprocess.Popen(["python", "heygen_2p_script_chunker_automation.py"])
     return "HeyGen 2-problem script chunker workflow started", 200
