@@ -386,7 +386,7 @@ def parse_script_aggressively(script_content: str) -> Dict[str, any]:
 
 def parse_script_by_markers(script_content: str) -> Dict[str, any]:
     """
-    Parse script using explicit section markers like [INTRO], [BODY], [OUTRO]
+    FIXED: Parse script using flexible problem markers (handles any problem numbers)
     """
     sections = {"intro": "", "problems": [], "outro": ""}
     
@@ -395,44 +395,44 @@ def parse_script_by_markers(script_content: str) -> Dict[str, any]:
     current_content = []
     
     for line in lines:
-        line_stripped = line.strip()
-        
-        # Check for section markers
-        if re.search(r'\[INTRO\]|\*\*\[INTRO', line_stripped, re.IGNORECASE):
-            current_section = "intro"
-            continue
-        elif re.search(r'\[BODY\]|\*\*\[BODY', line_stripped, re.IGNORECASE):
+        # Check for problem marker with any number (flexible regex)
+        if re.match(r'\*\*Problem\s+\d+:', line, re.IGNORECASE):
+            # Save previous section
             if current_section == "intro":
-                sections["intro"] = "\n".join(current_content).strip()
-            current_content = []
-            current_section = "body"
-            continue
-        elif re.search(r'\[OUTRO\]|\*\*\[OUTRO', line_stripped, re.IGNORECASE):
-            if current_section == "body":
-                if current_content:
-                    sections["problems"].append("\n".join(current_content).strip())
-            current_content = []
+                sections["intro"] = '\n'.join(current_content).strip()
+            elif current_section == "problem" and current_content:
+                sections["problems"].append('\n'.join(current_content).strip())
+            
+            # Start new problem section
+            current_section = "problem"
+            current_content = [line]  # Include the problem header
+            
+        elif any(marker in line.lower() for marker in ['outro:', 'implementing kluster', 'in conclusion']):
+            # Save current problem if any
+            if current_section == "problem" and current_content:
+                sections["problems"].append('\n'.join(current_content).strip())
+            
+            # Start outro section
             current_section = "outro"
-            continue
-        elif current_section == "body" and re.search(r'Problem \d+:', line_stripped, re.IGNORECASE):
-            if current_content:
-                sections["problems"].append("\n".join(current_content).strip())
-                current_content = []
-        
-        current_content.append(line)
+            current_content = [line]
+            
+        else:
+            current_content.append(line)
     
     # Save final section
     if current_section == "intro" and current_content:
-        sections["intro"] = "\n".join(current_content).strip()
-    elif current_section == "body" and current_content:
-        sections["problems"].append("\n".join(current_content).strip())
+        sections["intro"] = '\n'.join(current_content).strip()
+    elif current_section == "problem" and current_content:
+        sections["problems"].append('\n'.join(current_content).strip())
     elif current_section == "outro" and current_content:
-        sections["outro"] = "\n".join(current_content).strip()
+        sections["outro"] = '\n'.join(current_content).strip()
     
     # Ensure we have exactly 4 problems
     while len(sections["problems"]) < 4:
         sections["problems"].append("")
-    sections["problems"] = sections["problems"][:4]
+    
+    if len(sections["problems"]) > 4:
+        sections["problems"] = sections["problems"][:4]
     
     return sections
 
@@ -453,7 +453,8 @@ def parse_script_by_content_patterns(script_content: str) -> Dict[str, any]:
     for i, paragraph in enumerate(paragraphs):
         if any(indicator in paragraph.lower() for indicator in [
             'to wrap up', 'in conclusion', 'remember', 'until next time', 
-            'call-to-action', 'download our', 'linked in the description'
+            'call-to-action', 'download our', 'linked in the description',
+            'implementing kluster'
         ]):
             outro_start_idx = i
             break
