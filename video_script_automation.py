@@ -402,7 +402,7 @@ QUOTE SELECTION MANDATE - KEEP IT SIMPLE:
 STRATEGIC QUOTE DISTRIBUTION REQUIREMENTS:
 - Include exactly 4 customer quotes in EVERY problem section for maximum credibility
 - Structure each problem with quotes integrated naturally throughout the problem discussion
-- Use role-specific attributions when available (Director of Sales, VP Sales, CRO, CEO)
+- Use ONLY role-specific attributions (Director of Sales, VP Sales, CRO, CEO) - NEVER include first or last names
 - Distribute the 4 quotes evenly throughout each problem section
 - Use customer quotes throughout the script for optimal conversion psychology
 
@@ -424,12 +424,19 @@ PROFESSIONAL COMPETENCE & CONFIDENCE TRANSFORMATION (NOT EGO-STROKING):
 - Focus on operational excellence rather than personal recognition
 
 CUSTOMER QUOTE AUTHENTICITY GUIDELINES:
-- Make quotes feel conversational, not polished marketing speak
-- Include specific job titles that match your target buyer personas
+- Use exact quotes from the poppy card content provided
+- Attribute quotes ONLY by professional role (a VP of Sales, a Director of Sales, etc.)
+- NEVER fabricate or include first names, last names, or company names in attributions
+- Use format: "Quote text," says a VP of Sales at [Industry Type] Company
+- Keep quotes conversational as provided in source material
 - Use industry-specific language that resonates with software buyers
-- Include subtle pain points that show the customer truly understands the problem
-- Balance problem validation quotes with professional confidence quotes
-- Avoid quotes that sound like ego-stroking or "hero" positioning
+- Avoid language that sounds like ego-stroking or "hero" positioning
+
+CRITICAL ATTRIBUTION RULE:
+- Use exact quotes from poppy card content
+- Attribute by role only: "says a Director of Sales" or "notes a VP of Sales"  
+- NEVER add fabricated names like "Jane Doe" or "John Smith"
+- NEVER add specific company names in attributions
 
 FINAL REMINDER BEFORE YOU BEGIN:
 - Use exactly 4 quotes from each problem (first 4 from each problem's list)
