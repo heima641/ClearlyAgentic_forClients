@@ -455,13 +455,13 @@ QUOTE SELECTION MANDATE - KEEP IT SIMPLE:
 - Each two-problem poppy card contains 16 total quotes (8 customer quotes per problem)
 - For each problem, use the FIRST 4 quotes from that problem's list of 8 quotes
 - DO NOT create new quotes - extract and use the provided quotes exactly as written
-- Total quotes in your script: exactly 8 quotes (4 × 2 problems)
+- Total quotes in your script: exactly 8 quotes (4 quotes per problem * 2 problems)
 - DO NOT pick and choose quotes - simply use the first 4 from each problem section
 
 STRATEGIC QUOTE DISTRIBUTION REQUIREMENTS:
 - Include exactly 4 customer quotes in EVERY problem section for maximum credibility
 - Structure each problem with quotes integrated naturally throughout the problem discussion
-- Use role-specific attributions when available (Director of Sales, VP Sales, CRO, CEO)
+- Use ONLY role-specific attributions (a Director of Sales, a VP of Sales, a CRO, a CEO) - NEVER include first or last names
 - Distribute the 4 quotes evenly throughout each problem section
 - Use customer quotes throughout the script for optimal conversion psychology
 
@@ -483,12 +483,13 @@ PROFESSIONAL COMPETENCE & CONFIDENCE TRANSFORMATION (NOT EGO-STROKING):
 - Focus on operational excellence rather than personal recognition
 
 CUSTOMER QUOTE AUTHENTICITY GUIDELINES:
-- Make quotes feel conversational, not polished marketing speak
-- Include specific job titles that match your target buyer personas
+- Use exact quotes from the poppy card content provided
+- Attribute quotes ONLY by professional role (a VP of Sales, a Director of Sales, etc.)
+- NEVER fabricate or include first names, last names, or company names in attributions
+- Use format: "Quote text," says a VP of Sales at [Industry Type] Company
+- Keep quotes conversational as provided in source material
 - Use industry-specific language that resonates with software buyers
-- Include subtle pain points that show the customer truly understands the problem
-- Balance problem validation quotes with professional confidence quotes
-- Avoid quotes that sound like ego-stroking or "hero" positioning
+- Avoid language that sounds like ego-stroking or "hero" positioning
 
 WORD DISTRIBUTION REQUIREMENTS (Proportional to Full Version):
 - Total script: 1200-1600 words
@@ -497,6 +498,12 @@ WORD DISTRIBUTION REQUIREMENTS (Proportional to Full Version):
 - Transition: 75-100 words (bridge between problems)
 - Problem 2: 500-700 words (4 quotes + enhancements + company mention)
 - Outro: 150-200 words (implementation + competitive + company mention)
+
+CRITICAL ATTRIBUTION RULE:
+- Use exact quotes from poppy card content
+- Attribute by role only: "says Director of Sales" or "notes VP of Sales"  
+- NEVER add fabricated names like "Jane Doe" or "John Smith"
+- NEVER add specific company names in attributions
 
 FINAL REMINDER BEFORE YOU BEGIN:
 - Use exactly 4 quotes from each problem (first 4 from each problem's list)
