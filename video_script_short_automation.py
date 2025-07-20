@@ -246,24 +246,33 @@ def validate_enhanced_content_short(script_content, company_name):
         if not has_feature_mention:
             validation_issues.append("Missing specific feature explanations in problem sections")
         
-        # Check for company name mentions (maximum 8 with spacing control)
+        # Check for company name mentions (STRICT maximum 8 with spacing control)
         company_mentions = script_content.lower().count(company_name.lower())
         if company_mentions > 8:
-            validation_issues.append(f"Excessive company mentions: {company_mentions} (maximum: 8 with spacing control)")
+            validation_issues.append(f"CRITICAL: Excessive company mentions: {company_mentions} (maximum: 8 with spacing control)")
         
-        # Additional spacing validation - check for consecutive mentions
+        # STRICT spacing validation - check for consecutive mentions
         sentences = re.split(r'[.!?]+', script_content)
         spacing_violations = 0
+        violation_details = []
+        
         for i, sentence in enumerate(sentences):
             if company_name.lower() in sentence.lower():
                 # Check previous 3 sentences (4 total including current)
                 for j in range(max(0, i-3), i):
                     if j < len(sentences) and company_name.lower() in sentences[j].lower():
                         spacing_violations += 1
+                        violation_details.append(f"Sentences {j+1} and {i+1}")
                         break
         
-        if spacing_violations > 2:  # Allow some tolerance for natural flow
-            validation_issues.append(f"Company name spacing violations: {spacing_violations} (mentions too close together)")
+        if spacing_violations > 0:  # ZERO tolerance for spacing violations
+            validation_issues.append(f"CRITICAL: Company name spacing violations: {spacing_violations} (mentions too close together in: {', '.join(violation_details[:3])})")
+        
+        # Additional check for excessive density
+        if company_mentions > 0 and len(sentences) > 0:
+            mention_density = company_mentions / len(sentences)
+            if mention_density > 0.05:  # More than 5% of sentences contain company name
+                validation_issues.append(f"CRITICAL: Company name density too high: {mention_density:.2%} (should be <5%)")
         
         if validation_issues:
             return False, f"Enhanced content validation issues: {', '.join(validation_issues)}"
@@ -455,13 +464,13 @@ QUOTE SELECTION MANDATE - KEEP IT SIMPLE:
 - Each two-problem poppy card contains 16 total quotes (8 customer quotes per problem)
 - For each problem, use the FIRST 4 quotes from that problem's list of 8 quotes
 - DO NOT create new quotes - extract and use the provided quotes exactly as written
-- Total quotes in your script: exactly 8 quotes (4 quotes per problem * 2 problems)
+- Total quotes in your script: exactly 8 quotes (4 × 2 problems)
 - DO NOT pick and choose quotes - simply use the first 4 from each problem section
 
 STRATEGIC QUOTE DISTRIBUTION REQUIREMENTS:
 - Include exactly 4 customer quotes in EVERY problem section for maximum credibility
 - Structure each problem with quotes integrated naturally throughout the problem discussion
-- Use ONLY role-specific attributions (a Director of Sales, a VP of Sales, a CRO, a CEO) - NEVER include first or last names
+- Use role-specific attributions when available (Director of Sales, VP Sales, CRO, CEO)
 - Distribute the 4 quotes evenly throughout each problem section
 - Use customer quotes throughout the script for optimal conversion psychology
 
@@ -483,13 +492,12 @@ PROFESSIONAL COMPETENCE & CONFIDENCE TRANSFORMATION (NOT EGO-STROKING):
 - Focus on operational excellence rather than personal recognition
 
 CUSTOMER QUOTE AUTHENTICITY GUIDELINES:
-- Use exact quotes from the poppy card content provided
-- Attribute quotes ONLY by professional role (a VP of Sales, a Director of Sales, etc.)
-- NEVER fabricate or include first names, last names, or company names in attributions
-- Use format: "Quote text," says a VP of Sales at [Industry Type] Company
-- Keep quotes conversational as provided in source material
+- Make quotes feel conversational, not polished marketing speak
+- Include specific job titles that match your target buyer personas
 - Use industry-specific language that resonates with software buyers
-- Avoid language that sounds like ego-stroking or "hero" positioning
+- Include subtle pain points that show the customer truly understands the problem
+- Balance problem validation quotes with professional confidence quotes
+- Avoid quotes that sound like ego-stroking or "hero" positioning
 
 WORD DISTRIBUTION REQUIREMENTS (Proportional to Full Version):
 - Total script: 1200-1600 words
@@ -498,12 +506,6 @@ WORD DISTRIBUTION REQUIREMENTS (Proportional to Full Version):
 - Transition: 75-100 words (bridge between problems)
 - Problem 2: 500-700 words (4 quotes + enhancements + company mention)
 - Outro: 150-200 words (implementation + competitive + company mention)
-
-CRITICAL ATTRIBUTION RULE:
-- Use exact quotes from poppy card content
-- Attribute by role only: "says Director of Sales" or "notes VP of Sales"  
-- NEVER add fabricated names like "Jane Doe" or "John Smith"
-- NEVER add specific company names in attributions
 
 FINAL REMINDER BEFORE YOU BEGIN:
 - Use exactly 4 quotes from each problem (first 4 from each problem's list)
@@ -519,18 +521,20 @@ Requirements:
 - Create an engaging video script that follows the voice, method, and focuses on the provided content
 - Ensure quote distribution creates a "peer validation experience" rather than a sales pitch"""
 
-        # COMPANY NAME SPACING CONTROL (FIXED APPROACH)
         system_prompt += f"""
 
-🔁 MANDATORY COMPANY NAME SPACING CONTROL - SENTENCE-BASED ENFORCEMENT:
+🔁 FINAL OVERRIDE - MANDATORY COMPANY NAME SPACING CONTROL:
+⚠️ THIS RULE OVERRIDES ALL OTHER COMPANY NAME INSTRUCTIONS ABOVE ⚠️
+
 - Company name: {company_name}
 
-CRITICAL SPACING RULE:
+ABSOLUTE SPACING RULE (TAKES PRECEDENCE OVER ALL OTHER INSTRUCTIONS):
 - Maximum ONE mention of {company_name} per 4 consecutive sentences
 - Before writing {company_name}, count backward 4 sentences to ensure no prior mention
-- If a mention exists within the previous 4 sentences, use an alternative reference instead
+- If a mention exists within the previous 4 sentences, you MUST use an alternative reference instead
+- This rule applies to ALL sections: intro, problems, transitions, outro, feature descriptions, ROI descriptions, implementation, and competitive differentiation
 
-REQUIRED ALTERNATIVE REFERENCES:
+REQUIRED ALTERNATIVE REFERENCES (use when spacing rule blocks {company_name}):
 - "this top-rated solution"
 - "this cutting-edge platform" 
 - "the system"
@@ -539,67 +543,60 @@ REQUIRED ALTERNATIVE REFERENCES:
 - "this advanced tool"
 
 TOTAL TARGET: Maximum 8 mentions across entire script
-NATURAL FLOW: Let the narrative determine placement, but enforce spacing rule strictly
+NATURAL FLOW: Let the narrative determine placement, but ALWAYS enforce spacing rule
 
-ENFORCEMENT PROCESS:
-1. When narrative calls for company name, count back 4 sentences
-2. If {company_name} appears in those 4 sentences, use alternative reference
+MANDATORY ENFORCEMENT PROCESS:
+1. When ANY instruction above suggests using {company_name}, first count back 4 sentences
+2. If {company_name} appears in those 4 sentences, you MUST use alternative reference
 3. If no mention in previous 4 sentences, {company_name} is allowed
-4. Continue this process throughout entire script
+4. Continue this process throughout entire script for ALL company name usage
 
-EXAMPLE ENFORCEMENT:
-✅ Sentence 1: "Sales teams struggle with data." 
-✅ Sentence 2: "This is where {company_name} excels."
-✅ Sentence 3: "The platform provides insights." 
-✅ Sentence 4: "Teams see immediate results."
-✅ Sentence 5: "This top-rated solution transforms workflows." (NOT {company_name} - too close)
-✅ Sentence 6: "Advanced analytics drive decisions."
-✅ Sentence 7: "With this cutting-edge platform, teams thrive." (NOT {company_name} - still too close)
-✅ Sentence 8: "Results are measurable and consistent."
-✅ Sentence 9: "Companies using {company_name} report success." (NOW ALLOWED - 4+ sentences since last mention)
+OVERRIDE EXAMPLES:
+❌ WRONG: "The platform shows data. {company_name} provides insights. Teams see results. {company_name} accelerates deals." (violates spacing)
+✅ CORRECT: "The platform shows data. {company_name} provides insights. Teams see results. This advanced tool accelerates deals." (respects spacing)
 
-This spacing rule eliminates overuse regardless of section boundaries."""
+🚨 CRITICAL: The 4-sentence spacing rule OVERRIDES any "consistently" or "throughout" instructions above. When in conflict, spacing control wins."""
 
-        # ✅ TRANSPLANTED ADDITIVE ENHANCEMENT REQUIREMENTS FROM FULL VERSION
+        # Continue with retry logic for SHORT scripts
         system_prompt += f"""
 
 🎯 PROBLEM SECTION CONTENT REQUIREMENTS - ADDITIVE ENHANCEMENTS:
 
 FEATURE CLARITY MANDATE (Requirement 1):
-- In each of the 2 problem sections, add 2-3 sentences explaining the specific {company_name} feature that addresses this problem
+- In each of the 2 problem sections, add 2-3 sentences explaining the specific feature that addresses this problem
 - Use fewer than 800 additional characters per problem section for feature explanations
 - Include high-level explanation of how the feature helps solve the specific problem
-- Reference the product as "{company_name}" consistently throughout feature descriptions
+- Use company name OR alternative references based on 4-sentence spacing rule compliance
 - Make feature descriptions concrete and specific, not vague marketing language
-- Examples: "{company_name}'s pipeline analytics dashboard shows exactly where deals are stuck" or "{company_name}'s automated scoring system highlights which prospects need immediate attention"
+- Examples: "The pipeline analytics dashboard shows exactly where deals are stuck" or "The automated scoring system highlights which prospects need immediate attention"
 
 REVENUE IMPACT MANDATE (Requirement 2):
 - In each of the 2 problem sections, add 2-3 sentences explaining how this solution increases revenue
 - Use fewer than 800 additional characters per problem section for revenue impact explanations
 - Specifically assure viewers they will achieve less than 6-month payback period
-- Reference the product as "{company_name}" consistently throughout ROI descriptions
+- Use company name OR alternative references based on 4-sentence spacing rule compliance
 - Include specific revenue generation mechanisms (faster deals, better conversion, reduced waste, etc.)
 - Position as "fully engaged users consistently achieve sub-6-month ROI"
-- Examples: "Companies using {company_name}'s deal acceleration features see 23% faster close rates, typically achieving full payback in under 6 months" or "{company_name} users report 31% improvement in qualified lead conversion, with most seeing ROI within 5 months"
+- Examples: "Companies using deal acceleration features see 23% faster close rates, typically achieving full payback in under 6 months" or "Users report 31% improvement in qualified lead conversion, with most seeing ROI within 5 months"
 
 🚀 OUTRO CONTENT REQUIREMENTS - ADDITIVE ENHANCEMENTS:
 
 IMPLEMENTATION ASSURANCE MANDATE (Requirement 3):
-- In the first 4 sentences of the outro, assure viewers that full {company_name} implementation takes less than 8 hours
+- In the first 4 sentences of the outro, assure viewers that full implementation takes less than 8 hours
 - Use fewer than 800 additional characters for implementation time assurance
-- Reference the product as "{company_name}" consistently
+- Use company name OR alternative references based on 4-sentence spacing rule compliance
 - Emphasize minimal disruption to current operations
 - Position as "rapid deployment advantage"
-- Examples: "{company_name} deploys in under 8 hours with zero disruption to your current sales process" or "Full {company_name} implementation typically completes in 6-8 hours, often during a single business day"
+- Examples: "The platform deploys in under 8 hours with zero disruption to your current sales process" or "Full implementation typically completes in 6-8 hours, often during a single business day"
 
 COMPETITIVE DIFFERENTIATION MANDATE (Requirement 4):
-- In the first 5 sentences of the outro, clarify what makes {company_name} superior to competitors
+- In the first 5 sentences of the outro, clarify what makes the solution superior to competitors
 - Use fewer than 800 additional characters for competitive advantages
-- Reference the product as "{company_name}" consistently  
+- Use company name OR alternative references based on 4-sentence spacing rule compliance
 - Include 2 specific differentiators that are concrete and measurable
 - Focus on unique capabilities, not generic benefits
 - Avoid naming specific competitors - focus on category advantages
-- Examples: "Unlike traditional CRM analytics, {company_name} provides predictive deal scoring and real-time pipeline health monitoring" or "{company_name}'s peer-based benchmarking gives you insights that generic sales platforms simply cannot match"
+- Examples: "Unlike traditional CRM analytics, the platform provides predictive deal scoring and real-time pipeline health monitoring" or "The peer-based benchmarking gives you insights that generic sales platforms simply cannot match"
 """
 
         # Continue with retry logic for SHORT scripts
