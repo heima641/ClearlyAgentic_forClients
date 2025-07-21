@@ -915,7 +915,7 @@ def generate_chunked_filename(original_filename: str) -> str:
         New filename for chunked script
         
     Example:
-        kluster_SHORT_creative_enhanced_script_P4_P1_20250720_1310.txt
+        kluster_SHORT_FINAL_script_P4_P1_20250720_1310.txt
         -> kluster_SHORT_creative_enhanced_chunked_2prob_script_P4_P1_20250720_1310.txt
     """
     base_name = original_filename.replace('.txt', '')
@@ -949,9 +949,9 @@ def process_all_scripts_for_company(company_name: str, template_config: Dict, he
     all_files = list_files_in_bucket(bucket_name)
     
     # Filter files for this company (exclude already chunked files)
-    # Look for files with the specific pattern: <company>_SHORT_creative_enhanced_script_
+    # Look for files with the specific pattern: <company>_SHORT_FINAL_script_
     company_files = [f for f in all_files 
-                    if f.startswith(company_name) and 'SHORT_creative_enhanced_script_' in f and 'chunked' not in f.lower()]
+                    if f.startswith(company_name) and 'SHORT_FINAL_script_' in f and 'chunked' not in f.lower()]
     
     logger.info(f"[HEYGEN-2PROB-MAIN] Found {len(company_files)} script files for {company_name}")
     
