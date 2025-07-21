@@ -984,7 +984,7 @@ def main():
         # Fetch configuration from Supabase
         logger.info("[HEYGEN-2PROB-MAIN] Fetching configuration from Supabase...")
         print("\nFetching configuration from Supabase...")
-        variables = fetch_configuration_from_supabase(config_name="HeyGen Two-Problem Chunker Configuration")
+        variables = fetch_configuration_from_supabase()
 
         # Validate that we have the heygen_2prob_chunker configuration
         if "scripts" not in variables or "heygen_2prob_chunker" not in variables["scripts"]:
