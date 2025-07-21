@@ -385,7 +385,7 @@ def parse_script_aggressively(script_content: str) -> Dict[str, any]:
 
 def parse_script_by_markers(script_content: str) -> Dict[str, any]:
     """
-    Parse script using flexible problem markers (handles any problem numbers)
+    ALIGNED WITH 4P: Parse script using flexible problem markers (handles any problem numbers)
     """
     sections = {"intro": "", "problems": [], "outro": ""}
     
@@ -394,8 +394,8 @@ def parse_script_by_markers(script_content: str) -> Dict[str, any]:
     current_content = []
     
     for line in lines:
-        # Check for problem marker with any number (flexible regex)
-        if re.match(r'\*\*Problem\s+\d+:', line, re.IGNORECASE):
+        # FIXED: Check for problem marker with any number - matches actual format **[PROBLEM 1:
+        if re.match(r'\*\*\[Problem\s+\d+:', line, re.IGNORECASE):
             # Save previous section
             if current_section == "intro":
                 sections["intro"] = '\n'.join(current_content).strip()
@@ -406,7 +406,7 @@ def parse_script_by_markers(script_content: str) -> Dict[str, any]:
             current_section = "problem"
             current_content = [line]  # Include the problem header
             
-        elif any(marker in line.lower() for marker in ['outro:', 'implementing kluster', 'in conclusion']):
+        elif any(marker in line.lower() for marker in ['**[outro', 'implementing kluster', 'in conclusion']):
             # Save current problem if any
             if current_section == "problem" and current_content:
                 sections["problems"].append('\n'.join(current_content).strip())
@@ -431,21 +431,14 @@ def parse_script_by_markers(script_content: str) -> Dict[str, any]:
         sections["problems"].append("")
     
     if len(sections["problems"]) > 2:
-        # If we have more than 2 problems, combine them
-        if len(sections["problems"]) > 2:
-            # Combine problems 3+ into problem 2
-            combined_problem_2 = sections["problems"][1]
-            for i in range(2, len(sections["problems"])):
-                if sections["problems"][i].strip():
-                    combined_problem_2 += "\n\n" + sections["problems"][i]
-            sections["problems"] = [sections["problems"][0], combined_problem_2]
+        sections["problems"] = sections["problems"][:2]
     
     return sections
 
 
 def parse_script_by_content_patterns(script_content: str) -> Dict[str, any]:
     """
-    Fallback parsing method using content patterns for 2-problem scripts
+    ALIGNED WITH 4P: Fallback parsing method using content patterns for 2-problem scripts
     """
     sections = {"intro": "", "problems": [], "outro": ""}
     
@@ -455,7 +448,7 @@ def parse_script_by_content_patterns(script_content: str) -> Dict[str, any]:
     intro_end_idx = 0
     outro_start_idx = len(paragraphs)
     
-    # Look for outro indicators
+    # Look for outro indicators (same as 4p)
     for i, paragraph in enumerate(paragraphs):
         if any(indicator in paragraph.lower() for indicator in [
             'to wrap up', 'in conclusion', 'remember', 'until next time', 
@@ -465,7 +458,7 @@ def parse_script_by_content_patterns(script_content: str) -> Dict[str, any]:
             outro_start_idx = i
             break
     
-    # Look for intro end
+    # Look for intro end (same as 4p)
     for i, paragraph in enumerate(paragraphs):
         if any(indicator in paragraph.lower() for indicator in [
             'our focus will be', 'these problems', 'first problem', 
@@ -486,26 +479,18 @@ def parse_script_by_content_patterns(script_content: str) -> Dict[str, any]:
     
     if main_content_paragraphs:
         if len(main_content_paragraphs) >= 2:
-            # Divide paragraphs into 2 roughly equal groups
+            # Divide paragraphs into 2 roughly equal groups (adapted from 4p logic)
             chunk_size = len(main_content_paragraphs) // 2
-            problem_1_paragraphs = main_content_paragraphs[:chunk_size]
-            problem_2_paragraphs = main_content_paragraphs[chunk_size:]
-            
-            sections["problems"] = [
-                "\n\n".join(problem_1_paragraphs) if problem_1_paragraphs else "",
-                "\n\n".join(problem_2_paragraphs) if problem_2_paragraphs else ""
-            ]
+            for i in range(2):
+                start_idx = i * chunk_size
+                end_idx = start_idx + chunk_size if i < 1 else len(main_content_paragraphs)
+                problem_paragraphs = main_content_paragraphs[start_idx:end_idx]
+                if problem_paragraphs:
+                    sections["problems"].append("\n\n".join(problem_paragraphs))
         else:
-            # Split single paragraph into 2 parts
-            if main_content_paragraphs:
-                single_content = main_content_paragraphs[0]
-                mid_point = len(single_content) // 2
-                sections["problems"] = [
-                    single_content[:mid_point].strip(),
-                    single_content[mid_point:].strip()
-                ]
-            else:
-                sections["problems"] = ["", ""]
+            sections["problems"] = main_content_paragraphs
+            while len(sections["problems"]) < 2:
+                sections["problems"].append("")
     
     # Ensure we have exactly 2 problems
     while len(sections["problems"]) < 2:
@@ -999,7 +984,7 @@ def main():
         # Fetch configuration from Supabase
         logger.info("[HEYGEN-2PROB-MAIN] Fetching configuration from Supabase...")
         print("\nFetching configuration from Supabase...")
-        variables = fetch_configuration_from_supabase()
+        variables = fetch_configuration_from_supabase(config_name="HeyGen Two-Problem Chunker Configuration")
 
         # Validate that we have the heygen_2prob_chunker configuration
         if "scripts" not in variables or "heygen_2prob_chunker" not in variables["scripts"]:
