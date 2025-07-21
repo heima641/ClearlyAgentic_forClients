@@ -14,7 +14,7 @@ ENHANCEMENTS (TRANSPLANTED FROM FULL VERSION):
 - Peer validation psychology framework
 - Professional competence vs. ego-stroking detection
 - Quote distribution validation and reporting
-# Company name integration (maximum 8 mentions with spacing control)
+# Company name integration (FIXED: 4-6 mentions with spacing control)
 - ADDITIVE IMPROVEMENTS: Feature clarity, revenue impact, implementation assurance, competitive differentiation
 - Enhanced content validation with full strictness
 - Rich creative guidance matching four-problem version depth
@@ -26,7 +26,7 @@ Card Range: 11-15 (specifically for 2-problem format cards)
 Target Duration: 6-8 minutes (increased from 5 minutes for rich development)
 Target Word Count: 1200-1600 words (proportional depth to full version)
 Quote Distribution: 4 quotes per problem (8 total quotes)
-Company Integration: Maximum 8 mentions with 4-sentence spacing control
+Company Integration: FIXED - 4-6 mentions with 4-sentence spacing control
 Output Bucket: two-problem-script-drafts (preserves existing architecture)
 
 All output files are saved to Supabase Storage buckets.
@@ -112,6 +112,7 @@ logger.info("=" * 60)
 logger.info("SHORT VIDEO SCRIPT AUTOMATION - ENHANCED WITH FULL CREATIVE GUIDANCE")
 logger.info(f"Target: 6-8 minute scripts with 8 quotes (4 per problem) from cards 11-15")
 logger.info(f"Word Target: 1200-1600 words with rich creative development")
+logger.info(f"Company Integration: FIXED - 4-6 mentions with spacing control")
 logger.info(f"Session ID: {datetime.now(eastern_tz).strftime('%Y%m%d_%H%M%S')}")
 logger.info("=" * 60)
 
@@ -205,12 +206,12 @@ def validate_quote_distribution_short(script_content):
 
 
 # =====================================================================
-# ENHANCED CONTENT VALIDATION FUNCTION - TRANSPLANTED FROM FULL VERSION
+# FIXED ENHANCED CONTENT VALIDATION FUNCTION
 # =====================================================================
 
 def validate_enhanced_content_short(script_content, company_name):
     """
-    Validate the enhanced content requirements for SHORT format (adapted from full version)
+    FIXED: Validate the enhanced content requirements for SHORT format with proper company name validation
     
     Args:
         script_content (str): The generated video script content
@@ -246,12 +247,16 @@ def validate_enhanced_content_short(script_content, company_name):
         if not has_feature_mention:
             validation_issues.append("Missing specific feature explanations in problem sections")
         
-        # Check for company name mentions (STRICT maximum 8 with spacing control)
+        # FIXED: Check for company name mentions with minimum AND maximum requirements
         company_mentions = script_content.lower().count(company_name.lower())
-        if company_mentions > 8:
-            validation_issues.append(f"CRITICAL: Excessive company mentions: {company_mentions} (maximum: 8 with spacing control)")
         
-        # STRICT spacing validation - check for consecutive mentions
+        # FIXED: Require 4-6 mentions (minimum 4, maximum 6)
+        if company_mentions < 4:
+            validation_issues.append(f"CRITICAL: Insufficient company mentions: {company_mentions} (required: 4-6 mentions)")
+        elif company_mentions > 6:
+            validation_issues.append(f"CRITICAL: Excessive company mentions: {company_mentions} (maximum: 6 with spacing control)")
+        
+        # FIXED: STRICT spacing validation - check for consecutive mentions
         sentences = re.split(r'[.!?]+', script_content)
         spacing_violations = 0
         violation_details = []
@@ -271,8 +276,8 @@ def validate_enhanced_content_short(script_content, company_name):
         # Additional check for excessive density
         if company_mentions > 0 and len(sentences) > 0:
             mention_density = company_mentions / len(sentences)
-            if mention_density > 0.05:  # More than 5% of sentences contain company name
-                validation_issues.append(f"CRITICAL: Company name density too high: {mention_density:.2%} (should be <5%)")
+            if mention_density > 0.04:  # Tightened from 5% to 4%
+                validation_issues.append(f"CRITICAL: Company name density too high: {mention_density:.2%} (should be <4%)")
         
         if validation_issues:
             return False, f"Enhanced content validation issues: {', '.join(validation_issues)}"
@@ -284,7 +289,7 @@ def validate_enhanced_content_short(script_content, company_name):
 
 
 # =====================================================================
-# COMMON FUNCTIONS
+# COMMON FUNCTIONS (UNCHANGED)
 # =====================================================================
 
 def fetch_configuration_from_supabase(config_name=None, config_id=None):
@@ -399,7 +404,7 @@ def upload_file_to_bucket(bucket_name, file_name, file_content):
 
 
 # =====================================================================
-# ENHANCED VIDEO SCRIPT GENERATION - FULL CREATIVE GUIDANCE TRANSPLANT
+# FIXED VIDEO SCRIPT GENERATION WITH PROPER COMPANY NAME CONTROL
 # =====================================================================
 
 def generate_video_script(voice_guidance,
@@ -411,7 +416,7 @@ def generate_video_script(voice_guidance,
                           max_retries=3,
                           retry_delay=2):
     """
-    Generate a SHORT video script with full creative guidance from four-problem version
+    FIXED: Generate a SHORT video script with proper company name control (4-6 mentions)
     
     Args:
         voice_guidance (str): Voice and tone guidance
@@ -424,13 +429,13 @@ def generate_video_script(voice_guidance,
         retry_delay (int): Delay between retries in seconds
         
     Returns:
-        str: Generated SHORT video script with exactly 8 quotes (4 per problem) and full creative guidance
+        str: Generated SHORT video script with exactly 8 quotes (4 per problem) and 4-6 company mentions
     """
     try:
         # Create OpenAI client
         client = openai.OpenAI(api_key=openai_api_key)
 
-        # ✅ TRANSPLANTED CREATIVE GUIDANCE SYSTEM PROMPT - ADAPTED FOR 2-PROBLEM STRUCTURE
+        # FIXED: Creative guidance system prompt with proper company name control
         system_prompt = f"""You are a professional video script writer specializing in B2B software buyer psychology. Generate a SHORT video script using the following guidance:
 
 TARGET: 6-8 minute duration (approximately 1200-1600 words)
@@ -521,43 +526,7 @@ Requirements:
 - Create an engaging video script that follows the voice, method, and focuses on the provided content
 - Ensure quote distribution creates a "peer validation experience" rather than a sales pitch"""
 
-        system_prompt += f"""
-
-🔁 FINAL OVERRIDE - MANDATORY COMPANY NAME SPACING CONTROL:
-⚠️ THIS RULE OVERRIDES ALL OTHER COMPANY NAME INSTRUCTIONS ABOVE ⚠️
-
-- Company name: {company_name}
-
-ABSOLUTE SPACING RULE (TAKES PRECEDENCE OVER ALL OTHER INSTRUCTIONS):
-- Maximum ONE mention of {company_name} per 4 consecutive sentences
-- Before writing {company_name}, count backward 4 sentences to ensure no prior mention
-- If a mention exists within the previous 4 sentences, you MUST use an alternative reference instead
-- This rule applies to ALL sections: intro, problems, transitions, outro, feature descriptions, ROI descriptions, implementation, and competitive differentiation
-
-REQUIRED ALTERNATIVE REFERENCES (use when spacing rule blocks {company_name}):
-- "this top-rated solution"
-- "this cutting-edge platform" 
-- "the system"
-- "this technology"
-- "the platform"
-- "this advanced tool"
-
-TOTAL TARGET: Maximum 8 mentions across entire script
-NATURAL FLOW: Let the narrative determine placement, but ALWAYS enforce spacing rule
-
-MANDATORY ENFORCEMENT PROCESS:
-1. When ANY instruction above suggests using {company_name}, first count back 4 sentences
-2. If {company_name} appears in those 4 sentences, you MUST use alternative reference
-3. If no mention in previous 4 sentences, {company_name} is allowed
-4. Continue this process throughout entire script for ALL company name usage
-
-OVERRIDE EXAMPLES:
-❌ WRONG: "The platform shows data. {company_name} provides insights. Teams see results. {company_name} accelerates deals." (violates spacing)
-✅ CORRECT: "The platform shows data. {company_name} provides insights. Teams see results. This advanced tool accelerates deals." (respects spacing)
-
-🚨 CRITICAL: The 4-sentence spacing rule OVERRIDES any "consistently" or "throughout" instructions above. When in conflict, spacing control wins."""
-
-        # Continue with retry logic for SHORT scripts
+        # FIXED: Problem section content requirements BEFORE final company name control
         system_prompt += f"""
 
 🎯 PROBLEM SECTION CONTENT REQUIREMENTS - ADDITIVE ENHANCEMENTS:
@@ -566,7 +535,7 @@ FEATURE CLARITY MANDATE (Requirement 1):
 - In each of the 2 problem sections, add 2-3 sentences explaining the specific feature that addresses this problem
 - Use fewer than 800 additional characters per problem section for feature explanations
 - Include high-level explanation of how the feature helps solve the specific problem
-- Use company name OR alternative references based on 4-sentence spacing rule compliance
+- PREFER alternative references ("this cutting-edge platform", "the system", "this technology")
 - Make feature descriptions concrete and specific, not vague marketing language
 - Examples: "The pipeline analytics dashboard shows exactly where deals are stuck" or "The automated scoring system highlights which prospects need immediate attention"
 
@@ -574,7 +543,7 @@ REVENUE IMPACT MANDATE (Requirement 2):
 - In each of the 2 problem sections, add 2-3 sentences explaining how this solution increases revenue
 - Use fewer than 800 additional characters per problem section for revenue impact explanations
 - Specifically assure viewers they will achieve less than 6-month payback period
-- Use company name OR alternative references based on 4-sentence spacing rule compliance
+- PREFER alternative references ("this advanced tool", "the platform", "this technology")
 - Include specific revenue generation mechanisms (faster deals, better conversion, reduced waste, etc.)
 - Position as "fully engaged users consistently achieve sub-6-month ROI"
 - Examples: "Companies using deal acceleration features see 23% faster close rates, typically achieving full payback in under 6 months" or "Users report 31% improvement in qualified lead conversion, with most seeing ROI within 5 months"
@@ -584,7 +553,7 @@ REVENUE IMPACT MANDATE (Requirement 2):
 IMPLEMENTATION ASSURANCE MANDATE (Requirement 3):
 - In the first 4 sentences of the outro, assure viewers that full implementation takes less than 8 hours
 - Use fewer than 800 additional characters for implementation time assurance
-- Use company name OR alternative references based on 4-sentence spacing rule compliance
+- PREFER alternative references ("the platform", "this top-rated solution", "the system")
 - Emphasize minimal disruption to current operations
 - Position as "rapid deployment advantage"
 - Examples: "The platform deploys in under 8 hours with zero disruption to your current sales process" or "Full implementation typically completes in 6-8 hours, often during a single business day"
@@ -592,19 +561,63 @@ IMPLEMENTATION ASSURANCE MANDATE (Requirement 3):
 COMPETITIVE DIFFERENTIATION MANDATE (Requirement 4):
 - In the first 5 sentences of the outro, clarify what makes the solution superior to competitors
 - Use fewer than 800 additional characters for competitive advantages
-- Use company name OR alternative references based on 4-sentence spacing rule compliance
+- PREFER alternative references ("this cutting-edge platform", "the system", "this technology")
 - Include 2 specific differentiators that are concrete and measurable
 - Focus on unique capabilities, not generic benefits
 - Avoid naming specific competitors - focus on category advantages
 - Examples: "Unlike traditional CRM analytics, the platform provides predictive deal scoring and real-time pipeline health monitoring" or "The peer-based benchmarking gives you insights that generic sales platforms simply cannot match"
 """
 
-        # Continue with retry logic for SHORT scripts
+        # FIXED: ABSOLUTE FINAL COMPANY NAME CONTROL (moved to the very end)
+        system_prompt += f"""
+
+🚨 ABSOLUTE FINAL OVERRIDE - COMPANY NAME CONTROL (OVERRIDES ALL ABOVE):
+⚠️ THIS SECTION SUPERSEDES ALL PREVIOUS COMPANY NAME INSTRUCTIONS ⚠️
+
+Company name: {company_name}
+
+MANDATORY REQUIREMENTS:
+- TOTAL TARGET: Exactly 4-6 mentions of {company_name} across entire script
+- MINIMUM: Must have at least 4 mentions (for branding consistency)
+- MAXIMUM: Cannot exceed 6 mentions (to avoid oversaturation)
+- SPACING RULE: Maximum ONE mention per 4 consecutive sentences
+
+DEFAULT BEHAVIOR - USE ALTERNATIVE REFERENCES:
+- ALWAYS use alternative references as your PRIMARY choice
+- "this cutting-edge platform", "the system", "this technology", "this advanced tool", "the platform", "this top-rated solution"
+- Only use {company_name} when specifically required for branding placement
+
+STRATEGIC PLACEMENT GUIDE:
+- Mention 1: Early intro for brand introduction
+- Mention 2: Mid-problem 1 for feature association  
+- Mention 3: Mid-problem 2 for solution reinforcement
+- Mention 4: Early outro for brand recall
+- Mention 5: (Optional) Mid-outro for competitive positioning
+- Mention 6: (Optional) Final outro for brand closure
+
+ENFORCEMENT PROCESS:
+1. Count backward 4 sentences before each potential {company_name} usage
+2. If {company_name} appears in those 4 sentences, use alternative reference instead
+3. Only use {company_name} if no mention in previous 4 sentences AND it serves strategic branding purpose
+4. Track your mention count to stay within 4-6 total range
+
+CRITICAL SUCCESS CRITERIA:
+✅ Script contains exactly 4-6 mentions of {company_name}
+✅ No two mentions within 4 sentences of each other
+✅ Alternative references used for all other brand needs
+✅ Strategic placement for maximum branding impact
+
+EXAMPLE ENFORCEMENT:
+"Sales teams struggle with pipeline visibility. This is where {company_name} excels. [3 sentences with alternatives] This cutting-edge platform provides analytics. Teams see immediate results. The system transforms workflows. [4 sentences passed] Companies using {company_name} report success."
+
+🔴 FINAL INSTRUCTION: Count your {company_name} mentions as you write. Target exactly 4-6 total mentions."""
+
+        # Continue with retry logic for SHORT scripts with validation enforcement
         for attempt in range(max_retries):
             try:
-                logger.info(f"[SHORT-ENHANCED] Attempt {attempt + 1}/{max_retries} for creative-enhanced 2-problem script with {company_name} integration")
+                logger.info(f"[SHORT-ENHANCED] Attempt {attempt + 1}/{max_retries} for FIXED 2-problem script with {company_name} integration")
                 print(
-                    f"Generating creative-enhanced SHORT video script with full guidance transplant and {company_name} integration using {openai_model} (attempt {attempt + 1}/{max_retries})..."
+                    f"Generating FIXED SHORT video script with controlled company mentions (4-6 target) using {openai_model} (attempt {attempt + 1}/{max_retries})..."
                 )
 
                 response = client.chat.completions.create(
@@ -614,9 +627,9 @@ COMPETITIVE DIFFERENTIATION MANDATE (Requirement 4):
                         "content": system_prompt
                     }, {
                         "role": "user",
-                        "content": "Generate a 6-8 minute SHORT video script now with exactly 4 quotes from each problem (8 total quotes), controlled company name spacing (maximum 8 mentions with 4-sentence spacing rule), and all additive improvements including feature clarity, revenue impact, implementation assurance, and competitive differentiation. Target 1200-1600 words with rich creative development matching the depth of the four-problem version."
+                        "content": f"Generate a 6-8 minute SHORT video script now with exactly 4 quotes from each problem (8 total quotes) and EXACTLY 4-6 mentions of {company_name} with proper spacing. Use alternative references for all other brand needs. Target 1200-1600 words with rich creative development."
                     }],
-                    max_tokens=4000,  # Increased to 4000 as specified
+                    max_tokens=4000,
                     temperature=0.7)
 
                 script_content = response.choices[0].message.content
@@ -626,32 +639,33 @@ COMPETITIVE DIFFERENTIATION MANDATE (Requirement 4):
                 if script_content:
                     # Calculate word count for 6-8 minute target validation
                     word_count = len(script_content.split())
-                    logger.info(f"[SHORT-ENHANCED] SUCCESS - Generated {word_count} words, {len(script_content)} characters")
+                    company_mentions = script_content.lower().count(company_name.lower())
+                    
+                    logger.info(f"[SHORT-ENHANCED] Generated {word_count} words, {company_mentions} company mentions")
                     print(
-                        f"Successfully generated creative-enhanced SHORT video script with full guidance transplant ({len(script_content)} characters, ~{word_count} words)"
+                        f"Generated FIXED SHORT video script ({len(script_content)} characters, ~{word_count} words, {company_mentions} company mentions)"
                     )
                     
-                    # ✅ DUAL VALIDATION - STRUCTURAL AND ENHANCED CONTENT
+                    # FIXED: Dual validation with rejection for failed scripts
                     is_valid, validation_message = validate_quote_distribution_short(script_content)
                     is_enhanced_valid, enhanced_message = validate_enhanced_content_short(script_content, company_name)
                     
-                    if is_valid:
-                        logger.info(f"✅ Structural validation passed: {validation_message}")
-                        print(f"✅ Structural validation passed: {validation_message}")
+                    # FIXED: Only return script if BOTH validations pass
+                    if is_valid and is_enhanced_valid:
+                        logger.info(f"✅ All validations passed: {validation_message} | {enhanced_message}")
+                        print(f"✅ All validations passed: {validation_message} | {enhanced_message}")
+                        return script_content
                     else:
-                        logger.warning(f"⚠️ Structural validation warning: {validation_message}")
-                        print(f"⚠️ Structural validation warning: {validation_message}")
-                    
-                    if is_enhanced_valid:
-                        logger.info(f"✅ Enhanced content validation passed: {enhanced_message}")
-                        print(f"✅ Enhanced content validation passed: {enhanced_message}")
-                    else:
-                        logger.warning(f"⚠️ Enhanced content validation warning: {enhanced_message}")
-                        print(f"⚠️ Enhanced content validation warning: {enhanced_message}")
+                        # FIXED: Reject script and retry if validation fails
+                        logger.warning(f"⚠️ Validation failed - retrying: {validation_message} | {enhanced_message}")
+                        print(f"⚠️ Validation failed - retrying: {validation_message} | {enhanced_message}")
                         
-                    return script_content
+                        if attempt < max_retries - 1:
+                            continue  # Retry instead of returning failed script
+                        else:
+                            raise Exception(f"Script validation failed after all retries: {validation_message} | {enhanced_message}")
                 else:
-                    raise Exception("Empty response from OpenAI for creative-enhanced SHORT script generation")
+                    raise Exception("Empty response from OpenAI for FIXED SHORT script generation")
 
             except Exception as e:
                 error_msg = str(e).lower()
@@ -661,22 +675,22 @@ COMPETITIVE DIFFERENTIATION MANDATE (Requirement 4):
                 if "model" in error_msg and ("not found" in error_msg
                                              or "unavailable" in error_msg
                                              or "sunset" in error_msg):
-                    logger.critical(f"[SHORT-ENHANCED] OpenAI model {openai_model} unavailable for creative SHORT script generation")
+                    logger.critical(f"[SHORT-ENHANCED] OpenAI model {openai_model} unavailable for FIXED SHORT script generation")
                     raise Exception(
-                        f"OpenAI model {openai_model} is unavailable or has been sunset. Please update the creative-enhanced SHORT script model configuration."
+                        f"OpenAI model {openai_model} is unavailable or has been sunset. Please update the FIXED SHORT script model configuration."
                     )
 
                 if attempt < max_retries - 1:
-                    logger.info(f"[SHORT-ENHANCED] Retrying creative-enhanced SHORT script generation in {retry_delay}s...")
+                    logger.info(f"[SHORT-ENHANCED] Retrying FIXED SHORT script generation in {retry_delay}s...")
                     print(
-                        f"OpenAI API error: {e}. Retrying creative-enhanced SHORT script generation in {retry_delay} seconds..."
+                        f"OpenAI API error: {e}. Retrying FIXED SHORT script generation in {retry_delay} seconds..."
                     )
                     time.sleep(retry_delay)
                     retry_delay *= 2  # Exponential backoff
                 else:
-                    logger.error(f"[SHORT-ENHANCED] Failed to generate creative-enhanced SHORT script after {max_retries} attempts")
+                    logger.error(f"[SHORT-ENHANCED] Failed to generate FIXED SHORT script after {max_retries} attempts")
                     print(
-                        f"Failed to generate creative-enhanced SHORT script after {max_retries} attempts: {e}"
+                        f"Failed to generate FIXED SHORT script after {max_retries} attempts: {e}"
                     )
                     raise
 
@@ -686,7 +700,7 @@ COMPETITIVE DIFFERENTIATION MANDATE (Requirement 4):
 
 
 # =====================================================================
-# MAIN WORKFLOW FUNCTIONS
+# MAIN WORKFLOW FUNCTIONS (UNCHANGED EXCEPT FOR UPDATED LOGGING)
 # =====================================================================
 
 def load_guidance_files(bucket_name):
@@ -700,12 +714,11 @@ def load_guidance_files(bucket_name):
         dict: Dictionary containing voice, method, and SHORT prompt guidance
     """
     print("\n" + "=" * 80)
-    print("LOADING GUIDANCE FILES FOR CREATIVE-ENHANCED SHORT SCRIPTS")
+    print("LOADING GUIDANCE FILES FOR FIXED SHORT SCRIPTS")
     print("=" * 80)
 
     try:
         # Load all three guidance files - using SHORT version of prompt instructions
-        # NO FALLBACKS - all files must exist or the process fails
         voice_guidance = download_file_from_bucket(bucket_name,
                                                    "voice_guidance.txt")
         method_guidance = download_file_from_bucket(bucket_name,
@@ -729,7 +742,7 @@ def load_guidance_files(bucket_name):
             "prompt": prompt_instructions
         }
 
-        print("Successfully loaded all guidance files for creative-enhanced SHORT scripts")
+        print("Successfully loaded all guidance files for FIXED SHORT scripts")
         return guidance_files
 
     except Exception as e:
@@ -739,14 +752,14 @@ def load_guidance_files(bucket_name):
 
 def process_poppy_cards(variables, guidance_files):
     """
-    Process 5 Poppy Card combinations sequentially (cards 11-15) with full creative guidance
+    Process 5 Poppy Card combinations sequentially (cards 11-15) with FIXED company name control
     
     Args:
         variables (dict): Configuration variables from Supabase
         guidance_files (dict): Loaded guidance files
         
     Returns:
-        dict: Summary of processed creative-enhanced SHORT scripts
+        dict: Summary of processed FIXED SHORT scripts
     """
     try:
         # Validate required configuration exists before accessing
@@ -787,7 +800,7 @@ def process_poppy_cards(variables, guidance_files):
         total_cards = len(card_combinations)
 
         print(f"\n" + "=" * 80)
-        print("PROCESSING POPPY CARDS WITH FULL CREATIVE GUIDANCE TRANSPLANT")
+        print("PROCESSING POPPY CARDS WITH FIXED COMPANY NAME CONTROL")
         print("=" * 80)
         print(f"Total combinations to process: {total_cards}")
         print(f"Company: {company_name}")
@@ -795,21 +808,21 @@ def process_poppy_cards(variables, guidance_files):
         print(f"Input Bucket: {input_bucket}")
         print(f"Output Bucket: {output_bucket}")
         print(f"Quote Distribution: 4 quotes per problem (8 total per SHORT script)")
-        print(f"Company Integration: Maximum 8 mentions with spacing control")
+        print(f"Company Integration: FIXED - 4-6 mentions with spacing control")
         print(f"Word Target: 1200-1600 words (rich creative development)")
         print(f"Duration Target: 6-8 minutes")
-        print(f"✅ FULL ADDITIVE ENHANCEMENTS: Feature clarity, Revenue impact, Implementation assurance, Competitive differentiation")
+        print(f"✅ FIXED VALIDATION: Scripts rejected and retried if validation fails")
         print(f"Timestamp: {timestamp}")
         
         for i, combination in enumerate(card_combinations, 1):
-            print(f"\nProcessing creative-enhanced SHORT card {i} of {total_cards}...")
+            print(f"\nProcessing FIXED SHORT card {i} of {total_cards}...")
             print(f"Combination: {combination}")
 
             try:
                 # Construct input and output filenames for cards 11-15
                 card_number = f"card{i+10:02d}"  # Formats as card11, card12, ..., card15
                 input_filename = f"{company_name}_{card_number}_{combination}.txt"
-                output_filename = f"{company_name}_SHORT_creative_enhanced_script_{combination}_{timestamp}.txt"
+                output_filename = f"{company_name}_SHORT_FIXED_script_{combination}_{timestamp}.txt"
 
                 print(f"Looking for file: {input_filename}")
 
@@ -817,7 +830,7 @@ def process_poppy_cards(variables, guidance_files):
                 poppy_card_content = download_file_from_bucket(
                     input_bucket, input_filename)
 
-                # ✅ CREATIVE-ENHANCED SCRIPT GENERATION WITH FULL GUIDANCE TRANSPLANT
+                # FIXED: Script generation with proper validation enforcement
                 script_content = generate_video_script(
                     voice_guidance=guidance_files["voice"],
                     method_guidance=guidance_files["method"],
@@ -831,7 +844,7 @@ def process_poppy_cards(variables, guidance_files):
                 upload_file_to_bucket(output_bucket, output_filename,
                                       script_content)
 
-                # ✅ DUAL VALIDATION RESULTS (STRUCTURAL + ENHANCED CONTENT)
+                # Final validation results for reporting
                 is_valid, validation_message = validate_quote_distribution_short(script_content)
                 is_enhanced_valid, enhanced_message = validate_enhanced_content_short(script_content, company_name)
                 quote_count = len(re.findall(r'"[^"]*"', script_content))
@@ -852,20 +865,21 @@ def process_poppy_cards(variables, guidance_files):
                     "enhanced_validation_passed": is_enhanced_valid,
                     "enhanced_validation_message": enhanced_message,
                     "target_compliance": "optimal" if 1200 <= word_count <= 1600 else ("low" if word_count < 1200 else "high"),
+                    "company_mention_compliance": "optimal" if 4 <= company_mentions <= 6 else ("low" if company_mentions < 4 else "high"),
                     "status": "success",
-                    "script_type": "SHORT_CREATIVE_ENHANCED"
+                    "script_type": "SHORT_FIXED"
                 })
 
-                print(f"✅ Successfully processed creative-enhanced SHORT {combination}")
-                print(f"📊 Quote count: {quote_count}, Target: 8, Validation: {'PASSED' if is_valid else 'WARNING'}")
+                print(f"✅ Successfully processed FIXED SHORT {combination}")
+                print(f"📊 Quote count: {quote_count}, Target: 8, Validation: {'PASSED' if is_valid else 'FAILED'}")
                 print(f"📊 Word count: {word_count}, Target: 1200-1600")
-                print(f"🏢 Company mentions: {company_mentions}, Maximum: 8")
+                print(f"🏢 Company mentions: {company_mentions}, Target: 4-6")
                 print(f"📋 Structural validation: {validation_message}")
-                print(f"🎯 Enhanced validation: {'PASSED' if is_enhanced_valid else 'WARNING'}")
+                print(f"🎯 Enhanced validation: {'PASSED' if is_enhanced_valid else 'FAILED'}")
                 print(f"📈 Enhanced details: {enhanced_message}")
 
             except Exception as e:
-                print(f"❌ Error processing creative-enhanced SHORT {combination}: {str(e)}")
+                print(f"❌ Error processing FIXED SHORT {combination}: {str(e)}")
                 processed_scripts.append({
                     "combination": combination,
                     "input_file": input_filename if 'input_filename' in locals() else "unknown",
@@ -877,14 +891,15 @@ def process_poppy_cards(variables, guidance_files):
                     "quote_count": 0,
                     "word_count": 0,
                     "company_mentions": 0,
-                    "script_type": "SHORT_CREATIVE_ENHANCED"
+                    "script_type": "SHORT_FIXED"
                 })
 
-        # Enhanced summary with dual validation statistics for SHORT format
+        # Enhanced summary with FIXED validation statistics
         successful_scripts = [s for s in processed_scripts if s["status"] == "success"]
         failed_scripts = [s for s in processed_scripts if s["status"] == "failed"]
         validated_scripts = [s for s in successful_scripts if s.get("validation_passed", False)]
         enhanced_validated_scripts = [s for s in successful_scripts if s.get("enhanced_validation_passed", False)]
+        company_compliant_scripts = [s for s in successful_scripts if s.get("company_mention_compliance") == "optimal"]
         
         # Calculate averages for successful scripts
         avg_quote_count = sum(s.get("quote_count", 0) for s in successful_scripts) / len(successful_scripts) if successful_scripts else 0
@@ -898,19 +913,20 @@ def process_poppy_cards(variables, guidance_files):
             "failed": len(failed_scripts),
             "validation_passed": len(validated_scripts),
             "enhanced_validation_passed": len(enhanced_validated_scripts),
+            "company_mention_compliance": len(company_compliant_scripts),
             "validation_rate": f"{len(validated_scripts)}/{len(successful_scripts)}" if successful_scripts else "0/0",
             "enhanced_validation_rate": f"{len(enhanced_validated_scripts)}/{len(successful_scripts)}" if successful_scripts else "0/0",
+            "company_compliance_rate": f"{len(company_compliant_scripts)}/{len(successful_scripts)}" if successful_scripts else "0/0",
             "average_quote_count": round(avg_quote_count, 1),
             "target_quote_count": 8,
             "scripts": processed_scripts,
             "company_name": company_name,
             "timestamp": timestamp,
             "openai_model": openai_model,
-            "script_type": "SHORT_CREATIVE_ENHANCED",
+            "script_type": "SHORT_FIXED",
             "card_range": "11-15",
             "target_duration": "6-8 minutes",
-            "creative_enhancements": "Full guidance transplant from four-problem version",
-            "additive_improvements": ["feature_clarity", "revenue_impact", "implementation_assurance", "competitive_differentiation"],
+            "fixes_applied": "Proper company name control (4-6 mentions), validation enforcement, instruction hierarchy fix",
             "word_count_analysis": {
                 "average_word_count": round(avg_word_count, 1),
                 "optimal_compliance": f"{optimal_count}/{len(successful_scripts)}" if successful_scripts else "0/0",
@@ -918,21 +934,24 @@ def process_poppy_cards(variables, guidance_files):
             },
             "company_integration": {
                 "average_mentions": round(avg_company_mentions, 1),
-                "maximum_mentions": 8
+                "target_mentions": "4-6",
+                "compliance_rate": f"{len(company_compliant_scripts)}/{len(successful_scripts)}" if successful_scripts else "0/0"
             }
         }
 
-        print(f"\n📊 PROCESSING SUMMARY - CREATIVE-ENHANCED SHORT FORMAT:")
-        print(f"✅ Creative-enhanced SHORT scripts generated: {len(successful_scripts)}/{total_cards}")
+        print(f"\n📊 PROCESSING SUMMARY - FIXED SHORT FORMAT:")
+        print(f"✅ FIXED SHORT scripts generated: {len(successful_scripts)}/{total_cards}")
         print(f"✅ Structural validation passed: {len(validated_scripts)}/{len(successful_scripts)}")
         print(f"🎯 Enhanced content validation passed: {len(enhanced_validated_scripts)}/{len(successful_scripts)}")
+        print(f"🏢 Company mention compliance: {len(company_compliant_scripts)}/{len(successful_scripts)}")
         print(f"📈 Average quote count: {avg_quote_count:.1f} (target: 8)")
         print(f"📈 Average word count: {avg_word_count:.1f} (target: 1200-1600)")
-        print(f"🏢 Average company mentions: {avg_company_mentions:.1f} (maximum: 8)")
+        print(f"🏢 Average company mentions: {avg_company_mentions:.1f} (target: 4-6)")
         print(f"🎯 Structural success rate: {(len(validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
         print(f"🚀 Enhanced content success rate: {(len(enhanced_validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
+        print(f"🏢 Company mention success rate: {(len(company_compliant_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
         print(f"🎯 Word count compliance: {optimal_count}/{len(successful_scripts)} scripts in optimal range")
-        print(f"📋 Creative guidance: Full transplant from four-problem version")
+        print(f"📋 Fixes applied: Proper company name control, validation enforcement, instruction hierarchy")
         
         return summary
 
@@ -942,36 +961,35 @@ def process_poppy_cards(variables, guidance_files):
 
 
 def main():
-    """Main function to orchestrate the entire creative-enhanced SHORT video script workflow."""
+    """Main function to orchestrate the entire FIXED SHORT video script workflow."""
     try:
         logger.info("=" * 80)
-        logger.info("CREATIVE-ENHANCED SHORT VIDEO SCRIPT AUTOMATION - FULL GUIDANCE TRANSPLANT")
+        logger.info("FIXED SHORT VIDEO SCRIPT AUTOMATION - COMPANY NAME CONTROL")
         logger.info("=" * 80)
         print("=" * 80)
-        print("CREATIVE-ENHANCED SHORT VIDEO SCRIPT AUTOMATION - FULL GUIDANCE TRANSPLANT")
+        print("FIXED SHORT VIDEO SCRIPT AUTOMATION - COMPANY NAME CONTROL")
         print("=" * 80)
         print(f"Start time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Script directory: {SCRIPT_DIR}")
         print(f"Target: 6-8 minute scripts with 8 quotes (4 per problem) from cards 11-15")
         print(f"Word Target: 1200-1600 words with rich creative development")
         print("🎯 APPROACH: Exactly 4 quotes per problem (8 total quotes per SHORT script)")
-        print("🏢 ENHANCEMENT: Company name spacing control (maximum 8 mentions)")
-        print("🚀 CREATIVE TRANSPLANT: Full additive improvements from four-problem version")
-        print("   ✅ Feature clarity in each problem section (<800 chars)")
-        print("   ✅ Revenue impact with <6-month payback assurance (<800 chars)")
-        print("   ✅ Implementation assurance <8 hours in outro (<800 chars)")
-        print("   ✅ Competitive differentiation in outro (<800 chars)")
-        print("🔧 TOKEN LIMIT: Increased to 4000 for comprehensive generation")
+        print("🏢 FIXED: Company name control (4-6 mentions with spacing)")
+        print("🚀 VALIDATION: Scripts rejected and retried if validation fails")
+        print("   ✅ Minimum 4 company mentions (for branding)")
+        print("   ✅ Maximum 6 company mentions (avoid oversaturation)")
+        print("   ✅ 4-sentence spacing rule enforced")
+        print("   ✅ Alternative references as default behavior")
 
         # Fetch configuration from Supabase with error handling
         logger.info("[SHORT-ENHANCED] Fetching configuration from Supabase...")
-        print("\nFetching creative-enhanced SHORT configuration from Supabase...")
+        print("\nFetching FIXED SHORT configuration from Supabase...")
         
         try:
             variables = fetch_configuration_from_supabase()
         except Exception as e:
             logger.critical(f"[SHORT-ENHANCED] Failed to fetch configuration: {str(e)}")
-            raise Exception(f"Failed to fetch creative-enhanced SHORT script configuration from Supabase: {str(e)}")
+            raise Exception(f"Failed to fetch FIXED SHORT script configuration from Supabase: {str(e)}")
 
         # Validate that we have the video_script_short configuration
         if "scripts" not in variables or "video_script_short" not in variables["scripts"]:
@@ -987,110 +1005,111 @@ def main():
         video_script_config = variables["scripts"]["video_script_short"]
         logger.info("[SHORT-ENHANCED] Successfully loaded video_script_short configuration")
 
-        # Load guidance files (using SHORT version) with no fallback handling
+        # Load guidance files with no fallback handling
         guidance_bucket = video_script_config["supabase_buckets"]["guidance"]
         try:
             guidance_files = load_guidance_files(guidance_bucket)
-            logger.info("[SHORT-ENHANCED] Successfully loaded all guidance files for creative processing")
+            logger.info("[SHORT-ENHANCED] Successfully loaded all guidance files for FIXED processing")
         except Exception as e:
             logger.critical(f"[SHORT-ENHANCED] Failed to load guidance files: {str(e)}")
-            raise Exception(f"Failed to load creative-enhanced SHORT script guidance files from bucket '{guidance_bucket}': {str(e)}")
+            raise Exception(f"Failed to load FIXED SHORT script guidance files from bucket '{guidance_bucket}': {str(e)}")
 
-        # Process Poppy Cards (cards 11-15) with creative enhancement
+        # Process Poppy Cards (cards 11-15) with FIXED company name control
         try:
-            logger.info("[SHORT-ENHANCED] Starting creative-enhanced card processing for cards 11-15")
+            logger.info("[SHORT-ENHANCED] Starting FIXED card processing for cards 11-15")
             summary = process_poppy_cards(variables, guidance_files)
-            logger.info(f"[SHORT-ENHANCED] Completed creative processing: {summary['successful']}/{summary['total_processed']} successful")
+            logger.info(f"[SHORT-ENHANCED] Completed FIXED processing: {summary['successful']}/{summary['total_processed']} successful")
         except Exception as e:
-            logger.critical(f"[SHORT-ENHANCED] Failed during creative card processing: {str(e)}")
-            raise Exception(f"Failed to process creative-enhanced SHORT script cards 11-15: {str(e)}")
+            logger.critical(f"[SHORT-ENHANCED] Failed during FIXED card processing: {str(e)}")
+            raise Exception(f"Failed to process FIXED SHORT script cards 11-15: {str(e)}")
 
-        # Save summary to output bucket - MUST SUCCEED  
+        # Save summary to output bucket
         output_bucket = video_script_config["supabase_buckets"]["output"]
-        summary_filename = f"video_script_SHORT_creative_enhanced_summary_{summary['timestamp']}.json"
+        summary_filename = f"video_script_SHORT_FIXED_summary_{summary['timestamp']}.json"
         summary_content = json.dumps(summary, indent=2)
         
         try:
             upload_file_to_bucket(output_bucket, summary_filename, summary_content)
-            logger.info(f"[SHORT-ENHANCED] Saved creative summary as {summary_filename}")
+            logger.info(f"[SHORT-ENHANCED] Saved FIXED summary as {summary_filename}")
         except Exception as e:
-            logger.error(f"[SHORT-ENHANCED] Failed to save creative summary: {str(e)}")
-            print(f"Warning: Could not save creative summary file to bucket '{output_bucket}': {str(e)}")
-            print("Creative-enhanced video script generation completed successfully despite summary save failure.")
+            logger.error(f"[SHORT-ENHANCED] Failed to save FIXED summary: {str(e)}")
+            print(f"Warning: Could not save FIXED summary file to bucket '{output_bucket}': {str(e)}")
+            print("FIXED video script generation completed successfully despite summary save failure.")
 
         # Calculate and display execution time
         end_time = datetime.now(eastern_tz)
         execution_time = end_time - start_time
 
         logger.info("=" * 80)
-        logger.info("CREATIVE-ENHANCED SHORT VIDEO SCRIPT WORKFLOW COMPLETE")
+        logger.info("FIXED SHORT VIDEO SCRIPT WORKFLOW COMPLETE")
         logger.info(f"Execution time: {execution_time}")
         logger.info(f"Success rate: {summary['successful']}/{summary['total_processed']}")
         logger.info("=" * 80)
 
         print("\n" + "=" * 80)
-        print("CREATIVE-ENHANCED SHORT VIDEO SCRIPT WORKFLOW COMPLETE")
+        print("FIXED SHORT VIDEO SCRIPT WORKFLOW COMPLETE")
         print("=" * 80)
         print(f"End time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Total execution time: {execution_time}")
-        print(f"Creative-enhanced SHORT scripts generated: {summary['successful']}/{summary['total_processed']}")
+        print(f"FIXED SHORT scripts generated: {summary['successful']}/{summary['total_processed']}")
         print(f"Structural validation success rate: {summary['validation_rate']}")
         print(f"Enhanced content validation success rate: {summary['enhanced_validation_rate']}")
+        print(f"Company mention compliance rate: {summary['company_compliance_rate']}")
         print(f"Average quote count: {summary['average_quote_count']} (target: 8)")
         print(f"Average word count: {summary['word_count_analysis']['average_word_count']} (target: 1200-1600)")
-        print(f"Average company mentions: {summary['company_integration']['average_mentions']} (maximum: 8)")
-        print(f"Creative summary saved as: {summary_filename}")
+        print(f"Average company mentions: {summary['company_integration']['average_mentions']} (target: 4-6)")
+        print(f"FIXED summary saved as: {summary_filename}")
 
         if summary['failed'] > 0:
-            logger.warning(f"[SHORT-ENHANCED] {summary['failed']} creative scripts failed to generate")
-            print(f"\n⚠️ Warning: {summary['failed']} creative-enhanced SHORT script(s) failed to generate")
+            logger.warning(f"[SHORT-ENHANCED] {summary['failed']} FIXED scripts failed to generate")
+            print(f"\n⚠️ Warning: {summary['failed']} FIXED SHORT script(s) failed to generate")
             for script in summary['scripts']:
                 if script['status'] == 'failed':
                     logger.error(f"[SHORT-ENHANCED-FAILED] {script['combination']}: {script.get('error', 'Unknown error')}")
                     print(f"  - {script['combination']}: {script.get('error', 'Unknown error')}")
 
-        # Show comprehensive validation statistics
+        # Show comprehensive FIXED validation statistics
         validation_passed = summary['validation_passed']
         enhanced_validation_passed = summary['enhanced_validation_passed']
+        company_compliant = summary['company_mention_compliance']
         total_successful = summary['successful']
         if total_successful > 0:
-            print(f"\n📊 COMPREHENSIVE CREATIVE VALIDATION ANALYSIS (SHORT FORMAT):")
+            print(f"\n📊 COMPREHENSIVE FIXED VALIDATION ANALYSIS:")
             print(f"✅ Scripts with balanced 2-problem structure: {validation_passed}/{total_successful}")
             print(f"📏 Scripts with 8 quotes (4 per problem): {validation_passed}/{total_successful}")
             print(f"🎯 Scripts with enhanced content: {enhanced_validation_passed}/{total_successful}")
-            print(f"🏢 Company mentions per script: Maximum 8 with 4-sentence spacing control")
-            print(f"📈 Professional competence focus maintained across all creative SHORT scripts")
-            print(f"🎯 Peer validation psychology successfully implemented")
+            print(f"🏢 Scripts with proper company mentions (4-6): {company_compliant}/{total_successful}")
+            print(f"📈 Company mention compliance rate: {(company_compliant/total_successful*100):.1f}%")
+            print(f"🎯 Overall validation success rate: {(min(validation_passed, enhanced_validation_passed, company_compliant)/total_successful*100):.1f}%")
             print(f"⏱️ Duration target compliance: 6-8 minutes with {summary['word_count_analysis']['optimal_compliance']} optimal word count")
-            print(f"🚀 Creative depth: Full guidance transplant from four-problem version")
-            print(f"🎯 Additive improvements: {', '.join(summary['additive_improvements'])}")
+            print(f"🚀 Fixes applied: {summary['fixes_applied']}")
 
-        print("\n🎉 Creative-enhanced SHORT video script automation workflow completed successfully!")
-        print("📋 Each creative SHORT script contains exactly 8 quotes (4 quotes per problem)")
-        print("🏢 Each creative SHORT script includes controlled company name spacing (maximum 8 mentions)")
-        print("⏱️ Each creative SHORT script targets 6-8 minute duration with rich development")
-        print("🚀 Each creative SHORT script includes full additive improvements:")
-        print("   • Feature clarity explanations in problem sections")
-        print("   • Revenue impact with sub-6-month payback assurance")
-        print("   • Implementation time assurance (<8 hours)")
-        print("   • Competitive differentiation advantages")
-        print("🎯 Creative guidance successfully transplanted from four-problem version")
-        print("📊 Word distribution proportional to full version with rich content development")
+        print("\n🎉 FIXED SHORT video script automation workflow completed successfully!")
+        print("📋 Each FIXED SHORT script contains exactly 8 quotes (4 quotes per problem)")
+        print("🏢 Each FIXED SHORT script includes 4-6 company mentions with proper spacing")
+        print("⏱️ Each FIXED SHORT script targets 6-8 minute duration with rich development")
+        print("🚀 Validation enforcement ensures quality control")
+        print("🎯 Company name control fixes applied:")
+        print("   • Minimum 4 mentions requirement")
+        print("   • Maximum 6 mentions limit") 
+        print("   • 4-sentence spacing rule")
+        print("   • Alternative references as default")
+        print("   • Script rejection for failed validation")
         
         # Log successful session completion
         logger.info("=" * 60)
-        logger.info("CREATIVE-ENHANCED SHORT VIDEO SCRIPT AUTOMATION - SESSION END (SUCCESS)")
+        logger.info("FIXED SHORT VIDEO SCRIPT AUTOMATION - SESSION END (SUCCESS)")
         logger.info("=" * 60)
 
     except Exception as e:
-        logger.critical(f"[SHORT-ENHANCED] Critical error in creative SHORT workflow: {str(e)}")
+        logger.critical(f"[SHORT-ENHANCED] Critical error in FIXED SHORT workflow: {str(e)}")
         logger.critical(f"[SHORT-ENHANCED] Traceback: {traceback.format_exc()}")
-        print(f"\n❌ Critical error in creative-enhanced SHORT workflow: {str(e)}")
+        print(f"\n❌ Critical error in FIXED SHORT workflow: {str(e)}")
         print(f"Traceback: {traceback.format_exc()}")
         
         # Ensure we log session end even on failure
         logger.info("=" * 60)
-        logger.info("CREATIVE-ENHANCED SHORT VIDEO SCRIPT AUTOMATION - SESSION END (FAILED)")
+        logger.info("FIXED SHORT VIDEO SCRIPT AUTOMATION - SESSION END (FAILED)")
         logger.info("=" * 60)
         raise
 
