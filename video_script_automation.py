@@ -14,7 +14,7 @@ ENHANCEMENTS:
 - Peer validation psychology framework
 - Professional competence vs. ego-stroking detection
 - Quote distribution validation and reporting
-- Company name integration (maximum 11 mentions with spacing control)
+- Company name integration (FIXED: 9-12 mentions with natural distribution - transplanted from 2-problem logic)
 - ADDITIVE IMPROVEMENTS: Feature clarity, revenue impact, implementation assurance, competitive differentiation
 
 The workflow processes 10 predefined Poppy Card combinations sequentially,
@@ -303,24 +303,12 @@ def validate_enhanced_content(script_content, company_name):
         if not has_feature_mention:
             validation_issues.append("Missing specific feature explanations in problem sections")
         
-        # Check for company name mentions (maximum 11 with spacing control)
+        # FIXED: Check for company name mentions with natural range (transplanted from 2-problem logic)
         company_mentions = script_content.lower().count(company_name.lower())
-        if company_mentions > 11:
-            validation_issues.append(f"Excessive company mentions: {company_mentions} (maximum: 11 with spacing control)")
-        
-        # Additional spacing validation - check for consecutive mentions
-        sentences = re.split(r'[.!?]+', script_content)
-        spacing_violations = 0
-        for i, sentence in enumerate(sentences):
-            if company_name.lower() in sentence.lower():
-                # Check previous 3 sentences (4 total including current)
-                for j in range(max(0, i-3), i):
-                    if j < len(sentences) and company_name.lower() in sentences[j].lower():
-                        spacing_violations += 1
-                        break
-        
-        if spacing_violations > 3:  # Allow some tolerance for natural flow in longer scripts
-            validation_issues.append(f"Company name spacing violations: {spacing_violations} (mentions too close together)")
+        if company_mentions < 6:
+            validation_issues.append(f"Low company mentions: {company_mentions} (target: 9-12 mentions)")
+        elif company_mentions > 15:
+            validation_issues.append(f"High company mentions: {company_mentions} (target: 9-12 mentions)")
         
         if validation_issues:
             return False, f"Enhanced content validation issues: {', '.join(validation_issues)}"
@@ -451,46 +439,37 @@ Requirements:
 - Create an engaging video script that follows the voice, method, and focuses on the provided content
 - Ensure quote distribution creates a "peer validation experience" rather than a sales pitch"""
 
-        # COMPANY NAME SPACING CONTROL (FIXED APPROACH)
+        # COMPANY NAME USAGE - NATURAL DISTRIBUTION (transplanted from working 2-problem logic)
         system_prompt += f"""
 
-🔁 MANDATORY COMPANY NAME SPACING CONTROL - SENTENCE-BASED ENFORCEMENT:
-- Company name: {company_name}
+🏢 COMPANY NAME USAGE - NATURAL DISTRIBUTION:
 
-CRITICAL SPACING RULE:
-- Maximum ONE mention of {company_name} per 4 consecutive sentences
-- Before writing {company_name}, count backward 4 sentences to ensure no prior mention
-- If a mention exists within the previous 4 sentences, use an alternative reference instead
+Company name: {company_name}
 
-REQUIRED ALTERNATIVE REFERENCES:
-- "this top-rated solution"
-- "this cutting-edge platform" 
+SIMPLE APPROACH:
+- Include {company_name} 9-12 times throughout your script (adjusted for 4-problem format)
+- Distribute naturally across sections: intro, problem 1, problem 2, problem 3, problem 4, outro
+- Use alternatives when it would sound repetitive: "the platform", "this solution", "the system", "this technology"
+- Focus on natural flow rather than rigid counting rules
+
+GOAL: Professional brand integration without oversaturation or forced repetition.
+
+DISTRIBUTION GUIDE:
+- Intro: 1-2 mentions when introducing the solution
+- Problem 1: 2-3 mentions when discussing how it addresses this problem
+- Problem 2: 2-3 mentions when discussing how it addresses this problem
+- Problem 3: 2-3 mentions when discussing how it addresses this problem
+- Problem 4: 2-3 mentions when discussing how it addresses this problem
+- Outro: 2-3 mentions for final brand reinforcement
+
+ALTERNATIVE REFERENCES:
+- "the platform"
+- "this solution" 
 - "the system"
 - "this technology"
-- "the platform"
 - "this advanced tool"
-
-TOTAL TARGET: Maximum 11 mentions across entire script
-NATURAL FLOW: Let the narrative determine placement, but enforce spacing rule strictly
-
-ENFORCEMENT PROCESS:
-1. When narrative calls for company name, count back 4 sentences
-2. If {company_name} appears in those 4 sentences, use alternative reference
-3. If no mention in previous 4 sentences, {company_name} is allowed
-4. Continue this process throughout entire script
-
-EXAMPLE ENFORCEMENT:
-✅ Sentence 1: "Sales teams struggle with data." 
-✅ Sentence 2: "This is where {company_name} excels."
-✅ Sentence 3: "The platform provides insights." 
-✅ Sentence 4: "Teams see immediate results."
-✅ Sentence 5: "This top-rated solution transforms workflows." (NOT {company_name} - too close)
-✅ Sentence 6: "Advanced analytics drive decisions."
-✅ Sentence 7: "With this cutting-edge platform, teams thrive." (NOT {company_name} - still too close)
-✅ Sentence 8: "Results are measurable and consistent."
-✅ Sentence 9: "Companies using {company_name} report success." (NOW ALLOWED - 4+ sentences since last mention)
-
-This spacing rule eliminates overuse regardless of section boundaries."""
+- "this top-rated solution"
+"""
 
         # ✅ ADDITIVE ENHANCEMENT: PROBLEM SECTION CONTENT REQUIREMENTS
         system_prompt += f"""
@@ -498,21 +477,21 @@ This spacing rule eliminates overuse regardless of section boundaries."""
 🎯 PROBLEM SECTION CONTENT REQUIREMENTS - ADDITIVE ENHANCEMENTS:
 
 FEATURE CLARITY MANDATE (Requirement 1):
-- In each of the 4 problem sections, add 2-3 sentences explaining the specific {company_name} feature that addresses this problem
+- In each of the 4 problem sections, add 2-3 sentences explaining the specific feature that addresses this problem
 - Use fewer than 800 additional characters per problem section for feature explanations
 - Include high-level explanation of how the feature helps solve the specific problem
-- Reference the product as "{company_name}" consistently throughout feature descriptions
+- Use {company_name} OR alternative references naturally based on flow
 - Make feature descriptions concrete and specific, not vague marketing language
-- Examples: "{company_name}'s pipeline analytics dashboard shows exactly where deals are stuck" or "{company_name}'s automated scoring system highlights which prospects need immediate attention"
+- Examples: "The pipeline analytics dashboard shows exactly where deals are stuck" or "The automated scoring system highlights which prospects need immediate attention"
 
 REVENUE IMPACT MANDATE (Requirement 2):
 - In each of the 4 problem sections, add 2-3 sentences explaining how this solution increases revenue
 - Use fewer than 800 additional characters per problem section for revenue impact explanations
 - Specifically assure viewers they will achieve less than 6-month payback period
-- Reference the product as "{company_name}" consistently throughout ROI descriptions
+- Use {company_name} OR alternative references naturally based on flow
 - Include specific revenue generation mechanisms (faster deals, better conversion, reduced waste, etc.)
 - Position as "fully engaged users consistently achieve sub-6-month ROI"
-- Examples: "Companies using {company_name}'s deal acceleration features see 23% faster close rates, typically achieving full payback in under 6 months" or "{company_name} users report 31% improvement in qualified lead conversion, with most seeing ROI within 5 months"
+- Examples: "Companies using deal acceleration features see 23% faster close rates, typically achieving full payback in under 6 months" or "Users report 31% improvement in qualified lead conversion, with most seeing ROI within 5 months"
 """
 
         # ✅ ADDITIVE ENHANCEMENT: OUTRO CONTENT REQUIREMENTS  
@@ -521,21 +500,21 @@ REVENUE IMPACT MANDATE (Requirement 2):
 🚀 OUTRO CONTENT REQUIREMENTS - ADDITIVE ENHANCEMENTS:
 
 IMPLEMENTATION ASSURANCE MANDATE (Requirement 3):
-- In the first 4 sentences of the outro, assure viewers that full {company_name} implementation takes less than 8 hours
+- In the first 4 sentences of the outro, assure viewers that full implementation takes less than 8 hours
 - Use fewer than 800 additional characters for implementation time assurance
-- Reference the product as "{company_name}" consistently
+- Use {company_name} OR alternative references naturally based on flow
 - Emphasize minimal disruption to current operations
 - Position as "rapid deployment advantage"
-- Examples: "{company_name} deploys in under 8 hours with zero disruption to your current sales process" or "Full {company_name} implementation typically completes in 6-8 hours, often during a single business day"
+- Examples: "The platform deploys in under 8 hours with zero disruption to your current sales process" or "Full implementation typically completes in 6-8 hours, often during a single business day"
 
 COMPETITIVE DIFFERENTIATION MANDATE (Requirement 4):
-- In the first 5 sentences of the outro, clarify what makes {company_name} superior to competitors
+- In the first 5 sentences of the outro, clarify what makes the solution superior to competitors
 - Use fewer than 800 additional characters for competitive advantages
-- Reference the product as "{company_name}" consistently  
+- Use {company_name} OR alternative references naturally based on flow
 - Include 2 specific differentiators that are concrete and measurable
 - Focus on unique capabilities, not generic benefits
 - Avoid naming specific competitors - focus on category advantages
-- Examples: "Unlike traditional CRM analytics, {company_name} provides predictive deal scoring and real-time pipeline health monitoring" or "{company_name}'s peer-based benchmarking gives you insights that generic sales platforms simply cannot match"
+- Examples: "Unlike traditional CRM analytics, the platform provides predictive deal scoring and real-time pipeline health monitoring" or "The peer-based benchmarking gives you insights that generic sales platforms simply cannot match"
 """
 
         # Continue with existing retry logic...
@@ -552,7 +531,7 @@ COMPETITIVE DIFFERENTIATION MANDATE (Requirement 4):
                         "content": system_prompt
                     }, {
                         "role": "user",
-                        "content": "Please generate the video script now with exactly 4 quotes from each problem (16 total quotes), controlled company name spacing (maximum 11 mentions with 4-sentence spacing rule), and all additive improvements including feature clarity, revenue impact, implementation assurance, and competitive differentiation."
+                        "content": "Please generate the video script now with exactly 4 quotes from each problem (16 total quotes), natural company name distribution (target: 9-12 mentions), and all additive improvements including feature clarity, revenue impact, implementation assurance, and competitive differentiation."
                     }],
                     max_tokens=2500,  # Increased token limit for enhanced content
                     temperature=0.7)
@@ -677,7 +656,7 @@ def process_poppy_cards(variables, guidance_files):
         print(f"Company: {company_name}")
         print(f"OpenAI Model: {openai_model}")
         print(f"Quote Distribution: 4 quotes per problem (16 total per script)")
-        print(f"Company Integration: Maximum 11 mentions with spacing control")
+        print(f"Company Integration: Natural distribution (target: 9-12 mentions)")
         print(f"✅ ADDITIVE ENHANCEMENTS: Feature clarity, Revenue impact, Implementation assurance, Competitive differentiation")
         print(f"Timestamp: {timestamp}")
         
@@ -735,7 +714,7 @@ def process_poppy_cards(variables, guidance_files):
 
                 print(f"✅ Successfully processed {combination}")
                 print(f"📊 Quote count: {quote_count}, Target: 16, Validation: {'PASSED' if is_valid else 'WARNING'}")
-                print(f"🏢 Company mentions: {company_mentions}, Maximum: 11")
+                print(f"🏢 Company mentions: {company_mentions}, Target: 9-12")
                 print(f"📋 Quote validation: {validation_message}")
                 print(f"🎯 Enhanced validation: {'PASSED' if is_enhanced_valid else 'WARNING'}")
                 print(f"📈 Enhanced details: {enhanced_message}")
@@ -781,7 +760,7 @@ def process_poppy_cards(variables, guidance_files):
             "additive_enhancements": ["feature_clarity", "revenue_impact", "implementation_assurance", "competitive_differentiation"],
             "company_integration": {
                 "average_mentions": round(avg_company_mentions, 1),
-                "maximum_mentions": 11
+                "target_mentions": "9-12"
             }
         }
 
@@ -790,7 +769,7 @@ def process_poppy_cards(variables, guidance_files):
         print(f"✅ Quote validation passed: {len(validated_scripts)}/{len(successful_scripts)}")
         print(f"🎯 Enhanced validation passed: {len(enhanced_validated_scripts)}/{len(successful_scripts)}")
         print(f"📈 Average quote count: {avg_quote_count:.1f} (target: 16)")
-        print(f"🏢 Average company mentions: {avg_company_mentions:.1f} (maximum: 11)")
+        print(f"🏢 Average company mentions: {avg_company_mentions:.1f} (target: 9-12)")
         print(f"🎯 Quote distribution success rate: {(len(validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
         print(f"🚀 Enhanced content success rate: {(len(enhanced_validated_scripts)/len(successful_scripts)*100):.1f}%" if successful_scripts else "0%")
         print(f"📋 Additive enhancements: {', '.join(summary['additive_enhancements'])}")
@@ -811,7 +790,7 @@ def main():
         print(f"Start time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Script directory: {SCRIPT_DIR}")
         print("🎯 APPROACH: Exactly 4 quotes per problem (16 total quotes per script)")
-        print("🏢 ENHANCEMENT: Company name spacing control (maximum 11 mentions)")
+        print("🏢 ENHANCEMENT: Company name natural distribution (target: 9-12 mentions)")
         print("🚀 ADDITIVE IMPROVEMENTS:")
         print("   ✅ Feature clarity in each problem section (<800 chars)")
         print("   ✅ Revenue impact with <6-month payback assurance (<800 chars)")
@@ -854,7 +833,7 @@ def main():
         print(f"Quote validation success rate: {summary['validation_rate']}")
         print(f"Enhanced validation success rate: {summary['enhanced_validation_rate']}")
         print(f"Average quote count: {summary['average_quote_count']} (target: 16)")
-        print(f"Average company mentions: {summary['company_integration']['average_mentions']} (maximum: 11)")
+        print(f"Average company mentions: {summary['company_integration']['average_mentions']} (target: 9-12)")
         print(f"Summary saved as: {summary_filename}")
 
         if summary['failed'] > 0:
@@ -871,14 +850,14 @@ def main():
             print(f"\n📊 COMPREHENSIVE VALIDATION ANALYSIS:")
             print(f"✅ Scripts with 16 quotes (4 per problem): {validation_passed}/{total_successful}")
             print(f"🎯 Scripts with enhanced content: {enhanced_validation_passed}/{total_successful}")
-            print(f"🏢 Company mentions per script: Maximum 11 with 4-sentence spacing control")
+            print(f"🏢 Company mentions per script: Target 9-12 with natural distribution")
             print(f"📈 Professional competence focus maintained across all scripts")
             print(f"🎯 Peer validation psychology successfully implemented")
             print(f"🚀 Additive improvements: {', '.join(summary['additive_enhancements'])}")
 
         print("\n🎉 Enhanced video script automation workflow completed successfully!")
         print("📋 Each script contains exactly 16 quotes (4 quotes per problem)")
-        print("🏢 Each script includes controlled company name spacing (maximum 11 mentions)")
+        print("🏢 Each script includes natural company name distribution (target: 9-12 mentions)")
         print("🚀 Each script includes all additive improvements:")
         print("   • Feature clarity explanations")
         print("   • Revenue impact with sub-6-month payback assurance")
