@@ -305,6 +305,7 @@ def parse_script_structure(script_content: str) -> Dict[str, any]:
 def parse_script_aggressively(script_content: str) -> Dict[str, any]:
     """
     Aggressive parsing that ensures we capture ALL content with maximum retention for 4 problems
+    IMPROVED: Better content allocation percentages aligned with 2-problem success pattern
     
     Args:
         script_content: Raw script content
@@ -318,9 +319,9 @@ def parse_script_aggressively(script_content: str) -> Dict[str, any]:
     
     total_length = len(script_content)
     
-    # Use a balanced split: 20% intro, 60% problems (4 x 15%), 20% outro
-    intro_end = int(total_length * 0.20)
-    outro_start = int(total_length * 0.80)
+    # IMPROVED: Use more balanced split like successful 2-problem version: 25% intro, 50% problems (4 x 12.5%), 25% outro
+    intro_end = int(total_length * 0.25)
+    outro_start = int(total_length * 0.75)
     
     # Adjust for sentence boundaries
     intro_chunk = script_content[:intro_end + 300]
@@ -386,7 +387,7 @@ def parse_script_aggressively(script_content: str) -> Dict[str, any]:
 
 def parse_script_by_markers(script_content: str) -> Dict[str, any]:
     """
-    FIXED: Parse script using flexible problem markers (handles any problem numbers)
+    FIXED: Parse script using correct problem marker pattern that matches actual script format
     """
     sections = {"intro": "", "problems": [], "outro": ""}
     
@@ -395,8 +396,8 @@ def parse_script_by_markers(script_content: str) -> Dict[str, any]:
     current_content = []
     
     for line in lines:
-        # Check for problem marker with any number (flexible regex)
-        if re.match(r'\*\*Problem\s+\d+:', line, re.IGNORECASE):
+        # CRITICAL FIX: Corrected regex pattern to include square bracket that matches actual format **[Problem 1:
+        if re.match(r'\*\*\[Problem\s+\d+:', line, re.IGNORECASE):
             # Save previous section
             if current_section == "intro":
                 sections["intro"] = '\n'.join(current_content).strip()
@@ -930,6 +931,7 @@ def generate_chunked_filename(original_filename: str) -> str:
 def process_all_scripts_for_company(company_name: str, template_config: Dict, heygen_config: Dict) -> Dict:
     """
     Process all 4-problem scripts for a company from four-problem-script-drafts bucket
+    IMPROVED: Enhanced file filtering with better pattern matching
     """
     logger.info(f"[HEYGEN-4PROB-MAIN] Processing all 4-problem scripts for company: {company_name}")
     
@@ -949,11 +951,18 @@ def process_all_scripts_for_company(company_name: str, template_config: Dict, he
     # List all files in bucket
     all_files = list_files_in_bucket(bucket_name)
     
-    # Filter files for this company (exclude already chunked files)
-    company_files = [f for f in all_files 
-                    if f.startswith(company_name) and 'chunked' not in f.lower()]
+    # IMPROVED: Enhanced file filtering - exclude already chunked files and focus on script files
+    company_files = []
+    for f in all_files:
+        if (f.startswith(company_name) and 
+            'chunked' not in f.lower() and 
+            'script' in f.lower() and 
+            f.endswith('.txt')):
+            company_files.append(f)
     
     logger.info(f"[HEYGEN-4PROB-MAIN] Found {len(company_files)} script files for {company_name}")
+    if company_files:
+        logger.info(f"[HEYGEN-4PROB-MAIN] Files to process: {company_files}")
     
     # Process each file
     for filename in company_files:
