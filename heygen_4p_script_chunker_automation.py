@@ -7,6 +7,7 @@ This script processes existing 4-problem video scripts and intelligently chunks 
 - Reads scripts from four-problem-script-drafts bucket only
 - Applies smart content-aware splitting (respects sentence boundaries, preserves quotes)
 - Chunks scripts according to 4-problem slide structure (15 slides)
+- Comments out non-audio segments for video generator script
 - Saves chunked scripts with HeyGen placeholder mappings back to same Supabase bucket
 
 Production workflow that integrates with the ClearlyAgentic configuration management system.
@@ -824,7 +825,7 @@ def format_chunked_output(slide_contents: Dict[int, str], original_content: str)
     
     # Add placeholder mappings for 4prob
     for slide_num in sorted(slide_contents.keys()):
-        placeholder = f"{{{{4prob_slide_{slide_num:02d}_content}}}}"
+        placeholder = f"{{{{four_prob_slide_{slide_num:02d}_content}}}}"
         content = slide_contents[slide_num].strip()
         char_count = len(content)
         
@@ -851,6 +852,59 @@ def format_chunked_output(slide_contents: Dict[int, str], original_content: str)
     return "\n".join(output_lines)
 
 # =====================================================================
+# COMMENT OUT NON-AUDIO SEGMENTS FUNCTION
+# =====================================================================
+
+def comment_out_non_audio_segments(chunked_content: str) -> str:
+    """
+    Standalone additive function to comment out segments that should not be 
+    generated into audio and video content by the video generator script.
+    
+    This function identifies and comments out:
+    1. **[Intro]**, **[INTRO]**, **[Outro]**, **[OUTRO]**, **[Transition]**, **[TRANSITION]**
+    2. Synopsis text that follows the '---' separator at the end
+    
+    Args:
+        chunked_content (str): The chunked script content
+        
+    Returns:
+        str: Content with non-audio segments commented out
+    """
+    
+    lines = chunked_content.split('\n')
+    processed_lines = []
+    in_synopsis_section = False
+    
+    for line in lines:
+        # Check if we've hit the synopsis separator
+        if line.strip() == '---':
+            in_synopsis_section = True
+            processed_lines.append(line)  # Keep the separator as-is
+            continue
+            
+        # Comment out synopsis content after '---'
+        if in_synopsis_section and line.strip():
+            processed_lines.append(f"# {line}")
+            continue
+        
+        # Check for bracketed intro/outro/transition markers
+        line_stripped = line.strip()
+        markers_to_comment = [
+            '**[Intro]**', '**[INTRO]**', '[INTRO]', '[intro]',
+            '**[Outro]**', '**[OUTRO]**',  '[OUTRO]', '[outro]',
+            '**[Transition]**', '**[TRANSITION]**', '[TRANSITION]', '[transition]',
+        ]
+        
+        # If line contains any of these markers, comment it out
+        if any(marker in line_stripped for marker in markers_to_comment):
+            processed_lines.append(f"# {line}")
+        else:
+            # Keep line as-is
+            processed_lines.append(line)
+    
+    return '\n'.join(processed_lines)
+
+# =====================================================================
 # MAIN WORKFLOW FUNCTIONS
 # =====================================================================
 
@@ -875,11 +929,14 @@ def process_single_script(filename: str, company_name: str, template_config: Dic
         # Format output for 4prob template
         formatted_output = format_chunked_output(slide_contents, script_content)
         
+        # Comment out non-audio segments
+        commented_output = comment_out_non_audio_segments(formatted_output)
+        
         # Generate output filename
         chunked_filename = generate_chunked_filename(filename)
         
-        # Upload chunked script to same bucket
-        upload_file_to_bucket(bucket_name, chunked_filename, formatted_output)
+        # Upload commented chunked script to same bucket
+        upload_file_to_bucket(bucket_name, chunked_filename, commented_output)
         
         # Calculate metrics
         total_chars = sum(len(content) for content in slide_contents.values() if content)
