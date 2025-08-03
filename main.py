@@ -84,6 +84,18 @@ def run_heygen_2prob_chunker():
     subprocess.Popen(["python", "heygen_2p_script_chunker_automation.py"])
     return "HeyGen 2-problem script chunker workflow started", 200
 
+@app.route('/run_heygen_4prob_video', methods=['POST'])
+def run_heygen_4prob_video():
+    """Trigger four-problem video generator"""
+    subprocess.Popen(["python", "heygen_4prob_video_generator_v4.py"])
+    return "HeyGen 4-problem video generator workflow started", 200
+
+@app.route('/run_heygen_2prob_video', methods=['POST'])
+def run_heygen_2prob_video():
+    """Trigger two-problem video generator"""
+    subprocess.Popen(["python", "heygen_2prob_video_generator_v4.py"])
+    return "HeyGen 2-problem video generator workflow started", 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
     
