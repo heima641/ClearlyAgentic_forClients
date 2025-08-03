@@ -22,7 +22,7 @@ def run_blog():
 def run_reviews():
     """Trigger product reviews workflow"""
     subprocess.Popen(["python", "combined_reviews_workflow.py"])
-    return "Reviews workflow started", 200
+    return {"status": "success", "message": "Reviews workflow started"}, 200
 
 @app.route('/run_press_release', methods=['POST'])
 def run_press_release():
