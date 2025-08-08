@@ -620,6 +620,37 @@ SCRIPT ENDING REQUIREMENT:
 - Keep the script tight and focused for video production
 """
 
+        # ✅ ADD PROHIBITED TERMS VALIDATION FUNCTION
+        def contains_prohibited_terms(content):
+            """
+            Check if content contains any prohibited marketing terms
+            
+            Args:
+                content (str): The script content to check
+                
+            Returns:
+                list: List of prohibited terms found (empty if none found)
+            """
+            prohibited_terms = [
+                'unlock', 'unlocking', 'unlocks',
+                'transform', 'transforming', 'transforms', 'transformation',
+                'revolutionize', 'revolutionizing', 'revolutionizes', 'revolution',
+                'seamless', 'seamlessly',
+                'game-changer', 'game changer', 'game-changing',
+                'empower', 'empowering', 'empowers', 'empowerment',
+                'catalyst', 'catalysts',
+                'operational excellence'
+            ]
+            
+            content_lower = content.lower()
+            found_terms = []
+            
+            for term in prohibited_terms:
+                if term in content_lower:
+                    found_terms.append(term)
+            
+            return found_terms
+
         # Continue with retry logic for SHORT scripts
         for attempt in range(max_retries):
             try:
@@ -645,6 +676,22 @@ SCRIPT ENDING REQUIREMENT:
                     script_content = script_content.strip()
 
                 if script_content:
+                    # ✅ FIRST CHECK: PROHIBITED TERMS VALIDATION (BEFORE OTHER PROCESSING)
+                    found_prohibited_terms = contains_prohibited_terms(script_content)
+                    if found_prohibited_terms:
+                        logger.warning(f"[SHORT-ENHANCED] ❌ Found prohibited terms: {found_prohibited_terms}. Regenerating...")
+                        print(f"❌ Found prohibited terms: {found_prohibited_terms}. Regenerating script...")
+                        # Force retry by continuing to next attempt
+                        if attempt < max_retries - 1:
+                            continue
+                        else:
+                            logger.error(f"[SHORT-ENHANCED] Failed to generate script without prohibited terms after {max_retries} attempts")
+                            raise Exception(f"Could not generate script without prohibited terms after {max_retries} attempts. Found terms: {found_prohibited_terms}")
+                    
+                    # ✅ PROHIBITED TERMS PASSED - Continue with normal validation
+                    logger.info(f"[SHORT-ENHANCED] ✅ No prohibited terms found - proceeding with validation")
+                    print(f"✅ No prohibited terms detected - script accepted for validation")
+                    
                     # Calculate word count for 6-8 minute target validation
                     word_count = len(script_content.split())
                     logger.info(f"[SHORT-ENHANCED] SUCCESS - Generated {word_count} words, {len(script_content)} characters")
