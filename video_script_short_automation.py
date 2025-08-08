@@ -620,38 +620,56 @@ SCRIPT ENDING REQUIREMENT:
 - Keep the script tight and focused for video production
 """
 
-        # ✅ ADD PROHIBITED TERMS VALIDATION FUNCTION
-        def contains_prohibited_terms(content):
+        # ✅ PROHIBITED TERMS CLEANUP FUNCTION (NEW APPROACH)
+        def clean_prohibited_terms(script_content):
             """
-            Check if content contains any prohibited marketing terms
+            Replace prohibited terms with specific acceptable alternatives
             
             Args:
-                content (str): The script content to check
+                script_content (str): Generated script content
                 
             Returns:
-                list: List of prohibited terms found (empty if none found)
+                str: Script with prohibited terms replaced
             """
-            prohibited_terms = [
-                'unlock', 'unlocking', 'unlocks',
-                'transform', 'transforming', 'transforms', 'transformation',
-                'revolutionize', 'revolutionizing', 'revolutionizes', 'revolution',
-                'seamless', 'seamlessly',
-                'game-changer', 'game changer', 'game-changing',
-                'empower', 'empowering', 'empowers', 'empowerment',
-                'catalyst', 'catalysts',
-                'operational excellence'
-            ]
+            replacements = {
+                'transform': 'modernize',
+                'transforms': 'modernizes', 
+                'transforming': 'modernizing',
+                'transformation': 'modernization',
+                'revolutionize': 'advance',
+                'revolutionizing': 'advancing',
+                'revolutionizes': 'advances',
+                'revolution': 'advancement',
+                'unlock': 'access',
+                'unlocking': 'accessing',
+                'unlocks': 'accesses',
+                'empower': 'enable',
+                'empowers': 'enables',
+                'empowering': 'enabling',
+                'empowerment': 'enablement',
+                'seamless': 'smooth',
+                'seamlessly': 'smoothly',
+                'game-changer': 'major advantage',
+                'game changer': 'major advantage',
+                'game-changing': 'highly beneficial',
+                'catalyst': 'driver',
+                'catalysts': 'drivers'
+            }
             
-            content_lower = content.lower()
-            found_terms = []
+            cleaned_content = script_content
+            replaced_terms = []
             
-            for term in prohibited_terms:
-                if term in content_lower:
-                    found_terms.append(term)
+            for prohibited, replacement in replacements.items():
+                # Case-insensitive replacement while preserving original case
+                import re
+                pattern = re.compile(re.escape(prohibited), re.IGNORECASE)
+                if pattern.search(cleaned_content):
+                    replaced_terms.append(prohibited)
+                    cleaned_content = pattern.sub(replacement, cleaned_content)
             
-            return found_terms
+            return cleaned_content, replaced_terms
 
-        # Continue with retry logic for SHORT scripts
+        # ✅ SIMPLIFIED GENERATION WITH AUTOMATIC CLEANUP (REPLACES COMPLEX RETRY LOGIC)
         for attempt in range(max_retries):
             try:
                 logger.info(f"[SHORT-ENHANCED] Attempt {attempt + 1}/{max_retries} for creative-enhanced 2-problem script with {company_name} integration")
@@ -669,89 +687,29 @@ SCRIPT ENDING REQUIREMENT:
                         "content": "Generate a 6-8 minute SHORT video script now with exactly 4 quotes from each problem (8 total quotes), natural company name distribution (4-6 mentions), and all additive improvements including feature clarity, revenue impact, implementation assurance, and competitive differentiation. Target 1200-1600 words with rich creative development matching the depth of the four-problem version."
                     }],
                     max_tokens=4000,
-                    temperature=0.1)  # ← CHANGED FROM 0.7 TO 0.1 FOR MORE DETERMINISTIC OUTPUT
+                    temperature=0.1)
 
                 script_content = response.choices[0].message.content
                 if script_content:
                     script_content = script_content.strip()
 
                 if script_content:
-                    # ✅ FIRST CHECK: PROHIBITED TERMS VALIDATION (BEFORE OTHER PROCESSING)
-                    found_prohibited_terms = contains_prohibited_terms(script_content)
-                    if found_prohibited_terms:
-                        logger.warning(f"[SHORT-ENHANCED] ❌ Found prohibited terms: {found_prohibited_terms}. Regenerating...")
-                        print(f"❌ Found prohibited terms: {found_prohibited_terms}. Regenerating script...")
-                        
-                        # ✅ ENHANCED RETRY LOGIC: Add specific violation feedback for next attempt
-                        if attempt < max_retries - 1:
-                            # Create violation-specific guidance for the next retry
-                            violation_feedback = f"""
-
-🚨 CRITICAL RETRY INSTRUCTION - PREVIOUS SCRIPT REJECTED
-
-Your previous script was AUTOMATICALLY REJECTED because it contained these FORBIDDEN terms: {', '.join(found_prohibited_terms)}
-
-IMMEDIATE ACTION REQUIRED:
-- You MUST completely avoid these exact terms: {', '.join(found_prohibited_terms)}
-- Do NOT use any variations or forms of these terms
-- Use ONLY the approved alternatives provided in the prohibited terms section
-- Review each sentence as you write to ensure compliance
-
-RETRY FOCUS: Write a new script that accomplishes the same goals but uses ONLY approved terminology.
-This is attempt {attempt + 2} of {max_retries}. Compliance is mandatory for acceptance.
-"""
-                            
-                            # Append violation feedback to system prompt for next attempt
-                            enhanced_system_prompt = system_prompt + violation_feedback
-                            
-                            # Use enhanced prompt for the retry
-                            logger.info(f"[SHORT-ENHANCED] Retrying with enhanced guidance for specific violations: {found_prohibited_terms}")
-                            
-                            # Make the retry call with enhanced guidance
-                            response = client.chat.completions.create(
-                                model=openai_model,
-                                messages=[{
-                                    "role": "system",
-                                    "content": enhanced_system_prompt
-                                }, {
-                                    "role": "user",
-                                    "content": "Generate a 6-8 minute SHORT video script now with exactly 4 quotes from each problem (8 total quotes), natural company name distribution (4-6 mentions), and all additive improvements. CRITICAL: Avoid the specific prohibited terms identified in the retry instruction above."
-                                }],
-                                max_tokens=4000,
-                                temperature=0.1)
-                            
-                            # Get the retry response
-                            retry_script_content = response.choices[0].message.content
-                            if retry_script_content:
-                                retry_script_content = retry_script_content.strip()
-                                
-                                # Check the retry for prohibited terms
-                                retry_found_terms = contains_prohibited_terms(retry_script_content)
-                                if not retry_found_terms:
-                                    # Success! Use the retry script
-                                    script_content = retry_script_content
-                                    logger.info(f"[SHORT-ENHANCED] ✅ Retry successful - no prohibited terms found")
-                                    print(f"✅ Retry successful - prohibited terms eliminated")
-                                else:
-                                    # Still has prohibited terms, continue to next attempt
-                                    logger.warning(f"[SHORT-ENHANCED] ❌ Retry still contains prohibited terms: {retry_found_terms}")
-                                    print(f"❌ Retry still contains prohibited terms: {retry_found_terms}")
-                                    continue
-                            else:
-                                continue
-                        else:
-                            logger.error(f"[SHORT-ENHANCED] Failed to generate script without prohibited terms after {max_retries} attempts")
-                            raise Exception(f"Could not generate script without prohibited terms after {max_retries} attempts. Found terms: {found_prohibited_terms}")
+                    # ✅ AUTOMATIC PROHIBITED TERMS CLEANUP (REPLACES VALIDATION + RETRY LOGIC)
+                    cleaned_script, replaced_terms = clean_prohibited_terms(script_content)
                     
-                    # ✅ IF WE REACH HERE: No prohibited terms found - proceed with normal validation
-                    if not contains_prohibited_terms(script_content):
-                        logger.info(f"[SHORT-ENHANCED] ✅ No prohibited terms found - proceeding with validation")
-                        print(f"✅ No prohibited terms detected - script accepted for validation")
-                        
-                        # Calculate word count for 6-8 minute target validation
-                        word_count = len(script_content.split())
-                        logger.info(f"[SHORT-ENHANCED] SUCCESS - Generated {word_count} words, {len(script_content)} characters")
-                        print(
+                    if replaced_terms:
+                        logger.info(f"[SHORT-ENHANCED] ✅ Auto-replaced prohibited terms: {replaced_terms}")
+                        print(f"✅ Auto-replaced prohibited terms: {replaced_terms}")
+                    else:
+                        logger.info(f"[SHORT-ENHANCED] ✅ No prohibited terms found - script was clean")
+                        print(f"✅ No prohibited terms found - script was clean")
+                    
+                    script_content = cleaned_script
+                    
+                    # Calculate word count for 6-8 minute target validation
+                    word_count = len(script_content.split())
+                    logger.info(f"[SHORT-ENHANCED] SUCCESS - Generated {word_count} words, {len(script_content)} characters")
+                    print(
                         f"Successfully generated creative-enhanced SHORT video script with full guidance transplant ({len(script_content)} characters, ~{word_count} words)"
                     )
                     
