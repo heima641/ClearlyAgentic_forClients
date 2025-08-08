@@ -855,12 +855,13 @@ def format_chunked_output(slide_contents: Dict[int, str], original_content: str)
 
 def comment_out_non_audio_segments(chunked_content: str) -> str:
     """
-    Standalone additive function to comment out segments that should not be 
-    generated into audio and video content by the video generator script.
+    SURGICAL commenting: Only comment out specific non-audio segments.
+    INPUT: Clean content with NO existing # prefixes
+    OUTPUT: Mostly clean content with ONLY targeted lines commented out
     
     This function identifies and comments out:
-    1. **[Intro]**, **[INTRO]**, **[Outro]**, **[OUTRO]**, **[Transition]**, **[TRANSITION]**
-    2. Synopsis text that follows the '---' separator at the end
+    1. Section markers like **[Intro]**, **[Outro]**, **[Transition]**  
+    2. Final synopsis section (only after the LAST '---' separator)
     
     Args:
         chunked_content (str): The chunked script content
@@ -871,34 +872,47 @@ def comment_out_non_audio_segments(chunked_content: str) -> str:
     
     lines = chunked_content.split('\n')
     processed_lines = []
-    in_synopsis_section = False
     
-    for line in lines:
-        # Check if we've hit the synopsis separator
+    # FIND THE FINAL '---' - only content after THIS should be synopsis
+    last_separator_index = -1
+    for i, line in enumerate(lines):
         if line.strip() == '---':
-            in_synopsis_section = True
-            processed_lines.append(line)  # Keep the separator as-is
-            continue
-            
-        # Comment out synopsis content after '---'
-        if in_synopsis_section and line.strip():
-            processed_lines.append(f"# {line}")
+            last_separator_index = i
+    
+    for i, line in enumerate(lines):
+        line_stripped = line.strip()
+        
+        # Always keep separators and empty lines as-is
+        if not line_stripped or line_stripped == '---':
+            processed_lines.append(line)
             continue
         
-        # Check for bracketed intro/outro/transition markers
-        line_stripped = line.strip()
+        # Only comment content after the FINAL '---' AND skip chunking summary lines
+        in_final_synopsis = (last_separator_index != -1 and i > last_separator_index)
+        if in_final_synopsis:
+            # Don't double-comment lines that are already chunking metadata
+            if line_stripped.startswith('# '):
+                processed_lines.append(line)  # Keep existing metadata comments
+            else:
+                processed_lines.append(f"# {line}")  # Comment out synopsis prose
+            continue
+        
+        # Comment out ONLY specific section markers (exact matches only)
         markers_to_comment = [
+            '**Intro (', '**INTRO (', 
+            '**Outro (', '**OUTRO (',
+            '**Transition (', '**TRANSITION (',
             '**[Intro]**', '**[INTRO]**', '[INTRO]', '[intro]',
             '**[Outro]**', '**[OUTRO]**', '[OUTRO]', '[outro]',
-            '**[Transition]**', '**[TRANSITION]**', '[TRANSITION]', '[transition]',
+            '**[Transition]**', '**[TRANSITION]**', '[TRANSITION]', '[transition]'
         ]
         
-        # If line contains any of these markers, comment it out
-        if any(marker in line_stripped for marker in markers_to_comment):
-            processed_lines.append(f"# {line}")
+        should_comment = any(marker in line_stripped for marker in markers_to_comment)
+        
+        if should_comment:
+            processed_lines.append(f"# {line}")  # Comment out section markers
         else:
-            # Keep line as-is
-            processed_lines.append(line)
+            processed_lines.append(line)  # ✅ KEEP ALL OTHER CONTENT CLEAN FOR SPEAKING
     
     return '\n'.join(processed_lines)
 

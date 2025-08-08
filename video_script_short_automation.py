@@ -531,6 +531,34 @@ ALTERNATIVE REFERENCES:
 - "this top-rated solution"
 """
 
+        # ✅ ADD PROHIBITED TERMS SECTION HERE (NEW)
+        system_prompt += f"""
+
+📝 PROHIBITED TERMS & CONVERSATIONAL ALTERNATIVES:
+
+MANDATORY TERM SUBSTITUTIONS - USE CONVERSATIONAL LANGUAGE:
+The following overused marketing terms are PROHIBITED. Use the suggested conversational alternatives instead:
+
+❌ NEVER USE → ✅ USE INSTEAD:
+- "unlock" → "access", "get", "find", "discover", "see", "gain"
+- "transform" → "improve", "change", "enhance", "upgrade", "modernize"
+- "revolutionize" → "improve", "upgrade", "modernize", "enhance", "change"
+- "seamless" → "smooth", "easy", "simple", "effortless", "straightforward"
+- "game-changer" → "significant improvement", "major advantage", "big difference", "key benefit"
+- "empower" → "enable", "help", "allow", "give you the ability to", "make it possible"
+- "catalyst" → "driver", "key factor", "what enables", "foundation for", "reason for"
+- "operational excellence" → "better operations", "improved efficiency", "smoother processes", "better performance"
+
+TONE REQUIREMENT:
+- Write as if explaining to a colleague, not delivering a sales pitch
+- Use natural, conversational language that people actually use in business meetings
+- Avoid marketing jargon that sounds artificial or overly promotional
+- Focus on practical benefits using everyday business language
+
+VALIDATION:
+If any prohibited terms appear in your script, immediately replace them with conversational alternatives before finalizing the content.
+"""
+
         # Continue with additive enhancements section
         system_prompt += f"""
 
@@ -573,6 +601,25 @@ COMPETITIVE DIFFERENTIATION MANDATE (Requirement 4):
 - Examples: "Unlike traditional CRM analytics, the platform provides predictive deal scoring and real-time pipeline health monitoring" or "The peer-based benchmarking gives you insights that generic sales platforms simply cannot match"
 """
 
+        # ✅ ADD SYNOPSIS CONTROL SECTION HERE (NEW)
+        system_prompt += f"""
+
+🚫 SYNOPSIS CONTROL:
+
+MANDATORY OUTPUT RESTRICTIONS:
+- Do NOT add any summary, synopsis, or concluding remarks after the outro section
+- End the script immediately after the outro content
+- Do NOT include any content after the final outro paragraph
+- Do NOT add section headers, timestamps, or meta-commentary
+- Focus only on the actual video script content that will be spoken
+
+SCRIPT ENDING REQUIREMENT:
+- Your script should end with the final sentence of the outro section
+- No additional commentary, analysis, or wrap-up content
+- No "In summary", "To conclude", or similar ending phrases beyond the outro
+- Keep the script tight and focused for video production
+"""
+
         # Continue with retry logic for SHORT scripts
         for attempt in range(max_retries):
             try:
@@ -590,8 +637,8 @@ COMPETITIVE DIFFERENTIATION MANDATE (Requirement 4):
                         "role": "user",
                         "content": "Generate a 6-8 minute SHORT video script now with exactly 4 quotes from each problem (8 total quotes), natural company name distribution (4-6 mentions), and all additive improvements including feature clarity, revenue impact, implementation assurance, and competitive differentiation. Target 1200-1600 words with rich creative development matching the depth of the four-problem version."
                     }],
-                    max_tokens=4000,  # Increased to 4000 as specified
-                    temperature=0.7)
+                    max_tokens=4000,
+                    temperature=0.1)  # ← CHANGED FROM 0.7 TO 0.1 FOR MORE DETERMINISTIC OUTPUT
 
                 script_content = response.choices[0].message.content
                 if script_content:
