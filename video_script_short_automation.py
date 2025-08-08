@@ -681,21 +681,77 @@ SCRIPT ENDING REQUIREMENT:
                     if found_prohibited_terms:
                         logger.warning(f"[SHORT-ENHANCED] ❌ Found prohibited terms: {found_prohibited_terms}. Regenerating...")
                         print(f"❌ Found prohibited terms: {found_prohibited_terms}. Regenerating script...")
-                        # Force retry by continuing to next attempt
+                        
+                        # ✅ ENHANCED RETRY LOGIC: Add specific violation feedback for next attempt
                         if attempt < max_retries - 1:
-                            continue
+                            # Create violation-specific guidance for the next retry
+                            violation_feedback = f"""
+
+🚨 CRITICAL RETRY INSTRUCTION - PREVIOUS SCRIPT REJECTED
+
+Your previous script was AUTOMATICALLY REJECTED because it contained these FORBIDDEN terms: {', '.join(found_prohibited_terms)}
+
+IMMEDIATE ACTION REQUIRED:
+- You MUST completely avoid these exact terms: {', '.join(found_prohibited_terms)}
+- Do NOT use any variations or forms of these terms
+- Use ONLY the approved alternatives provided in the prohibited terms section
+- Review each sentence as you write to ensure compliance
+
+RETRY FOCUS: Write a new script that accomplishes the same goals but uses ONLY approved terminology.
+This is attempt {attempt + 2} of {max_retries}. Compliance is mandatory for acceptance.
+"""
+                            
+                            # Append violation feedback to system prompt for next attempt
+                            enhanced_system_prompt = system_prompt + violation_feedback
+                            
+                            # Use enhanced prompt for the retry
+                            logger.info(f"[SHORT-ENHANCED] Retrying with enhanced guidance for specific violations: {found_prohibited_terms}")
+                            
+                            # Make the retry call with enhanced guidance
+                            response = client.chat.completions.create(
+                                model=openai_model,
+                                messages=[{
+                                    "role": "system",
+                                    "content": enhanced_system_prompt
+                                }, {
+                                    "role": "user",
+                                    "content": "Generate a 6-8 minute SHORT video script now with exactly 4 quotes from each problem (8 total quotes), natural company name distribution (4-6 mentions), and all additive improvements. CRITICAL: Avoid the specific prohibited terms identified in the retry instruction above."
+                                }],
+                                max_tokens=4000,
+                                temperature=0.1)
+                            
+                            # Get the retry response
+                            retry_script_content = response.choices[0].message.content
+                            if retry_script_content:
+                                retry_script_content = retry_script_content.strip()
+                                
+                                # Check the retry for prohibited terms
+                                retry_found_terms = contains_prohibited_terms(retry_script_content)
+                                if not retry_found_terms:
+                                    # Success! Use the retry script
+                                    script_content = retry_script_content
+                                    logger.info(f"[SHORT-ENHANCED] ✅ Retry successful - no prohibited terms found")
+                                    print(f"✅ Retry successful - prohibited terms eliminated")
+                                else:
+                                    # Still has prohibited terms, continue to next attempt
+                                    logger.warning(f"[SHORT-ENHANCED] ❌ Retry still contains prohibited terms: {retry_found_terms}")
+                                    print(f"❌ Retry still contains prohibited terms: {retry_found_terms}")
+                                    continue
+                            else:
+                                continue
                         else:
                             logger.error(f"[SHORT-ENHANCED] Failed to generate script without prohibited terms after {max_retries} attempts")
                             raise Exception(f"Could not generate script without prohibited terms after {max_retries} attempts. Found terms: {found_prohibited_terms}")
                     
-                    # ✅ PROHIBITED TERMS PASSED - Continue with normal validation
-                    logger.info(f"[SHORT-ENHANCED] ✅ No prohibited terms found - proceeding with validation")
-                    print(f"✅ No prohibited terms detected - script accepted for validation")
-                    
-                    # Calculate word count for 6-8 minute target validation
-                    word_count = len(script_content.split())
-                    logger.info(f"[SHORT-ENHANCED] SUCCESS - Generated {word_count} words, {len(script_content)} characters")
-                    print(
+                    # ✅ IF WE REACH HERE: No prohibited terms found - proceed with normal validation
+                    if not contains_prohibited_terms(script_content):
+                        logger.info(f"[SHORT-ENHANCED] ✅ No prohibited terms found - proceeding with validation")
+                        print(f"✅ No prohibited terms detected - script accepted for validation")
+                        
+                        # Calculate word count for 6-8 minute target validation
+                        word_count = len(script_content.split())
+                        logger.info(f"[SHORT-ENHANCED] SUCCESS - Generated {word_count} words, {len(script_content)} characters")
+                        print(
                         f"Successfully generated creative-enhanced SHORT video script with full guidance transplant ({len(script_content)} characters, ~{word_count} words)"
                     )
                     
