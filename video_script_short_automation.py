@@ -9,7 +9,7 @@ This script processes Poppy Card content and generates SHORT video scripts using
 - Prompt instructions (specific processing directions for 6-8 minute format)
 - Poppy Card content (unique subject matter for 2-problem cards)
 
-ENHANCEMENTS (TRANSPLANTED FROM FULL VERSION):
+ENHANCEMENTS (ALIGNED WITH FOUR-PROBLEM VERSION):
 - Simple quote distribution (4 quotes per problem = 8 total quotes per script)
 - Peer validation psychology framework
 - Professional competence vs. ego-stroking detection
@@ -206,12 +206,12 @@ def validate_quote_distribution_short(script_content):
 
 
 # =====================================================================
-# ENHANCED CONTENT VALIDATION FUNCTION - TRANSPLANTED FROM FULL VERSION
+# ENHANCED CONTENT VALIDATION FUNCTION - ALIGNED WITH FOUR-PROBLEM VERSION
 # =====================================================================
 
 def validate_enhanced_content_short(script_content, company_name):
     """
-    Validate the enhanced content requirements for SHORT format (adapted from full version)
+    Validate the enhanced content requirements for SHORT format (aligned with four-problem version)
     
     Args:
         script_content (str): The generated video script content
@@ -379,7 +379,7 @@ def upload_file_to_bucket(bucket_name, file_name, file_content):
 
 
 # =====================================================================
-# ENHANCED VIDEO SCRIPT GENERATION - FULL CREATIVE GUIDANCE TRANSPLANT
+# ENHANCED VIDEO SCRIPT GENERATION - CREATIVE GUIDANCE ALIGNED WITH FOUR-PROBLEM VERSION
 # =====================================================================
 
 def generate_video_script(voice_guidance,
@@ -410,7 +410,7 @@ def generate_video_script(voice_guidance,
         # Create OpenAI client
         client = openai.OpenAI(api_key=openai_api_key)
 
-        # ✅ TRANSPLANTED CREATIVE GUIDANCE SYSTEM PROMPT - ADAPTED FOR 2-PROBLEM STRUCTURE
+        # ✅ ALIGNED CREATIVE GUIDANCE SYSTEM PROMPT - ADAPTED FOR 2-PROBLEM STRUCTURE
         system_prompt = f"""You are a professional video script writer specializing in B2B software buyer psychology. Generate a SHORT video script using the following guidance:
 
 TARGET: 6-8 minute duration (approximately 1200-1600 words)
@@ -674,7 +674,7 @@ SCRIPT ENDING REQUIREMENT:
             try:
                 logger.info(f"[SHORT-ENHANCED] Attempt {attempt + 1}/{max_retries} for creative-enhanced 2-problem script with {company_name} integration")
                 print(
-                    f"Generating creative-enhanced SHORT video script with full guidance transplant and {company_name} integration using {openai_model} (attempt {attempt + 1}/{max_retries})..."
+                    f"Generating creative-enhanced SHORT video script aligned with four-problem version and {company_name} integration using {openai_model} (attempt {attempt + 1}/{max_retries})..."
                 )
 
                 response = client.chat.completions.create(
@@ -710,7 +710,7 @@ SCRIPT ENDING REQUIREMENT:
                     word_count = len(script_content.split())
                     logger.info(f"[SHORT-ENHANCED] SUCCESS - Generated {word_count} words, {len(script_content)} characters")
                     print(
-                        f"Successfully generated creative-enhanced SHORT video script with full guidance transplant ({len(script_content)} characters, ~{word_count} words)"
+                        f"Successfully generated creative-enhanced SHORT video script aligned with four-problem version and {company_name} integration ({len(script_content)} characters, ~{word_count} words)"
                     )
                     
                     # ✅ DUAL VALIDATION - STRUCTURAL AND ENHANCED CONTENT
@@ -869,7 +869,7 @@ def process_poppy_cards(variables, guidance_files):
         total_cards = len(card_combinations)
 
         print(f"\n" + "=" * 80)
-        print("PROCESSING POPPY CARDS WITH FULL CREATIVE GUIDANCE TRANSPLANT")
+        print("PROCESSING POPPY CARDS WITH CREATIVE GUIDANCE ALIGNED WITH FOUR-PROBLEM VERSION")
         print("=" * 80)
         print(f"Total combinations to process: {total_cards}")
         print(f"Company: {company_name}")
@@ -899,7 +899,7 @@ def process_poppy_cards(variables, guidance_files):
                 poppy_card_content = download_file_from_bucket(
                     input_bucket, input_filename)
 
-                # ✅ CREATIVE-ENHANCED SCRIPT GENERATION WITH FULL GUIDANCE TRANSPLANT
+                # ✅ CREATIVE-ENHANCED SCRIPT GENERATION - - GUIDANCE ALIGNED WITH FOUR-PROBLEM VERSION
                 script_content = generate_video_script(
                     voice_guidance=guidance_files["voice"],
                     method_guidance=guidance_files["method"],
@@ -995,7 +995,7 @@ def process_poppy_cards(variables, guidance_files):
             "script_type": "SHORT_FINAL",
             "card_range": "11-15",
             "target_duration": "6-8 minutes",
-            "creative_enhancements": "Full guidance transplant from four-problem version",
+            "creative_enhancements": "Guidance aligned with four-problem version",
             "company_mention_fix": "Simplified natural distribution (4-6 mentions)",
             "additive_improvements": ["feature_clarity", "revenue_impact", "implementation_assurance", "competitive_differentiation"],
             "word_count_analysis": {
@@ -1046,7 +1046,7 @@ def main():
         print(f"Word Target: 1200-1600 words with rich creative development")
         print("🎯 APPROACH: Exactly 4 quotes per problem (8 total quotes per SHORT script)")
         print("🏢 FIXED: Company name natural distribution (4-6 mentions)")
-        print("🚀 CREATIVE TRANSPLANT: Full additive improvements from four-problem version")
+        print("🚀 CREATIVE GUIDANCE ALIGNED WITH FOUR-PROBLEM VERSION")
         print("   ✅ Feature clarity in each problem section (<800 chars)")
         print("   ✅ Revenue impact with <6-month payback assurance (<800 chars)")
         print("   ✅ Implementation assurance <8 hours in outro (<800 chars)")
