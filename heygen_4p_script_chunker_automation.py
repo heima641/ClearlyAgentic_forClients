@@ -160,7 +160,7 @@ def get_template_config(heygen_config: Dict) -> Dict:
     config = TEMPLATE_4PROB_CONFIG.copy()
     config["template_id"] = heygen_config.get("template_4prob_id", config["template_id"])
     config["slide_count"] = heygen_config.get("slide_count_4prob", config["slide_count"])
-    config["bucket_name"] = heygen_config.get("bucket_name", config["bucket_name"])
+    config["bucket_name"] = heygen_config.get("bucket_name_4prob", config["bucket_name"])
     
     return config
 
@@ -306,7 +306,6 @@ def parse_script_structure(script_content: str) -> Dict[str, any]:
 def parse_script_aggressively(script_content: str) -> Dict[str, any]:
     """
     Aggressive parsing that ensures we capture ALL content with maximum retention for 4 problems
-    IMPROVED: Better content allocation percentages aligned with 2-problem success pattern
     
     Args:
         script_content: Raw script content
@@ -320,7 +319,7 @@ def parse_script_aggressively(script_content: str) -> Dict[str, any]:
     
     total_length = len(script_content)
     
-    # IMPROVED: Use more balanced split like successful 2-problem version: 25% intro, 50% problems (4 x 12.5%), 25% outro
+    # ALIGNED WITH 2P: Use balanced split like successful 2-problem version: 25% intro, 50% problems (4 x 12.5%), 25% outro
     intro_end = int(total_length * 0.25)
     outro_start = int(total_length * 0.75)
     
@@ -377,6 +376,12 @@ def parse_script_aggressively(script_content: str) -> Dict[str, any]:
         sections["intro"] = ""
         sections["outro"] = ""
     
+    # Ensure we have exactly 4 problems
+    while len(sections["problems"]) < 4:
+        sections["problems"].append("")
+    
+    sections["problems"] = sections["problems"][:4]
+    
     # Validate we captured all content
     total_parsed = len(sections["intro"]) + sum(len(p) for p in sections["problems"]) + len(sections["outro"])
     retention = total_parsed / total_length if total_length > 0 else 0
@@ -388,7 +393,7 @@ def parse_script_aggressively(script_content: str) -> Dict[str, any]:
 
 def parse_script_by_markers(script_content: str) -> Dict[str, any]:
     """
-    FIXED: Parse script using correct problem marker pattern that matches actual script format
+    ALIGNED WITH 2P: Parse script using flexible problem markers (handles any problem numbers)
     """
     sections = {"intro": "", "problems": [], "outro": ""}
     
@@ -397,7 +402,7 @@ def parse_script_by_markers(script_content: str) -> Dict[str, any]:
     current_content = []
     
     for line in lines:
-        # CRITICAL FIX: Corrected regex pattern to include square bracket that matches actual format **[Problem 1:
+        # ALIGNED WITH 2P: Check for problem marker with any number - matches actual format **[PROBLEM 1:
         if re.match(r'\*\*\[Problem\s+\d+:', line, re.IGNORECASE):
             # Save previous section
             if current_section == "intro":
@@ -409,7 +414,7 @@ def parse_script_by_markers(script_content: str) -> Dict[str, any]:
             current_section = "problem"
             current_content = [line]  # Include the problem header
             
-        elif any(marker in line.lower() for marker in ['outro:', 'implementing kluster', 'in conclusion']):
+        elif any(marker in line.lower() for marker in ['**[outro', 'implementing kluster', 'in conclusion']):
             # Save current problem if any
             if current_section == "problem" and current_content:
                 sections["problems"].append('\n'.join(current_content).strip())
@@ -441,7 +446,7 @@ def parse_script_by_markers(script_content: str) -> Dict[str, any]:
 
 def parse_script_by_content_patterns(script_content: str) -> Dict[str, any]:
     """
-    Fallback parsing method using content patterns for 4-problem scripts
+    ALIGNED WITH 2P: Fallback parsing method using content patterns for 4-problem scripts
     """
     sections = {"intro": "", "problems": [], "outro": ""}
     
@@ -451,7 +456,7 @@ def parse_script_by_content_patterns(script_content: str) -> Dict[str, any]:
     intro_end_idx = 0
     outro_start_idx = len(paragraphs)
     
-    # Look for outro indicators
+    # Look for outro indicators (same as 2p)
     for i, paragraph in enumerate(paragraphs):
         if any(indicator in paragraph.lower() for indicator in [
             'to wrap up', 'in conclusion', 'remember', 'until next time', 
@@ -461,7 +466,7 @@ def parse_script_by_content_patterns(script_content: str) -> Dict[str, any]:
             outro_start_idx = i
             break
     
-    # Look for intro end
+    # Look for intro end (same as 2p)
     for i, paragraph in enumerate(paragraphs):
         if any(indicator in paragraph.lower() for indicator in [
             'our focus will be', 'these problems', 'first problem', 
@@ -482,7 +487,7 @@ def parse_script_by_content_patterns(script_content: str) -> Dict[str, any]:
     
     if main_content_paragraphs:
         if len(main_content_paragraphs) >= 4:
-            # Divide paragraphs into 4 roughly equal groups
+            # Divide paragraphs into 4 roughly equal groups (adapted from 2p logic)
             chunk_size = len(main_content_paragraphs) // 4
             for i in range(4):
                 start_idx = i * chunk_size
@@ -857,12 +862,13 @@ def format_chunked_output(slide_contents: Dict[int, str], original_content: str)
 
 def comment_out_non_audio_segments(chunked_content: str) -> str:
     """
-    Standalone additive function to comment out segments that should not be 
-    generated into audio and video content by the video generator script.
+    SURGICAL commenting: Only comment out specific non-audio segments.
+    INPUT: Clean content with NO existing # prefixes
+    OUTPUT: Mostly clean content with ONLY targeted lines commented out
     
     This function identifies and comments out:
-    1. **[Intro]**, **[INTRO]**, **[Outro]**, **[OUTRO]**, **[Transition]**, **[TRANSITION]**
-    2. Synopsis text that follows the '---' separator at the end
+    1. Section markers like **[Intro]**, **[Outro]**, **[Transition]**  
+    2. Final synopsis section (only after the LAST '---' separator)
     
     Args:
         chunked_content (str): The chunked script content
@@ -873,34 +879,47 @@ def comment_out_non_audio_segments(chunked_content: str) -> str:
     
     lines = chunked_content.split('\n')
     processed_lines = []
-    in_synopsis_section = False
     
-    for line in lines:
-        # Check if we've hit the synopsis separator
+    # FIND THE FINAL '---' - only content after THIS should be synopsis
+    last_separator_index = -1
+    for i, line in enumerate(lines):
         if line.strip() == '---':
-            in_synopsis_section = True
-            processed_lines.append(line)  # Keep the separator as-is
-            continue
-            
-        # Comment out synopsis content after '---'
-        if in_synopsis_section and line.strip():
-            processed_lines.append(f"# {line}")
+            last_separator_index = i
+    
+    for i, line in enumerate(lines):
+        line_stripped = line.strip()
+        
+        # Always keep separators and empty lines as-is
+        if not line_stripped or line_stripped == '---':
+            processed_lines.append(line)
             continue
         
-        # Check for bracketed intro/outro/transition markers
-        line_stripped = line.strip()
+        # Only comment content after the FINAL '---' AND skip chunking summary lines
+        in_final_synopsis = (last_separator_index != -1 and i > last_separator_index)
+        if in_final_synopsis:
+            # Don't double-comment lines that are already chunking metadata
+            if line_stripped.startswith('# '):
+                processed_lines.append(line)  # Keep existing metadata comments
+            else:
+                processed_lines.append(f"# {line}")  # Comment out synopsis prose
+            continue
+        
+        # Comment out ONLY specific section markers (exact matches only)
         markers_to_comment = [
+            '**Intro (', '**INTRO (', 
+            '**Outro (', '**OUTRO (',
+            '**Transition (', '**TRANSITION (',
             '**[Intro]**', '**[INTRO]**', '[INTRO]', '[intro]',
-            '**[Outro]**', '**[OUTRO]**',  '[OUTRO]', '[outro]',
-            '**[Transition]**', '**[TRANSITION]**', '[TRANSITION]', '[transition]',
+            '**[Outro]**', '**[OUTRO]**', '[OUTRO]', '[outro]',
+            '**[Transition]**', '**[TRANSITION]**', '[TRANSITION]', '[transition]'
         ]
         
-        # If line contains any of these markers, comment it out
-        if any(marker in line_stripped for marker in markers_to_comment):
-            processed_lines.append(f"# {line}")
+        should_comment = any(marker in line_stripped for marker in markers_to_comment)
+        
+        if should_comment:
+            processed_lines.append(f"# {line}")  # Comment out section markers
         else:
-            # Keep line as-is
-            processed_lines.append(line)
+            processed_lines.append(line)  # ✅ KEEP ALL OTHER CONTENT CLEAN FOR SPEAKING
     
     return '\n'.join(processed_lines)
 
@@ -988,7 +1007,6 @@ def generate_chunked_filename(original_filename: str) -> str:
 def process_all_scripts_for_company(company_name: str, template_config: Dict, heygen_config: Dict) -> Dict:
     """
     Process all 4-problem scripts for a company from four-problem-script-drafts bucket
-    IMPROVED: Enhanced file filtering with better pattern matching
     """
     logger.info(f"[HEYGEN-4PROB-MAIN] Processing all 4-problem scripts for company: {company_name}")
     
@@ -1008,7 +1026,7 @@ def process_all_scripts_for_company(company_name: str, template_config: Dict, he
     # List all files in bucket
     all_files = list_files_in_bucket(bucket_name)
     
-    # IMPROVED: Enhanced file filtering - exclude already chunked files and focus on script files
+    # Enhanced file filtering - exclude already chunked files and focus on script files
     company_files = []
     for f in all_files:
         if (f.startswith(company_name) and 
@@ -1052,16 +1070,16 @@ def main():
         print("\nFetching configuration from Supabase...")
         variables = fetch_configuration_from_supabase()
 
-        # Validate that we have the heygen_chunker configuration
-        if "scripts" not in variables or "heygen_chunker" not in variables["scripts"]:
+        # Validate that we have the heygen_4prob_chunker configuration
+        if "scripts" not in variables or "heygen_4prob_chunker" not in variables["scripts"]:
             raise Exception(
-                "heygen_chunker configuration not found in Supabase config. Please ensure the configuration includes a 'heygen_chunker' section.")
+                "heygen_4prob_chunker configuration not found in Supabase config. Please ensure the configuration includes a 'heygen_4prob_chunker' section.")
 
         if "global" not in variables:
             raise Exception(
                 "global configuration not found in Supabase config. Please ensure the configuration includes a 'global' section.")
 
-        heygen_config = variables["scripts"]["heygen_chunker"]
+        heygen_config = variables["scripts"]["heygen_4prob_chunker"]
         global_config = variables["global"]
         company_name = global_config.get("COMPANY_NAME")
 
