@@ -479,11 +479,10 @@ CUSTOMER QUOTE AUTHENTICITY GUIDELINES:
 - Balance problem validation quotes with professional confidence quotes
 - Avoid quotes that sound like ego-stroking or "hero" positioning
 
-WORD DISTRIBUTION REQUIREMENTS (Proportional to Full Version):
+WORD DISTRIBUTION REQUIREMENTS:
 - Total script: 1200-1600 words
 - Intro: 100-150 words (hook + company mention)
 - Problem 1: 500-700 words (4 quotes + enhancements + company mention)
-- Transition: 75-100 words (bridge between problems)
 - Problem 2: 500-700 words (4 quotes + enhancements + company mention)
 - Outro: 150-200 words (implementation + competitive + company mention)
 
@@ -540,14 +539,15 @@ MANDATORY TERM SUBSTITUTIONS - USE CONVERSATIONAL LANGUAGE:
 The following overused marketing terms are PROHIBITED. Use the suggested conversational alternatives instead:
 
 ❌ NEVER USE → ✅ USE INSTEAD:
-- "unlock" → "access", "get", "find", "discover", "see", "gain"
-- "transform" → "improve", "change", "enhance", "upgrade", "modernize"
-- "revolutionize" → "improve", "upgrade", "modernize", "enhance", "change"
-- "seamless" → "smooth", "easy", "simple", "effortless", "straightforward"
-- "game-changer" → "significant improvement", "major advantage", "big difference", "key benefit"
-- "empower" → "enable", "help", "allow", "give you the ability to", "make it possible"
-- "catalyst" → "driver", "key factor", "what enables", "foundation for", "reason for"
-- "operational excellence" → "better operations", "improved efficiency", "smoother processes", "better performance"
+- "unlock" → "get"
+- "transform" → "modernize"
+- "revolutionize" → "advance"
+- "seamless" → "smooth"
+- "game-changer" → "major advantage"
+- "game-changing" → "high-value"
+- "empower" → "enable"
+- "catalyst" → "driver"
+- "operational excellence" → "solid performance"
 
 TONE REQUIREMENT:
 - Write as if explaining to a colleague, not delivering a sales pitch
@@ -651,7 +651,7 @@ SCRIPT ENDING REQUIREMENT:
                 'seamlessly': 'smoothly',
                 'game-changer': 'major advantage',
                 'game changer': 'major advantage',
-                'game-changing': 'highly beneficial',
+                'game-changing': 'high-value',
                 'catalyst': 'driver',
                 'catalysts': 'drivers'
             }
