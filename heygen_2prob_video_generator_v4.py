@@ -483,7 +483,7 @@ def check_video_status_with_retry(video_id: str, max_retries: int = DEFAULT_MAX_
                 raise
 
 
-def monitor_video_generation(video_id: str, max_wait_minutes: int = 30) -> Dict:
+def monitor_video_generation(video_id: str, max_wait_minutes: int = 45) -> Dict:
     """
     Monitor video generation until completion or timeout
     
